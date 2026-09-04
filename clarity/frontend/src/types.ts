@@ -1,7 +1,17 @@
 /* Mirrors clarity/backend/clarity/contracts.py. Change both together. */
 
 export type Severity = 'critical' | 'high' | 'medium' | 'low' | 'info'
-export type InsightStatus = 'new' | 'reviewed' | 'dismissed' | 'actioned'
+export type InsightStatus =
+  | 'new'
+  | 'opened'
+  | 'under_review'
+  | 'rm_edited'
+  | 'rm_reviewed'
+  | 'escalated'
+  | 'returned_for_review'
+  | 'client_ready'
+  | 'deferred'
+  | 'dismissed'
 export type Confidence = 'measured' | 'derived' | 'reported'
 export type CheckResult = 'pass' | 'fail' | 'attention' | 'not_assessed'
 
@@ -25,6 +35,20 @@ export interface SuitabilityCheck {
   result: CheckResult
   detail: string
   reference: string | null
+}
+
+export interface DecisionGate {
+  id: 'evidence' | 'suitability' | 'tax_planning' | 'data_model' | 'human_decision'
+  label: string
+  status: 'pass' | 'block'
+  detail: string
+  evidence: Evidence[]
+}
+
+export interface DecisionReadiness {
+  can_mark_client_ready: boolean
+  gates: DecisionGate[]
+  evidence_version: string
 }
 
 export interface Fact {

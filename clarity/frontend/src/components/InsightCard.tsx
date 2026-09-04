@@ -5,9 +5,15 @@ import { ActionReview } from './ActionReview'
 
 const STATUS_LABEL: Record<InsightStatus, string> = {
   new: 'New',
-  reviewed: 'Reviewed',
+  opened: 'Opened',
+  under_review: 'Under review',
+  rm_edited: 'RM edited',
+  rm_reviewed: 'RM reviewed',
+  escalated: 'Escalated',
+  returned_for_review: 'Returned for review',
+  client_ready: 'Client-ready',
+  deferred: 'Deferred',
   dismissed: 'Dismissed',
-  actioned: 'Actioned',
 }
 
 export function InsightCard({
@@ -29,11 +35,28 @@ export function InsightCard({
       selectedOptionId: string | null
       editedNextStep: string | null
     },
-  ) => void
+  ) => Promise<void>
 }) {
   const [showFacts, setShowFacts] = useState(false)
   const [reviewing, setReviewing] = useState(false)
   const chosen = options.find((option) => option.id === insight.selected_option_id)
+  const terminal = ['client_ready', 'deferred', 'dismissed'].includes(insight.status)
+
+  const toggleReview = async () => {
+    if (reviewing) {
+      setReviewing(false)
+      return
+    }
+    if (insight.status === 'new') {
+      await onDecide(insight, {
+        status: 'opened',
+        rmNote: '',
+        selectedOptionId: null,
+        editedNextStep: null,
+      })
+    }
+    setReviewing(true)
+  }
 
   return (
     <article className={`insight ${insight.severity}${insight.status === 'dismissed' ? ' dismissed' : ''}`}>
@@ -109,9 +132,9 @@ export function InsightCard({
         </button>
         <button
           className={`btn${reviewing ? '' : ' primary'}`}
-          onClick={() => setReviewing((value) => !value)}
+          onClick={() => void toggleReview()}
         >
-          {reviewing ? 'Close review' : `Review options (${options.length})`}
+          {reviewing ? 'Close review' : terminal ? 'View controlled outcome' : `Review options (${options.length})`}
         </button>
         <span className="footnote" style={{ marginLeft: 'auto' }}>
           Options for RM review. Nothing is executed by the system.
@@ -125,9 +148,11 @@ export function InsightCard({
             options={options}
             busy={busy}
             onClose={() => setReviewing(false)}
-            onDecide={(input) => {
-              onDecide(insight, input)
-              setReviewing(false)
+            onDecide={async (input) => {
+              await onDecide(insight, input)
+              if (['client_ready', 'deferred', 'dismissed'].includes(input.status)) {
+                setReviewing(false)
+              }
             }}
           />
         </div>

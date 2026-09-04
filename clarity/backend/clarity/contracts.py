@@ -60,9 +60,15 @@ class Category(str, Enum):
 
 class InsightStatus(str, Enum):
     NEW = "new"
-    REVIEWED = "reviewed"
+    OPENED = "opened"
+    UNDER_REVIEW = "under_review"
+    RM_EDITED = "rm_edited"
+    RM_REVIEWED = "rm_reviewed"
+    ESCALATED = "escalated"
+    RETURNED_FOR_REVIEW = "returned_for_review"
+    CLIENT_READY = "client_ready"
+    DEFERRED = "deferred"
     DISMISSED = "dismissed"
-    ACTIONED = "actioned"
 
 
 class Confidence(str, Enum):
@@ -118,6 +124,42 @@ class SuitabilityCheck:
 
     def to_dict(self) -> dict[str, Any]:
         return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class DecisionGate:
+    """One explicit control that must pass before an RM can mark work client-ready."""
+
+    id: Literal["evidence", "suitability", "tax_planning", "data_model", "human_decision"]
+    label: str
+    status: Literal["pass", "block"]
+    detail: str
+    evidence: list[Evidence] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "label": self.label,
+            "status": self.status,
+            "detail": self.detail,
+            "evidence": [item.to_dict() for item in self.evidence],
+        }
+
+
+@dataclass(frozen=True)
+class DecisionReadiness:
+    """Deterministic preflight for the irreversible client-ready workflow step."""
+
+    can_mark_client_ready: bool
+    gates: list[DecisionGate]
+    evidence_version: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "can_mark_client_ready": self.can_mark_client_ready,
+            "gates": [gate.to_dict() for gate in self.gates],
+            "evidence_version": self.evidence_version,
+        }
 
 
 @dataclass(frozen=True)

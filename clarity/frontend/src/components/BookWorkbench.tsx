@@ -55,7 +55,7 @@ export function BookWorkbench({
           </div>
           <div className="stat">
             <span className="v">
-              {(book.totals.decisions.reviewed ?? 0) + (book.totals.decisions.actioned ?? 0)}
+              {(book.totals.decisions.rm_reviewed ?? 0) + (book.totals.decisions.client_ready ?? 0)}
             </span>
             <span className="k">Reviewed by you</span>
           </div>

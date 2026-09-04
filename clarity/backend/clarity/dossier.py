@@ -82,7 +82,9 @@ def book_view(book: DataBook | None = None, store: ReviewStore | None = None) ->
             )
 
         reviewed = sum(
-            1 for i in insights if store.status_of(i.id) in ("reviewed", "actioned")
+            1
+            for i in insights
+            if store.status_of(i.id) in ("rm_reviewed", "client_ready")
         )
 
         rows.append(

@@ -16,6 +16,7 @@ Routes:
     GET  /api/clients/<client_id>
     GET  /api/events
     GET  /api/audit
+    POST /api/insights/<insight_id>/readiness
     POST /api/insights/<insight_id>/decision
     POST /api/reset
 Anything else is served from ../frontend/dist if it has been built, so the
@@ -32,10 +33,13 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from . import config
+from .actions import options_for
 from .contracts import Category, Severity
 from .dossier import all_events, book_view, client_dossier
+from .gates import evaluate_readiness
 from .loaders import get_book
-from .review import VALID_STATUSES, get_store
+from .review import InvalidTransitionError, VALID_STATUSES, get_store
+from .signals.base import SignalContext, run_for_client
 
 FRONTEND_DIST = config.REPO_ROOT / "clarity" / "frontend" / "dist"
 
@@ -64,6 +68,38 @@ def _meta() -> dict:
         },
         "data_warnings": book.warnings,
     }
+
+
+def _decision_subject(client_id: str, insight_id: str):
+    """Resolve the deterministic Task 1/2 payload used by Task 3's gates."""
+    book = get_book()
+    if client_id not in book.clients:
+        raise ValueError(f"Unknown client {client_id}")
+    ctx = SignalContext(book=book, client_id=client_id)
+    insight = next(
+        (item for item in run_for_client(client_id, book) if item.id == insight_id),
+        None,
+    )
+    if insight is None:
+        raise ValueError(f"Unknown insight {insight_id} for client {client_id}")
+    return insight, options_for(ctx, insight)
+
+
+def _client_id_for(insight_id: str, payload: dict) -> str:
+    return payload.get("client_id") or "-".join(insight_id.split("-")[:2])
+
+
+def _readiness(insight_id: str, payload: dict):
+    client_id = _client_id_for(insight_id, payload)
+    insight, options = _decision_subject(client_id, insight_id)
+    readiness = evaluate_readiness(
+        insight,
+        options,
+        selected_option_id=payload.get("selected_option_id"),
+        rm_note=payload.get("rm_note", ""),
+        edited_next_step=payload.get("edited_next_step"),
+    )
+    return client_id, readiness
 
 
 class ClarityHandler(BaseHTTPRequestHandler):
@@ -139,6 +175,11 @@ class ClarityHandler(BaseHTTPRequestHandler):
             if path == "/api/reset":
                 get_store().reset()
                 return self._send_json({"status": "reset"})
+            if path.startswith("/api/insights/") and path.endswith("/readiness"):
+                insight_id = path[len("/api/insights/") : -len("/readiness")]
+                payload = self._read_json()
+                _, readiness = _readiness(insight_id, payload)
+                return self._send_json(readiness.to_dict())
             if path.startswith("/api/insights/") and path.endswith("/decision"):
                 insight_id = path[len("/api/insights/") : -len("/decision")]
                 payload = self._read_json()
@@ -147,27 +188,50 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     return self._send_json(
                         {"error": f"status must be one of {list(VALID_STATUSES)}"}, 400
                     )
-                # Insight ids are prefixed with the client id, e.g.
-                # "CL-0014-collateral-CF-0002", so it can always be recovered.
-                client_id = payload.get("client_id") or "-".join(
-                    insight_id.split("-")[:2]
-                )
-                if client_id not in get_book().clients:
-                    return self._send_json(
-                        {"error": f"Unknown client {client_id}"}, 400
-                    )
+                client_id = _client_id_for(insight_id, payload)
+                actor = payload.get("actor") or "RM-SG-014"
+                readiness = None
+                if status == "client_ready":
+                    client_id, readiness = _readiness(insight_id, payload)
+                    if not readiness.can_mark_client_ready:
+                        get_store().record_blocked_transition(
+                            insight_id=insight_id,
+                            client_id=client_id,
+                            target_status=status,
+                            actor=actor,
+                            gate_results=[gate.to_dict() for gate in readiness.gates],
+                            evidence_version=readiness.evidence_version,
+                        )
+                        return self._send_json(
+                            {
+                                "error": "Client-ready transition is blocked by required controls.",
+                                **readiness.to_dict(),
+                            },
+                            409,
+                        )
+                # Resolve every decision against the current deterministic
+                # source payload, even where readiness is not required.
+                _decision_subject(client_id, insight_id)
                 decision = get_store().record(
                     insight_id=insight_id,
                     client_id=client_id,
                     status=status,
-                    actor=payload.get("actor") or "RM-SG-014",
+                    actor=actor,
                     rm_note=payload.get("rm_note", ""),
                     selected_option_id=payload.get("selected_option_id"),
                     edited_headline=payload.get("edited_headline"),
                     edited_next_step=payload.get("edited_next_step"),
+                    gate_results=[gate.to_dict() for gate in readiness.gates]
+                    if readiness
+                    else None,
+                    evidence_version=readiness.evidence_version if readiness else None,
                 )
                 return self._send_json({"decision": decision.to_dict()})
             return self._send_json({"error": "Not found"}, 404)
+        except InvalidTransitionError as exc:
+            return self._send_json({"error": str(exc)}, 409)
+        except ValueError as exc:
+            return self._send_json({"error": str(exc)}, 400)
         except Exception as exc:
             traceback.print_exc()
             return self._send_json({"error": str(exc)}, 500)

@@ -41,7 +41,7 @@ export function ClientDossier({
       selectedOptionId: string | null
       editedNextStep: string | null
     },
-  ) => void
+  ) => Promise<void>
   onBack: () => void
 }) {
   const [tab, setTab] = useState<Tab>('why')

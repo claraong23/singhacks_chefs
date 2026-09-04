@@ -1,4 +1,4 @@
-import type { BookView, Dossier, InsightStatus } from './types'
+import type { BookView, DecisionReadiness, Dossier, InsightStatus } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
 
@@ -25,6 +25,24 @@ export interface DecisionInput {
   selectedOptionId?: string | null
   editedNextStep?: string | null
 }
+
+export interface ReadinessInput {
+  clientId: string
+  selectedOptionId: string | null
+  rmNote: string
+  editedNextStep?: string | null
+}
+
+export const getDecisionReadiness = (insightId: string, input: ReadinessInput) =>
+  json<DecisionReadiness>(`/api/insights/${insightId}/readiness`, {
+    method: 'POST',
+    body: JSON.stringify({
+      client_id: input.clientId,
+      selected_option_id: input.selectedOptionId,
+      rm_note: input.rmNote,
+      edited_next_step: input.editedNextStep ?? null,
+    }),
+  })
 
 export const recordDecision = (insightId: string, input: DecisionInput) =>
   json<{ decision: Record<string, unknown> }>(`/api/insights/${insightId}/decision`, {

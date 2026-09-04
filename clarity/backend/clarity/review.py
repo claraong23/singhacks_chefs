@@ -1,12 +1,8 @@
-"""RM review state and the audit trail.
+"""RM review state and append-only audit trail.
 
-Human oversight is the product, not a feature of it, so the decision record is a
-first-class object: who decided, when, on what, and what they changed. Every
-mutation appends to an immutable audit log. Nothing is ever overwritten in place
-without leaving the previous value behind.
-
-Storage is a JSON file. In a bank this is a database with retention controls;
-the shape of the record is what matters for the prototype.
+The JSON store is deliberately a local-demo adapter. ``ReviewRepository`` is
+the narrow boundary a durable database implementation will later satisfy; the
+workflow and decision gates are independent of its storage mechanism.
 """
 
 from __future__ import annotations
@@ -16,18 +12,60 @@ import threading
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol
 
 from . import config
 
 STATE_DIR = config.REPO_ROOT / "clarity" / "state"
 DECISIONS_PATH = STATE_DIR / "decisions.json"
 
-VALID_STATUSES = ("new", "reviewed", "dismissed", "actioned")
+VALID_STATUSES = (
+    "new",
+    "opened",
+    "under_review",
+    "rm_edited",
+    "rm_reviewed",
+    "escalated",
+    "returned_for_review",
+    "client_ready",
+    "deferred",
+    "dismissed",
+)
+
+_TRANSITIONS: dict[str, set[str]] = {
+    "new": {"opened"},
+    "opened": {"under_review"},
+    "under_review": {"rm_edited", "rm_reviewed", "escalated", "deferred", "dismissed"},
+    "rm_edited": {"rm_edited", "rm_reviewed", "escalated", "deferred", "dismissed"},
+    "rm_reviewed": {"client_ready", "escalated", "deferred", "dismissed"},
+    "escalated": {"returned_for_review"},
+    "returned_for_review": {"under_review"},
+    "client_ready": set(),
+    "deferred": set(),
+    "dismissed": set(),
+}
+
+
+class InvalidTransitionError(ValueError):
+    """Raised when a requested workflow transition is not allowed."""
 
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def _require_reason(status: str, rm_note: str) -> None:
+    if status in {"client_ready", "escalated", "deferred", "dismissed"} and not rm_note.strip():
+        raise ValueError(f"An RM rationale is required for {status}.")
+
+
+def validate_transition(previous: str, target: str) -> None:
+    if target not in VALID_STATUSES:
+        raise InvalidTransitionError(
+            f"status must be one of {VALID_STATUSES}, received {target!r}"
+        )
+    if target not in _TRANSITIONS.get(previous, set()):
+        raise InvalidTransitionError(f"Cannot transition from {previous!r} to {target!r}.")
 
 
 @dataclass
@@ -39,6 +77,7 @@ class Decision:
     selected_option_id: str | None = None
     edited_headline: str | None = None
     edited_next_step: str | None = None
+    evidence_version: str | None = None
     decided_by: str | None = None
     decided_at: str | None = None
 
@@ -59,8 +98,20 @@ class AuditEntry:
         return asdict(self)
 
 
+class ReviewRepository(Protocol):
+    """Storage boundary for the Task 3 workflow."""
+
+    def get(self, insight_id: str) -> Decision | None: ...
+
+    def status_of(self, insight_id: str) -> str: ...
+
+    def record(self, **kwargs: Any) -> Decision: ...
+
+    def record_blocked_transition(self, **kwargs: Any) -> None: ...
+
+
 class ReviewStore:
-    """Thread-safe JSON-backed store for RM decisions."""
+    """Thread-safe JSON-backed implementation of :class:`ReviewRepository`."""
 
     def __init__(self, path: Path = DECISIONS_PATH) -> None:
         self.path = path
@@ -78,16 +129,22 @@ class ReviewStore:
             payload = json.loads(self.path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
             return
-        self._decisions = {
-            k: Decision(**v) for k, v in payload.get("decisions", {}).items()
-        }
-        self._audit = [AuditEntry(**e) for e in payload.get("audit", [])]
+        migrated = False
+        for key, raw in payload.get("decisions", {}).items():
+            raw = dict(raw)
+            if raw.get("status") == "actioned":
+                raw["status"] = "client_ready"
+                migrated = True
+            self._decisions[key] = Decision(**raw)
+        self._audit = [AuditEntry(**entry) for entry in payload.get("audit", [])]
+        if migrated:
+            self._save()
 
     def _save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
-            "decisions": {k: v.to_dict() for k, v in self._decisions.items()},
-            "audit": [e.to_dict() for e in self._audit],
+            "decisions": {key: value.to_dict() for key, value in self._decisions.items()},
+            "audit": [entry.to_dict() for entry in self._audit],
         }
         self.path.write_text(
             json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -103,16 +160,16 @@ class ReviewStore:
         return decision.status if decision else "new"
 
     def for_client(self, client_id: str) -> list[Decision]:
-        return [d for d in self._decisions.values() if d.client_id == client_id]
+        return [decision for decision in self._decisions.values() if decision.client_id == client_id]
 
     def audit(self, client_id: str | None = None, limit: int = 100) -> list[AuditEntry]:
         entries = [
-            e for e in self._audit if client_id is None or e.client_id == client_id
+            entry for entry in self._audit if client_id is None or entry.client_id == client_id
         ]
         return list(reversed(entries))[:limit]
 
     def counts(self) -> dict[str, int]:
-        out = {s: 0 for s in VALID_STATUSES}
+        out = {status: 0 for status in VALID_STATUSES}
         for decision in self._decisions.values():
             out[decision.status] = out.get(decision.status, 0) + 1
         return out
@@ -130,26 +187,31 @@ class ReviewStore:
         selected_option_id: str | None = None,
         edited_headline: str | None = None,
         edited_next_step: str | None = None,
+        gate_results: list[dict[str, Any]] | None = None,
+        evidence_version: str | None = None,
     ) -> Decision:
-        if status not in VALID_STATUSES:
-            raise ValueError(
-                f"status must be one of {VALID_STATUSES}, received {status!r}"
-            )
+        _require_reason(status, rm_note)
         with self._lock:
             previous = self._decisions.get(insight_id)
+            prior_status = previous.status if previous else "new"
+            validate_transition(prior_status, status)
             decision = Decision(
                 insight_id=insight_id,
                 client_id=client_id,
                 status=status,
                 rm_note=rm_note or (previous.rm_note if previous else ""),
                 selected_option_id=selected_option_id
-                or (previous.selected_option_id if previous else None),
+                if selected_option_id is not None
+                else (previous.selected_option_id if previous else None),
                 edited_headline=edited_headline
                 if edited_headline is not None
                 else (previous.edited_headline if previous else None),
                 edited_next_step=edited_next_step
                 if edited_next_step is not None
                 else (previous.edited_next_step if previous else None),
+                evidence_version=evidence_version
+                if evidence_version is not None
+                else (previous.evidence_version if previous else None),
                 decided_by=actor,
                 decided_at=_now(),
             )
@@ -162,17 +224,48 @@ class ReviewStore:
                     insight_id=insight_id,
                     client_id=client_id,
                     detail={
-                        "from": previous.status if previous else "new",
+                        "from": prior_status,
                         "to": status,
                         "rm_note": rm_note,
                         "selected_option_id": selected_option_id,
                         "edited_headline": edited_headline,
                         "edited_next_step": edited_next_step,
+                        "gates": gate_results or [],
+                        "evidence_version": evidence_version,
                     },
                 )
             )
             self._save()
             return decision
+
+    def record_blocked_transition(
+        self,
+        *,
+        insight_id: str,
+        client_id: str,
+        target_status: str,
+        actor: str,
+        gate_results: list[dict[str, Any]],
+        evidence_version: str,
+    ) -> None:
+        with self._lock:
+            previous = self._decisions.get(insight_id)
+            self._audit.append(
+                AuditEntry(
+                    timestamp=_now(),
+                    actor=actor,
+                    action=f"transition_blocked:{target_status}",
+                    insight_id=insight_id,
+                    client_id=client_id,
+                    detail={
+                        "from": previous.status if previous else "new",
+                        "to": target_status,
+                        "gates": gate_results,
+                        "evidence_version": evidence_version,
+                    },
+                )
+            )
+            self._save()
 
     def reset(self) -> None:
         with self._lock:
