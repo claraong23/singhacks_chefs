@@ -33,6 +33,25 @@ Go deep on three client journeys and use the book-level workbench to demonstrate
 
 These are **investigation storylines, not investment recommendations**. The analytics and evidence panel must confirm every claim before it is shown in the demo. CL-0002 (volatile technology collateral) and CL-0012 (retirement-income/duration risk) are useful backup priority cards.
 
+## Judging criteria — visible proof in the product and demo
+
+The four criteria carry equal weight. Do not leave any of them as a claim in a presentation: make each one visible in a screen, a decision, and a line in the narration.
+
+| Criterion | What `Clarity` demonstrates | Evidence to show in the demo |
+| --- | --- | --- |
+| **Client-Centric Innovation (25%)** | Advice begins with the whole person—not a generic portfolio score. Each insight combines portfolio facts with objectives, life stage, tax domicile, planned cash needs, and RM relationship context. | Open a client-specific priority card, then show why the same market/risk signal matters differently for that client's goals. State the client outcome: greater confidence, earlier preparation, or a more relevant conversation. |
+| **User Experience & Design (25%)** | A calm, RM-first flow reduces a 20-client book to the next best conversation. Progressive disclosure moves from `why now` to `why` to `what to discuss`; evidence is available without overwhelming the main view. | Complete the full journey in under 90 seconds: ranked book → client dossier → explanation/evidence → editable meeting brief. Show clear urgency labels, source dates, empty/missing-data handling, and one-click review/dismiss/edit controls. |
+| **Technical & Operational Feasibility (25%)** | The architecture is deliberately bank-realistic: deterministic analytics for financial facts, a controlled event source, stable data contracts, traceable evidence, and AI limited to grounded narrative drafting. | Show the evidence drawer with source file/ID/date, suitability checks, assumption disclosure, and the RM approval state. Explain the single-app data/API architecture, synthetic-data handling, and how rules can be independently tested and audited. |
+| **Strategic Impact (25%)** | `Clarity` is the intelligence layer that turns existing portfolio data into scalable, higher-quality RM coverage while retaining the relationship-led Julius Baer model. | Frame the outcome as helping Priscilla prioritise all 20 clients and arrive prepared for the three complex conversations—not replacing her judgement. Close with how the same workflow can expand from a prototype to monitored, governed advisory workflows. |
+
+### Non-negotiable demo beats
+
+1. Start with the **RM problem**: twenty clients, limited time, and too much descriptive information.
+2. Demonstrate a **specific client decision**, not just analytics or charts.
+3. Expose the **evidence and caveat** behind one insight; this is the trust moment.
+4. Show the RM **editing, approving, or dismissing** the proposed action; this is the human-in-the-loop moment.
+5. End on a client benefit and a business benefit: more timely, personalised advice and a scalable RM operating model.
+
 ## Team ownership
 
 | Owner | Primary responsibility | Deliverable and interface |
