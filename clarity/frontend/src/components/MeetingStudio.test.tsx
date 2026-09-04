@@ -71,4 +71,55 @@ describe('MeetingStudio', () => {
     await user.click(screen.getByRole('button', { name: 'Reset deterministic wording' }))
     expect(regenerateMeetingSection).toHaveBeenCalledWith('meeting-1', 'objective')
   })
+
+  it('renders saved RM action plans with inline editing and delete/reset controls', async () => {
+    const onDecide = vi.fn().mockResolvedValue(undefined)
+    const onReset = vi.fn().mockResolvedValue(undefined)
+    const reviewedInsight = {
+      ...insight,
+      status: 'rm_reviewed' as const,
+      rm_note: 'Client agrees with capital preservation approach.',
+      suggested_next_step: 'Discuss property collateral refinancing options.',
+      edited: true,
+    }
+    const testDossier = {
+      client: { client_id: 'CL-0014' },
+      insights: [reviewedInsight],
+    } as unknown as Dossier
+
+    const user = userEvent.setup()
+    render(<MeetingStudio dossier={testDossier} onDecide={onDecide} onReset={onReset} />)
+
+    // Verify presence of Agenda section and saved plan
+    expect(screen.getByText(/RM Meeting Agenda & Action Directives/)).toBeInTheDocument()
+    expect(screen.getByText('Confirm funding plan')).toBeInTheDocument()
+    expect(screen.getByText(/Priority 90 \/ 100/)).toBeInTheDocument()
+
+    // Verify editable fields
+    const directiveInput = screen.getByLabelText(/Action directive for Confirm funding plan/)
+    expect(directiveInput).toHaveValue('Discuss property collateral refinancing options.')
+
+    const noteInput = screen.getByLabelText(/RM rationale for Confirm funding plan/)
+    expect(noteInput).toHaveValue('Client agrees with capital preservation approach.')
+
+    // Edit directive and save
+    await user.type(directiveInput, ' Also review LTV threshold.')
+    const saveBtn = screen.getByRole('button', { name: 'Save Changes' })
+    expect(saveBtn).toBeEnabled()
+    await user.click(saveBtn)
+
+    expect(onDecide).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 'CL-0014-demo' }),
+      expect.objectContaining({
+        status: 'rm_reviewed',
+        editedNextStep: 'Discuss property collateral refinancing options. Also review LTV threshold.',
+      }),
+    )
+
+    // Test Reset / Delete Plan
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    const resetBtn = screen.getByRole('button', { name: '🗑️ Reset Plan' })
+    await user.click(resetBtn)
+    expect(onReset).toHaveBeenCalledWith(expect.objectContaining({ id: 'CL-0014-demo' }))
+  })
 })

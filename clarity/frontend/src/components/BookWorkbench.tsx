@@ -94,8 +94,8 @@ export function BookWorkbench({
           <thead>
             <tr>
               <th style={{ width: 210 }}>Client</th>
-              <th style={{ width: 118 }}>Priority</th>
-              <th>Why now</th>
+              <th style={{ width: 130 }}>Priority Score</th>
+              <th>Flags to Address</th>
               <th style={{ width: 120, textAlign: 'right' }}>Wealth</th>
               <th style={{ width: 96 }}>Findings</th>
             </tr>
@@ -127,7 +127,12 @@ export function BookWorkbench({
                 </td>
                 <td>
                   <div className="scorebar">
-                    <span className="v">{row.priority_score.toFixed(0)}</span>
+                    <span className="v">
+                      {row.priority_score.toFixed(0)}
+                      <span style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 400, marginLeft: 1 }}>
+                        /100
+                      </span>
+                    </span>
                     <span className="track">
                       <span
                         className={`fill ${row.top_severity}`}

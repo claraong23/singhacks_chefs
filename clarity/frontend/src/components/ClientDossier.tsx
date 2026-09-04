@@ -27,7 +27,7 @@ import { WhatChangedTab } from './WhatChangedTab'
 type Tab = 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief'
 
 const TABS: { key: Tab; label: string; hint: string }[] = [
-  { key: 'why', label: 'Why now', hint: 'Ranked findings and the decision' },
+  { key: 'why', label: 'Flags to address', hint: 'Ranked client flags requiring RM review and decision' },
   { key: 'changed', label: 'What changed and why', hint: 'Attribution against the event log' },
   { key: 'risk', label: 'Exposure and mandate', hint: 'Look-through, concentration, bands' },
   { key: 'liquidity', label: 'Liquidity and collateral', hint: 'What is sellable, and what is pledged' },
@@ -40,6 +40,7 @@ export function ClientDossier({
   busy,
   onDecide,
   onAttachScenario,
+  onReset,
   onBack,
 }: {
   dossier: Dossier
@@ -54,6 +55,7 @@ export function ClientDossier({
     },
   ) => Promise<void>
   onAttachScenario: (insight: Insight, scenario: SavedScenario) => Promise<void>
+  onReset?: (insight: Insight) => Promise<void>
   onBack: () => void
 }) {
   const searchParams = new URLSearchParams(window.location.search)
@@ -218,7 +220,7 @@ export function ClientDossier({
       )}
       {tab === 'risk' && <ExposureTab dossier={localDossier} />}
       {tab === 'liquidity' && <LiquidityTab dossier={localDossier} />}
-      {tab === 'brief' && <MeetingStudio dossier={localDossier} />}
+      {tab === 'brief' && <MeetingStudio dossier={localDossier} onDecide={onDecide} onReset={onReset} />}
 
       {evidenceFor && (
         <EvidenceDrawer insight={evidenceFor} onClose={() => setEvidenceFor(null)} />

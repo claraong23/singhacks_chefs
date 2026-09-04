@@ -143,6 +143,12 @@ export const recordDecision = (insightId: string, input: DecisionInput) =>
 export const resetDecisions = () =>
   json<{ status: string }>('/api/reset', { method: 'POST', body: '{}' })
 
+export const resetDecision = (insightId: string) =>
+  json<{ status: string; insight_id: string }>(`/api/insights/${insightId}/reset`, {
+    method: 'POST',
+    body: JSON.stringify({}),
+  })
+
 export const getHoldingChanges = (
   clientId: string,
   params?: { from?: string; to?: string; portfolio?: string },

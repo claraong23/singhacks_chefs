@@ -35,14 +35,14 @@ VALID_STATUSES = (
 _TRANSITIONS: dict[str, set[str]] = {
     "new": {"opened"},
     "opened": {"under_review"},
-    "under_review": {"rm_edited", "rm_reviewed", "escalated", "deferred", "dismissed"},
-    "rm_edited": {"rm_edited", "rm_reviewed", "escalated", "deferred", "dismissed"},
-    "rm_reviewed": {"client_ready", "escalated", "deferred", "dismissed"},
-    "escalated": {"returned_for_review"},
-    "returned_for_review": {"under_review"},
-    "client_ready": set(),
-    "deferred": set(),
-    "dismissed": set(),
+    "under_review": {"under_review", "opened", "rm_edited", "rm_reviewed", "escalated", "deferred", "dismissed"},
+    "rm_edited": {"rm_edited", "under_review", "opened", "rm_reviewed", "escalated", "deferred", "dismissed"},
+    "rm_reviewed": {"rm_reviewed", "rm_edited", "under_review", "opened", "client_ready", "escalated", "deferred", "dismissed"},
+    "escalated": {"escalated", "returned_for_review", "under_review", "opened"},
+    "returned_for_review": {"under_review", "rm_reviewed", "opened"},
+    "client_ready": {"client_ready", "rm_reviewed", "rm_edited", "under_review", "opened"},
+    "deferred": {"deferred", "under_review", "opened"},
+    "dismissed": {"dismissed", "under_review", "opened"},
 }
 
 
@@ -185,7 +185,7 @@ class ReviewStore:
         client_id: str,
         status: str,
         actor: str = "RM-SG-014",
-        rm_note: str = "",
+        rm_note: str | None = None,
         selected_option_id: str | None = None,
         edited_headline: str | None = None,
         edited_next_step: str | None = None,
@@ -194,16 +194,17 @@ class ReviewStore:
         selected_scenario_id: str | None = None,
         scenario_calculation_version: str | None = None,
     ) -> Decision:
-        _require_reason(status, rm_note)
         with self._lock:
             previous = self._decisions.get(insight_id)
             prior_status = previous.status if previous else "new"
             validate_transition(prior_status, status)
+            actual_note = rm_note if rm_note is not None else (previous.rm_note if previous else "")
+            _require_reason(status, actual_note)
             decision = Decision(
                 insight_id=insight_id,
                 client_id=client_id,
                 status=status,
-                rm_note=rm_note or (previous.rm_note if previous else ""),
+                rm_note=actual_note,
                 selected_option_id=selected_option_id
                 if selected_option_id is not None
                 else (previous.selected_option_id if previous else None),
@@ -236,7 +237,7 @@ class ReviewStore:
                     detail={
                         "from": prior_status,
                         "to": status,
-                        "rm_note": rm_note,
+                        "rm_note": actual_note,
                         "selected_option_id": selected_option_id,
                         "edited_headline": edited_headline,
                         "edited_next_step": edited_next_step,
@@ -249,6 +250,25 @@ class ReviewStore:
             )
             self._save()
             return decision
+
+    def reset_decision(self, insight_id: str, actor: str = "RM-SG-014") -> None:
+        with self._lock:
+            previous = self._decisions.get(insight_id)
+            if not previous:
+                return
+            client_id = previous.client_id
+            del self._decisions[insight_id]
+            self._audit.append(
+                AuditEntry(
+                    timestamp=_now(),
+                    actor=actor,
+                    action="decision:reset",
+                    insight_id=insight_id,
+                    client_id=client_id,
+                    detail={"prior_status": previous.status, "prior_note": previous.rm_note},
+                )
+            )
+            self._save()
 
     def record_blocked_transition(
         self,

@@ -2,13 +2,6 @@ import { useEffect, useState } from 'react'
 import { getDecisionReadiness } from '../api'
 import type { ActionOption, DecisionReadiness, Insight, InsightStatus } from '../types'
 
-const CHECK_MARK: Record<string, string> = {
-  pass: '✓',
-  fail: '✕',
-  attention: '!',
-  not_assessed: '–',
-}
-
 const TERMINAL: InsightStatus[] = ['client_ready', 'deferred', 'dismissed']
 
 type DecisionInput = {
@@ -70,7 +63,7 @@ export function ActionReview({
       status,
       rmNote: note,
       selectedOptionId: selected,
-      editedNextStep: edited ? nextStep : null,
+      editedNextStep: nextStep.trim() ? nextStep : null,
     })
   }
 
@@ -122,81 +115,146 @@ export function ActionReview({
 
         {canWork && (
           <>
-            {options.map((option) => {
-              const isOpen = expanded === option.id
-              const isSelected = selected === option.id
-              return (
-                <div className={`option${isSelected ? ' selected' : ''}`} key={option.id} style={{ background: 'var(--surface)' }}>
-                  <div className="option-head">
-                    <input
-                      type="radio"
-                      name={`option-${insight.id}`}
-                      checked={isSelected}
-                      onChange={() => {
-                        setSelected(option.id)
-                        setExpanded(option.id)
-                      }}
-                      style={{ marginTop: 3 }}
-                      aria-label={`Select: ${option.label}`}
-                    />
-                    <div style={{ flex: 1 }}>
-                      <h4>{option.label}</h4>
-                      <div className="small muted" style={{ marginTop: 4 }}>{option.rationale}</div>
-                    </div>
-                    <button className="btn quiet" onClick={() => setExpanded(isOpen ? null : option.id)}>
-                      {isOpen ? 'Hide detail' : 'Detail'}
-                    </button>
-                  </div>
-
-                  {isOpen && (
-                    <div className="option-body">
-                      <div className="option-cols">
-                        <div>
-                          <div className="eyebrow" style={{ marginBottom: 6 }}>How it would work</div>
-                          <ul>{option.mechanics.map((step) => <li key={step}>{step}</li>)}</ul>
-                        </div>
-                        <div>
-                          <div className="eyebrow" style={{ marginBottom: 6 }}>What it costs</div>
-                          <ul>{option.trade_offs.map((item) => <li key={item}>{item}</li>)}</ul>
-                        </div>
-                      </div>
-                      <div style={{ marginTop: 14 }}>
-                        <div className="eyebrow" style={{ marginBottom: 6 }}>Suitability</div>
-                        {option.suitability_checks.map((check) => (
-                          <div className="check" key={`${option.id}-${check.check}`}>
-                            <span className={`mark ${check.result}`}>{CHECK_MARK[check.result]}</span>
-                            <div><div>{check.check}</div><div className="d">{check.detail}</div></div>
-                          </div>
-                        ))}
-                      </div>
-                      {option.estimated_impact && <div className="impact"><strong>Expected effect.</strong> {option.estimated_impact}</div>}
-                      <div style={{ marginTop: 10, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                        {option.requires.map((requirement) => <span className="tag" key={requirement}>{requirement}</span>)}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-
-            <div style={{ marginTop: 18 }}>
-              <div className="eyebrow" style={{ marginBottom: 6 }}>
-                Next step {edited && <span className="pill accent" style={{ marginLeft: 6 }}>edited</span>}
+            {/* Open-Ended RM Advisory Action Box */}
+            <div style={{ marginBottom: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 6 }}>
+                <label
+                  htmlFor={`nextstep-${insight.id}`}
+                  className="eyebrow"
+                  style={{ color: 'var(--accent)', fontSize: 11.5 }}
+                >
+                  ✍️ What action should be taken? (RM Advisory Directive)
+                </label>
+                {edited && (
+                  <span className="pill accent" style={{ fontSize: 10.5 }}>
+                    RM Custom Directive
+                  </span>
+                )}
               </div>
-              <textarea className="rmnote" value={nextStep} onChange={(event) => setNextStep(event.target.value)} aria-label="Next step" />
-              {edited && <div className="footnote">The original engine wording stays in the audit trail alongside the RM edit.</div>}
+              <textarea
+                id={`nextstep-${insight.id}`}
+                className="rmnote"
+                rows={4}
+                style={{ minHeight: 90, fontSize: 13, lineHeight: 1.5 }}
+                value={nextStep}
+                onChange={(event) => setNextStep(event.target.value)}
+                placeholder="Type your tailored conversation plan, action directive, or proposal for this client…"
+                aria-label="Next step"
+              />
+              {edited && (
+                <div className="footnote" style={{ marginTop: 4 }}>
+                  Customized by RM. The original playbook suggestion is preserved in the compliance audit trail.
+                </div>
+              )}
             </div>
 
-            <div style={{ marginTop: 14 }}>
-              <div className="eyebrow" style={{ marginBottom: 6 }}>RM rationale</div>
+            {/* Open-Ended RM Rationale Box */}
+            <div style={{ marginBottom: 16 }}>
+              <label
+                htmlFor={`note-${insight.id}`}
+                className="eyebrow"
+                style={{ display: 'block', marginBottom: 6, fontSize: 11.5 }}
+              >
+                📝 RM Decision Rationale & File Note
+              </label>
               <textarea
+                id={`note-${insight.id}`}
                 className="rmnote"
+                rows={3}
                 value={note}
-                placeholder="What you decided and why. Required for client-ready, escalation, deferral, and dismissal."
+                placeholder="Document what you decided and why (e.g. client context, family preferences, risk constraints). Required for compliance and audit trail."
                 onChange={(event) => setNote(event.target.value)}
                 aria-label="RM rationale"
               />
             </div>
+
+            {/* Optional Collapsible Bank Reference Ideas */}
+            {options.length > 0 && (
+              <div
+                className="card"
+                style={{
+                  marginBottom: 16,
+                  background: 'var(--surface)',
+                  border: '1px solid var(--rule)',
+                }}
+              >
+                <div
+                  className="card-head"
+                  style={{ padding: '10px 14px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  onClick={() => setExpanded((prev) => (prev ? null : options[0]?.id ?? 'open'))}
+                >
+                  <h4 style={{ fontSize: 12.5, margin: 0, fontWeight: 600 }}>
+                    💡 Bank Reference Strategies & Playbook Guidance ({options.length} ideas)
+                  </h4>
+                  <button
+                    className="btn quiet"
+                    style={{ marginLeft: 'auto', fontSize: 11 }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setExpanded((prev) => (prev ? null : options[0]?.id ?? 'open'))
+                    }}
+                  >
+                    {expanded ? '▲ Hide ideas' : '▼ Browse ideas'}
+                  </button>
+                </div>
+
+                {expanded && (
+                  <div className="card-body" style={{ padding: '12px 14px' }}>
+                    <p className="footnote" style={{ marginTop: 0, marginBottom: 10 }}>
+                      These reference strategies are calculated from bank playbook rules. You can adopt any strategy as a starting baseline into your action plan above, or write your own custom plan.
+                    </p>
+                    <div className="stack" style={{ gap: 10 }}>
+                      {options.map((option) => (
+                        <div
+                          key={option.id}
+                          className="card"
+                          style={{
+                            padding: '10px 12px',
+                            border: selected === option.id ? '1px solid var(--accent)' : '1px solid var(--rule)',
+                            background: selected === option.id ? 'var(--accent-wash)' : 'var(--surface-sunk)',
+                          }}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 10 }}>
+                            <div>
+                              <strong style={{ fontSize: 13 }}>{option.label}</strong>
+                              <div className="muted" style={{ fontSize: 12, marginTop: 2 }}>{option.rationale}</div>
+                            </div>
+                            <button
+                              className="btn"
+                              style={{ fontSize: 11, padding: '3px 8px', flexShrink: 0 }}
+                              onClick={() => {
+                                setSelected(option.id)
+                                setNextStep(`${option.label}. ${option.rationale} Next steps: ${option.mechanics.join(' ')}`)
+                                if (!note.trim()) {
+                                  setNote(`Adopted bank playbook strategy: ${option.label}. Fits client's current profile.`)
+                                }
+                              }}
+                            >
+                              📥 Adopt as my plan
+                            </button>
+                          </div>
+                          {/* Mechanics & trade offs preview */}
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 8, fontSize: 11.5 }}>
+                            <div>
+                              <span className="muted" style={{ fontWeight: 600 }}>Mechanics:</span>
+                              <ul style={{ margin: '2px 0 0', paddingLeft: 16 }}>
+                                {option.mechanics.slice(0, 2).map((m, i) => <li key={i}>{m}</li>)}
+                              </ul>
+                            </div>
+                            <div>
+                              <span className="muted" style={{ fontWeight: 600 }}>Trade-offs:</span>
+                              <ul style={{ margin: '2px 0 0', paddingLeft: 16 }}>
+                                {option.trade_offs.slice(0, 2).map((t, i) => <li key={i}>{t}</li>)}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="card" style={{ marginTop: 16, background: 'var(--surface)' }}>
               <div className="card-head"><h3>Client-ready checks</h3><span className="sub">Strict controls — no overrides</span></div>
@@ -221,6 +279,11 @@ export function ActionReview({
               {insight.status !== 'rm_reviewed' && (
                 <button className="btn" disabled={busy} onClick={() => void submit('rm_reviewed')}>
                   Mark RM review complete
+                </button>
+              )}
+              {insight.status === 'rm_reviewed' && (
+                <button className="btn" disabled={busy} onClick={() => void submit('rm_reviewed')}>
+                  Update review plan & notes
                 </button>
               )}
               {insight.status === 'rm_reviewed' && (

@@ -61,8 +61,33 @@ export function InsightCard({
   return (
     <article className={`insight ${insight.severity}${insight.status === 'dismissed' ? ' dismissed' : ''}`}>
       <div className="insight-head">
-        <div className="score" title="Priority score out of 100">
-          {insight.priority_score.toFixed(0)}
+        <div
+          className="score"
+          title={`Priority score ${insight.priority_score.toFixed(1)} out of 100`}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            minWidth: 54,
+            paddingRight: 6,
+          }}
+        >
+          <span
+            style={{
+              fontSize: 9,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: 'var(--muted)',
+              fontWeight: 600,
+              lineHeight: 1,
+            }}
+          >
+            Priority
+          </span>
+          <span style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.15 }}>
+            {insight.priority_score.toFixed(0)}
+          </span>
+          <span style={{ fontSize: 9.5, color: 'var(--faint)', lineHeight: 1 }}>/ 100</span>
         </div>
         <div style={{ flex: 1 }}>
           <h3>{insight.headline}</h3>

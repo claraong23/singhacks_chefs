@@ -134,9 +134,10 @@ def evaluate_readiness(
             detail="No unresolved questions or invalid edited wording were supplied.",
         )
 
+    has_action = (option is not None) or bool(edited_next_step and edited_next_step.strip())
     human_issues: list[str] = []
-    if option is None:
-        human_issues.append("Select an action option.")
+    if not has_action:
+        human_issues.append("Select an action option or define a custom RM action.")
     if not rm_note.strip():
         human_issues.append("Record the RM rationale.")
     human_gate = DecisionGate(
@@ -146,7 +147,11 @@ def evaluate_readiness(
         detail=(
             " ".join(human_issues)
             if human_issues
-            else "An RM selected an option and recorded a rationale for the file."
+            else (
+                "An RM defined a tailored action directive and recorded a rationale for the file."
+                if option is None
+                else "An RM selected an option and recorded a rationale for the file."
+            )
         ),
     )
 

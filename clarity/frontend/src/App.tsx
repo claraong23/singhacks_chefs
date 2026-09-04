@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getBook, getClient, recordDecision } from './api'
+import { getBook, getClient, recordDecision, resetDecision } from './api'
 import type { BookView, Dossier, Insight, InsightStatus, SavedScenario } from './types'
 import { BookWorkbench } from './components/BookWorkbench'
 import { ClientDossier } from './components/ClientDossier'
@@ -82,6 +82,23 @@ export default function App() {
     [loadBook],
   )
 
+  const resetPlan = useCallback(
+    async (insight: Insight) => {
+      setBusy(true)
+      setError(null)
+      try {
+        await resetDecision(insight.id)
+        const [nextDossier] = await Promise.all([getClient(insight.client_id), loadBook()])
+        setDossier(nextDossier)
+      } catch (exception) {
+        setError(String(exception))
+      } finally {
+        setBusy(false)
+      }
+    },
+    [loadBook],
+  )
+
   const attachScenario = useCallback(
     async (insight: Insight, scenario: SavedScenario) => {
       await decide(insight, {
@@ -137,6 +154,7 @@ export default function App() {
             dossier={dossier}
             busy={busy}
             onDecide={decide}
+            onReset={resetPlan}
             onAttachScenario={attachScenario}
             onBack={() => {
               setClientId(null)

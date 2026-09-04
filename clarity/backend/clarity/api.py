@@ -455,7 +455,7 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     client_id=client_id,
                     status=status,
                     actor=actor,
-                    rm_note=payload.get("rm_note", ""),
+                    rm_note=payload.get("rm_note") if "rm_note" in payload else None,
                     selected_option_id=payload.get("selected_option_id"),
                     edited_headline=payload.get("edited_headline"),
                     edited_next_step=payload.get("edited_next_step"),
@@ -473,6 +473,12 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     ),
                 )
                 return self._send_json({"decision": decision.to_dict()})
+            if path.startswith("/api/insights/") and path.endswith("/reset"):
+                insight_id = path[len("/api/insights/") : -len("/reset")]
+                payload = self._read_json() if self.headers.get("content-length") else {}
+                actor = payload.get("actor") or "RM-SG-014"
+                get_store().reset_decision(insight_id, actor=actor)
+                return self._send_json({"status": "reset", "insight_id": insight_id})
             return self._send_json({"error": "Not found"}, 404)
         except PermissionError as exc:
             return self._send_json({"error": str(exc)}, 409)
