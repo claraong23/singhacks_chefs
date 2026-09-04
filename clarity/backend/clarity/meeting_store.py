@@ -88,6 +88,7 @@ class MeetingStore:
         with self._lock:
             package = self._packages[package_id]
             package["last_preflight"] = result
+            package.setdefault("preflights", []).append(result)
             package["state"] = "preflight_passed" if result.get("can_hand_off") else "draft"
             self._save()
             return package

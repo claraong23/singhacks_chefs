@@ -261,6 +261,109 @@ class MeetingPackage:
         return dataclasses.asdict(self)
 
 
+# ---------------------------------------------------------------------------
+# Follow-through and audit
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class FollowUpTask:
+    id: str
+    client_id: str
+    title: str
+    owner_role: str
+    due_date: str
+    status: str
+    insight_id: str | None = None
+    meeting_package_id: str | None = None
+    evidence_refs: list[str] = field(default_factory=list)
+    description: str = ""
+    created_by: str = ""
+    created_at: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class SpecialistReferral:
+    id: str
+    client_id: str
+    referral_type: str
+    owner_role: str
+    due_date: str
+    status: str
+    summary: str
+    insight_id: str | None = None
+    meeting_package_id: str | None = None
+    evidence_refs: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class MeetingOutcome:
+    id: str
+    client_id: str
+    outcome_type: str
+    statement: str
+    actor: str
+    recorded_at: str
+    insight_id: str | None = None
+    meeting_package_id: str | None = None
+    requested_documents: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class EvidenceUpdate:
+    id: str
+    client_id: str
+    source_type: str
+    source_ref: str
+    summary: str
+    received_at: str
+    actor: str
+    affected_insight_ids: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class ReevaluationRequest:
+    id: str
+    client_id: str
+    evidence_update_id: str
+    affected_insight_ids: list[str]
+    owner_role: str
+    status: Literal["queued", "acknowledged", "complete"]
+    created_at: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class AuditTimelineEvent:
+    id: str
+    timestamp: str
+    origin: Literal["source_data", "system", "user_decision"]
+    object_type: str
+    object_id: str
+    action: str
+    actor: str
+    client_id: str | None = None
+    insight_id: str | None = None
+    detail: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
 @dataclass(frozen=True)
 class Fact:
     """A computed statement plus the number behind it."""

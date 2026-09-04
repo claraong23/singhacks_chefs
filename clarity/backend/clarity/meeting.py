@@ -208,7 +208,7 @@ def create_package(
         "state": "draft", "created_at": _now(), "created_by": actor,
         "client_reporting_language": subject["ctx"].client.get("reporting_language", "English"),
         "source": _source(subject, review_store.audit(client_id, limit=500)),
-        "current_version": 1, "versions": [version], "handoffs": [],
+        "current_version": 1, "versions": [version], "handoffs": [], "preflights": [],
     }
 
 

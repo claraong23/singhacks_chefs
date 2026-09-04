@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getBook, getClient, recordDecision, resetDecision } from './api'
 import type { BookView, Dossier, Insight, InsightStatus, SavedScenario } from './types'
+import type { SimulatedRole } from './types'
 import { BookWorkbench } from './components/BookWorkbench'
 import { ClientDossier } from './components/ClientDossier'
+import { FollowThroughBoard } from './components/FollowThrough'
+import { AuditConsole } from './components/AuditConsole'
 import { shortDate } from './format'
 
 export default function App() {
@@ -11,6 +14,8 @@ export default function App() {
   const [clientId, setClientId] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [role, setRole] = useState<SimulatedRole>('rm')
+  const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit'>('book')
 
   const loadBook = useCallback(async () => {
     try {
@@ -34,6 +39,7 @@ export default function App() {
       const params = new URLSearchParams(window.location.search)
       params.set('client', id)
       window.history.replaceState(null, '', `?${params.toString()}`)
+      setView('client')
       window.scrollTo({ top: 0 })
     } catch (exception) {
       setError(String(exception))
@@ -119,6 +125,7 @@ export default function App() {
           Clarity<span>RM wealth intelligence</span>
         </div>
         <div className="topbar-meta">
+          <label className="k">Simulated role<select className="select" value={role} onChange={(event) => setRole(event.target.value as SimulatedRole)}><option value="rm">RM</option><option value="credit">Credit specialist</option><option value="wealth_planning">Wealth planning</option><option value="investment">Investment specialist</option><option value="compliance_audit">Compliance / audit</option><option value="operations">Product operations</option></select></label>
           <div>
             <div className="k">Relationship manager</div>
             <div>{book?.rm.rm_name ?? '—'}</div>
@@ -134,6 +141,13 @@ export default function App() {
         </div>
       </header>
 
+      <nav className="tabs" aria-label="Application navigation">
+        <button aria-current={view === 'book'} onClick={() => setView('book')}>Book</button>
+        <button aria-current={view === 'client'} disabled={!dossier} onClick={() => dossier && setView('client')}>Client</button>
+        <button aria-current={view === 'follow'} onClick={() => setView('follow')}>Follow-through</button>
+        <button aria-current={view === 'audit'} onClick={() => setView('audit')}>Audit</button>
+      </nav>
+
       <main className="page">
         {error && (
           <div className="banner" role="alert">
@@ -147,19 +161,24 @@ export default function App() {
 
         {!book && !error && <div className="loading">Loading the book…</div>}
 
-        {book && !clientId && <BookWorkbench book={book} onOpenClient={openClient} />}
+        {book && view === 'book' && <BookWorkbench book={book} onOpenClient={openClient} />}
 
-        {clientId && dossier && (
+        {view === 'follow' && <FollowThroughBoard role={role} onOpenClient={openClient} />}
+        {view === 'audit' && <AuditConsole role={role} />}
+
+        {view === 'client' && clientId && dossier && (
           <ClientDossier
             dossier={dossier}
             busy={busy}
             onDecide={decide}
             onReset={resetPlan}
             onAttachScenario={attachScenario}
+            role={role}
             onBack={() => {
               setClientId(null)
               setDossier(null)
               window.history.replaceState(null, '', window.location.pathname)
+              setView('book')
               void loadBook()
             }}
           />

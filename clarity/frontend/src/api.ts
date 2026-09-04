@@ -14,6 +14,10 @@ import type {
   ClientAttributionDraft,
   ClientNote,
   ProposedObjective,
+  AuditTimelineEvent,
+  FollowThroughView,
+  SimulatedRole,
+  WorkStatus,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -126,6 +130,27 @@ export const handoffMeetingPackage = (packageId: string, channel: CommunicationC
   json<{ package: MeetingPackage }>(`/api/meeting-packages/${packageId}/handoff`, {
     method: 'POST', body: JSON.stringify({ channel }),
   })
+
+export const getFollowThrough = (role: SimulatedRole, clientId?: string) =>
+  json<FollowThroughView>(`/api/follow-through?role=${role}${clientId ? `&client_id=${clientId}` : ''}`)
+
+export const getAudit = (filters: Record<string, string> = {}) =>
+  json<{ audit: AuditTimelineEvent[] }>(`/api/audit?${new URLSearchParams(filters).toString()}`)
+
+export const createFollowTask = (input: Record<string, unknown>) =>
+  json<{ task: Record<string, unknown> }>('/api/follow-through/tasks', { method: 'POST', body: JSON.stringify(input) })
+
+export const createReferral = (input: Record<string, unknown>) =>
+  json<{ referral: Record<string, unknown> }>('/api/follow-through/referrals', { method: 'POST', body: JSON.stringify(input) })
+
+export const createOutcome = (input: Record<string, unknown>) =>
+  json<{ outcome: Record<string, unknown> }>('/api/follow-through/outcomes', { method: 'POST', body: JSON.stringify(input) })
+
+export const createEvidenceUpdate = (input: Record<string, unknown>) =>
+  json<{ evidence_update: Record<string, unknown>; reevaluation: Record<string, unknown> }>('/api/follow-through/evidence-updates', { method: 'POST', body: JSON.stringify(input) })
+
+export const updateFollowRecord = (collection: 'tasks' | 'referrals' | 'reevaluations', id: string, role: SimulatedRole, status: WorkStatus | 'queued' | 'acknowledged' | 'complete', reason = '') =>
+  json<Record<string, unknown>>(`/api/follow-through/${collection}/${id}/update`, { method: 'POST', body: JSON.stringify({ role, status, reason }) })
 
 export const recordDecision = (insightId: string, input: DecisionInput) =>
   json<{ decision: Record<string, unknown> }>(`/api/insights/${insightId}/decision`, {

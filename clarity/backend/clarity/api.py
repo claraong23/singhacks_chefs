@@ -53,6 +53,12 @@ from .meeting_store import get_meeting_store, new_id, now as meeting_now
 from .review import InvalidTransitionError, VALID_STATUSES, get_store
 from .scenario_store import get_scenario_store
 from .scenarios import evaluate_scenario, templates_for_client
+from .audit import timeline
+from .followthrough import (
+    actor as follow_actor, ensure_create, ensure_update, evidence_record, outcome_record,
+    reevaluation_update, required_text, status_update, work_record,
+)
+from .followthrough_store import get_followthrough_store
 from .signals.base import SignalContext, run_for_client
 from .signals.holding_explain import explain_holding
 
@@ -102,6 +108,22 @@ def _decision_subject(client_id: str, insight_id: str):
 
 def _client_id_for(insight_id: str, payload: dict) -> str:
     return payload.get("client_id") or "-".join(insight_id.split("-")[:2])
+
+
+def _follow_links(payload: dict) -> str:
+    """Validate stable collaboration links without changing source records."""
+    client_id = required_text(payload, "client_id")
+    if client_id not in get_book().clients:
+        raise KeyError(f"Unknown client {client_id}")
+    insight_id = payload.get("insight_id")
+    if insight_id:
+        _decision_subject(client_id, insight_id)
+    package_id = payload.get("meeting_package_id")
+    if package_id:
+        package = get_meeting_store().get(package_id)
+        if not package or package["client_id"] != client_id or (insight_id and package["insight_id"] != insight_id):
+            raise ValueError("Meeting package link does not belong to this client/finding.")
+    return client_id
 
 
 def _readiness(insight_id: str, payload: dict):
@@ -174,7 +196,9 @@ class ClarityHandler(BaseHTTPRequestHandler):
         self._send_json({}, 204)
 
     def do_GET(self) -> None:  # noqa: N802
-        path = unquote(urlparse(self.path).path)
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path)
+        query = parse_qs(parsed.query)
         try:
             if path == "/api/health":
                 return self._send_json({"status": "ok", "as_of": config.AS_OF})
@@ -185,9 +209,26 @@ class ClarityHandler(BaseHTTPRequestHandler):
             if path == "/api/events":
                 return self._send_json({"events": all_events()})
             if path == "/api/audit":
-                return self._send_json(
-                    {"audit": [e.to_dict() for e in get_store().audit()]}
-                )
+                audit = timeline(query.get("client_id", [None])[0])
+                for field in ("origin", "actor", "object_type", "insight_id"):
+                    value = query.get(field, [None])[0]
+                    if value:
+                        audit = [item for item in audit if item.get(field) == value]
+                return self._send_json({"audit": audit})
+            if path == "/api/follow-through":
+                client_id = query.get("client_id", [None])[0]
+                role = query.get("role", ["rm"])[0]
+                store = get_followthrough_store()
+                payload = {key: store.list(key, client_id=client_id) for key in ("tasks", "referrals", "outcomes", "evidence_updates", "reevaluations")}
+                if role in {"credit", "wealth_planning", "investment"}:
+                    for key in ("tasks", "referrals"):
+                        payload[key] = [item for item in payload[key] if item.get("owner_role") == role]
+                    payload["outcomes"], payload["evidence_updates"], payload["reevaluations"] = [], [], []
+                elif role == "operations":
+                    payload["tasks"], payload["referrals"], payload["outcomes"] = [], [], []
+                elif role == "compliance_audit":
+                    payload = {key: [] for key in payload}
+                return self._send_json(payload)
             if path.startswith("/api/clients/") and path.endswith("/scenario-templates"):
                 client_id = path[len("/api/clients/") : -len("/scenario-templates")]
                 return self._send_json(
@@ -254,7 +295,50 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 get_store().reset()
                 get_scenario_store().reset()
                 get_meeting_store().reset()
+                get_followthrough_store().reset()
                 return self._send_json({"status": "reset"})
+            if path == "/api/follow-through/tasks" or path == "/api/follow-through/referrals":
+                payload = self._read_json()
+                role = payload.get("role") or "rm"
+                kind = "task" if path.endswith("tasks") else "referral"
+                ensure_create(role, kind)
+                _follow_links(payload)
+                record = work_record(payload, kind=kind)
+                saved = get_followthrough_store().create(
+                    "tasks" if kind == "task" else "referrals", record,
+                    origin="user_decision", actor=follow_actor(role),
+                )
+                return self._send_json({kind: saved}, 201)
+            if path == "/api/follow-through/outcomes":
+                payload = self._read_json(); role = payload.get("role") or "rm"
+                ensure_create(role, "outcome"); _follow_links(payload)
+                saved = get_followthrough_store().create("outcomes", outcome_record(payload, follow_actor(role)), origin="user_decision", actor=follow_actor(role))
+                return self._send_json({"outcome": saved}, 201)
+            if path == "/api/follow-through/evidence-updates":
+                payload = self._read_json(); role = payload.get("role") or "operations"
+                ensure_create(role, "evidence_update"); client_id = _follow_links(payload)
+                for insight_id in payload.get("affected_insight_ids") or []:
+                    _decision_subject(client_id, insight_id)
+                store = get_followthrough_store()
+                update = store.create("evidence_updates", evidence_record(payload, follow_actor(role)), origin="source_data", actor=follow_actor(role))
+                reeval = store.create("reevaluations", {
+                    "kind": "reevaluation", "client_id": client_id, "evidence_update_id": update["id"],
+                    "affected_insight_ids": update["affected_insight_ids"], "owner_role": "operations", "status": "queued",
+                }, origin="source_data", actor=follow_actor(role))
+                return self._send_json({"evidence_update": update, "reevaluation": reeval}, 201)
+            if path.startswith("/api/follow-through/") and path.endswith("/update"):
+                remainder = path[len("/api/follow-through/") : -len("/update")].strip("/")
+                collection, _, record_id = remainder.partition("/")
+                if collection not in {"tasks", "referrals", "reevaluations"} or not record_id:
+                    return self._send_json({"error": "Unknown follow-through record."}, 404)
+                payload = self._read_json(); role = payload.get("role") or "rm"
+                store = get_followthrough_store(); record = store.data[collection].get(record_id)
+                if record is None:
+                    return self._send_json({"error": "Unknown follow-through record."}, 404)
+                ensure_update(role, record)
+                changes, reason = reevaluation_update(payload) if collection == "reevaluations" else status_update(record, payload)
+                saved = store.update(collection, record_id, changes, actor=follow_actor(role), action="status_updated", reason=reason)
+                return self._send_json({collection[:-1]: saved})
             if path.startswith("/api/clients/") and path.endswith("/scenarios/evaluate"):
                 client_id = path[len("/api/clients/") : -len("/scenarios/evaluate")]
                 payload = self._read_json()

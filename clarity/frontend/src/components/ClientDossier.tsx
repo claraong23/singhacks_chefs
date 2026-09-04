@@ -6,6 +6,7 @@ import type {
   InsightStatus,
   ProposedObjective,
   SavedScenario,
+  SimulatedRole,
 } from '../types'
 import {
   money,
@@ -23,8 +24,9 @@ import { MeetingStudio } from './MeetingStudio'
 import { ScenarioStudio } from './ScenarioStudio'
 import { ClientHeader } from './ClientHeader'
 import { WhatChangedTab } from './WhatChangedTab'
+import { FollowThroughPanel } from './FollowThrough'
 
-type Tab = 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief'
+type Tab = 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief' | 'follow'
 
 const TABS: { key: Tab; label: string; hint: string }[] = [
   { key: 'why', label: 'Flags to address', hint: 'Ranked client flags requiring RM review and decision' },
@@ -33,6 +35,7 @@ const TABS: { key: Tab; label: string; hint: string }[] = [
   { key: 'liquidity', label: 'Liquidity and collateral', hint: 'What is sellable, and what is pledged' },
   { key: 'scenario', label: 'Scenario Studio', hint: 'Compare constrained current-state options' },
   { key: 'brief', label: 'Meeting Studio', hint: 'Versioned client-ready communication' },
+  { key: 'follow', label: 'Follow-through', hint: 'Owners, outcomes, evidence and re-review' },
 ]
 
 export function ClientDossier({
@@ -41,6 +44,7 @@ export function ClientDossier({
   onDecide,
   onAttachScenario,
   onReset,
+  role,
   onBack,
 }: {
   dossier: Dossier
@@ -56,6 +60,7 @@ export function ClientDossier({
   ) => Promise<void>
   onAttachScenario: (insight: Insight, scenario: SavedScenario) => Promise<void>
   onReset?: (insight: Insight) => Promise<void>
+  role: SimulatedRole
   onBack: () => void
 }) {
   const searchParams = new URLSearchParams(window.location.search)
@@ -221,6 +226,7 @@ export function ClientDossier({
       {tab === 'risk' && <ExposureTab dossier={localDossier} />}
       {tab === 'liquidity' && <LiquidityTab dossier={localDossier} />}
       {tab === 'brief' && <MeetingStudio dossier={localDossier} onDecide={onDecide} onReset={onReset} />}
+      {tab === 'follow' && <FollowThroughPanel dossier={localDossier} role={role} />}
 
       {evidenceFor && (
         <EvidenceDrawer insight={evidenceFor} onClose={() => setEvidenceFor(null)} />

@@ -506,6 +506,43 @@ export interface MeetingPackage {
   last_preflight?: CommunicationPreflight
 }
 
+export type SimulatedRole = 'rm' | 'credit' | 'wealth_planning' | 'investment' | 'compliance_audit' | 'operations'
+export type WorkStatus = 'open' | 'in_progress' | 'waiting' | 'completed' | 'cancelled'
+
+export interface FollowThroughRecord {
+  id: string
+  client_id: string
+  insight_id?: string | null
+  meeting_package_id?: string | null
+  owner_role?: string
+  due_date?: string
+  status: string
+  evidence_refs?: string[]
+  history: { timestamp: string; actor: string; action: string; reason: string }[]
+  [key: string]: unknown
+}
+
+export interface FollowThroughView {
+  tasks: FollowThroughRecord[]
+  referrals: FollowThroughRecord[]
+  outcomes: FollowThroughRecord[]
+  evidence_updates: FollowThroughRecord[]
+  reevaluations: FollowThroughRecord[]
+}
+
+export interface AuditTimelineEvent {
+  id: string
+  timestamp: string
+  origin: 'source_data' | 'system' | 'user_decision'
+  object_type: string
+  object_id: string
+  action: string
+  actor: string
+  client_id: string | null
+  insight_id: string | null
+  detail: Record<string, unknown>
+}
+
 export interface Dossier {
   as_of: string
   client: Record<string, string | number | null>
@@ -564,14 +601,8 @@ export interface Dossier {
       points: { snapshot: string; value: number | null }[]
     }[]
   }
-  audit: {
-    timestamp: string
-    actor: string
-    action: string
-    insight_id: string
-    client_id: string
-    detail: Record<string, unknown>
-  }[]
+  follow_through: FollowThroughView
+  audit: AuditTimelineEvent[]
 }
 
 export interface HoldingChange {

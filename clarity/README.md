@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-54 backend tests. They check the things a judge would push on: that holdings reconcile to
+57 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
@@ -106,6 +106,17 @@ version. Communication preflight rechecks the client-ready source, cited
 evidence, required caveats, prohibited claims and reporting language before an
 RM can copy the draft or record a **simulated** hand-off. Nothing is sent.
 
+### 5. Follow-through and Audit — make the meeting accountable
+
+The RM can assign evidence-linked tasks and specialist referrals with owners and
+due dates, then record client statements, requested documents and meeting
+outcomes. Product Operations may record newly received evidence, which creates a
+tracked re-evaluation request without changing source files or historical
+decisions. A simulated least-privilege role switcher demonstrates what an RM,
+specialist, Compliance/Audit user and Product Operations user can see or change.
+The Audit Console keeps source-data, deterministic system and user-decision
+activity visibly separate.
+
 ---
 
 ## What it found
@@ -152,6 +163,9 @@ clarity/
     scenario_store.py  Saved-scenario JSON adapter
     meeting.py         Deterministic meeting packages and communication preflight
     meeting_store.py   Versioned Meeting Studio JSON adapter
+    followthrough.py   Controlled post-meeting workflow validation
+    followthrough_store.py Local tasks, referrals, outcomes and source-update adapter
+    audit.py           Unified origin-labelled audit reconstruction
     brief.py           Legacy deterministic brief used by the terminal fallback
     review.py          RM decisions and the audit trail
     dossier.py         Assembly into stable JSON
@@ -203,6 +217,11 @@ MeetingBrief   purpose, talking_points[], questions_to_ask[], relationship_conte
 MeetingPackage id, client_id, insight_id, source{option, scenario, evidence, gates}
                current_version, versions[] {sections[], communications[]}, handoffs[]
 Communication  channel, content, evidence_refs[]; preflight {can_hand_off, checks[]}
+
+FollowUpTask / SpecialistReferral  client_id, insight_id?, owner_role, due_date, status,
+                                   evidence_refs[], history[]
+EvidenceUpdate / ReevaluationRequest source_ref, affected_insight_ids[], immutable history
+AuditTimelineEvent timestamp, origin {source_data|system|user_decision}, object, actor
 ```
 
 Two rules hold everywhere: **no claim without a citation**, and **computed
@@ -245,7 +264,7 @@ The seams are already cut, so four people can work without colliding.
 | `GET /api/clients/<id>` | One full dossier |
 | `GET /api/events` | `event_log.csv`, normalised with stable ids |
 | `GET /api/meta` | Snapshots, categories, thresholds, load warnings |
-| `GET /api/audit` | The decision trail |
+| `GET /api/audit` | Unified origin-labelled audit timeline; supports client and origin filters |
 | `GET /api/clients/<id>/scenario-templates` | Supported bounded comparisons for an anchor client |
 | `GET /api/clients/<id>/scenarios` | Saved RM scenario comparisons |
 | `POST /api/clients/<id>/scenarios/evaluate` | Evaluate `{template_id, insight_id, option_id, inputs}` |
@@ -255,7 +274,10 @@ The seams are already cut, so four people can work without colliding.
 | `POST /api/insights/<id>/meeting-packages` | Create a package from one client-ready finding |
 | `POST /api/meeting-packages/<id>/versions` | Save an evidence-linked section edit |
 | `POST /api/meeting-packages/<id>/(regenerate|restore|preflight|handoff)` | Controlled package lifecycle operations |
-| `POST /api/reset` | Clear local decisions, scenarios and meeting packages (demo reset) |
+| `GET /api/follow-through?role=<role>` | Role-scoped local tasks, referrals, outcomes and re-evaluation work |
+| `POST /api/follow-through/(tasks|referrals|outcomes|evidence-updates)` | Create governed post-meeting workflow records |
+| `POST /api/follow-through/<collection>/<id>/update` | Controlled work or re-evaluation status update |
+| `POST /api/reset` | Clear all local demo workflow state (demo reset) |
 
 ---
 

@@ -21,6 +21,8 @@ from .analytics import income as income_mod
 from .analytics import lookthrough
 from .analytics.valuation import household_view, household_timeseries
 from .brief import build_brief
+from .audit import timeline
+from .followthrough_store import get_followthrough_store
 from .contracts import Insight, InsightStatus
 from .loaders import DataBook, get_book
 from .review import ReviewStore, get_store
@@ -311,7 +313,11 @@ def client_dossier(
                 if series_id in book.market_meta
             ]
         },
-        "audit": [e.to_dict() for e in store.audit(client_id)],
+        "follow_through": {
+            key: get_followthrough_store().list(key, client_id=client_id)
+            for key in ("tasks", "referrals", "outcomes", "evidence_updates", "reevaluations")
+        },
+        "audit": timeline(client_id),
     }
 
 
