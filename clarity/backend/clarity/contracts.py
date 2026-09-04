@@ -294,6 +294,7 @@ class MeetingVersion:
     reason: str
     sections: list[MeetingSection]
     communications: list[CommunicationVariant]
+    provenance: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -304,6 +305,7 @@ class MeetingVersion:
             "reason": self.reason,
             "sections": [section.to_dict() for section in self.sections],
             "communications": [variant.to_dict() for variant in self.communications],
+            "provenance": self.provenance,
         }
 
 
@@ -349,6 +351,74 @@ class MeetingPackage:
 
     def to_dict(self) -> dict[str, Any]:
         return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class AIDraftingProviderStatus:
+    """Safe-to-display availability of the optional server-side drafting adapter."""
+
+    available: bool
+    provider: Literal["disabled", "gemini", "openai_compatible"]
+    model: str | None
+    detail: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class AIDraftRequest:
+    package_id: str
+    target_key: str
+    style: Literal["clear_concise", "warm_respectful", "formal_concise"]
+    source_version: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class AIDraftGuardrail:
+    id: str
+    label: str
+    status: Literal["pass", "block"]
+    detail: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class AIDraftProvenance:
+    provider: Literal["gemini", "openai_compatible"]
+    model: str
+    prompt_version: str
+    source_version: int
+    target_key: str
+    candidate_digest: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class AIDraftCandidate:
+    id: str
+    package_id: str
+    target_key: str
+    style: str
+    content: str | None
+    can_apply: bool
+    guardrails: list[AIDraftGuardrail]
+    expires_at: str
+    provenance: AIDraftProvenance | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            **dataclasses.asdict(self),
+            "guardrails": [item.to_dict() for item in self.guardrails],
+            "provenance": self.provenance.to_dict() if self.provenance else None,
+        }
 
 
 # ---------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import unittest
+from unittest.mock import patch
 
 from clarity import config
 from clarity.analytics.attribution import detect_meaningful_changes
@@ -59,6 +60,14 @@ class TestClientExplanation(unittest.TestCase):
             draft.language_disclaimer,
             "English RM preview — client-language version requires review.",
         )
+
+    def test_meeting_drafting_key_does_not_enable_task_1_external_attribution(self) -> None:
+        explanation = explain_holding(
+            BOOK, "CL-0003", "SYN-ST-0107", config.BASELINE_SNAPSHOT, config.AS_OF
+        )
+        with patch.dict("os.environ", {"GEMINI_API_KEY": "meeting-only-key", "CLARITY_ATTRIBUTION_AI_ENABLED": ""}, clear=False), patch("clarity.attribution_ai.urllib.request.urlopen") as request:
+            generate_client_attribution(explanation, BOOK.clients["CL-0003"])
+        request.assert_not_called()
 
     def test_review_store_notes_and_proposals(self) -> None:
         """ReviewStore persists notes and proposed objectives."""

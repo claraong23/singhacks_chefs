@@ -11,6 +11,7 @@ import {
 import { shortDate } from '../format'
 import type { CommunicationChannel, Dossier, Insight, InsightStatus, MeetingPackage, SimulatedRole } from '../types'
 import { KnowledgeReferencePanel } from './KnowledgeReference'
+import { AIMeetingDrafting } from './AIMeetingDrafting'
 
 function versionOf(item: MeetingPackage) {
   return item.versions.find((version) => version.version === item.current_version) ?? item.versions[item.versions.length - 1]
@@ -706,6 +707,8 @@ export function MeetingStudio({
                   </div>
                 </div>
               </div>
+
+              <AIMeetingDrafting package={selected} role={role} busy={busy} onApplied={replace} />
 
               <div className="grid2">
                 {current.sections.map((section) => (

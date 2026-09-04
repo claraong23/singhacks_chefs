@@ -513,6 +513,16 @@ export interface MeetingVersion {
   reason: string
   sections: MeetingSection[]
   communications: CommunicationVariant[]
+  provenance?: {
+    provider: 'gemini' | 'openai_compatible'
+    model: string
+    prompt_version: string
+    source_version: number
+    target_key: string
+    candidate_digest: string
+    draft_id?: string
+    rm_rationale?: string
+  } | null
 }
 
 export interface CommunicationPreflight {
@@ -551,6 +561,38 @@ export interface MeetingPackage {
   versions: MeetingVersion[]
   handoffs: MeetingHandoffEvent[]
   last_preflight?: CommunicationPreflight
+}
+
+export type AIDraftStyle = 'clear_concise' | 'warm_respectful' | 'formal_concise'
+export interface AIDraftingProviderStatus {
+  available: boolean
+  provider: 'disabled' | 'gemini' | 'openai_compatible'
+  model: string | null
+  detail: string
+}
+export interface AIDraftGuardrail {
+  id: string
+  label: string
+  status: 'pass' | 'block'
+  detail: string
+}
+export interface AIDraftCandidate {
+  id: string
+  package_id: string
+  target_key: string
+  style: AIDraftStyle
+  content: string | null
+  can_apply: boolean
+  guardrails: AIDraftGuardrail[]
+  expires_at: string
+  provenance: {
+    provider: 'gemini' | 'openai_compatible'
+    model: string
+    prompt_version: string
+    source_version: number
+    target_key: string
+    candidate_digest: string
+  } | null
 }
 
 export type SimulatedRole = 'rm' | 'credit' | 'wealth_planning' | 'investment' | 'compliance_audit' | 'operations'

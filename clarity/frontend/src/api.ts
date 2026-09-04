@@ -23,6 +23,9 @@ import type {
   RMFeedbackInput,
   KnowledgeDocument,
   KnowledgeSearchResult,
+  AIDraftCandidate,
+  AIDraftingProviderStatus,
+  AIDraftStyle,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -168,6 +171,19 @@ export const preflightMeetingPackage = (packageId: string) =>
 export const handoffMeetingPackage = (packageId: string, channel: CommunicationChannel) =>
   json<{ package: MeetingPackage }>(`/api/meeting-packages/${packageId}/handoff`, {
     method: 'POST', body: JSON.stringify({ channel }),
+  })
+
+export const getAIDraftingStatus = () =>
+  json<AIDraftingProviderStatus>('/api/ai-drafting/status')
+
+export const generateAIMeetingDraft = (packageId: string, targetKey: string, style: AIDraftStyle, role: SimulatedRole) =>
+  json<{ draft: AIDraftCandidate }>(`/api/meeting-packages/${packageId}/ai-drafts`, {
+    method: 'POST', body: JSON.stringify({ target_key: targetKey, style, role }),
+  })
+
+export const applyAIMeetingDraft = (packageId: string, draftId: string, rationale: string, role: SimulatedRole) =>
+  json<{ package: MeetingPackage }>(`/api/meeting-packages/${packageId}/ai-drafts/${draftId}/apply`, {
+    method: 'POST', body: JSON.stringify({ rationale, role }),
   })
 
 export const getFollowThrough = (role: SimulatedRole, clientId?: string) =>

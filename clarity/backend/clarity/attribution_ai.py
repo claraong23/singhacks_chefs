@@ -3,9 +3,10 @@
 Translates technical portfolio and event attribution into plain-language,
 empathetic talking points for Priscilla to discuss with the client.
 
-Uses Google Gemini if GEMINI_API_KEY is present in the environment, with an
-institutional deterministic fallback template that always produces compliant,
-traceable output even without network access.
+Uses its legacy Google Gemini path only when the separate
+``CLARITY_ATTRIBUTION_AI_ENABLED=true`` feature flag is set. This prevents a
+Meeting Studio drafting key from broadening the data boundary of Task 1. The
+institutional deterministic fallback remains the default.
 """
 
 from __future__ import annotations
@@ -120,7 +121,7 @@ def generate_client_attribution(
     highlighted_claim: str | None = None,
 ) -> ClientAttributionDraft:
     """Generate client attribution draft via Gemini with reliable deterministic fallback."""
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = os.environ.get("GEMINI_API_KEY") if os.environ.get("CLARITY_ATTRIBUTION_AI_ENABLED", "").lower() == "true" else None
     if not api_key:
         return _deterministic_attribution(explanation, client, highlighted_claim)
 

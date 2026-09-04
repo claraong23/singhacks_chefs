@@ -216,7 +216,8 @@ def current_version(package: dict[str, Any]) -> dict[str, Any]:
     return next(item for item in package["versions"] if item["version"] == package["current_version"])
 
 
-def update_section(package: dict[str, Any], key: str, content: str, evidence_refs: list[str], *, actor: str, reason: str = "RM edit") -> dict[str, Any]:
+def update_section(package: dict[str, Any], key: str, content: str, evidence_refs: list[str], *, actor: str,
+                   reason: str = "RM edit", provenance: dict[str, Any] | None = None) -> dict[str, Any]:
     if key not in SECTION_TITLES and key not in CHANNELS:
         raise ValueError("Unknown meeting section or communication channel.")
     if not isinstance(content, str) or not content.strip():
@@ -240,6 +241,7 @@ def update_section(package: dict[str, Any], key: str, content: str, evidence_ref
         new_id(), previous["version"] + 1, _now(), actor, reason,
         [MeetingSection(**item) for item in sections],
         [CommunicationVariant(**item) for item in communications],
+        provenance,
     ).to_dict()
 
 

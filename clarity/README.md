@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-67 backend tests. They check the things a judge would push on: that holdings reconcile to
+75 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
@@ -146,6 +146,45 @@ meeting package or client communication. Action Review and Meeting Studio open
 only safe category shortcuts; retrieval activity and document lineage appear in
 the unified audit timeline.
 
+### 8. Optional AI Meeting Drafting — controlled rewrite, never autonomous advice
+
+Meeting Studio can optionally request a rewrite of one current internal section
+or client-facing channel. The primary adapter is Google Gemini; an
+OpenAI-compatible endpoint is also supported. Both run server-side, are disabled
+by default, and receive only the selected approved package text—not raw CSVs,
+RM notes, the full dossier, knowledge results, or web data.
+
+Every candidate is an in-memory preview that expires after 15 minutes. It is
+screened for source continuity, retained evidence, new numerical/date/currency
+claims, product claims, prohibited recommendation/execution/tax/guarantee/
+redemption wording, and (for client copy) required caveats. Only an RM can apply
+a passing preview with a rationale. Applying creates an immutable, AI-provenanced
+package version and requires preflight again; nothing is sent or executed.
+
+To opt in locally, configure one provider before starting the Python service:
+
+```powershell
+# Gemini
+$env:CLARITY_AI_PROVIDER = "gemini"
+$env:GEMINI_API_KEY = "your-local-key"
+$env:CLARITY_GEMINI_MODEL = "your-approved-model"
+
+# Or an OpenAI-compatible endpoint
+$env:CLARITY_AI_PROVIDER = "openai_compatible"
+$env:CLARITY_OPENAI_COMPATIBLE_BASE_URL = "https://provider.example/v1"
+$env:CLARITY_OPENAI_COMPATIBLE_API_KEY = "your-local-key"
+$env:CLARITY_OPENAI_COMPATIBLE_MODEL = "your-approved-model"
+```
+
+Keys, provider URLs, prompts, and candidate text never enter the browser or
+durable audit log. The audit retains only actor, source package/version, target,
+provider/model identifier, prompt-template version, candidate digest, and
+guardrail outcomes.
+
+The Meeting Studio flag does not enable the older Task 1 attribution experiment;
+that separate path remains deterministic unless its own
+`CLARITY_ATTRIBUTION_AI_ENABLED=true` flag is deliberately set.
+
 ---
 
 ## What it found
@@ -195,6 +234,7 @@ clarity/
     followthrough.py   Controlled post-meeting workflow validation
     followthrough_store.py Local tasks, referrals, outcomes and source-update adapter
     knowledge_store.py Local approved-reference lifecycle and lexical retrieval adapter
+    ai_drafting.py    Optional provider adapters, ephemeral draft preview and audit metadata
     audit.py           Unified origin-labelled audit reconstruction
     brief.py           Legacy deterministic brief used by the terminal fallback
     review.py          RM decisions and the audit trail
@@ -313,6 +353,9 @@ The seams are already cut, so four people can work without colliding.
 | `POST /api/insights/<id>/meeting-packages` | Create a package from one client-ready finding |
 | `POST /api/meeting-packages/<id>/versions` | Save an evidence-linked section edit |
 | `POST /api/meeting-packages/<id>/(regenerate|restore|preflight|handoff)` | Controlled package lifecycle operations |
+| `GET /api/ai-drafting/status` | Safe local availability of the optional server-side drafting adapter |
+| `POST /api/meeting-packages/<id>/ai-drafts` | Generate a guarded, ephemeral RM preview for one package surface |
+| `POST /api/meeting-packages/<id>/ai-drafts/<draft_id>/apply` | RM-only, rationale-required immutable application of a passing preview |
 | `GET /api/follow-through?role=<role>` | Role-scoped local tasks, referrals, outcomes and re-evaluation work |
 | `POST /api/follow-through/(tasks|referrals|outcomes|evidence-updates)` | Create governed post-meeting workflow records |
 | `POST /api/follow-through/<collection>/<id>/update` | Controlled work or re-evaluation status update |

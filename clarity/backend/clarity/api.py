@@ -25,7 +25,8 @@ Routes:
     POST /api/clients/<client_id>/scenarios/evaluate
     POST /api/clients/<client_id>/scenarios
     POST /api/insights/<insight_id>/meeting-packages
-    POST /api/meeting-packages/<package_id>/(versions|regenerate|restore|preflight|handoff)
+    POST /api/meeting-packages/<package_id>/(versions|regenerate|restore|preflight|handoff|ai-drafts)
+    POST /api/meeting-packages/<package_id>/ai-drafts/<draft_id>/apply
     POST /api/reset
 Anything else is served from ../frontend/dist if it has been built, so the
 whole product runs from one process.
@@ -62,6 +63,7 @@ from .followthrough import (
 )
 from .followthrough_store import get_followthrough_store
 from .knowledge_store import get_knowledge_repository
+from .ai_drafting import get_ai_drafting_service
 from .signals.base import SignalContext, run_for_client
 from .signals.holding_explain import explain_holding
 
@@ -219,6 +221,8 @@ class ClarityHandler(BaseHTTPRequestHandler):
             if path == "/api/priority-policies":
                 store = get_calibration_store()
                 return self._send_json({"active_policy": store.active(), "policies": store.list(), "templates": TEMPLATES})
+            if path == "/api/ai-drafting/status":
+                return self._send_json(get_ai_drafting_service().status())
             if path == "/api/knowledge-documents":
                 role = query.get("role", ["rm"])[0]
                 return self._send_json({"documents": get_knowledge_repository().list(role)})
@@ -329,6 +333,7 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 get_followthrough_store().reset()
                 get_calibration_store().reset()
                 get_knowledge_repository().reset()
+                get_ai_drafting_service().reset()
                 return self._send_json({"status": "reset"})
             if path == "/api/knowledge-documents":
                 payload = self._read_json(); role = payload.get("role", "operations")
@@ -473,6 +478,15 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     return self._send_json({"error": f"Unknown meeting package {package_id}"}, 404)
                 payload = self._read_json()
                 actor = payload.get("actor") or "RM-SG-014"
+                if action.startswith("ai-drafts/"):
+                    draft_id = action[len("ai-drafts/") :].removesuffix("/apply")
+                    if not action.endswith("/apply"):
+                        return self._send_json({"error": "Unknown AI draft action."}, 404)
+                    version = get_ai_drafting_service().apply(package, draft_id=draft_id, rationale=payload.get("rationale", ""), role=payload.get("role", "rm"))
+                    return self._send_json({"package": get_meeting_store().append_version(package_id, version)})
+                if action == "ai-drafts":
+                    candidate = get_ai_drafting_service().generate(package, key=payload.get("target_key", ""), style=payload.get("style", ""), role=payload.get("role", "rm"))
+                    return self._send_json({"draft": candidate})
                 if action == "versions":
                     version = update_section(
                         package, payload.get("key", ""), payload.get("content", ""),
