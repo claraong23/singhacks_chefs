@@ -40,7 +40,10 @@ def _apply_decisions(
         decision = store.get(insight.id)
         payload = insight.to_dict()
         if decision:
-            payload["status"] = decision.status
+            status, reopen_reason = store.effective_status(insight)
+            payload["status"] = status
+            payload["reopened"] = reopen_reason is not None
+            payload["reopen_reason"] = reopen_reason
             payload["rm_note"] = decision.rm_note
             payload["selected_option_id"] = decision.selected_option_id
             payload["selected_scenario_id"] = decision.selected_scenario_id
@@ -74,7 +77,7 @@ def book_view(book: DataBook | None = None, store: ReviewStore | None = None) ->
     total_aum = 0.0
     for client_id, client in book.clients.items():
         insights = run_for_client(client_id, book, priority_weights=active_policy["weights"])
-        live = [i for i in insights if store.status_of(i.id) != "dismissed"]
+        live = [i for i in insights if store.effective_status(i)[0] != "dismissed"]
         view = household_view(book, client_id)
         total_aum += view.total_usd
 
@@ -90,7 +93,7 @@ def book_view(book: DataBook | None = None, store: ReviewStore | None = None) ->
         reviewed = sum(
             1
             for i in insights
-            if store.status_of(i.id) in ("rm_reviewed", "client_ready")
+            if store.effective_status(i)[0] in ("rm_reviewed", "client_ready")
         )
 
         rows.append(

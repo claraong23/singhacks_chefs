@@ -238,6 +238,11 @@ def run_for_client(
                 continue
             insights.extend(produced)
 
+        # Alert-quality policy runs after the independent checks and before
+        # ranking. It remains deterministic and cannot suppress high/critical.
+        from .filtering import filter_insights
+
+        insights = filter_insights(ctx, insights)
         insights.sort(key=lambda i: (-i.priority_score, i.id))
         return insights
     finally:

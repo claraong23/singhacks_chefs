@@ -4,7 +4,7 @@ Importing this package registers every check. Add a new module here and it
 appears in the book automatically.
 """
 
-from . import explain, governance, planning, quality, risk  # noqa: F401
+from . import explain, governance, opportunities, planning, quality, risk, scenarios  # noqa: F401
 from .base import (  # noqa: F401
     SignalContext,
     priority,

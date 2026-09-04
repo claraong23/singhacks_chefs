@@ -17,6 +17,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DATA_DIR = Path(os.environ.get("CLARITY_DATA_DIR", REPO_ROOT))
 FIXTURES_DIR = REPO_ROOT / "clarity" / "fixtures"
+DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
+API_TOKEN = os.environ.get("CLARITY_API_TOKEN", "").strip()
 
 # ---------------------------------------------------------------------------
 # Time
@@ -89,6 +91,14 @@ MANDATE_TOLERANCE_PCT = 0.5
 HOUSEHOLD_CONCENTRATION_WARN_PCT = 15.0
 HOUSEHOLD_CONCENTRATION_HIGH_PCT = 25.0
 
+# Low/info market findings below this share of household wealth are filtered as
+# immaterial. High and critical findings are never suppressed by this rule.
+ALERT_MIN_MATERIALITY_PCT = 0.10
+
+# A dismissed alert reopens when its measured amount changes by at least this
+# percentage, or when its severity increases. The original decision is retained.
+ALERT_REOPEN_CHANGE_PCT = 10.0
+
 #: Distance to the margin-call trigger, in LTV percentage points.
 LTV_WARN_HEADROOM_PP = 10.0
 LTV_CRITICAL_HEADROOM_PP = 5.0
@@ -100,6 +110,15 @@ NEAR_TERM_MONTHS = 18
 #: which we raise a liquidity signal.
 LIQUIDITY_COVER_WARN = 1.5
 LIQUIDITY_COVER_CRITICAL = 1.0
+
+# Scenario shocks are deliberately labelled as assumptions in every insight.
+from .contracts import Assumption
+
+SCENARIO_SHOCK_ASSUMPTION = Assumption(
+    statement="The scenario applies the same percentage move to every instrument mapped to the theme.",
+    basis="A simple sensitivity is appropriate for the first prototype; it is not a forecast or a stress-model calibration.",
+    impact_if_wrong="Actual instruments may have different betas, payoffs, currencies, or nonlinear structured-product terms.",
+)
 
 #: A KYC review this many days past due is flagged as an admin action.
 KYC_OVERDUE_WARN_DAYS = 0

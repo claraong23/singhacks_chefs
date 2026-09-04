@@ -7,6 +7,7 @@ workflow and decision gates are independent of its storage mechanism.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import threading
 from dataclasses import asdict, dataclass, field
@@ -15,6 +16,7 @@ from pathlib import Path
 from typing import Any, Protocol
 
 from . import config
+from .contracts import Insight
 
 STATE_DIR = config.REPO_ROOT / "clarity" / "state"
 DECISIONS_PATH = STATE_DIR / "decisions.json"
@@ -82,6 +84,9 @@ class Decision:
     scenario_calculation_version: str | None = None
     decided_by: str | None = None
     decided_at: str | None = None
+    severity_at_decision: str | None = None
+    amount_usd_at_decision: float | None = None
+    alert_evidence_version: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -106,6 +111,8 @@ class ReviewRepository(Protocol):
     def get(self, insight_id: str) -> Decision | None: ...
 
     def status_of(self, insight_id: str) -> str: ...
+
+    def effective_status(self, insight: Insight) -> tuple[str, str | None]: ...
 
     def record(self, **kwargs: Any) -> Decision: ...
 
@@ -161,6 +168,32 @@ class ReviewStore:
         decision = self._decisions.get(insight_id)
         return decision.status if decision else "new"
 
+    def effective_status(self, insight: Insight) -> tuple[str, str | None]:
+        """Reopen a dismissal only when its measured basis changes materially."""
+        decision = self._decisions.get(insight.id)
+        if decision is None:
+            return "new", None
+        if decision.status != "dismissed":
+            return decision.status, None
+        old_severity = decision.severity_at_decision
+        if old_severity and _severity_rank(insight.severity.value) > _severity_rank(old_severity):
+            return "new", f"Severity increased from {old_severity} to {insight.severity.value}."
+        if decision.amount_usd_at_decision is not None and insight.amount_usd is not None:
+            change_pct = (
+                abs(insight.amount_usd - decision.amount_usd_at_decision)
+                / max(abs(decision.amount_usd_at_decision), 1.0)
+                * 100.0
+            )
+            if change_pct >= config.ALERT_REOPEN_CHANGE_PCT:
+                return "new", (
+                    f"Measured amount changed by {change_pct:.1f}% since dismissal "
+                    f"(reopen threshold {config.ALERT_REOPEN_CHANGE_PCT:.0f}%)."
+                )
+        current_version = alert_evidence_version(insight)
+        if decision.alert_evidence_version and decision.alert_evidence_version != current_version:
+            return "new", "The supporting evidence changed since dismissal."
+        return "dismissed", None
+
     def for_client(self, client_id: str) -> list[Decision]:
         return [decision for decision in self._decisions.values() if decision.client_id == client_id]
 
@@ -194,6 +227,7 @@ class ReviewStore:
         selected_scenario_id: str | None = None,
         scenario_calculation_version: str | None = None,
         feedback: dict[str, Any] | None = None,
+        insight: Insight | None = None,
     ) -> Decision:
         with self._lock:
             previous = self._decisions.get(insight_id)
@@ -226,6 +260,17 @@ class ReviewStore:
                 else (previous.scenario_calculation_version if previous else None),
                 decided_by=actor,
                 decided_at=_now(),
+                severity_at_decision=(
+                    insight.severity.value if insight else (previous.severity_at_decision if previous else None)
+                ),
+                amount_usd_at_decision=(
+                    insight.amount_usd if insight else (previous.amount_usd_at_decision if previous else None)
+                ),
+                alert_evidence_version=(
+                    alert_evidence_version(insight)
+                    if insight
+                    else (previous.alert_evidence_version if previous else None)
+                ),
             )
             self._decisions[insight_id] = decision
             self._audit.append(
@@ -409,5 +454,32 @@ _STORE: ReviewStore | None = None
 def get_store() -> ReviewStore:
     global _STORE
     if _STORE is None:
-        _STORE = ReviewStore()
+        if config.DATABASE_URL:
+            from .postgres_review import PostgresReviewStore
+
+            _STORE = PostgresReviewStore(config.DATABASE_URL)  # type: ignore[assignment]
+        else:
+            _STORE = ReviewStore()
     return _STORE
+
+
+_SEVERITY_ORDER = {"info": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
+
+
+def _severity_rank(value: str) -> int:
+    return _SEVERITY_ORDER.get(value, 0)
+
+
+def alert_evidence_version(insight: Insight) -> str:
+    """Fingerprint evidence identity; amount changes are tested separately."""
+    payload = [
+        {
+            "source_file": item.source_file,
+            "row_or_id": item.row_or_id,
+            "field": item.field,
+            "snapshot_date": item.snapshot_date,
+        }
+        for item in insight.evidence
+    ]
+    encoded = json.dumps(payload, sort_keys=True, default=str).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()[:16]
