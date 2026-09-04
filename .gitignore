@@ -9,6 +9,12 @@ dist/
 
 # Runtime state
 clarity/state/
+.vercel/
+
+# Local secrets (keep the documented empty template)
+.env
+.env.*
+!.env.example
 
 # Editors
 .history/
