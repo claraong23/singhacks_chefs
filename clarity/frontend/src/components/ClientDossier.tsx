@@ -1,20 +1,28 @@
-import { useMemo, useState } from 'react'
-import type { Dossier, Insight, InsightStatus, SavedScenario } from '../types'
+import { useEffect, useMemo, useState } from 'react'
+import type {
+  ClientNote,
+  Dossier,
+  Insight,
+  InsightStatus,
+  ProposedObjective,
+  SavedScenario,
+} from '../types'
 import {
   money,
   pct,
-  shortDate,
   signedPct,
   signedUsd,
   titleCase,
   usd,
   usdExact,
 } from '../format'
-import { BandChart, DivergingBars, DonutList, LtvChart, TierBar, ValueLine } from './charts'
+import { BandChart, DonutList, LtvChart, TierBar } from './charts'
 import { InsightCard } from './InsightCard'
 import { EvidenceDrawer } from './EvidenceDrawer'
 import { MeetingStudio } from './MeetingStudio'
 import { ScenarioStudio } from './ScenarioStudio'
+import { ClientHeader } from './ClientHeader'
+import { WhatChangedTab } from './WhatChangedTab'
 
 type Tab = 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief'
 
@@ -48,90 +56,60 @@ export function ClientDossier({
   onAttachScenario: (insight: Insight, scenario: SavedScenario) => Promise<void>
   onBack: () => void
 }) {
-  const [tab, setTab] = useState<Tab>('why')
+  const searchParams = new URLSearchParams(window.location.search)
+  const initialTab = (searchParams.get('tab') as Tab) || 'why'
+  const [tab, setTab] = useState<Tab>(initialTab)
+  const initialFrom = searchParams.get('from') || '2025-12-31'
+  const initialTo = searchParams.get('to') || '2026-08-26'
+  const initialPortfolio = searchParams.get('portfolio') || 'all'
+  const initialHolding = searchParams.get('holding') || null
+
+  const [localDossier, setLocalDossier] = useState<Dossier>(dossier)
+  useEffect(() => {
+    setLocalDossier(dossier)
+  }, [dossier])
+
   const [evidenceFor, setEvidenceFor] = useState<Insight | null>(null)
   const [showDismissed, setShowDismissed] = useState(false)
 
-  const client = dossier.client as Record<string, string | number | null>
-  const insights = dossier.insights.filter(
+  const insights = localDossier.insights.filter(
     (insight) => showDismissed || insight.status !== 'dismissed',
   )
-  const dismissedCount = dossier.insights.filter((i) => i.status === 'dismissed').length
+  const dismissedCount = localDossier.insights.filter((i) => i.status === 'dismissed').length
+
+  const handleTabChange = (nextTab: Tab) => {
+    setTab(nextTab)
+    const params = new URLSearchParams(window.location.search)
+    params.set('tab', nextTab)
+    window.history.replaceState(null, '', `?${params.toString()}`)
+  }
+
+  const handleNoteAdded = (newNote: ClientNote) => {
+    setLocalDossier((prev) => ({
+      ...prev,
+      notes: [newNote, ...(prev.notes || [])],
+    }))
+  }
+
+  const handleObjectiveProposed = (proposal: ProposedObjective) => {
+    setLocalDossier((prev) => ({
+      ...prev,
+      client: {
+        ...prev.client,
+        objectives: `${prev.client.objectives} [Pending update: ${proposal.proposed_objectives}]`,
+      },
+    }))
+  }
 
   return (
     <div>
-      <div className="crumb">
-        <button onClick={onBack}>← Book</button>
-        <span>/</span>
-        <span>{String(client.client_name)}</span>
-      </div>
-
-      <header className="client-head">
-        <div>
-          <div className="eyebrow">{String(client.client_id)} · client since {shortDate(String(client.client_since))}</div>
-          <h1>{String(client.client_name)}</h1>
-          <div className="who">
-            <span className="pill ghost">{String(client.risk_profile)} · {client.risk_tolerance_score}/10</span>
-            <span className="pill ghost">{String(client.wealth_band)}</span>
-            <span className="pill ghost">{String(client.booking_centre)} desk</span>
-            <span className="pill ghost">Base {String(client.base_currency)}</span>
-            <span className="pill ghost">Tax domicile {String(client.tax_domicile)}</span>
-            {client.tax_domicile !== client.country_of_residence && (
-              <span className="pill high">Resident {String(client.country_of_residence)}</span>
-            )}
-            <span className="pill ghost">Horizon {client.investment_horizon_years}y</span>
-            <span className="pill ghost">Liquidity need {String(client.liquidity_needs)}</span>
-          </div>
-          <p className="objectives">
-            <strong>Objectives.</strong> {String(client.objectives)}
-          </p>
-          <p className="objectives" style={{ marginTop: 6 }}>
-            <strong>Source of wealth.</strong> {String(client.source_of_wealth)} ·{' '}
-            <strong>Life stage.</strong> {String(client.life_stage)}
-          </p>
-        </div>
-        <div className="card">
-          <div className="card-body">
-            <div className="stat" style={{ marginBottom: 14 }}>
-              <span className="v">{usd(dossier.wealth.total_usd)}</span>
-              <span className="k">
-                Household wealth across {dossier.portfolios.length} portfolio
-                {dossier.portfolios.length === 1 ? '' : 's'}, as at {dossier.as_of}
-              </span>
-            </div>
-            <table className="kv">
-              <tbody>
-                <tr>
-                  <td>Year to date</td>
-                  <td style={{ textAlign: 'right' }}>
-                    <span className={dossier.explanation.ytd.change_usd >= 0 ? 'pos' : 'neg'}>
-                      {signedUsd(dossier.explanation.ytd.change_usd)} ·{' '}
-                      {signedPct(dossier.explanation.ytd.change_pct)}
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Income run rate</td>
-                  <td style={{ textAlign: 'right' }}>
-                    {usd(dossier.income.annualised_gross_usd)}{' '}
-                    <span className="muted">· {pct(dossier.income.yield_pct, 2)}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Realisable in a week</td>
-                  <td style={{ textAlign: 'right' }}>
-                    {usd(dossier.liquidity.readily_realisable_usd)}
-                  </td>
-                </tr>
-                <tr>
-                  <td>KYC review due</td>
-                  <td style={{ textAlign: 'right' }}>{shortDate(String(client.kyc_review_due))}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </header>
+      {/* Interactive Client Header: Hero bar, dual currency AUM, dynamic alert chips, admin drawer & modals */}
+      <ClientHeader
+        dossier={localDossier}
+        onBack={onBack}
+        onNoteAdded={handleNoteAdded}
+        onObjectiveProposed={handleObjectiveProposed}
+      />
 
       {/* The hint is exposed as a description rather than a title, so the
           accessible name stays identical to the visible label. */}
@@ -142,7 +120,7 @@ export function ClientDossier({
             role="tab"
             aria-selected={tab === entry.key}
             aria-description={entry.hint}
-            onClick={() => setTab(entry.key)}
+            onClick={() => handleTabChange(entry.key)}
           >
             {entry.label}
             {entry.key === 'why' && ` (${insights.length})`}
@@ -209,212 +187,42 @@ export function ClientDossier({
       )}
 
       {tab === 'scenario' && (
-        <ScenarioStudio dossier={dossier} busy={busy} onAttach={onAttachScenario} />
+        <ScenarioStudio dossier={localDossier} busy={busy} onAttach={onAttachScenario} />
       )}
 
-      {tab === 'changed' && <WhatChanged dossier={dossier} />}
-      {tab === 'risk' && <ExposureTab dossier={dossier} />}
-      {tab === 'liquidity' && <LiquidityTab dossier={dossier} />}
-      {tab === 'brief' && <MeetingStudio dossier={dossier} />}
+      {tab === 'changed' && (
+        <WhatChangedTab
+          dossier={localDossier}
+          initialFrom={initialFrom}
+          initialTo={initialTo}
+          initialPortfolio={initialPortfolio}
+          initialHoldingId={initialHolding}
+          onUrlStateChange={(params) => {
+            const url = new URLSearchParams(window.location.search)
+            url.set('tab', 'changed')
+            url.set('from', params.from)
+            url.set('to', params.to)
+            if (params.portfolio && params.portfolio !== 'all') {
+              url.set('portfolio', params.portfolio)
+            } else {
+              url.delete('portfolio')
+            }
+            if (params.holding) {
+              url.set('holding', params.holding)
+            } else {
+              url.delete('holding')
+            }
+            window.history.replaceState(null, '', `?${url.toString()}`)
+          }}
+        />
+      )}
+      {tab === 'risk' && <ExposureTab dossier={localDossier} />}
+      {tab === 'liquidity' && <LiquidityTab dossier={localDossier} />}
+      {tab === 'brief' && <MeetingStudio dossier={localDossier} />}
 
       {evidenceFor && (
         <EvidenceDrawer insight={evidenceFor} onClose={() => setEvidenceFor(null)} />
       )}
-    </div>
-  )
-}
-
-/* ------------------------------------------------------------------------- */
-
-function WhatChanged({ dossier }: { dossier: Dossier }) {
-  const ytd = dossier.explanation.ytd
-  const recent = dossier.explanation.recent
-
-  return (
-    <div className="stack">
-      <div className="card">
-        <div className="card-head">
-          <h2>Household value across the five snapshots</h2>
-          <span className="sub">
-            {ytd.start_label} to {ytd.end_label}
-          </span>
-        </div>
-        <div className="card-body">
-          <ValueLine points={dossier.wealth.timeseries} />
-          <hr className="rule" />
-          {ytd.narrative.map((sentence, index) => (
-            <p key={index} style={{ margin: index === 0 ? '0 0 10px' : '0 0 10px', fontSize: 13.5 }}>
-              {sentence}
-            </p>
-          ))}
-          <div className="footnote">
-            Assembled from computed attribution, market_context.csv levels and event_log.csv
-            entries. No language model wrote this paragraph, and every clause has a source
-            row behind it.
-          </div>
-        </div>
-      </div>
-
-      <div className="grid2">
-        <div className="card">
-          <div className="card-head">
-            <h2>What drove it</h2>
-            <span className="sub">Year to date, by theme</span>
-          </div>
-          <div className="card-body">
-            <DivergingBars
-              rows={ytd.drivers.map((driver) => ({
-                label: driver.theme_name,
-                value: driver.amount_usd,
-                detail: driver.market_moves[0]
-                  ? `${driver.market_moves[0].series_name}: ${driver.market_moves[0].start_value} → ${driver.market_moves[0].end_value} ${driver.market_moves[0].unit}`
-                  : undefined,
-              }))}
-            />
-            <hr className="rule" />
-            <table className="kv">
-              <tbody>
-                <tr>
-                  <td>Market movement</td>
-                  <td style={{ textAlign: 'right' }} className={ytd.price_effect_usd >= 0 ? 'pos' : 'neg'}>
-                    {signedUsd(ytd.price_effect_usd)}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Currency translation</td>
-                  <td style={{ textAlign: 'right' }} className={ytd.fx_effect_usd >= 0 ? 'pos' : 'neg'}>
-                    {signedUsd(ytd.fx_effect_usd)}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Money in and out</td>
-                  <td style={{ textAlign: 'right' }}>{signedUsd(ytd.flow_effect_usd)}</td>
-                </tr>
-              </tbody>
-            </table>
-            {ytd.fx_dominates && (
-              <div className="banner" style={{ marginTop: 14, marginBottom: 0 }}>
-                Currency translation is larger than the market movement here. Reported in
-                USD the household looks weaker than it does in the client's own reporting
-                currency.
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-head">
-            <h2>Biggest market moves</h2>
-            <span className="sub">Price effect only, excluding purchases</span>
-          </div>
-          <div className="card-body">
-            <table className="postable">
-              <thead>
-                <tr>
-                  <th>Position</th>
-                  <th className="r">Price effect</th>
-                  <th className="r">Price move</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...ytd.detractors, ...ytd.contributors].slice(0, 9).map((row) => (
-                  <tr key={row.instrument_id}>
-                    <td>
-                      {row.instrument_name}
-                      <div className="muted" style={{ fontSize: 11 }}>
-                        {row.asset_class} · {row.currency}
-                      </div>
-                    </td>
-                    <td className={`r ${row.price_effect_usd >= 0 ? 'pos' : 'neg'}`}>
-                      {signedUsd(row.price_effect_usd)}
-                    </td>
-                    <td className="r muted">
-                      {row.price_start !== null && row.price_end !== null
-                        ? `${row.price_start} → ${row.price_end}`
-                        : '—'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="footnote">
-              Positions bought during the period are measured against their cost basis, so a
-              structured product marked below what the client paid shows as a loss rather
-              than as an inflow.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid2">
-        <div className="card">
-          <div className="card-head">
-            <h2>Events behind the moves</h2>
-            <span className="sub">event_log.csv is authoritative for 2026</span>
-          </div>
-          <div className="card-body">
-            {dossier.events.map((event) => (
-              <div className="event-item" key={event.event_id}>
-                <div className="d">
-                  {event.event_date}
-                  <div style={{ marginTop: 4 }}>
-                    <span className={`pill ${event.severity === 'Severe' ? 'critical' : event.severity === 'High' ? 'high' : 'low'}`}>
-                      {event.severity}
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <div className="t">{event.description}</div>
-                  <div className="ch">Reached portfolios through: {event.primary_transmission}</div>
-                </div>
-              </div>
-            ))}
-            {dossier.events.length === 0 && (
-              <p className="muted small">
-                No 2026 events in the log map to this client's themes. The moves here are
-                structural rather than event-driven.
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-head">
-            <h2>Market backdrop</h2>
-            <span className="sub">Same five dates</span>
-          </div>
-          <div className="card-body">
-            <table className="postable">
-              <thead>
-                <tr>
-                  <th>Series</th>
-                  {dossier.wealth.timeseries.map((point) => (
-                    <th className="r" key={point.snapshot}>{point.label}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {dossier.market.series.map((series) => (
-                  <tr key={series.series_id}>
-                    <td>
-                      {series.series_name}
-                      <div className="muted" style={{ fontSize: 11 }}>{series.unit}</div>
-                    </td>
-                    {series.points.map((point) => (
-                      <td className="r" key={point.snapshot}>
-                        {point.value === null ? '—' : point.value.toLocaleString('en-GB')}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <hr className="rule" />
-            <div className="eyebrow" style={{ marginBottom: 8 }}>Since the half-year</div>
-            <p className="small" style={{ margin: 0 }}>{recent.narrative[0]}</p>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

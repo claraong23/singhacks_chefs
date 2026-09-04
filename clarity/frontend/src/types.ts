@@ -573,3 +573,108 @@ export interface Dossier {
     detail: Record<string, unknown>
   }[]
 }
+
+export interface HoldingChange {
+  instrument_id: string
+  instrument_name: string
+  asset_class: string
+  sector: string
+  region: string
+  currency: string
+  portfolio_ids: string[]
+  start_quantity: number
+  end_quantity: number
+  quantity_change: number
+  start_price: number | null
+  end_price: number | null
+  price_return_pct: number | null
+  start_value_usd: number
+  end_value_usd: number
+  value_change_usd: number
+  start_weight_pct: number
+  end_weight_pct: number
+  weight_change_pct: number
+  trigger_badges: string[]
+  is_meaningful: boolean
+  valuation_lag: boolean
+  liquidity_tier: string
+}
+
+export interface HoldingExplanation {
+  client_id: string
+  instrument_id: string
+  instrument_name: string
+  asset_class: string
+  sector: string
+  region: string
+  start: string
+  end: string
+  portfolio_id: string | null
+  what_changed: {
+    start_value_usd: number
+    end_value_usd: number
+    value_change_usd: number
+    start_quantity: number
+    end_quantity: number
+    quantity_change: number
+    start_price: number | null
+    end_price: number | null
+    price_return_pct: number | null
+    start_weight_pct: number
+    end_weight_pct: number
+    weight_change_pct: number
+    currency: string
+    valuation_lag: boolean
+  }
+  event_evidence: {
+    event_id: string
+    event_date: string
+    event_type: string
+    region: string
+    description: string
+    primary_transmission: string
+    severity: string
+    correlation_score: number
+    rationale: string
+  }[]
+  transmission_mechanisms: string[]
+  why_it_matters: string[]
+  uncertainties: string[]
+  source_evidence: Evidence[]
+}
+
+export interface ClientAttributionDraft {
+  client_id: string
+  instrument_id: string
+  instrument_name: string
+  headline: string
+  what_happened_bullet: string
+  why_it_matters_bullet: string
+  next_steps_bullet: string
+  confidence: string
+  source_chips: string[]
+  limitations: string[]
+  language_disclaimer: string | null
+  created_at: string
+}
+
+export interface ClientNote {
+  note_id: string
+  note_date: string
+  channel: string
+  rm_name: string
+  note: string
+}
+
+export interface ProposedObjective {
+  proposal_id: string
+  client_id: string
+  proposed_at: string
+  rm_id: string
+  rm_name: string
+  current_objectives: string
+  proposed_objectives: string
+  rationale: string
+  status: 'pending_governance_review' | 'approved' | 'rejected'
+}
+

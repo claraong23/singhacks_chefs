@@ -9,6 +9,11 @@ import type {
   CommunicationChannel,
   CommunicationPreflight,
   MeetingPackage,
+  HoldingChange,
+  HoldingExplanation,
+  ClientAttributionDraft,
+  ClientNote,
+  ProposedObjective,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -137,3 +142,86 @@ export const recordDecision = (insightId: string, input: DecisionInput) =>
 
 export const resetDecisions = () =>
   json<{ status: string }>('/api/reset', { method: 'POST', body: '{}' })
+
+export const getHoldingChanges = (
+  clientId: string,
+  params?: { from?: string; to?: string; portfolio?: string },
+) => {
+  const query = new URLSearchParams()
+  if (params?.from) query.set('from', params.from)
+  if (params?.to) query.set('to', params.to)
+  if (params?.portfolio && params.portfolio !== 'all') query.set('portfolio', params.portfolio)
+  const qs = query.toString()
+  return json<{ changes: HoldingChange[]; period: { start: string; end: string }; portfolio_id: string | null }>(
+    `/api/clients/${clientId}/changes${qs ? `?${qs}` : ''}`,
+  )
+}
+
+export const explainHolding = (payload: {
+  clientId: string
+  instrumentId: string
+  from?: string
+  to?: string
+  portfolioId?: string
+}) =>
+  json<{ explanation: HoldingExplanation }>('/api/explain-holding', {
+    method: 'POST',
+    body: JSON.stringify({
+      client_id: payload.clientId,
+      instrument_id: payload.instrumentId,
+      from: payload.from,
+      to: payload.to,
+      portfolio_id: payload.portfolioId,
+    }),
+  })
+
+export const getClientAttribution = (payload: {
+  clientId: string
+  instrumentId: string
+  from?: string
+  to?: string
+  portfolioId?: string
+}) =>
+  json<{ draft: ClientAttributionDraft }>('/api/client-attribution', {
+    method: 'POST',
+    body: JSON.stringify({
+      client_id: payload.clientId,
+      instrument_id: payload.instrumentId,
+      from: payload.from,
+      to: payload.to,
+      portfolio_id: payload.portfolioId,
+    }),
+  })
+
+export const addClientNote = (
+  clientId: string,
+  note: string,
+  channel = 'Client Meeting',
+  rmName = 'Priscilla Ong',
+) =>
+  json<{ note: ClientNote }>(`/api/clients/${clientId}/notes`, {
+    method: 'POST',
+    body: JSON.stringify({ note, channel, rm_name: rmName }),
+  })
+
+export const proposeObjectiveUpdate = (
+  clientId: string,
+  proposedObjectives: string,
+  rationale: string,
+  rmName = 'Priscilla Ong',
+) =>
+  json<{ proposal: ProposedObjective }>(`/api/clients/${clientId}/propose-objective`, {
+    method: 'POST',
+    body: JSON.stringify({
+      proposed_objectives: proposedObjectives,
+      rationale,
+      rm_name: rmName,
+    }),
+  })
+
+export const addDraftToMeetingBrief = (clientId: string, draft: ClientAttributionDraft) =>
+  json<{ brief: Record<string, unknown> }>('/api/meeting-brief/add-draft', {
+    method: 'POST',
+    body: JSON.stringify({ client_id: clientId, draft }),
+  })
+

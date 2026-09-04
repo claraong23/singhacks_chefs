@@ -202,3 +202,4 @@ def generate_client_attribution(
     except Exception:
         # Seamless fallback
         return _deterministic_attribution(explanation, client, highlighted_claim)
+

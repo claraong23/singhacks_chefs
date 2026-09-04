@@ -31,6 +31,9 @@ export default function App() {
       const next = await getClient(id)
       setDossier(next)
       setClientId(id)
+      const params = new URLSearchParams(window.location.search)
+      params.set('client', id)
+      window.history.replaceState(null, '', `?${params.toString()}`)
       window.scrollTo({ top: 0 })
     } catch (exception) {
       setError(String(exception))
@@ -38,6 +41,13 @@ export default function App() {
       setBusy(false)
     }
   }, [])
+
+  useEffect(() => {
+    const urlClient = new URLSearchParams(window.location.search).get('client')
+    if (urlClient && !clientId) {
+      void openClient(urlClient)
+    }
+  }, [clientId, openClient])
 
   const decide = useCallback(
     async (
@@ -131,6 +141,7 @@ export default function App() {
             onBack={() => {
               setClientId(null)
               setDossier(null)
+              window.history.replaceState(null, '', window.location.pathname)
               void loadBook()
             }}
           />
