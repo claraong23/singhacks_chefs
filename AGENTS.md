@@ -100,19 +100,21 @@ clarity/frontend/
   styles.css                      Hand-written private-bank design system
   types.ts                        TypeScript mirror of backend contracts
 clarity/fixtures/                 Frozen payloads for demo and offline frontend work
-clarity/state/                    Local persisted review/audit state (runtime only)
+clarity/state/                    Local development review/audit state (runtime only)
 ```
 
-### Selected current product stack
+### Recommended Vercel-first product stack
 
-- **Frontend:** Vite 5, React 18 and TypeScript 5. The interface is built from purpose-specific components and hand-written CSS; do not migrate to Next.js, Tailwind, shadcn/ui, or another design system while this product already has a coherent one.
+- **Frontend:** Vite 5, React 18 and TypeScript 5, deployed as a static application on Vercel. Preserve the purpose-specific components and hand-written CSS; do not migrate to Next.js, Tailwind, shadcn/ui, or another design system while this product already has a coherent one.
 - **Visualisation:** lightweight, accessible inline SVG charts in `frontend/src/components/charts.tsx`. Do not add a charting dependency unless a required chart cannot be represented and tested clearly with the current primitives.
-- **Frontend-to-backend integration:** browser `fetch`, a Vite development proxy from port 5173 to port 8000, and TypeScript types in `frontend/src/types.ts` that mirror `backend/clarity/contracts.py`. Contract changes must update both sides together.
-- **Backend and analytics:** dependency-free Python standard library, including CSV/JSON loaders, deterministic analytics and `ThreadingHTTPServer`. Do not replace it with FastAPI or pandas unless a concrete capability—not framework preference—requires it.
-- **Workflow persistence:** a thread-safe JSON review store at `clarity/state/decisions.json` for the prototype. Move to SQLite or PostgreSQL only when multi-user concurrency, durable retention, role-based access, migrations, or operational reporting are actually in scope.
-- **AI and external services:** none are required for the current product. Deterministic templates already produce cited narratives. Any later LLM integration must be a replaceable structured-output adapter that receives only approved facts/evidence and always has a deterministic fallback.
-- **Runtime and delivery:** `npm run build` produces `clarity/frontend/dist`, which `python -m clarity.api` serves from one process on port 8000. Keep this single-process demo path as the reliable default. If a hosted deployment is needed, deploy the unified Python service; split a static frontend to Vercel only when there is a demonstrated benefit.
-- **Testing:** Python `unittest` verifies the calculations and signal integrity; TypeScript compilation plus Vite build verifies the frontend. Add React component tests and browser end-to-end tests when the workflow grows beyond the current controlled decision paths.
+- **Frontend-to-backend integration:** browser `fetch`, typed request/response contracts, and TypeScript types in `frontend/src/types.ts` that mirror `backend/clarity/contracts.py`. Keep the Vite proxy for local development; use `/api/*` routes in the deployed application. Contract changes must update both sides together.
+- **Backend and analytics:** retain the dependency-free Python domain engine—CSV/JSON loaders, deterministic analytics, signals, evidence and action-option builders. Replace the long-running local `ThreadingHTTPServer` only at the hosting boundary with Vercel Python Function handlers; do not rewrite the domain layer or add FastAPI without a concrete capability need.
+- **Database:** use managed PostgreSQL for deployed workflow state: RM decisions, meeting briefs, action options, audit events, assignments and version history. The existing JSON review store remains the local/offline-demo adapter; never write production state to a Vercel function filesystem.
+- **Source data:** package the synthetic CSV/JSON data as read-only build inputs for the prototype. Any future live ingestion must use approved controlled pipelines and preserve source/version provenance.
+- **AI (optional):** keep AI disabled by default and preserve deterministic templates as the fallback. When enabled, call an approved LLM provider from a server-side Python function using environment-managed credentials. The adapter receives only approved structured facts, evidence IDs, permitted wording instructions and a JSON schema; it may draft editable explanation/meeting prose only. It may not calculate, rank, approve, send, retrieve uncontrolled market facts, or execute actions.
+- **Hosting:** Vercel serves the Vite build and Python `/api/*` Functions; PostgreSQL supplies durable state. Keep the frontend, functions and database in compatible regions, configure secrets only through Vercel environment variables, and use preview deployments with synthetic fixtures.
+- **Local runtime:** `npm run build` plus `python -m clarity.api` remains the single-process, no-network demo fallback on port 8000. It must remain functional even when hosting, database or AI services are unavailable.
+- **Testing:** Python `unittest` verifies calculations and signal integrity; TypeScript compilation plus Vite build verifies the frontend. Add React component tests, API-contract tests and browser end-to-end tests for the persisted workflow before treating a hosted build as production-like.
 
 ## Shared contracts
 
