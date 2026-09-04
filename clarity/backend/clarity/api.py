@@ -38,21 +38,23 @@ import mimetypes
 import traceback
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import unquote, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 from . import config
 from .actions import options_for
-from .contracts import Category, Severity
+from .analytics.attribution import attribute, detect_meaningful_changes
+from .attribution_ai import generate_client_attribution
+from .contracts import Category, MeetingHandoffEvent, Severity
 from .dossier import all_events, book_view, client_dossier
 from .gates import evaluate_readiness
 from .loaders import get_book
+from .meeting import create_package, preflight, regenerate_section, restore_version, update_section
+from .meeting_store import get_meeting_store, new_id, now as meeting_now
 from .review import InvalidTransitionError, VALID_STATUSES, get_store
 from .scenario_store import get_scenario_store
 from .scenarios import evaluate_scenario, templates_for_client
-from .meeting import create_package, preflight, regenerate_section, restore_version, update_section
-from .meeting_store import get_meeting_store, new_id, now as meeting_now
-from .contracts import MeetingHandoffEvent
 from .signals.base import SignalContext, run_for_client
+from .signals.holding_explain import explain_holding
 
 FRONTEND_DIST = config.REPO_ROOT / "clarity" / "frontend" / "dist"
 
@@ -207,6 +209,32 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 if package is None:
                     return self._send_json({"error": f"Unknown meeting package {package_id}"}, 404)
                 return self._send_json({"package": package})
+            if path.startswith("/api/clients/") and "/changes" in path:
+                client_id = (
+                    path.split("/api/clients/", 1)[1].split("/changes", 1)[0].strip("/")
+                )
+                if client_id not in get_book().clients:
+                    return self._send_json({"error": f"Unknown client {client_id}"}, 404)
+                query = parse_qs(urlparse(self.path).query)
+                start = query.get("from", [config.BASELINE_SNAPSHOT])[0]
+                end = query.get("to", [config.AS_OF])[0]
+                portfolio_id = query.get("portfolio", [None])[0]
+                if portfolio_id in ("", "all", "undefined", "null"):
+                    portfolio_id = None
+                changes = detect_meaningful_changes(
+                    get_book(), client_id, start, end, portfolio_id
+                )
+                attr = attribute(get_book(), client_id, start, end, portfolio_id)
+                return self._send_json(
+                    {
+                        "client_id": client_id,
+                        "start": start,
+                        "end": end,
+                        "portfolio_id": portfolio_id,
+                        "changes": [c.to_dict() for c in changes],
+                        "attribution": attr.to_dict(),
+                    }
+                )
             if path.startswith("/api/clients/"):
                 client_id = path.split("/api/clients/", 1)[1].strip("/")
                 if client_id not in get_book().clients:
@@ -302,6 +330,85 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 payload = self._read_json()
                 _, readiness = _readiness(insight_id, payload)
                 return self._send_json(readiness.to_dict())
+            if path == "/api/explain-holding":
+                payload = self._read_json()
+                client_id = payload.get("client_id")
+                instrument_id = payload.get("instrument_id")
+                start = payload.get("from") or config.BASELINE_SNAPSHOT
+                end = payload.get("to") or config.AS_OF
+                portfolio_id = payload.get("portfolio")
+                if portfolio_id in ("", "all", "undefined", "null"):
+                    portfolio_id = None
+                if not client_id or not instrument_id:
+                    return self._send_json(
+                        {"error": "client_id and instrument_id are required"}, 400
+                    )
+                explanation = explain_holding(
+                    get_book(), client_id, instrument_id, start, end, portfolio_id
+                )
+                return self._send_json({"explanation": explanation.to_dict()})
+            if path == "/api/client-attribution":
+                payload = self._read_json()
+                client_id = payload.get("client_id")
+                instrument_id = payload.get("instrument_id")
+                start = payload.get("from") or config.BASELINE_SNAPSHOT
+                end = payload.get("to") or config.AS_OF
+                portfolio_id = payload.get("portfolio")
+                highlighted_claim = payload.get("highlighted_claim")
+                if portfolio_id in ("", "all", "undefined", "null"):
+                    portfolio_id = None
+                if not client_id or not instrument_id:
+                    return self._send_json(
+                        {"error": "client_id and instrument_id are required"}, 400
+                    )
+                explanation = explain_holding(
+                    get_book(), client_id, instrument_id, start, end, portfolio_id
+                )
+                client = get_book().clients.get(client_id, {})
+                draft = generate_client_attribution(
+                    explanation, client, highlighted_claim
+                )
+                return self._send_json({"draft": draft.to_dict()})
+            if path.startswith("/api/clients/") and path.endswith("/notes"):
+                client_id = path[len("/api/clients/") : -len("/notes")].strip("/")
+                payload = self._read_json()
+                note = payload.get("note", "").strip()
+                channel = payload.get("channel", "Meeting")
+                if not note:
+                    return self._send_json({"error": "note cannot be empty"}, 400)
+                entry = get_store().add_note(
+                    client_id=client_id, note=note, channel=channel
+                )
+                return self._send_json({"note": entry})
+            if path.startswith("/api/clients/") and path.endswith("/propose-objective"):
+                client_id = path[
+                    len("/api/clients/") : -len("/propose-objective")
+                ].strip("/")
+                payload = self._read_json()
+                proposed = payload.get("proposed_objective", "").strip()
+                rationale = payload.get("rationale", "")
+                if not proposed:
+                    return self._send_json(
+                        {"error": "proposed_objective cannot be empty"}, 400
+                    )
+                entry = get_store().propose_objective(
+                    client_id=client_id,
+                    proposed_objective=proposed,
+                    rationale=rationale,
+                )
+                return self._send_json({"objective": entry})
+            if path == "/api/meeting-brief/add-draft":
+                payload = self._read_json()
+                client_id = payload.get("client_id")
+                draft = payload.get("draft", {})
+                if not client_id or not draft:
+                    return self._send_json(
+                        {"error": "client_id and draft are required"}, 400
+                    )
+                entry = get_store().add_draft_to_meeting_brief(
+                    client_id=client_id, draft=draft
+                )
+                return self._send_json({"status": "added", "entry": entry})
             if path.startswith("/api/insights/") and path.endswith("/decision"):
                 insight_id = path[len("/api/insights/") : -len("/decision")]
                 payload = self._read_json()

@@ -283,11 +283,102 @@ class ReviewStore:
             )
             self._save()
 
+    def add_note(
+        self,
+        *,
+        client_id: str,
+        note: str,
+        channel: str = "Meeting",
+        actor: str = "RM-SG-014",
+    ) -> dict[str, Any]:
+        with self._lock:
+            ts = _now()
+            entry = {
+                "note_id": f"N-USR-{len(self._audit) + 1:04d}",
+                "client_id": client_id,
+                "note_date": ts[:10],
+                "rm_id": actor,
+                "rm_name": "Priscilla Ong",
+                "channel": channel,
+                "note": note,
+            }
+            self._audit.append(
+                AuditEntry(
+                    timestamp=ts,
+                    actor=actor,
+                    action="note:add",
+                    insight_id=entry["note_id"],
+                    client_id=client_id,
+                    detail=entry,
+                )
+            )
+            self._save()
+            return entry
+
+    def propose_objective(
+        self,
+        *,
+        client_id: str,
+        proposed_objective: str,
+        rationale: str = "",
+        actor: str = "RM-SG-014",
+    ) -> dict[str, Any]:
+        with self._lock:
+            ts = _now()
+            entry = {
+                "client_id": client_id,
+                "proposed_objective": proposed_objective,
+                "rationale": rationale,
+                "proposed_by": actor,
+                "proposed_at": ts,
+            }
+            self._audit.append(
+                AuditEntry(
+                    timestamp=ts,
+                    actor=actor,
+                    action="objective:propose",
+                    insight_id=f"OBJ-{client_id}",
+                    client_id=client_id,
+                    detail=entry,
+                )
+            )
+            self._save()
+            return entry
+
+    def add_draft_to_meeting_brief(
+        self,
+        *,
+        client_id: str,
+        draft: dict[str, Any],
+        actor: str = "RM-SG-014",
+    ) -> dict[str, Any]:
+        with self._lock:
+            ts = _now()
+            entry = {
+                "client_id": client_id,
+                "draft": draft,
+                "added_by": actor,
+                "added_at": ts,
+            }
+            self._audit.append(
+                AuditEntry(
+                    timestamp=ts,
+                    actor=actor,
+                    action="meeting_brief:add_draft",
+                    insight_id=f"MB-DRAFT-{client_id}",
+                    client_id=client_id,
+                    detail=entry,
+                )
+            )
+            self._save()
+            return entry
+
     def reset(self) -> None:
         with self._lock:
             self._decisions.clear()
             self._audit.clear()
             self._save()
+
 
 
 _STORE: ReviewStore | None = None

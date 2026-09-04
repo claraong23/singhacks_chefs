@@ -27,7 +27,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .. import config
-from ..contracts import Assumption, Evidence
+from ..contracts import Assumption, Evidence, HoldingChange
 from ..loaders import DataBook
 from .lookthrough import THEMES
 
@@ -158,9 +158,16 @@ class AttributionResult:
         }
 
 
-def _positions(book: DataBook, client_id: str, snapshot: str) -> dict[str, dict]:
+def _positions(
+    book: DataBook,
+    client_id: str,
+    snapshot: str,
+    portfolio_id: str | None = None,
+) -> dict[str, dict]:
     out: dict[str, dict] = {}
     for h in book.holdings_by_client_date.get((client_id, snapshot), []):
+        if portfolio_id and portfolio_id != "all" and h.get("portfolio_id") != portfolio_id:
+            continue
         iid = h["instrument_id"]
         entry = out.setdefault(
             iid,
@@ -172,10 +179,16 @@ def _positions(book: DataBook, client_id: str, snapshot: str) -> dict[str, dict]
                 "cost_basis_usd": 0.0,
                 "instrument_name": h.get("instrument_name"),
                 "asset_class": h.get("asset_class"),
+                "sector": h.get("sector") or "",
+                "region": h.get("region") or "",
+                "liquidity_tier": h.get("liquidity_tier") or "Daily",
+                "valuation_date": h.get("valuation_date") or snapshot,
+                "portfolio_ids": set(),
             },
         )
         entry["quantity"] += h.get("quantity") or 0.0
         entry["market_value_usd"] += h.get("market_value_usd") or 0.0
+        entry["portfolio_ids"].add(h.get("portfolio_id"))
         pf = book.portfolios.get(h["portfolio_id"], {})
         entry["cost_basis_usd"] += (
             book.to_usd(
@@ -193,10 +206,11 @@ def attribute(
     client_id: str,
     start: str = config.BASELINE_SNAPSHOT,
     end: str = config.AS_OF,
+    portfolio_id: str | None = None,
 ) -> AttributionResult:
-    """Decompose a household's change in USD value between two snapshots."""
-    before = _positions(book, client_id, start)
-    after = _positions(book, client_id, end)
+    """Decompose a household or single portfolio's change in USD value between two snapshots."""
+    before = _positions(book, client_id, start, portfolio_id)
+    after = _positions(book, client_id, end, portfolio_id)
 
     contributions: list[Contribution] = []
     for iid in set(before) | set(after):
@@ -378,3 +392,157 @@ def contribution_evidence(
             )
         )
     return out
+
+
+def detect_meaningful_changes(
+    book: DataBook,
+    client_id: str,
+    start: str = config.BASELINE_SNAPSHOT,
+    end: str = config.AS_OF,
+    portfolio_id: str | None = None,
+) -> list[HoldingChange]:
+    """Detect and classify holding-level changes between two snapshots with triple-trigger filtering."""
+    before = _positions(book, client_id, start, portfolio_id)
+    after = _positions(book, client_id, end, portfolio_id)
+
+    total_start = sum(p["market_value_usd"] for p in before.values())
+    total_end = sum(p["market_value_usd"] for p in after.values())
+    ref_total = max(total_start, total_end, 1.0)
+
+    # Check mandate breaches at end snapshot for single-position & asset class
+    from .mandate import review_client
+    mandate_reviews = review_client(book, client_id, end)
+    breached_iids = {
+        pb.instrument_id for mr in mandate_reviews for pb in mr.position_breaches
+    }
+    breached_asset_classes = {
+        bb.asset_class
+        for mr in mandate_reviews
+        for bb in mr.band_breaches
+        if bb.is_material
+    }
+
+    # Also find events in the period to flag event_relevant
+    period_events = [
+        e for e in book.events
+        if start <= e.get("event_date", "") <= end
+    ]
+    event_transmissions = " ".join(e.get("primary_transmission", "") for e in period_events).lower()
+
+    results: list[HoldingChange] = []
+    for iid in sorted(set(before) | set(after)):
+        b = before.get(iid)
+        a = after.get(iid)
+        instrument = book.instrument(iid)
+        name = (a or b).get("instrument_name") or instrument.get("instrument_name", iid)
+        asset_class = (a or b).get("asset_class") or instrument.get("asset_class", "")
+        sector = (a or b).get("sector") or instrument.get("sector", "")
+        region = (a or b).get("region") or instrument.get("region", "")
+        currency = (a or b).get("currency") or instrument.get("currency", "USD")
+        liquidity_tier = (a or b).get("liquidity_tier") or instrument.get("liquidity_tier", "Daily")
+        p_ids = sorted(list((a or b).get("portfolio_ids", [])))
+
+        q0 = (b or {}).get("quantity", 0.0)
+        q1 = (a or {}).get("quantity", 0.0)
+        q_change = round(q1 - q0, 4)
+
+        p0 = (b or {}).get("price_local")
+        p1 = (a or {}).get("price_local")
+        if p0 is None:
+            p0 = instrument.get(f"price_{start}")
+        if p1 is None:
+            p1 = instrument.get(f"price_{end}")
+
+        p_return = None
+        if p0 and p1 is not None and p0 > 0:
+            p_return = round((p1 / p0 - 1.0) * 100, 2)
+
+        val0 = (b or {}).get("market_value_usd", 0.0)
+        val1 = (a or {}).get("market_value_usd", 0.0)
+        val_change = round(val1 - val0, 2)
+
+        wt0 = round((val0 / total_start * 100), 2) if total_start > 0 else 0.0
+        wt1 = round((val1 / total_end * 100), 2) if total_end > 0 else 0.0
+        wt_change = round(wt1 - wt0, 2)
+
+        val_date = (a or b).get("valuation_date") or end
+        val_lag = val_date != end or liquidity_tier in ("Illiquid", "Quarterly Gate")
+
+        # Determine trigger badges
+        badges: list[str] = []
+
+        # 1. Material Mover (>=0.5% of total portfolio value or >= $50,000)
+        if abs(val_change) >= (0.005 * ref_total) or abs(val_change) >= 50000.0:
+            badges.append("material_mover")
+
+        # 2. Price Shock (>= 10% price return)
+        if p_return is not None and abs(p_return) >= 10.0:
+            badges.append("price_shock")
+
+        # 3. Mandate Breach (single position breach or part of breached asset class)
+        if iid in breached_iids or (asset_class in breached_asset_classes and wt1 > 5.0):
+            badges.append("mandate_breach")
+
+        # 4. Quantity Changed
+        if abs(q_change) > 1e-4 and q0 > 0 and q1 > 0:
+            badges.append("quantity_changed")
+
+        # 5. New or Closed
+        if q0 == 0 and q1 > 0:
+            badges.append("new_position")
+        elif q0 > 0 and q1 == 0:
+            badges.append("closed_position")
+
+        # 6. Valuation Lag
+        if val_lag:
+            badges.append("valuation_lag")
+
+        # 7. Event relevance check
+        keywords = [k.lower() for k in [sector, region, asset_class, name] if k]
+        if any(k in event_transmissions for k in keywords if len(k) > 3):
+            badges.append("event_relevant")
+
+        is_meaningful = bool(
+            set(badges) & {
+                "material_mover",
+                "price_shock",
+                "mandate_breach",
+                "new_position",
+                "closed_position",
+                "valuation_lag",
+                "event_relevant",
+            }
+        )
+
+        results.append(
+            HoldingChange(
+                instrument_id=iid,
+                instrument_name=name,
+                asset_class=asset_class,
+                sector=sector,
+                region=region,
+                currency=currency,
+                portfolio_ids=p_ids,
+                start_quantity=q0,
+                end_quantity=q1,
+                quantity_change=q_change,
+                start_price=p0,
+                end_price=p1,
+                price_return_pct=p_return,
+                start_value_usd=round(val0, 2),
+                end_value_usd=round(val1, 2),
+                value_change_usd=val_change,
+                start_weight_pct=wt0,
+                end_weight_pct=wt1,
+                weight_change_pct=wt_change,
+                trigger_badges=badges,
+                is_meaningful=is_meaningful,
+                valuation_lag=val_lag,
+                liquidity_tier=liquidity_tier,
+            )
+        )
+
+    # Sort so meaningful and largest absolute value movers appear first
+    results.sort(key=lambda r: (1 if r.is_meaningful else 0, abs(r.value_change_usd)), reverse=True)
+    return results
+

@@ -500,3 +500,96 @@ class MeetingBrief:
 
     def to_dict(self) -> dict[str, Any]:
         return dataclasses.asdict(self)
+
+
+# ---------------------------------------------------------------------------
+# Holding changes and explanation contracts (Task 1)
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class HoldingChange:
+    instrument_id: str
+    instrument_name: str
+    asset_class: str
+    sector: str
+    region: str
+    currency: str
+    portfolio_ids: list[str]
+    start_quantity: float
+    end_quantity: float
+    quantity_change: float
+    start_price: float | None
+    end_price: float | None
+    price_return_pct: float | None
+    start_value_usd: float
+    end_value_usd: float
+    value_change_usd: float
+    start_weight_pct: float
+    end_weight_pct: float
+    weight_change_pct: float
+    trigger_badges: list[str]
+    is_meaningful: bool
+    valuation_lag: bool = False
+    liquidity_tier: str = "Daily"
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass
+class HoldingExplanation:
+    client_id: str
+    instrument_id: str
+    instrument_name: str
+    asset_class: str
+    sector: str
+    region: str
+    start: str
+    end: str
+    portfolio_id: str | None
+    what_changed: dict[str, Any]
+    event_evidence: list[dict[str, Any]]
+    transmission_mechanisms: list[str]
+    why_it_matters: list[str]
+    uncertainties: list[str]
+    source_evidence: list[Evidence] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "client_id": self.client_id,
+            "instrument_id": self.instrument_id,
+            "instrument_name": self.instrument_name,
+            "asset_class": self.asset_class,
+            "sector": self.sector,
+            "region": self.region,
+            "start": self.start,
+            "end": self.end,
+            "portfolio_id": self.portfolio_id,
+            "what_changed": self.what_changed,
+            "event_evidence": self.event_evidence,
+            "transmission_mechanisms": self.transmission_mechanisms,
+            "why_it_matters": self.why_it_matters,
+            "uncertainties": self.uncertainties,
+            "source_evidence": [e.to_dict() for e in self.source_evidence],
+        }
+
+
+@dataclass
+class ClientAttributionDraft:
+    client_id: str
+    instrument_id: str
+    instrument_name: str
+    headline: str
+    what_happened_bullet: str
+    why_it_matters_bullet: str
+    next_steps_bullet: str
+    confidence: str
+    source_chips: list[str]
+    limitations: list[str]
+    language_disclaimer: str | None = None
+    created_at: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
