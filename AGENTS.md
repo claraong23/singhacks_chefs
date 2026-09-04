@@ -33,13 +33,50 @@ Go deep on three client journeys and use the book-level workbench to demonstrate
 
 These are **investigation storylines, not investment recommendations**. The analytics and evidence panel must confirm every claim before it is shown in the demo. CL-0002 (volatile technology collateral) and CL-0012 (retirement-income/duration risk) are useful backup priority cards.
 
+## Judging criteria — visible proof in the product and demo
+
+The four criteria carry equal weight. Do not leave any of them as a claim in a presentation: make each one visible in a screen, a decision, and a line in the narration.
+
+| Criterion | What `Clarity` demonstrates | Evidence to show in the demo |
+| --- | --- | --- |
+| **Client-Centric Innovation (25%)** | Advice begins with the whole person—not a generic portfolio score. Each insight combines portfolio facts with objectives, life stage, tax domicile, planned cash needs, and RM relationship context. | Open a client-specific priority card, then show why the same market/risk signal matters differently for that client's goals. State the client outcome: greater confidence, earlier preparation, or a more relevant conversation. |
+| **User Experience & Design (25%)** | A calm, RM-first flow reduces a 20-client book to the next best conversation. Progressive disclosure moves from `why now` to `why` to `what to discuss`; evidence is available without overwhelming the main view. | Complete the full journey in under 90 seconds: ranked book → client dossier → explanation/evidence → editable meeting brief. Show clear urgency labels, source dates, empty/missing-data handling, and one-click review/dismiss/edit controls. |
+| **Technical & Operational Feasibility (25%)** | The architecture is deliberately bank-realistic: deterministic analytics for financial facts, a controlled event source, stable data contracts, traceable evidence, and AI limited to grounded narrative drafting. | Show the evidence drawer with source file/ID/date, suitability checks, assumption disclosure, and the RM approval state. Explain the single-app data/API architecture, synthetic-data handling, and how rules can be independently tested and audited. |
+| **Strategic Impact (25%)** | `Clarity` is the intelligence layer that turns existing portfolio data into scalable, higher-quality RM coverage while retaining the relationship-led Julius Baer model. | Frame the outcome as helping Priscilla prioritise all 20 clients and arrive prepared for the three complex conversations—not replacing her judgement. Close with how the same workflow can expand from a prototype to monitored, governed advisory workflows. |
+
+### Non-negotiable demo beats
+
+1. Start with the **RM problem**: twenty clients, limited time, and too much descriptive information.
+2. Demonstrate a **specific client decision**, not just analytics or charts.
+3. Expose the **evidence and caveat** behind one insight; this is the trust moment.
+4. Show the RM **editing, approving, or dismissing** the proposed action; this is the human-in-the-loop moment.
+5. End on a client benefit and a business benefit: more timely, personalised advice and a scalable RM operating model.
+
 ## Team ownership
 
 | Owner | Primary responsibility | Deliverable and interface |
 | --- | --- | --- |
-| Teammate 1 | **Task 1 — Client Context / intelligent portfolio explanations** | A reusable client dossier: objectives, tax domicile, mandate, notes, multi-portfolio roll-up, snapshot changes, and a plain-language `what changed / why` explanation with source evidence. |
-| Teammates 2 and 3 | **Task 2 — AI Wealth Intelligence Layer and UI/UX** | Deterministic signal checks and prioritisation, plus a polished shared visual system and screens. Suggested split: one owns data/risk rules and evidence payloads; the other owns the end-to-end UI, loading/error states, and demo polish. |
-| Project lead (you) | **Task 3 — RM Intelligence Workbench**, solution foundation, and client advisory action | Create the application skeleton and shared contracts; own book prioritisation, insight-review state, meeting brief, recommendation options, suitability guardrails, approval/rejection, and the final client-action screen. Integrate the other workstreams and maintain the demo narrative. |
+| Teammate 1 — **Project lead** | **Task 1 — Client Context / intelligent portfolio explanations** | Own the client-context module: profile, objectives, tax domicile, mandate, RM notes, multi-portfolio roll-up, snapshot comparisons, and the grounded `what changed / why` explanation. Deliver a reusable `ClientContext` payload and evidence-linked explanation cards. As project lead, set scope, resolve product trade-offs, keep the demo storyline coherent, and accept each completed vertical slice. |
+| Teammate 2 | **Task 2A — AI Wealth Intelligence / risk and opportunity engine** | Own deterministic signal checks and evidence payloads for concentration, liquidity, currency, mandate, collateral, and scenarios, plus explainable priority-score inputs. Deliver stable `Insight` fixtures/API responses for the UI; do not own the RM action workflow. |
+| Teammate 3 | **Task 2B — Overall UI/UX and intelligence views** | Own the shared visual language and the screens that present Task 2: intelligence cards, risk/opportunity detail, evidence drawer, charts, and loading/error states. Integrate Task 1 context and Task 2 signals into clear, reusable components; do not own the recommendation/approval logic. |
+| You | **Task 3 — RM Intelligence Workbench and client advisory action** | Own the RM decision workflow: the prioritised-book workbench (using Task 2's priority inputs), insight selection/review state, meeting brief, action options, suitability checklist, RM edit/approve/dismiss controls, and client-ready follow-up. Consume the shared inputs rather than rebuilding the analytics or client-context logic. |
+
+### Extra task — solution foundation and integration
+
+This is a small shared enablement task, not a fourth feature track. **Teammate 2 is the technical owner** because its data contracts and signal engine depend on it; Teammate 3 owns the UI shell contribution; Teammate 1 approves scope; you integrate the workbench once the contract is stable. Time-box it to the minimum needed to unblock parallel work:
+
+1. Runnable repository/app bootstrap, environment template, and one command to start the demo.
+2. CSV/JSON loaders, normalised client/portfolio/instrument data model, and three selected demo-client fixtures.
+3. Versioned `ClientContext` and `Insight` contracts, source-evidence format, and stubbed responses where a task is not ready.
+4. Shared routing, design tokens, and a single end-to-end vertical slice: priority card → client dossier → evidence → RM action.
+
+### Implementation hand-offs
+
+1. The **extra foundation task starts first** and gives every teammate a runnable path and sample payloads.
+2. **Task 1** plugs its client-context and explanation output into that path. Its explanation must retain date, portfolio/holding, and event evidence—not only prose.
+3. **Task 2A** publishes the insight/priority contract; **Task 2B** makes it comprehensible and usable in the shared experience.
+4. **Task 3** consumes these inputs in the RM workflow, then adds review and advisory-action state. It should never recalculate signals already supplied by Task 2A.
+5. The **project lead** validates the full flow against the product story and rubric. The technical owner keeps the shared branch/build working, but does not make product-scope decisions alone.
 
 Every feature should be usable through the same path: `priority card → client dossier → evidence → RM action`. Avoid isolated dashboards that cannot feed a decision.
 
