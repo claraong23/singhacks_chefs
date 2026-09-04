@@ -6,6 +6,9 @@ import type {
   ScenarioResult,
   ScenarioTemplate,
   InsightStatus,
+  CommunicationChannel,
+  CommunicationPreflight,
+  MeetingPackage,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -83,6 +86,40 @@ export const saveScenario = (clientId: string, name: string, input: ScenarioInpu
   json<{ scenario: SavedScenario }>(`/api/clients/${clientId}/scenarios`, {
     method: 'POST',
     body: JSON.stringify({ name, ...scenarioBody(input) }),
+  })
+
+export const getMeetingPackages = (clientId: string) =>
+  json<{ packages: MeetingPackage[] }>(`/api/clients/${clientId}/meeting-packages`)
+
+export const createMeetingPackage = (insightId: string, clientId: string) =>
+  json<{ package: MeetingPackage }>(`/api/insights/${insightId}/meeting-packages`, {
+    method: 'POST', body: JSON.stringify({ client_id: clientId }),
+  })
+
+export const saveMeetingSection = (
+  packageId: string, key: string, content: string, evidenceRefs: string[], reason = 'RM edit',
+) => json<{ package: MeetingPackage }>(`/api/meeting-packages/${packageId}/versions`, {
+  method: 'POST', body: JSON.stringify({ key, content, evidence_refs: evidenceRefs, reason }),
+})
+
+export const regenerateMeetingSection = (packageId: string, key: string) =>
+  json<{ package: MeetingPackage }>(`/api/meeting-packages/${packageId}/regenerate`, {
+    method: 'POST', body: JSON.stringify({ key }),
+  })
+
+export const restoreMeetingVersion = (packageId: string, version: number) =>
+  json<{ package: MeetingPackage }>(`/api/meeting-packages/${packageId}/restore`, {
+    method: 'POST', body: JSON.stringify({ version }),
+  })
+
+export const preflightMeetingPackage = (packageId: string) =>
+  json<{ preflight: CommunicationPreflight }>(`/api/meeting-packages/${packageId}/preflight`, {
+    method: 'POST', body: '{}',
+  })
+
+export const handoffMeetingPackage = (packageId: string, channel: CommunicationChannel) =>
+  json<{ package: MeetingPackage }>(`/api/meeting-packages/${packageId}/handoff`, {
+    method: 'POST', body: JSON.stringify({ channel }),
   })
 
 export const recordDecision = (insightId: string, input: DecisionInput) =>

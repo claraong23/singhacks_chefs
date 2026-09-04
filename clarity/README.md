@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-48 backend tests. They check the things a judge would push on: that holdings reconcile to
+54 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
@@ -82,7 +82,7 @@ position, and the weights are stated so they can be argued with.
 | **Exposure and mandate** | Look-through concentration, themes, mandate bands and limits |
 | **Liquidity and collateral** | What is actually sellable, what is pledged, and LTV through time |
 | **Scenario Studio** | Evidence-backed baseline-versus-option comparison for Lau, Margarethe, and Fong; current-state arithmetic only |
-| **Meeting brief** | What to say, what to ask, what *not* to say, and a draft follow-up |
+| **Meeting Studio** | Versioned, evidence-backed meeting packages and client-ready drafts; copy/simulated hand-off only after preflight |
 
 ### 3. The decision — the RM stays in charge
 
@@ -95,6 +95,16 @@ Before anything can become client-ready, evidence, suitability, tax/planning,
 data/model quality, and RM rationale must all pass. Saved Scenario Studio
 comparisons retain their bounded inputs and calculation version; they cannot
 bypass a decision gate or execute a transaction.
+
+### 4. Meeting Studio — turn an approved finding into a conversation
+
+A package can be created only for one `client_ready` finding. It freezes the
+selected option, evidence version, optional scenario calculation and passing
+gate snapshot, then creates editable internal sections plus concise email,
+formal briefing, call-notes and client-app variants. Every edit appends a
+version. Communication preflight rechecks the client-ready source, cited
+evidence, required caveats, prohibited claims and reporting language before an
+RM can copy the draft or record a **simulated** hand-off. Nothing is sent.
 
 ---
 
@@ -126,7 +136,7 @@ behind that note are reported as unknown instead of guessed.
 clarity/
   backend/clarity/
     config.py          Dates, thresholds, conventions. Nothing inferred.
-    contracts.py       Insight, Evidence, ActionOption, MeetingBrief
+    contracts.py       Insight, Evidence, ActionOption, scenario and meeting contracts
     loaders.py         CSV/JSON → normalised, indexed, coerced once
     analytics/         Deterministic calculation, no narrative
       valuation.py       household roll-up across every portfolio
@@ -140,7 +150,9 @@ clarity/
     actions.py         Reviewable options, solved from the data
     scenarios.py       Bounded current-state comparisons for the anchor journeys
     scenario_store.py  Saved-scenario JSON adapter
-    brief.py           The meeting brief
+    meeting.py         Deterministic meeting packages and communication preflight
+    meeting_store.py   Versioned Meeting Studio JSON adapter
+    brief.py           Legacy deterministic brief used by the terminal fallback
     review.py          RM decisions and the audit trail
     dossier.py         Assembly into stable JSON
     api.py             Standard-library HTTP API
@@ -187,6 +199,10 @@ ScenarioResult template_id, client_id, insight_id, option_id, inputs{}
 
 MeetingBrief   purpose, talking_points[], questions_to_ask[], relationship_context[]
                contradictions[], do_not_say[], draft_follow_up, provenance
+
+MeetingPackage id, client_id, insight_id, source{option, scenario, evidence, gates}
+               current_version, versions[] {sections[], communications[]}, handoffs[]
+Communication  channel, content, evidence_refs[]; preflight {can_hand_off, checks[]}
 ```
 
 Two rules hold everywhere: **no claim without a citation**, and **computed
@@ -219,7 +235,7 @@ The seams are already cut, so four people can work without colliding.
 | **Task 1 — Client context and explanations** | `analytics/attribution.py`, `signals/explain.py`, the *What changed and why* tab | Extend `THEMES` in `analytics/lookthrough.py` and `THEME_MARKET_SERIES` to explain a new driver |
 | **Task 2a — Risk rules and evidence** | `signals/risk.py`, `signals/governance.py`, `signals/planning.py`, `analytics/` | Add a `@signal`; it appears in the book with no other change |
 | **Task 2b — UI and design system** | `frontend/src/components/`, `frontend/src/styles.css` | Only `types.ts` couples you to the backend; `clarity/fixtures/*.json` lets you work with the API stopped |
-| **Task 3 — Workbench and action** | `actions.py`, `brief.py`, `review.py`, `dossier.py`, `api.py` | Owns the contracts and the demo narrative |
+| **Task 3 — Workbench and action** | `actions.py`, `meeting.py`, `review.py`, `dossier.py`, `api.py` | Owns the contracts and the demo narrative |
 
 ## API
 
@@ -235,7 +251,11 @@ The seams are already cut, so four people can work without colliding.
 | `POST /api/clients/<id>/scenarios/evaluate` | Evaluate `{template_id, insight_id, option_id, inputs}` |
 | `POST /api/clients/<id>/scenarios` | Re-evaluate and save a named comparison |
 | `POST /api/insights/<id>/decision` | `{status, rm_note, selected_option_id, edited_next_step}` |
-| `POST /api/reset` | Clear decisions (demo reset) |
+| `GET /api/clients/<id>/meeting-packages` | Versioned packages for one client |
+| `POST /api/insights/<id>/meeting-packages` | Create a package from one client-ready finding |
+| `POST /api/meeting-packages/<id>/versions` | Save an evidence-linked section edit |
+| `POST /api/meeting-packages/<id>/(regenerate|restore|preflight|handoff)` | Controlled package lifecycle operations |
+| `POST /api/reset` | Clear local decisions, scenarios and meeting packages (demo reset) |
 
 ---
 

@@ -162,6 +162,105 @@ class DecisionReadiness:
         }
 
 
+# ---------------------------------------------------------------------------
+# Meeting Studio
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class MeetingSection:
+    """One editable, evidence-linked block in an RM meeting package."""
+
+    key: str
+    title: str
+    content: str
+    evidence_refs: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class CommunicationVariant:
+    """A channel-specific client draft. It is never sent by Clarity."""
+
+    channel: Literal["email", "formal_briefing", "call_notes", "client_app"]
+    label: str
+    content: str
+    evidence_refs: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class MeetingVersion:
+    """Immutable snapshot created for generation, editing, or restoration."""
+
+    id: str
+    version: int
+    created_at: str
+    actor: str
+    reason: str
+    sections: list[MeetingSection]
+    communications: list[CommunicationVariant]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "version": self.version,
+            "created_at": self.created_at,
+            "actor": self.actor,
+            "reason": self.reason,
+            "sections": [section.to_dict() for section in self.sections],
+            "communications": [variant.to_dict() for variant in self.communications],
+        }
+
+
+@dataclass(frozen=True)
+class CommunicationPreflight:
+    """Deterministic control result before an RM copies or hands off a draft."""
+
+    can_hand_off: bool
+    checks: list[dict[str, Any]]
+    checked_at: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class MeetingHandoffEvent:
+    """Audit event for a simulated, never external, communication hand-off."""
+
+    id: str
+    package_id: str
+    channel: str
+    actor: str
+    created_at: str
+    preflight_version: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class MeetingPackage:
+    """Persisted, one-finding communication package with immutable versions."""
+
+    id: str
+    client_id: str
+    insight_id: str
+    state: Literal["draft", "preflight_passed", "handed_off"]
+    created_at: str
+    created_by: str
+    source: dict[str, Any]
+    current_version: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
 @dataclass(frozen=True)
 class Fact:
     """A computed statement plus the number behind it."""

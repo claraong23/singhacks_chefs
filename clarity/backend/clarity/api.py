@@ -16,12 +16,16 @@ Routes:
     GET  /api/clients/<client_id>
     GET  /api/clients/<client_id>/scenario-templates
     GET  /api/clients/<client_id>/scenarios
+    GET  /api/clients/<client_id>/meeting-packages
+    GET  /api/meeting-packages/<package_id>
     GET  /api/events
     GET  /api/audit
     POST /api/insights/<insight_id>/readiness
     POST /api/insights/<insight_id>/decision
     POST /api/clients/<client_id>/scenarios/evaluate
     POST /api/clients/<client_id>/scenarios
+    POST /api/insights/<insight_id>/meeting-packages
+    POST /api/meeting-packages/<package_id>/(versions|regenerate|restore|preflight|handoff)
     POST /api/reset
 Anything else is served from ../frontend/dist if it has been built, so the
 whole product runs from one process.
@@ -45,6 +49,9 @@ from .loaders import get_book
 from .review import InvalidTransitionError, VALID_STATUSES, get_store
 from .scenario_store import get_scenario_store
 from .scenarios import evaluate_scenario, templates_for_client
+from .meeting import create_package, preflight, regenerate_section, restore_version, update_section
+from .meeting_store import get_meeting_store, new_id, now as meeting_now
+from .contracts import MeetingHandoffEvent
 from .signals.base import SignalContext, run_for_client
 
 FRONTEND_DIST = config.REPO_ROOT / "clarity" / "frontend" / "dist"
@@ -189,6 +196,17 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 if client_id not in get_book().clients:
                     return self._send_json({"error": f"Unknown client {client_id}"}, 404)
                 return self._send_json({"scenarios": get_scenario_store().list_for_client(client_id)})
+            if path.startswith("/api/clients/") and path.endswith("/meeting-packages"):
+                client_id = path[len("/api/clients/") : -len("/meeting-packages")]
+                if client_id not in get_book().clients:
+                    return self._send_json({"error": f"Unknown client {client_id}"}, 404)
+                return self._send_json({"packages": get_meeting_store().list_for_client(client_id)})
+            if path.startswith("/api/meeting-packages/"):
+                package_id = path[len("/api/meeting-packages/") :].strip("/")
+                package = get_meeting_store().get(package_id)
+                if package is None:
+                    return self._send_json({"error": f"Unknown meeting package {package_id}"}, 404)
+                return self._send_json({"package": package})
             if path.startswith("/api/clients/"):
                 client_id = path.split("/api/clients/", 1)[1].strip("/")
                 if client_id not in get_book().clients:
@@ -207,6 +225,7 @@ class ClarityHandler(BaseHTTPRequestHandler):
             if path == "/api/reset":
                 get_store().reset()
                 get_scenario_store().reset()
+                get_meeting_store().reset()
                 return self._send_json({"status": "reset"})
             if path.startswith("/api/clients/") and path.endswith("/scenarios/evaluate"):
                 client_id = path[len("/api/clients/") : -len("/scenarios/evaluate")]
@@ -235,6 +254,49 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     saved_by=payload.get("actor") or "RM-SG-014",
                 )
                 return self._send_json({"scenario": scenario}, 201)
+            if path.startswith("/api/insights/") and path.endswith("/meeting-packages"):
+                insight_id = path[len("/api/insights/") : -len("/meeting-packages")]
+                payload = self._read_json()
+                client_id = _client_id_for(insight_id, payload)
+                package = create_package(client_id, insight_id, actor=payload.get("actor") or "RM-SG-014")
+                get_meeting_store().create(package)
+                return self._send_json({"package": package}, 201)
+            if path.startswith("/api/meeting-packages/"):
+                remainder = path[len("/api/meeting-packages/") :].strip("/")
+                package_id, _, action = remainder.partition("/")
+                package = get_meeting_store().get(package_id)
+                if package is None:
+                    return self._send_json({"error": f"Unknown meeting package {package_id}"}, 404)
+                payload = self._read_json()
+                actor = payload.get("actor") or "RM-SG-014"
+                if action == "versions":
+                    version = update_section(
+                        package, payload.get("key", ""), payload.get("content", ""),
+                        payload.get("evidence_refs", []), actor=actor,
+                        reason=payload.get("reason") or "RM edit",
+                    )
+                    return self._send_json({"package": get_meeting_store().append_version(package_id, version)})
+                if action == "regenerate":
+                    version = regenerate_section(package, key=payload.get("key", ""), actor=actor)
+                    return self._send_json({"package": get_meeting_store().append_version(package_id, version)})
+                if action == "restore":
+                    version = restore_version(package, int(str(payload.get("version", ""))), actor=actor)
+                    return self._send_json({"package": get_meeting_store().append_version(package_id, version)})
+                if action == "preflight":
+                    result = preflight(package)
+                    get_meeting_store().mark_preflight(package_id, result)
+                    return self._send_json({"preflight": result})
+                if action == "handoff":
+                    channel = payload.get("channel")
+                    result = preflight(package)
+                    get_meeting_store().mark_preflight(package_id, result)
+                    if not result["can_hand_off"]:
+                        return self._send_json({"error": "Communication hand-off is blocked by preflight.", "preflight": result}, 409)
+                    if channel not in {"email", "formal_briefing", "call_notes", "client_app"}:
+                        return self._send_json({"error": "Unknown communication channel."}, 400)
+                    event = MeetingHandoffEvent(new_id(), package_id, channel, actor, meeting_now(), package["current_version"]).to_dict()
+                    return self._send_json({"package": get_meeting_store().append_handoff(package_id, event), "handoff": event})
+                return self._send_json({"error": "Unknown meeting package action."}, 404)
             if path.startswith("/api/insights/") and path.endswith("/readiness"):
                 insight_id = path[len("/api/insights/") : -len("/readiness")]
                 payload = self._read_json()
@@ -305,6 +367,10 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 )
                 return self._send_json({"decision": decision.to_dict()})
             return self._send_json({"error": "Not found"}, 404)
+        except PermissionError as exc:
+            return self._send_json({"error": str(exc)}, 409)
+        except KeyError as exc:
+            return self._send_json({"error": str(exc)}, 404)
         except InvalidTransitionError as exc:
             return self._send_json({"error": str(exc)}, 409)
         except ValueError as exc:

@@ -442,6 +442,70 @@ export interface MeetingBriefView {
   provenance: string
 }
 
+export type CommunicationChannel = 'email' | 'formal_briefing' | 'call_notes' | 'client_app'
+
+export interface MeetingSection {
+  key: string
+  title: string
+  content: string
+  evidence_refs: string[]
+}
+
+export interface CommunicationVariant {
+  channel: CommunicationChannel
+  label: string
+  content: string
+  evidence_refs: string[]
+}
+
+export interface MeetingVersion {
+  id: string
+  version: number
+  created_at: string
+  actor: string
+  reason: string
+  sections: MeetingSection[]
+  communications: CommunicationVariant[]
+}
+
+export interface CommunicationPreflight {
+  can_hand_off: boolean
+  checks: { id: string; label: string; status: 'pass' | 'block'; detail: string }[]
+  checked_at: string
+}
+
+export interface MeetingHandoffEvent {
+  id: string
+  package_id: string
+  channel: CommunicationChannel
+  actor: string
+  created_at: string
+  preflight_version: number
+}
+
+export interface MeetingPackage {
+  id: string
+  client_id: string
+  insight_id: string
+  state: 'draft' | 'preflight_passed' | 'handed_off'
+  created_at: string
+  created_by: string
+  client_reporting_language?: string
+  source: {
+    decision_status: string
+    selected_option_id: string | null
+    selected_scenario_id: string | null
+    scenario_calculation_version: string | null
+    evidence_version: string | null
+    gate_snapshot: { status: string }[]
+    evidence: Evidence[]
+  }
+  current_version: number
+  versions: MeetingVersion[]
+  handoffs: MeetingHandoffEvent[]
+  last_preflight?: CommunicationPreflight
+}
+
 export interface Dossier {
   as_of: string
   client: Record<string, string | number | null>

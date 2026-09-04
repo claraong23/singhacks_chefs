@@ -13,7 +13,7 @@ import {
 import { BandChart, DivergingBars, DonutList, LtvChart, TierBar, ValueLine } from './charts'
 import { InsightCard } from './InsightCard'
 import { EvidenceDrawer } from './EvidenceDrawer'
-import { MeetingBriefPanel } from './MeetingBrief'
+import { MeetingStudio } from './MeetingStudio'
 import { ScenarioStudio } from './ScenarioStudio'
 
 type Tab = 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief'
@@ -24,7 +24,7 @@ const TABS: { key: Tab; label: string; hint: string }[] = [
   { key: 'risk', label: 'Exposure and mandate', hint: 'Look-through, concentration, bands' },
   { key: 'liquidity', label: 'Liquidity and collateral', hint: 'What is sellable, and what is pledged' },
   { key: 'scenario', label: 'Scenario Studio', hint: 'Compare constrained current-state options' },
-  { key: 'brief', label: 'Meeting brief', hint: 'What to say, ask, and send' },
+  { key: 'brief', label: 'Meeting Studio', hint: 'Versioned client-ready communication' },
 ]
 
 export function ClientDossier({
@@ -215,7 +215,7 @@ export function ClientDossier({
       {tab === 'changed' && <WhatChanged dossier={dossier} />}
       {tab === 'risk' && <ExposureTab dossier={dossier} />}
       {tab === 'liquidity' && <LiquidityTab dossier={dossier} />}
-      {tab === 'brief' && <MeetingBriefPanel dossier={dossier} />}
+      {tab === 'brief' && <MeetingStudio dossier={dossier} />}
 
       {evidenceFor && (
         <EvidenceDrawer insight={evidenceFor} onClose={() => setEvidenceFor(null)} />
