@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-75 backend tests. They check the things a judge would push on: that holdings reconcile to
+90 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
@@ -225,6 +225,7 @@ clarity/
       liquidity.py       obligations vs what can actually be sold
       attribution.py     price / FX / flow decomposition
       income.py          run-rate income and cost of the facility
+      event_impact.py    event → theme → holdings → affected-client ranking
     signals/           One file per family of checks; each returns Insights
     actions.py         Reviewable options, solved from the data
     scenarios.py       Bounded current-state comparisons for the anchor journeys
@@ -237,7 +238,8 @@ clarity/
     ai_drafting.py    Optional provider adapters, ephemeral draft preview and audit metadata
     audit.py           Unified origin-labelled audit reconstruction
     brief.py           Legacy deterministic brief used by the terminal fallback
-    review.py          RM decisions and the audit trail
+    review.py          RM decisions, changed-alert reopening and audit trail
+    postgres_review.py Optional deployed PostgreSQL review adapter
     dossier.py         Assembly into stable JSON
     api.py             Standard-library HTTP API
     cli.py             Terminal demo and fixture export
@@ -335,6 +337,7 @@ The seams are already cut, so four people can work without colliding.
 | `GET /api/book` | The ranked book |
 | `GET /api/clients/<id>` | One full dossier |
 | `GET /api/events` | `event_log.csv`, normalised with stable ids |
+| `GET /api/events/<id>/impact` | Ranked clients, mapped exposure and explicit sensitivity for one event |
 | `GET /api/meta` | Snapshots, categories, thresholds, load warnings |
 | `GET /api/audit` | Unified origin-labelled audit timeline; supports client and origin filters |
 | `GET /api/priority-policies` | Active policy, candidate policies, and curated transparent templates |
@@ -349,6 +352,7 @@ The seams are already cut, so four people can work without colliding.
 | `POST /api/clients/<id>/scenarios/evaluate` | Evaluate `{template_id, insight_id, option_id, inputs}` |
 | `POST /api/clients/<id>/scenarios` | Re-evaluate and save a named comparison |
 | `POST /api/insights/<id>/decision` | `{status, rm_note, selected_option_id, edited_next_step}` |
+| `POST /api/insights/<id>/narrative` | Optional grounded OpenAI wording for one computed insight |
 | `GET /api/clients/<id>/meeting-packages` | Versioned packages for one client |
 | `POST /api/insights/<id>/meeting-packages` | Create a package from one client-ready finding |
 | `POST /api/meeting-packages/<id>/versions` | Save an evidence-linked section edit |
