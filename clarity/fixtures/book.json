@@ -1,0 +1,765 @@
+{
+  "as_of": "2026-08-26",
+  "snapshots": [
+    {
+      "date": "2025-12-31",
+      "label": "Year-end 2025"
+    },
+    {
+      "date": "2026-02-27",
+      "label": "Pre-conflict"
+    },
+    {
+      "date": "2026-03-31",
+      "label": "Post-Hormuz"
+    },
+    {
+      "date": "2026-06-30",
+      "label": "Half-year"
+    },
+    {
+      "date": "2026-08-26",
+      "label": "Today"
+    }
+  ],
+  "rm": {
+    "rm_id": "RM-SG-014",
+    "rm_name": "Priscilla Ong",
+    "rm_desk": "Asia desk - Singapore and Hong Kong booking centres"
+  },
+  "totals": {
+    "clients": 20,
+    "aum_usd": 596220638.09,
+    "insights": 83,
+    "critical": 19,
+    "high": 28,
+    "decisions": {
+      "new": 0,
+      "reviewed": 0,
+      "dismissed": 0,
+      "actioned": 0
+    }
+  },
+  "clients": [
+    {
+      "client_id": "CL-0014",
+      "client_name": "Lau Chi Ming",
+      "booking_centre": "Hong Kong",
+      "base_currency": "HKD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Balanced",
+      "life_stage": "Peak earning years",
+      "total_usd": 26488970.55,
+      "priority_score": 98.03573066927265,
+      "top_headline": "Lombard facility 0.59pp from a margin call",
+      "top_category": "collateral",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 28.0% of household wealth (USD 7,426,376)",
+        "Live today"
+      ],
+      "insight_count": 11,
+      "severity_counts": {
+        "critical": 4,
+        "high": 2,
+        "medium": 4,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "collateral": 1,
+        "liquidity": 1,
+        "concentration": 3,
+        "mandate": 2,
+        "suitability": 1,
+        "data_quality": 1,
+        "admin": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-09-22",
+      "rank": 1
+    },
+    {
+      "client_id": "CL-0002",
+      "client_name": "Ravi Chandrasekaran",
+      "booking_centre": "Singapore",
+      "base_currency": "USD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Growth",
+      "life_stage": "Pre-liquidity event",
+      "total_usd": 46699200.0,
+      "priority_score": 83.91886798917326,
+      "top_headline": "Lombard facility 1.29pp from a margin call",
+      "top_category": "collateral",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 13.9% of household wealth (USD 6,500,000)",
+        "Live today"
+      ],
+      "insight_count": 7,
+      "severity_counts": {
+        "critical": 3,
+        "high": 2,
+        "medium": 1,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "collateral": 1,
+        "concentration": 1,
+        "liquidity": 1,
+        "data_quality": 1,
+        "suitability": 1,
+        "tax": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2027-02-28",
+      "rank": 2
+    },
+    {
+      "client_id": "CL-0017",
+      "client_name": "Fong Enterprises Family Office",
+      "booking_centre": "Hong Kong",
+      "base_currency": "USD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Balanced",
+      "life_stage": "Multi-generational - G2 and G3",
+      "total_usd": 87902980.0,
+      "priority_score": 82.97436218885868,
+      "top_headline": "Alternatives Sleeve owes USD 15,800,000 in uncalled commitments against USD 900,000 it can sell",
+      "top_category": "liquidity",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 18.0% of household wealth (USD 15,800,000)",
+        "Due in 90 days",
+        "Measured against Alternatives Sleeve alone, not the household"
+      ],
+      "insight_count": 5,
+      "severity_counts": {
+        "critical": 1,
+        "high": 2,
+        "medium": 1,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "liquidity": 2,
+        "mandate": 2,
+        "life_event": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-11-13",
+      "rank": 3
+    },
+    {
+      "client_id": "CL-0001",
+      "client_name": "Hartono Wijaya Kusuma",
+      "booking_centre": "Singapore",
+      "base_currency": "SGD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Balanced Growth",
+      "life_stage": "Wealth accumulation - second generation",
+      "total_usd": 46571821.48,
+      "priority_score": 82.5,
+      "top_headline": "45% of household wealth sits with Bara Nusantara Energy Tbk, across 2 line items",
+      "top_category": "concentration",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 45.0% of household wealth (USD 20,950,461)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 6,
+      "severity_counts": {
+        "critical": 1,
+        "high": 3,
+        "medium": 1,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "concentration": 2,
+        "suitability": 1,
+        "collateral": 1,
+        "currency": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-11-30",
+      "rank": 4
+    },
+    {
+      "client_id": "CL-0003",
+      "client_name": "Margarethe Voss-Brenner",
+      "booking_centre": "Singapore",
+      "base_currency": "EUR",
+      "wealth_band": "HNW",
+      "risk_profile": "Conservative",
+      "life_stage": "Recently inherited - transition",
+      "total_usd": 22181135.66,
+      "priority_score": 82.5,
+      "top_headline": "Inherited Portfolio - Under Review sits outside 2 of its Conservative bands",
+      "top_category": "mandate",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 100.0% of household wealth (USD 22,181,136)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 5,
+      "severity_counts": {
+        "critical": 2,
+        "high": 2,
+        "medium": 1,
+        "low": 0,
+        "info": 0
+      },
+      "categories": {
+        "mandate": 2,
+        "suitability": 1,
+        "tax": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2027-02-16",
+      "rank": 5
+    },
+    {
+      "client_id": "CL-0004",
+      "client_name": "Chalermchai Suphanburi",
+      "booking_centre": "Singapore",
+      "base_currency": "USD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Income",
+      "life_stage": "Pre-retirement",
+      "total_usd": 33453055.03,
+      "priority_score": 82.5,
+      "top_headline": "51% of the household moves with Interest rate duration",
+      "top_category": "concentration",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 50.7% of household wealth (USD 16,952,500)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 5,
+      "severity_counts": {
+        "critical": 1,
+        "high": 0,
+        "medium": 3,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "concentration": 1,
+        "mandate": 1,
+        "performance": 1,
+        "liquidity": 1,
+        "life_event": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-09-30",
+      "rank": 6
+    },
+    {
+      "client_id": "CL-0009",
+      "client_name": "Andreas Lindqvist",
+      "booking_centre": "Singapore",
+      "base_currency": "EUR",
+      "wealth_band": "UHNW",
+      "risk_profile": "Balanced",
+      "life_stage": "Post-liquidity event",
+      "total_usd": 31613603.44,
+      "priority_score": 82.5,
+      "top_headline": "Post-Sale Deployment Portfolio sits outside 2 of its Balanced bands",
+      "top_category": "mandate",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 100.0% of household wealth (USD 31,613,603)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 2,
+      "severity_counts": {
+        "critical": 1,
+        "high": 1,
+        "medium": 0,
+        "low": 0,
+        "info": 0
+      },
+      "categories": {
+        "mandate": 2
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2027-05-29",
+      "rank": 7
+    },
+    {
+      "client_id": "CL-0011",
+      "client_name": "Tan Boon Huat",
+      "booking_centre": "Singapore",
+      "base_currency": "SGD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Conservative",
+      "life_stage": "Succession and estate planning",
+      "total_usd": 35335041.43,
+      "priority_score": 82.5,
+      "top_headline": "Consolidated Family Account sits outside 2 of its Conservative bands",
+      "top_category": "mandate",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 100.0% of household wealth (USD 35,335,041)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 8,
+      "severity_counts": {
+        "critical": 3,
+        "high": 2,
+        "medium": 2,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "mandate": 2,
+        "suitability": 1,
+        "concentration": 1,
+        "tax": 1,
+        "liquidity": 1,
+        "admin": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-08-31",
+      "rank": 8
+    },
+    {
+      "client_id": "CL-0012",
+      "client_name": "Cheung Kwok Wing",
+      "booking_centre": "Hong Kong",
+      "base_currency": "USD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Income",
+      "life_stage": "Retired",
+      "total_usd": 28028704.72,
+      "priority_score": 82.5,
+      "top_headline": "52% of the household moves with Interest rate duration",
+      "top_category": "concentration",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 51.5% of household wealth (USD 14,448,400)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 4,
+      "severity_counts": {
+        "critical": 1,
+        "high": 1,
+        "medium": 1,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "concentration": 1,
+        "suitability": 1,
+        "life_event": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-10-04",
+      "rank": 9
+    },
+    {
+      "client_id": "CL-0013",
+      "client_name": "Zhang Meiling",
+      "booking_centre": "Hong Kong",
+      "base_currency": "USD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Growth",
+      "life_stage": "Wealth accumulation",
+      "total_usd": 36952084.12,
+      "priority_score": 82.5,
+      "top_headline": "57% of the household moves with US technology and AI capital expenditure",
+      "top_category": "concentration",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 57.1% of household wealth (USD 21,086,400)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 3,
+      "severity_counts": {
+        "critical": 1,
+        "high": 1,
+        "medium": 0,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "concentration": 2,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-12-06",
+      "rank": 10
+    },
+    {
+      "client_id": "CL-0005",
+      "client_name": "Aishah binti Rahman",
+      "booking_centre": "Singapore",
+      "base_currency": "SGD",
+      "wealth_band": "HNW",
+      "risk_profile": "Sustainable Balanced",
+      "life_stage": "Peak earning years",
+      "total_usd": 19400737.88,
+      "priority_score": 73.79678346076739,
+      "top_headline": "21% of a mandate with binding exclusions is invested in excluded instruments",
+      "top_category": "mandate",
+      "top_severity": "critical",
+      "why_now": [
+        "Severity critical (weight 1.00)",
+        "Affects 21.3% of household wealth",
+        "No dated deadline; scored as background risk",
+        "Discretionary mandate: the bank selected the positions"
+      ],
+      "insight_count": 2,
+      "severity_counts": {
+        "critical": 1,
+        "high": 1,
+        "medium": 0,
+        "low": 0,
+        "info": 0
+      },
+      "categories": {
+        "mandate": 2
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-10-15",
+      "rank": 11
+    },
+    {
+      "client_id": "CL-0007",
+      "client_name": "Alistair Pemberton-Hale",
+      "booking_centre": "Singapore",
+      "base_currency": "USD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Balanced",
+      "life_stage": "Retired - legacy and philanthropy",
+      "total_usd": 40019276.0,
+      "priority_score": 72.6,
+      "top_headline": "Core Balanced Mandate sits outside 1 of its Balanced bands",
+      "top_category": "mandate",
+      "top_severity": "high",
+      "why_now": [
+        "Severity high (weight 0.78)",
+        "Affects 100.0% of household wealth (USD 40,019,276)",
+        "No dated deadline; scored as background risk",
+        "An RM note may record a client instruction; check the file"
+      ],
+      "insight_count": 2,
+      "severity_counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 0,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "mandate": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-12-31",
+      "rank": 12
+    },
+    {
+      "client_id": "CL-0010",
+      "client_name": "Priya Nair Menon",
+      "booking_centre": "Singapore",
+      "base_currency": "SGD",
+      "wealth_band": "HNW",
+      "risk_profile": "Sustainable Balanced",
+      "life_stage": "Early career - next generation",
+      "total_usd": 8182936.1,
+      "priority_score": 72.6,
+      "top_headline": "37% of the household moves with Interest rate duration",
+      "top_category": "concentration",
+      "top_severity": "high",
+      "why_now": [
+        "Severity high (weight 0.78)",
+        "Affects 36.7% of household wealth (USD 3,006,185)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 2,
+      "severity_counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 1,
+        "low": 0,
+        "info": 0
+      },
+      "categories": {
+        "concentration": 1,
+        "liquidity": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2027-07-19",
+      "rank": 13
+    },
+    {
+      "client_id": "CL-0015",
+      "client_name": "Kim Do-Yoon",
+      "booking_centre": "Hong Kong",
+      "base_currency": "USD",
+      "wealth_band": "HNW",
+      "risk_profile": "Dynamic Opportunistic",
+      "life_stage": "Wealth accumulation",
+      "total_usd": 14985635.85,
+      "priority_score": 72.6,
+      "top_headline": "43% of the household moves with US technology and AI capital expenditure",
+      "top_category": "concentration",
+      "top_severity": "high",
+      "why_now": [
+        "Severity high (weight 0.78)",
+        "Affects 42.6% of household wealth (USD 6,379,900)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 2,
+      "severity_counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 0,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "concentration": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2027-04-11",
+      "rank": 14
+    },
+    {
+      "client_id": "CL-0016",
+      "client_name": "Yamamoto Kenji",
+      "booking_centre": "Hong Kong",
+      "base_currency": "JPY",
+      "wealth_band": "HNW",
+      "risk_profile": "Balanced",
+      "life_stage": "Pre-retirement",
+      "total_usd": 14508066.73,
+      "priority_score": 72.6,
+      "top_headline": "Advisory Balanced Portfolio sits outside 2 of its Balanced bands",
+      "top_category": "mandate",
+      "top_severity": "high",
+      "why_now": [
+        "Severity high (weight 0.78)",
+        "Affects 100.0% of household wealth (USD 14,508,067)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 4,
+      "severity_counts": {
+        "critical": 0,
+        "high": 3,
+        "medium": 1,
+        "low": 0,
+        "info": 0
+      },
+      "categories": {
+        "mandate": 2,
+        "suitability": 2
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2027-07-27",
+      "rank": 15
+    },
+    {
+      "client_id": "CL-0019",
+      "client_name": "Abdullah Al-Mansoori",
+      "booking_centre": "Hong Kong",
+      "base_currency": "USD",
+      "wealth_band": "UHNW",
+      "risk_profile": "Balanced Growth",
+      "life_stage": "Peak earning years",
+      "total_usd": 32214266.33,
+      "priority_score": 72.6,
+      "top_headline": "The portfolio and the client's source of wealth are the same bet (42% on Energy and the Strait of Hormuz)",
+      "top_category": "suitability",
+      "top_severity": "high",
+      "why_now": [
+        "Severity high (weight 0.78)",
+        "Affects 42.1% of household wealth (USD 13,573,266)",
+        "No dated deadline; scored as background risk",
+        "Client has a stated diversification objective"
+      ],
+      "insight_count": 4,
+      "severity_counts": {
+        "critical": 0,
+        "high": 3,
+        "medium": 0,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "suitability": 1,
+        "concentration": 2,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-11-20",
+      "rank": 16
+    },
+    {
+      "client_id": "CL-0018",
+      "client_name": "Elena Marchetti-Wong",
+      "booking_centre": "Hong Kong",
+      "base_currency": "EUR",
+      "wealth_band": "HNW",
+      "risk_profile": "Balanced",
+      "life_stage": "Peak earning years",
+      "total_usd": 22597824.97,
+      "priority_score": 66.99101788476239,
+      "top_headline": "The portfolio and the client's source of wealth are the same bet (24% on Greater China consumer demand)",
+      "top_category": "suitability",
+      "top_severity": "high",
+      "why_now": [
+        "Severity high (weight 0.78)",
+        "Affects 24.4% of household wealth (USD 5,511,840)",
+        "No dated deadline; scored as background risk",
+        "Client has a stated diversification objective"
+      ],
+      "insight_count": 4,
+      "severity_counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 3,
+        "low": 0,
+        "info": 0
+      },
+      "categories": {
+        "suitability": 2,
+        "mandate": 1,
+        "tax": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-12-05",
+      "rank": 17
+    },
+    {
+      "client_id": "CL-0020",
+      "client_name": "Grace Adeyemi-Lim",
+      "booking_centre": "Hong Kong",
+      "base_currency": "USD",
+      "wealth_band": "HNW",
+      "risk_profile": "Growth",
+      "life_stage": "Wealth accumulation",
+      "total_usd": 19059758.28,
+      "priority_score": 60.26243050822152,
+      "top_headline": "The portfolio and the client's source of wealth are the same bet (29% on Healthcare and pharmaceuticals)",
+      "top_category": "suitability",
+      "top_severity": "medium",
+      "why_now": [
+        "Severity medium (weight 0.52)",
+        "Affects 29.4% of household wealth (USD 5,596,408)",
+        "No dated deadline; scored as background risk"
+      ],
+      "insight_count": 2,
+      "severity_counts": {
+        "critical": 0,
+        "high": 0,
+        "medium": 1,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "suitability": 1,
+        "performance": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2027-02-08",
+      "rank": 18
+    },
+    {
+      "client_id": "CL-0006",
+      "client_name": "Nguyen Thi Bao Tran",
+      "booking_centre": "Singapore",
+      "base_currency": "SGD",
+      "wealth_band": "HNW",
+      "risk_profile": "Balanced",
+      "life_stage": "Wealth accumulation",
+      "total_usd": 18072993.49,
+      "priority_score": 53.9331176905105,
+      "top_headline": "Portfolio income covers 1.15x the client's planned annual drawdown",
+      "top_category": "life_event",
+      "top_severity": "medium",
+      "why_now": [
+        "Severity medium (weight 0.52)",
+        "Affects 5.5% of household wealth (USD 1,000,000)",
+        "Due in 6 days"
+      ],
+      "insight_count": 4,
+      "severity_counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 3,
+        "low": 0,
+        "info": 0
+      },
+      "categories": {
+        "life_event": 1,
+        "liquidity": 1,
+        "performance": 1,
+        "currency": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2027-01-30",
+      "rank": 19
+    },
+    {
+      "client_id": "CL-0008",
+      "client_name": "Chen Wei Ling",
+      "booking_centre": "Singapore",
+      "base_currency": "SGD",
+      "wealth_band": "HNW",
+      "risk_profile": "Balanced",
+      "life_stage": "Peak earning years",
+      "total_usd": 11952546.03,
+      "priority_score": 38.5,
+      "top_headline": "KYC review due in 16 days",
+      "top_category": "admin",
+      "top_severity": "low",
+      "why_now": [
+        "Severity low (weight 0.30)",
+        "Affects 0.0% of household wealth",
+        "Due in 16 days"
+      ],
+      "insight_count": 1,
+      "severity_counts": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 1,
+        "info": 0
+      },
+      "categories": {
+        "admin": 1
+      },
+      "reviewed_count": 0,
+      "kyc_review_due": "2026-09-11",
+      "rank": 20
+    }
+  ],
+  "data_warnings": [],
+  "scoring": {
+    "formula": "0.45 x severity + 0.30 x materiality + 0.25 x urgency, scaled to 100",
+    "materiality": "share of household wealth affected, capped at 30%",
+    "urgency": "days until the driving date, banded",
+    "note": "The weights are a judgement, not a discovery. They are stated so they can be argued with."
+  }
+}

@@ -1,0 +1,2984 @@
+{
+  "as_of": "2026-08-26",
+  "client": {
+    "client_id": "CL-0002",
+    "client_name": "Ravi Chandrasekaran",
+    "age": 41.0,
+    "nationality": "India",
+    "country_of_residence": "Singapore",
+    "tax_domicile": "Singapore",
+    "booking_centre": "Singapore",
+    "base_currency": "USD",
+    "wealth_band": "UHNW",
+    "life_stage": "Pre-liquidity event",
+    "source_of_wealth": "Entrepreneur - founder of enterprise software business",
+    "risk_profile": "Growth",
+    "risk_tolerance_score": 8.0,
+    "investment_horizon_years": 20.0,
+    "liquidity_needs": "High",
+    "objectives": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+    "client_since": "2021-08-02",
+    "kyc_review_due": "2027-02-28",
+    "reporting_language": "English",
+    "rm_name": "Priscilla Ong",
+    "total_usd": 46699200.0
+  },
+  "portfolios": [
+    {
+      "portfolio_id": "PF-0003",
+      "portfolio_name": "Advisory Growth Portfolio",
+      "mandate_code": "GROW",
+      "mandate_name": "Growth",
+      "service_model": "Advisory",
+      "base_currency": "USD",
+      "benchmark": "JB Growth USD Composite",
+      "inception_date": "2021-09-01",
+      "value_usd": 14779200.0,
+      "aum_series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "value_base": 11876500.0
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "value_base": 12683100.0
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "value_base": 12231550.0
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "value_base": 14370100.0
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "value_base": 14779200.0
+        }
+      ],
+      "mandate_review": {
+        "portfolio_id": "PF-0003",
+        "client_id": "CL-0002",
+        "mandate_code": "GROW",
+        "mandate_name": "Growth",
+        "service_model": "Advisory",
+        "governed": true,
+        "base_currency": "USD",
+        "total_base": 14779200.0,
+        "allocation_pct": {
+          "Equity": 74.33961242827758,
+          "Fixed Income": 8.257551152971745,
+          "Structured Products": 10.63657031503735,
+          "Cash and Equivalents": 6.766266103713327
+        },
+        "band_breaches": [],
+        "position_breaches": [],
+        "exclusion_breaches": []
+      },
+      "bands": {
+        "Cash and Equivalents": {
+          "min_pct": 1.0,
+          "target_pct": 4.0,
+          "max_pct": 12.0
+        },
+        "Fixed Income": {
+          "min_pct": 5.0,
+          "target_pct": 12.0,
+          "max_pct": 25.0
+        },
+        "Equity": {
+          "min_pct": 50.0,
+          "target_pct": 62.0,
+          "max_pct": 78.0
+        },
+        "Alternatives": {
+          "min_pct": 0.0,
+          "target_pct": 17.0,
+          "max_pct": 30.0
+        },
+        "Commodities": {
+          "min_pct": 0.0,
+          "target_pct": 2.0,
+          "max_pct": 8.0
+        },
+        "Structured Products": {
+          "min_pct": 0.0,
+          "target_pct": 3.0,
+          "max_pct": 15.0
+        }
+      },
+      "mandate_notes": "Long-horizon capital appreciation."
+    },
+    {
+      "portfolio_id": "PF-0004",
+      "portfolio_name": "Founder Shareholding Custody",
+      "mandate_code": "GROW",
+      "mandate_name": "Growth",
+      "service_model": "Custody",
+      "base_currency": "USD",
+      "benchmark": "None - custody only",
+      "inception_date": "2021-09-01",
+      "value_usd": 31920000.0,
+      "aum_series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "value_base": 31920000.0
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "value_base": 31920000.0
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "value_base": 31920000.0
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "value_base": 31920000.0
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "value_base": 31920000.0
+        }
+      ],
+      "mandate_review": {
+        "portfolio_id": "PF-0004",
+        "client_id": "CL-0002",
+        "mandate_code": "GROW",
+        "mandate_name": "Growth",
+        "service_model": "Custody",
+        "governed": false,
+        "base_currency": "USD",
+        "total_base": 31920000.0,
+        "allocation_pct": {
+          "Alternatives": 100.0
+        },
+        "band_breaches": [],
+        "position_breaches": [],
+        "exclusion_breaches": []
+      },
+      "bands": {
+        "Cash and Equivalents": {
+          "min_pct": 1.0,
+          "target_pct": 4.0,
+          "max_pct": 12.0
+        },
+        "Fixed Income": {
+          "min_pct": 5.0,
+          "target_pct": 12.0,
+          "max_pct": 25.0
+        },
+        "Equity": {
+          "min_pct": 50.0,
+          "target_pct": 62.0,
+          "max_pct": 78.0
+        },
+        "Alternatives": {
+          "min_pct": 0.0,
+          "target_pct": 17.0,
+          "max_pct": 30.0
+        },
+        "Commodities": {
+          "min_pct": 0.0,
+          "target_pct": 2.0,
+          "max_pct": 8.0
+        },
+        "Structured Products": {
+          "min_pct": 0.0,
+          "target_pct": 3.0,
+          "max_pct": 15.0
+        }
+      },
+      "mandate_notes": "Long-horizon capital appreciation."
+    }
+  ],
+  "wealth": {
+    "total_usd": 46699200.0,
+    "timeseries": [
+      {
+        "snapshot": "2025-12-31",
+        "label": "Year-end 2025",
+        "total_usd": 43796500.0,
+        "change_usd": null,
+        "change_pct": null
+      },
+      {
+        "snapshot": "2026-02-27",
+        "label": "Pre-conflict",
+        "total_usd": 44603100.0,
+        "change_usd": 806600.0,
+        "change_pct": 1.8416996791981093
+      },
+      {
+        "snapshot": "2026-03-31",
+        "label": "Post-Hormuz",
+        "total_usd": 44151550.0,
+        "change_usd": -451550.0,
+        "change_pct": -1.0123735794148836
+      },
+      {
+        "snapshot": "2026-06-30",
+        "label": "Half-year",
+        "total_usd": 46290100.0,
+        "change_usd": 2138550.0,
+        "change_pct": 4.843657810427946
+      },
+      {
+        "snapshot": "2026-08-26",
+        "label": "Today",
+        "total_usd": 46699200.0,
+        "change_usd": 409100.0,
+        "change_pct": 0.8837742843502173
+      }
+    ],
+    "by_asset_class": {
+      "Alternatives": 31920000.0,
+      "Equity": 10986800.0,
+      "Structured Products": 1572000.0,
+      "Fixed Income": 1220400.0,
+      "Cash and Equivalents": 1000000.0
+    },
+    "by_liquidity_tier": {
+      "Illiquid": 33492000.0,
+      "Daily": 13207200.0
+    },
+    "by_currency": {
+      "USD": 46699200.0
+    },
+    "by_region": {
+      "Singapore": 31920000.0,
+      "North America": 9437000.0,
+      "South Asia": 1693800.0,
+      "Global": 3648400.0
+    },
+    "by_sector": {
+      "Information Technology": 41357000.0,
+      "Diversified": 3121800.0,
+      "Corporate": 1220400.0,
+      "Cash": 1000000.0
+    },
+    "positions": [
+      {
+        "instrument_id": "SYN-AL-0308",
+        "instrument_name": "Unlisted Holding - Aranya Technologies Pte Ltd",
+        "asset_class": "Alternatives",
+        "sub_asset_class": "Private Equity",
+        "sector": "Information Technology",
+        "region": "Singapore",
+        "currency": "USD",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 31920000.0,
+        "weight_pct": 68.35234864837085,
+        "lending_value_usd": 0.0,
+        "advance_rate_pct": 0.0,
+        "unrealised_pnl_usd": 24890000.0,
+        "unrealised_pnl_pct": 354.05405405405406,
+        "portfolio_ids": [
+          "PF-0004"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": "Series D preference shares, last priced round Sep-2025"
+      },
+      {
+        "instrument_id": "SYN-EQ-0003",
+        "instrument_name": "US Technology Leaders Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Information Technology",
+        "region": "North America",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 3552600.0,
+        "weight_pct": 7.607410833590297,
+        "lending_value_usd": 2309190.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 1140000.0,
+        "unrealised_pnl_pct": 47.25192738124844,
+        "portfolio_ids": [
+          "PF-0003"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-ST-0102",
+        "instrument_name": "Meridian Semiconductor Corp",
+        "asset_class": "Equity",
+        "sub_asset_class": "Single Stock",
+        "sector": "Information Technology",
+        "region": "North America",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2242800.0,
+        "weight_pct": 4.802651865556584,
+        "lending_value_usd": 1121400.0,
+        "advance_rate_pct": 50.0,
+        "unrealised_pnl_usd": 1035000.0,
+        "unrealised_pnl_pct": 85.6929955290611,
+        "portfolio_ids": [
+          "PF-0003"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-ST-0103",
+        "instrument_name": "Helios Cloud Systems Inc",
+        "asset_class": "Equity",
+        "sub_asset_class": "Single Stock",
+        "sector": "Information Technology",
+        "region": "North America",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2069600.0,
+        "weight_pct": 4.431767567752766,
+        "lending_value_usd": 1034800.0,
+        "advance_rate_pct": 50.0,
+        "unrealised_pnl_usd": 940000.0,
+        "unrealised_pnl_pct": 83.21529745042493,
+        "portfolio_ids": [
+          "PF-0003"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0022",
+        "instrument_name": "India Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Emerging Market Equity",
+        "sector": "Diversified",
+        "region": "South Asia",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1693800.0,
+        "weight_pct": 3.6270428615479493,
+        "lending_value_usd": 1016280.0,
+        "advance_rate_pct": 60.0,
+        "unrealised_pnl_usd": 500400.0,
+        "unrealised_pnl_pct": 41.93061840120664,
+        "portfolio_ids": [
+          "PF-0003"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-SP-0502",
+        "instrument_name": "Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M",
+        "asset_class": "Structured Products",
+        "sub_asset_class": "Yield Enhancement",
+        "sector": "Information Technology",
+        "region": "North America",
+        "currency": "USD",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 1572000.0,
+        "weight_pct": 3.366224689073903,
+        "lending_value_usd": 471600.0,
+        "advance_rate_pct": 30.0,
+        "unrealised_pnl_usd": 72000.0,
+        "unrealised_pnl_pct": 4.8,
+        "portfolio_ids": [
+          "PF-0003"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": "Single underlying: Helios Cloud Systems Inc"
+      },
+      {
+        "instrument_id": "SYN-EQ-0001",
+        "instrument_name": "Global Developed Equity Index Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Diversified",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1428000.0,
+        "weight_pct": 3.0578682290060644,
+        "lending_value_usd": 928200.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 309000.0,
+        "unrealised_pnl_pct": 27.61394101876676,
+        "portfolio_ids": [
+          "PF-0003"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0208",
+        "instrument_name": "Short Duration USD Bond Fund",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Short Duration",
+        "sector": "Corporate",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1220400.0,
+        "weight_pct": 2.6133209990749307,
+        "lending_value_usd": 1037340.0,
+        "advance_rate_pct": 85.0,
+        "unrealised_pnl_usd": 15600.0,
+        "unrealised_pnl_pct": 1.294820717131474,
+        "portfolio_ids": [
+          "PF-0003"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-CA-0601",
+        "instrument_name": "USD Call Deposit",
+        "asset_class": "Cash and Equivalents",
+        "sub_asset_class": "Deposit",
+        "sector": "Cash",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1000000.0,
+        "weight_pct": 2.141364306026656,
+        "lending_value_usd": 900000.0,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": 0.0,
+        "unrealised_pnl_pct": 0.0,
+        "portfolio_ids": [
+          "PF-0003"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      }
+    ]
+  },
+  "income": {
+    "client_id": "CL-0002",
+    "quarters_observed": 2,
+    "gross_income_usd": 211222.6,
+    "costs_usd": 234254.77000000002,
+    "net_income_usd": -23032.170000000013,
+    "annualised_gross_usd": 422445.2,
+    "annualised_net_usd": -46064.340000000026,
+    "yield_pct": 0.9046090725322917,
+    "by_instrument": {
+      "SYN-EQ-0003": 60085.8,
+      "SYN-FI-0208": 53328.0,
+      "SYN-EQ-0022": 42120.0,
+      "SYN-CA-0601": 31000.0,
+      "SYN-EQ-0001": 24688.8
+    }
+  },
+  "explanation": {
+    "ytd": {
+      "client_id": "CL-0002",
+      "period": "ytd",
+      "primary_driver": "US technology and AI capital expenditure",
+      "fx_dominates": false,
+      "start": "2025-12-31",
+      "end": "2026-08-26",
+      "start_label": "Year-end 2025",
+      "end_label": "Today",
+      "change_usd": 2902700.0,
+      "change_pct": 6.627698560387245,
+      "price_effect_usd": 1402700.0,
+      "fx_effect_usd": 0.0,
+      "flow_effect_usd": 1500000.0,
+      "drivers": [
+        {
+          "theme_key": "us_tech_ai",
+          "theme_name": "US technology and AI capital expenditure",
+          "amount_usd": 2684300.0,
+          "pct_of_start": 6.129028575342779,
+          "market_moves": [
+            {
+              "series_id": "NASDAQ_COMP",
+              "series_name": "Nasdaq Composite Index",
+              "unit": "points",
+              "start_value": 23150.0,
+              "end_value": 26010.0,
+              "change": 2860.0,
+              "change_pct": 12.35421166306696
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-11",
+              "event_date": "2026-06-05",
+              "description": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+              "primary_transmission": "US technology, concentrated equity, collateralised lending",
+              "severity": "High"
+            }
+          ]
+        }
+      ],
+      "detractors": [],
+      "contributors": [
+        {
+          "instrument_id": "SYN-EQ-0003",
+          "instrument_name": "US Technology Leaders Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 3076800.0,
+          "end_value_usd": 3552600.0,
+          "price_effect_usd": 475800.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 475800.0,
+          "price_return_pct": 15.464118564742613,
+          "price_start": 512.8,
+          "price_end": 592.1
+        },
+        {
+          "instrument_id": "SYN-ST-0103",
+          "instrument_name": "Helios Cloud Systems Inc",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1747200.0,
+          "end_value_usd": 2069600.0,
+          "price_effect_usd": 322400.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 322400.0,
+          "price_return_pct": 18.452380952380953,
+          "price_start": 218.4,
+          "price_end": 258.7
+        },
+        {
+          "instrument_id": "SYN-ST-0102",
+          "instrument_name": "Meridian Semiconductor Corp",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1928700.0,
+          "end_value_usd": 2242800.0,
+          "price_effect_usd": 314100.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 314100.0,
+          "price_return_pct": 16.28558096126924,
+          "price_start": 428.6,
+          "price_end": 498.4
+        },
+        {
+          "instrument_id": "SYN-EQ-0001",
+          "instrument_name": "Global Developed Equity Index Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1310400.0,
+          "end_value_usd": 1428000.0,
+          "price_effect_usd": 117600.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 117600.0,
+          "price_return_pct": 8.974358974358964,
+          "price_start": 218.4,
+          "price_end": 238.0
+        },
+        {
+          "instrument_id": "SYN-EQ-0022",
+          "instrument_name": "India Equity Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1600200.0,
+          "end_value_usd": 1693800.0,
+          "price_effect_usd": 93600.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 93600.0,
+          "price_return_pct": 5.849268841394806,
+          "price_start": 88.9,
+          "price_end": 94.1
+        }
+      ],
+      "narrative": [
+        "Between 2025-12-31 and 2026-08-26 the household moved up USD 2,902,700, or 6.6%, from USD 43,796,500 to USD 46,699,200.",
+        "Of that, +USD 1,402,700 came from market moves, +USD 0 from currency translation and +USD 1,500,000 from money paid in or taken out.",
+        "US technology and AI capital expenditure contributed +USD 2,684,300 (+6.1 points), as Nasdaq Composite Index moved from 23150.0 to 26010.0 points. The event log records on 2026-06-05: Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before..."
+      ],
+      "provenance": "deterministic"
+    },
+    "recent": {
+      "client_id": "CL-0002",
+      "period": "recent",
+      "primary_driver": "US technology and AI capital expenditure",
+      "fx_dominates": false,
+      "start": "2026-06-30",
+      "end": "2026-08-26",
+      "start_label": "Half-year",
+      "end_label": "Today",
+      "change_usd": 409100.0,
+      "change_pct": 0.8837742843502173,
+      "price_effect_usd": 409100.0,
+      "fx_effect_usd": 0.0,
+      "flow_effect_usd": 0.0,
+      "drivers": [
+        {
+          "theme_key": "us_tech_ai",
+          "theme_name": "US technology and AI capital expenditure",
+          "amount_usd": 350900.0,
+          "pct_of_start": 0.7580454568039386,
+          "market_moves": [
+            {
+              "series_id": "NASDAQ_COMP",
+              "series_name": "Nasdaq Composite Index",
+              "unit": "points",
+              "start_value": 25320.0,
+              "end_value": 26010.0,
+              "change": 690.0,
+              "change_pct": 2.7251184834123254
+            }
+          ],
+          "events": []
+        }
+      ],
+      "detractors": [],
+      "contributors": [
+        {
+          "instrument_id": "SYN-ST-0102",
+          "instrument_name": "Meridian Semiconductor Corp",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 2123100.0,
+          "end_value_usd": 2242800.0,
+          "price_effect_usd": 119700.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 119700.0,
+          "price_return_pct": 5.637982195845681,
+          "price_start": 471.8,
+          "price_end": 498.4
+        },
+        {
+          "instrument_id": "SYN-EQ-0003",
+          "instrument_name": "US Technology Leaders Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 3441600.0,
+          "end_value_usd": 3552600.0,
+          "price_effect_usd": 111000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 111000.0,
+          "price_return_pct": 3.2252440725244025,
+          "price_start": 573.6,
+          "price_end": 592.1
+        },
+        {
+          "instrument_id": "SYN-ST-0103",
+          "instrument_name": "Helios Cloud Systems Inc",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1970400.0,
+          "end_value_usd": 2069600.0,
+          "price_effect_usd": 99200.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 99200.0,
+          "price_return_pct": 5.034510759236688,
+          "price_start": 246.3,
+          "price_end": 258.7
+        },
+        {
+          "instrument_id": "SYN-EQ-0022",
+          "instrument_name": "India Equity Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1663200.0,
+          "end_value_usd": 1693800.0,
+          "price_effect_usd": 30600.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 30600.0,
+          "price_return_pct": 1.8398268398268192,
+          "price_start": 92.4,
+          "price_end": 94.1
+        },
+        {
+          "instrument_id": "SYN-EQ-0001",
+          "instrument_name": "Global Developed Equity Index Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1405200.0,
+          "end_value_usd": 1428000.0,
+          "price_effect_usd": 22800.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 22800.0,
+          "price_return_pct": 1.6225448334756587,
+          "price_start": 234.2,
+          "price_end": 238.0
+        }
+      ],
+      "narrative": [
+        "Between 2026-06-30 and 2026-08-26 the household moved up USD 409,100, or 0.9%, from USD 46,290,100 to USD 46,699,200.",
+        "Of that, +USD 409,100 came from market moves, +USD 0 from currency translation and +USD 0 from money paid in or taken out.",
+        "US technology and AI capital expenditure contributed +USD 350,900 (+0.8 points), as Nasdaq Composite Index moved from 25320.0 to 26010.0 points."
+      ],
+      "provenance": "deterministic"
+    }
+  },
+  "exposures": {
+    "issuers": [
+      {
+        "key": "ARANYA_TECH",
+        "name": "Aranya Technologies Pte Ltd",
+        "kind": "issuer",
+        "attributed_usd": 31920000.0,
+        "pct_of_household": 68.35234864837085,
+        "direct_usd": 0,
+        "looked_through_usd": 31920000.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-AL-0308",
+            "instrument_name": "Unlisted Holding - Aranya Technologies Pte Ltd",
+            "wrapper": "Private Equity",
+            "market_value_usd": 31920000.0,
+            "attributed_usd": 31920000.0,
+            "basis_field": "underlying_reference",
+            "basis_note": "Unlisted Series D preference shares, last priced September 2025.",
+            "portfolio_ids": [
+              "PF-0004"
+            ]
+          }
+        ],
+        "event_ids": []
+      },
+      {
+        "key": "HELIOS",
+        "name": "Helios Cloud Systems Inc",
+        "kind": "issuer",
+        "attributed_usd": 3641600.0,
+        "pct_of_household": 7.797992256826669,
+        "direct_usd": 2069600.0,
+        "looked_through_usd": 1572000.0,
+        "hidden": true,
+        "legs": [
+          {
+            "instrument_id": "SYN-ST-0103",
+            "instrument_name": "Helios Cloud Systems Inc",
+            "wrapper": "Single Stock",
+            "market_value_usd": 2069600.0,
+            "attributed_usd": 2069600.0,
+            "basis_field": "instrument_name",
+            "basis_note": "Direct equity in the issuer.",
+            "portfolio_ids": [
+              "PF-0003"
+            ]
+          },
+          {
+            "instrument_id": "SYN-SP-0502",
+            "instrument_name": "Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M",
+            "wrapper": "Yield Enhancement",
+            "market_value_usd": 1572000.0,
+            "attributed_usd": 1572000.0,
+            "basis_field": "underlying_reference",
+            "basis_note": "Single-underlying equity linked note on the issuer.",
+            "portfolio_ids": [
+              "PF-0003"
+            ]
+          }
+        ],
+        "event_ids": []
+      },
+      {
+        "key": "MERIDIAN_SEMI",
+        "name": "Meridian Semiconductor Corp",
+        "kind": "issuer",
+        "attributed_usd": 2242800.0,
+        "pct_of_household": 4.802651865556584,
+        "direct_usd": 2242800.0,
+        "looked_through_usd": 0.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-ST-0102",
+            "instrument_name": "Meridian Semiconductor Corp",
+            "wrapper": "Single Stock",
+            "market_value_usd": 2242800.0,
+            "attributed_usd": 2242800.0,
+            "basis_field": "instrument_name",
+            "basis_note": "Direct equity in the issuer. Unrelated to Meridian Private Equity Fund VII despite the shared word; the two are not aggregated.",
+            "portfolio_ids": [
+              "PF-0003"
+            ]
+          }
+        ],
+        "event_ids": []
+      }
+    ],
+    "themes": [
+      {
+        "key": "us_tech_ai",
+        "name": "US technology and AI capital expenditure",
+        "kind": "theme",
+        "attributed_usd": 41357000.0,
+        "pct_of_household": 88.5604036043444,
+        "direct_usd": 0,
+        "looked_through_usd": 41357000.0,
+        "hidden": true,
+        "legs": [
+          {
+            "instrument_id": "SYN-AL-0308",
+            "instrument_name": "Unlisted Holding - Aranya Technologies Pte Ltd",
+            "wrapper": "Private Equity",
+            "market_value_usd": 31920000.0,
+            "attributed_usd": 31920000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "portfolio_ids": [
+              "PF-0004"
+            ]
+          },
+          {
+            "instrument_id": "SYN-EQ-0003",
+            "instrument_name": "US Technology Leaders Fund",
+            "wrapper": "Developed Market Equity",
+            "market_value_usd": 3552600.0,
+            "attributed_usd": 3552600.0,
+            "basis_field": "asset_class",
+            "basis_note": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "portfolio_ids": [
+              "PF-0003"
+            ]
+          },
+          {
+            "instrument_id": "SYN-ST-0102",
+            "instrument_name": "Meridian Semiconductor Corp",
+            "wrapper": "Single Stock",
+            "market_value_usd": 2242800.0,
+            "attributed_usd": 2242800.0,
+            "basis_field": "asset_class",
+            "basis_note": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "portfolio_ids": [
+              "PF-0003"
+            ]
+          },
+          {
+            "instrument_id": "SYN-ST-0103",
+            "instrument_name": "Helios Cloud Systems Inc",
+            "wrapper": "Single Stock",
+            "market_value_usd": 2069600.0,
+            "attributed_usd": 2069600.0,
+            "basis_field": "asset_class",
+            "basis_note": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "portfolio_ids": [
+              "PF-0003"
+            ]
+          },
+          {
+            "instrument_id": "SYN-SP-0502",
+            "instrument_name": "Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M",
+            "wrapper": "Yield Enhancement",
+            "market_value_usd": 1572000.0,
+            "attributed_usd": 1572000.0,
+            "basis_field": "underlying_reference",
+            "basis_note": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "portfolio_ids": [
+              "PF-0003"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-11"
+        ]
+      },
+      {
+        "key": "private_markets",
+        "name": "Private markets and gated vehicles",
+        "kind": "theme",
+        "attributed_usd": 31920000.0,
+        "pct_of_household": 68.35234864837085,
+        "direct_usd": 0,
+        "looked_through_usd": 31920000.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-AL-0308",
+            "instrument_name": "Unlisted Holding - Aranya Technologies Pte Ltd",
+            "wrapper": "Private Equity",
+            "market_value_usd": 31920000.0,
+            "attributed_usd": 31920000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Positions that cannot be sold on demand: private funds, semi-liquid vehicles subject to gates, and direct real estate.",
+            "portfolio_ids": [
+              "PF-0004"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-14"
+        ]
+      }
+    ],
+    "unresolved": []
+  },
+  "liquidity": {
+    "client_id": "CL-0002",
+    "snapshot": "2026-08-26",
+    "horizon_months": 18,
+    "horizon_end": "2028-02-26",
+    "total_usd": 46699200.0,
+    "by_tier": {
+      "Daily": 13207200.0,
+      "Weekly": 0.0,
+      "Monthly": 0.0,
+      "Quarterly Gate": 0.0,
+      "Illiquid": 33492000.0
+    },
+    "readily_realisable_usd": 13207200.0,
+    "encumbered_cap_usd": 13055056.666666666,
+    "withdrawable_usd": 152143.33333333395,
+    "gated_usd": 0.0,
+    "illiquid_usd": 33492000.0,
+    "obligations": [
+      {
+        "id": "CN-002",
+        "source": "planned_cash_needs",
+        "description": "Estimated Singapore tax on secondary share sale",
+        "currency": "USD",
+        "amount_ccy": 4200000.0,
+        "amount_usd": 4200000.0,
+        "occurrences": 1,
+        "total_usd": 4200000.0,
+        "due_from": "2027-01-01",
+        "due_to": "2027-04-30",
+        "certainty": "Conditional on the sale completing",
+        "recurrence": "One-off"
+      },
+      {
+        "id": "CN-003",
+        "source": "planned_cash_needs",
+        "description": "Family trust establishment and funding",
+        "currency": "USD",
+        "amount_ccy": 2000000.0,
+        "amount_usd": 2000000.0,
+        "occurrences": 1,
+        "total_usd": 2000000.0,
+        "due_from": "2026-11-01",
+        "due_to": "2027-03-31",
+        "certainty": "Likely",
+        "recurrence": "One-off"
+      }
+    ],
+    "obligations_confirmed_usd": 0,
+    "obligations_total_usd": 6200000.0,
+    "coverage_ratio": 0.024539247311828057,
+    "shortfall_usd": 6047856.666666666,
+    "gated_positions": [
+      {
+        "instrument_id": "SYN-AL-0308",
+        "instrument_name": "Unlisted Holding - Aranya Technologies Pte Ltd",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 31920000.0,
+        "advance_rate_pct": 0.0
+      },
+      {
+        "instrument_id": "SYN-SP-0502",
+        "instrument_name": "Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 1572000.0,
+        "advance_rate_pct": 30.0
+      }
+    ],
+    "notes": [
+      "USD 13,055,057 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger."
+    ]
+  },
+  "facilities": [
+    {
+      "facility_id": "CF-0001",
+      "client_id": "CL-0002",
+      "portfolio_id": "PF-0003",
+      "facility_type": "Lombard Credit Facility",
+      "currency": "USD",
+      "credit_limit": 9000000.0,
+      "interest_rate_pct": 6.15,
+      "margin_call_ltv_pct": 75.0,
+      "series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "drawn": 4800000.0,
+          "collateral_market_value": 11876500.0,
+          "lending_value": 7580970.0,
+          "ltv_pct": 63.32,
+          "headroom": 2780970.0,
+          "breached": false
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "drawn": 4800000.0,
+          "collateral_market_value": 12683100.0,
+          "lending_value": 8037340.0,
+          "ltv_pct": 59.72,
+          "headroom": 3237340.0,
+          "breached": false
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "drawn": 4800000.0,
+          "collateral_market_value": 12231550.0,
+          "lending_value": 7782285.0,
+          "ltv_pct": 61.68,
+          "headroom": 2982285.0,
+          "breached": false
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "drawn": 6500000.0,
+          "collateral_market_value": 14370100.0,
+          "lending_value": 8593650.0,
+          "ltv_pct": 75.64,
+          "headroom": 2093650.0,
+          "breached": true
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "drawn": 6500000.0,
+          "collateral_market_value": 14779200.0,
+          "lending_value": 8818810.0,
+          "ltv_pct": 73.71,
+          "headroom": 2318810.0,
+          "breached": false
+        }
+      ],
+      "headroom_pp": 1.2900000000000063,
+      "collateral_fall_to_trigger_pct": 1.7200000000000104,
+      "breaches": [
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "drawn": 6500000.0,
+          "collateral_market_value": 14370100.0,
+          "lending_value": 8593650.0,
+          "ltv_pct": 75.64,
+          "headroom": 2093650.0,
+          "breached": true
+        }
+      ],
+      "cure_narrative": "The breach at 2026-06-30 was cured by 2026-08-26 without any repayment: the drawn balance was unchanged and lending value rose by 225,160 USD as the collateral appreciated. The exposure was resolved by the market, not by an action, and would return if the move reversed.",
+      "drawn_reconciliation": [
+        {
+          "from_snapshot": "2026-03-31",
+          "to_snapshot": "2026-06-30",
+          "drawn_change": 1700000.0,
+          "explained_by_transactions": 1700000.0,
+          "unexplained": 0.0,
+          "transaction_ids": [
+            "TXN-0012"
+          ]
+        }
+      ]
+    }
+  ],
+  "insights": [
+    {
+      "id": "CL-0002-collateral-CF-0001",
+      "client_id": "CL-0002",
+      "category": "collateral",
+      "severity": "critical",
+      "headline": "Lombard facility 1.29pp from a margin call",
+      "summary": "CF-0001 sits at 73.71% loan-to-value against a 75% trigger. A 1.7% fall in collateral value is enough to produce a margin call. The trigger was already breached at 2026-06-30. The breach at 2026-06-30 was cured by 2026-08-26 without any repayment: the drawn balance was unchanged and lending value rose by 225,160 USD as the collateral appreciated. The exposure was resolved by the market, not by an action, and would return if the move reversed.",
+      "priority_score": 83.9,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 13.9% of household wealth (USD 6,500,000)",
+        "Live today"
+      ],
+      "observed_facts": [
+        {
+          "label": "Loan-to-value today",
+          "value": "73.71%",
+          "numeric": 73.71,
+          "unit": "%",
+          "trend": "down"
+        },
+        {
+          "label": "Margin-call trigger",
+          "value": "75%",
+          "numeric": 75.0,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Headroom",
+          "value": "1.29 percentage points",
+          "numeric": 1.2900000000000063,
+          "unit": "pp",
+          "trend": null
+        },
+        {
+          "label": "Collateral fall that triggers a call",
+          "value": "1.7%",
+          "numeric": 1.7200000000000104,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Drawn",
+          "value": "USD 6,500,000",
+          "numeric": 6500000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Cash that can leave the pledged account",
+          "value": "USD 152,143",
+          "numeric": 152143.33333333395,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "The pledged account is Advisory Growth Portfolio. Any sale and withdrawal from it reduces lending value while the drawn balance stays put, so it raises loan-to-value rather than lowering it.",
+      "suggested_next_step": "Agree a collateral plan before the next client-driven withdrawal: either reduce drawn, add eligible collateral, or accept a smaller withdrawal than the client expects.",
+      "evidence": [
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0001",
+          "field": "margin_call_ltv_pct",
+          "value": 75.0,
+          "snapshot_date": null,
+          "note": "Margin-call trigger."
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0001",
+          "field": "ltv_pct_2025-12-31",
+          "value": 63.32,
+          "snapshot_date": "2025-12-31",
+          "note": null
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0001",
+          "field": "ltv_pct_2026-02-27",
+          "value": 59.72,
+          "snapshot_date": "2026-02-27",
+          "note": null
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0001",
+          "field": "ltv_pct_2026-03-31",
+          "value": 61.68,
+          "snapshot_date": "2026-03-31",
+          "note": null
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0001",
+          "field": "ltv_pct_2026-06-30",
+          "value": 75.64,
+          "snapshot_date": "2026-06-30",
+          "note": "Breached the trigger."
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0001",
+          "field": "ltv_pct_2026-08-26",
+          "value": 73.71,
+          "snapshot_date": "2026-08-26",
+          "note": null
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "Lending value is used for loan-to-value, not market value.",
+          "basis": "Advance rates haircut each asset; illiquid alternatives carry a 0% advance rate and add no borrowing capacity.",
+          "impact_if_wrong": null
+        },
+        {
+          "statement": "Withdrawable value from a pledged portfolio is capped at lending_value - drawn / margin_call_ltv, not at market value.",
+          "basis": "Selling collateral and withdrawing the proceeds reduces lending value while the drawn balance is unchanged, so LTV rises.",
+          "impact_if_wrong": "Overstates what the client can raise without a margin call."
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Leverage consistent with risk profile",
+          "result": "attention",
+          "detail": "Client risk profile is Growth (tolerance 8.0/10) with High stated liquidity needs.",
+          "reference": "clients.csv"
+        }
+      ],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0003"
+      ],
+      "instrument_ids": [],
+      "amount_usd": 6500000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0002-theme-us_tech_ai",
+      "client_id": "CL-0002",
+      "category": "concentration",
+      "severity": "critical",
+      "headline": "89% of the household moves with US technology and AI capital expenditure",
+      "summary": "USD 41,357,000 across 5 positions responds to the same driver. The dataset records 1 events on this theme in 2026.",
+      "priority_score": 82.5,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 88.6% of household wealth (USD 41,357,000)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Unlisted Holding - Aranya Technologies Pte Ltd",
+          "value": "USD 31,920,000 (68.4%) via Private Equity",
+          "numeric": 31920000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "US Technology Leaders Fund",
+          "value": "USD 3,552,600 (7.6%) via Developed Market Equity",
+          "numeric": 3552600.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Meridian Semiconductor Corp",
+          "value": "USD 2,242,800 (4.8%) via Single Stock",
+          "numeric": 2242800.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Helios Cloud Systems Inc",
+          "value": "USD 2,069,600 (4.4%) via Single Stock",
+          "numeric": 2069600.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M",
+          "value": "USD 1,572,000 (3.4%) via Yield Enhancement",
+          "numeric": 1572000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Exposure to the megacap technology complex, including single names and notes written on them.",
+      "suggested_next_step": "Frame the review around the driver rather than the instruments: one decision covers all of them.",
+      "evidence": [
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-AL-0308",
+          "field": "asset_class",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 31,920,000 attributed via Private Equity."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-EQ-0003",
+          "field": "asset_class",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 3,552,600 attributed via Developed Market Equity."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0102",
+          "field": "asset_class",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 2,242,800 attributed via Single Stock."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0103",
+          "field": "asset_class",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 2,069,600 attributed via Single Stock."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-SP-0502",
+          "field": "underlying_reference",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 1,572,000 attributed via Yield Enhancement."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-11",
+          "field": "description",
+          "value": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+          "snapshot_date": "2026-06-05",
+          "note": "Transmission: US technology, concentrated equity, collateralised lending"
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [
+        "EVT-11"
+      ],
+      "portfolio_ids": [],
+      "instrument_ids": [
+        "SYN-AL-0308",
+        "SYN-EQ-0003",
+        "SYN-ST-0102",
+        "SYN-ST-0103",
+        "SYN-SP-0502"
+      ],
+      "amount_usd": 41357000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0002-liquidity-cover",
+      "client_id": "CL-0002",
+      "category": "liquidity",
+      "severity": "critical",
+      "headline": "Known obligations of USD 6,200,000 against USD 152,143 the client can actually withdraw",
+      "summary": "Coverage is 0.02x. USD 13,055,057 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger. USD 33,492,000 of the household is illiquid.",
+      "priority_score": 78.3,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 13.3% of household wealth (USD 6,200,000)",
+        "Due in 67 days"
+      ],
+      "observed_facts": [
+        {
+          "label": "Obligations inside the horizon",
+          "value": "USD 6,200,000",
+          "numeric": 6200000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Of which confirmed",
+          "value": "USD 0",
+          "numeric": 0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Daily and weekly assets",
+          "value": "USD 13,207,200",
+          "numeric": 13207200.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Withdrawable after collateral constraints",
+          "value": "USD 152,143",
+          "numeric": 152143.33333333395,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Coverage",
+          "value": "0.02x",
+          "numeric": 0.024539247311828057,
+          "unit": "x",
+          "trend": "down"
+        },
+        {
+          "label": "Shortfall",
+          "value": "USD 6,047,857",
+          "numeric": 6047856.666666666,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Estimated Singapore tax on secondary share sale",
+          "value": "USD 4,200,000 - Conditional on the sale completing",
+          "numeric": 4200000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Family trust establishment and funding",
+          "value": "USD 2,000,000 - Likely",
+          "numeric": 2000000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "The gap is a funding question, not a performance question. It has to be solved before the obligation falls due, and the options narrow as the date approaches.",
+      "suggested_next_step": "Produce a dated liquidity map: what is sellable, by when, and what it costs to raise the shortfall each way.",
+      "evidence": [
+        {
+          "source_file": "planned_cash_needs.csv",
+          "row_or_id": "CN-002",
+          "field": "amount",
+          "value": "USD 4,200,000",
+          "snapshot_date": null,
+          "note": "Estimated Singapore tax on secondary share sale (Conditional on the sale completing, 2027-01-01 to 2027-04-30)."
+        },
+        {
+          "source_file": "planned_cash_needs.csv",
+          "row_or_id": "CN-003",
+          "field": "amount",
+          "value": "USD 2,000,000",
+          "snapshot_date": null,
+          "note": "Family trust establishment and funding (Likely, 2026-11-01 to 2027-03-31)."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0308",
+          "field": "liquidity_tier",
+          "value": "Illiquid",
+          "snapshot_date": "2026-08-26",
+          "note": "USD 31,920,000 not available on demand."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-SP-0502",
+          "field": "liquidity_tier",
+          "value": "Illiquid",
+          "snapshot_date": "2026-08-26",
+          "note": "USD 1,572,000 not available on demand."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "'Annual' rows in planned_cash_needs are read as an amount per year; 'Annual instalments' rows are read as a total spread evenly across the due_from to due_to window.",
+          "basis": "The file uses both wordings. CN-012 (USD 1.28m, 'Annual') matches the client's stated USD 1.1m annual drawdown in clients.objectives as raised in note N-016, so 'Annual' is per year. CN-007 (USD 5m, 'Annual instalments', two children, four-year window) would exceed the client's entire household wealth if read the same way, so 'instalments' is read as a total.",
+          "impact_if_wrong": "Reading CN-007 as USD 5m per year would put this client's obligations above their total wealth. Each row is listed individually with its recurrence so the RM can check the source."
+        },
+        {
+          "statement": "Withdrawable value from a pledged portfolio is capped at lending_value - drawn / margin_call_ltv, not at market value.",
+          "basis": "Selling collateral and withdrawing the proceeds reduces lending value while the drawn balance is unchanged, so LTV rises.",
+          "impact_if_wrong": "Overstates what the client can raise without a margin call."
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Stated liquidity needs",
+          "result": "attention",
+          "detail": "clients.liquidity_needs is recorded as High.",
+          "reference": "clients.csv"
+        }
+      ],
+      "confidence": "derived",
+      "open_questions": [
+        "Is the client willing to reduce the facility rather than sell?",
+        "Can any obligation be deferred or staged?"
+      ],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 6200000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0002-stale-marks",
+      "client_id": "CL-0002",
+      "category": "data_quality",
+      "severity": "high",
+      "headline": "USD 31,920,000 (68% of the household) is carried at a mark up to 330 days old",
+      "summary": "These positions have a valuation_date earlier than the snapshot they appear in. Quarterly-reported private marks lagging a quarter is normal and not an error, but the reported wealth figure is only as current as its oldest input, and any percentage of the household computed against it inherits the lag.",
+      "priority_score": 72.6,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 68.4% of household wealth (USD 31,920,000)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Unlisted Holding - Aranya Technologies Pte Ltd",
+          "value": "USD 31,920,000, valued 2025-09-30 for a 2026-08-26 snapshot (330 days)",
+          "numeric": 31920000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Worth saying out loud before quoting a total wealth figure, particularly where the stale position is large enough to move the percentage weights.",
+      "suggested_next_step": "Ask the custodian or manager for the latest available mark before the meeting, and present the total with the as-at date attached.",
+      "evidence": [
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0308",
+          "field": "valuation_date",
+          "value": "2025-09-30",
+          "snapshot_date": "2026-08-26",
+          "note": "Unlisted Holding - Aranya Technologies Pte Ltd: 330 days behind the snapshot."
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [
+        "What is the most recent available valuation for this position?"
+      ],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [
+        "SYN-AL-0308"
+      ],
+      "amount_usd": 31920000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0002-samebet-us_tech_ai",
+      "client_id": "CL-0002",
+      "category": "suitability",
+      "severity": "medium",
+      "headline": "The portfolio and the client's source of wealth are the same bet (89% on US technology and AI capital expenditure)",
+      "summary": "Source of wealth is recorded as \"Entrepreneur - founder of enterprise software business\". USD 41,357,000 of the portfolio (88.6%) responds to the same driver, so the business and the portfolio would come under pressure together.",
+      "priority_score": 60.9,
+      "priority_reasons": [
+        "Severity medium (weight 0.52)",
+        "Affects 88.6% of household wealth (USD 41,357,000)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Source of wealth",
+          "value": "Entrepreneur - founder of enterprise software business",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Stated objectives",
+          "value": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Portfolio exposure to the same theme",
+          "value": "USD 41,357,000 (88.6%)",
+          "numeric": 41357000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Total household risk is higher than the portfolio alone suggests, because the operating business is not in the portfolio view.",
+      "suggested_next_step": "Put the combined picture in front of the client and agree what share of the theme belongs in the portfolio given the business exposure.",
+      "evidence": [
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0002",
+          "field": "source_of_wealth",
+          "value": "Entrepreneur - founder of enterprise software business",
+          "snapshot_date": null,
+          "note": "Matched on 'software'."
+        },
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0002",
+          "field": "objectives",
+          "value": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-AL-0308",
+          "field": "asset_class",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 31,920,000 attributed via Private Equity."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-EQ-0003",
+          "field": "asset_class",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 3,552,600 attributed via Developed Market Equity."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0102",
+          "field": "asset_class",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 2,242,800 attributed via Single Stock."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0103",
+          "field": "asset_class",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 2,069,600 attributed via Single Stock."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-SP-0502",
+          "field": "underlying_reference",
+          "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+          "snapshot_date": null,
+          "note": "USD 1,572,000 attributed via Yield Enhancement."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "The link between source of wealth and theme is matched on the term 'software' in clients.source_of_wealth.",
+          "basis": "The dataset holds no direct mapping between the two.",
+          "impact_if_wrong": "The RM can dismiss the insight in one click."
+        }
+      ],
+      "suitability_checks": [],
+      "confidence": "derived",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [
+        "SYN-AL-0308",
+        "SYN-EQ-0003",
+        "SYN-ST-0102",
+        "SYN-ST-0103",
+        "SYN-SP-0502"
+      ],
+      "amount_usd": 41357000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0002-tax",
+      "client_id": "CL-0002",
+      "category": "tax",
+      "severity": "high",
+      "headline": "Tax-sensitive decision ahead under Singapore domicile, with USD 4,200,000 due from 2027-01-01",
+      "summary": "Tax domicile is Singapore while country of residence is Singapore. Domicile governs the treatment, and this engine does not calculate tax outcomes: it flags that funding this from the portfolio is a decision with a tax dimension that needs the wealth planning team.",
+      "priority_score": 59.1,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 9.0% of household wealth (USD 4,200,000)",
+        "Due in about 4 months"
+      ],
+      "observed_facts": [
+        {
+          "label": "Tax domicile",
+          "value": "Singapore",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Country of residence",
+          "value": "Singapore",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Unrealised gains in the household",
+          "value": "USD 28,902,000",
+          "numeric": 28902000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Unrealised losses in the household",
+          "value": "USD 0",
+          "numeric": 0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Estimated Singapore tax on secondary share sale",
+          "value": "USD 4,200,000, 2027-01-01 to 2027-04-30 (Conditional on the sale completing)",
+          "numeric": 4200000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Which positions are sold, and in what order, changes the outcome. Gains and losses within the household can be considered together.",
+      "suggested_next_step": "Involve wealth planning before any disposal, and prepare a funding shortlist ranked by tax impact rather than by liquidity alone.",
+      "evidence": [
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0002",
+          "field": "tax_domicile",
+          "value": "Singapore",
+          "snapshot_date": null,
+          "note": "Domicile, not residence, governs the treatment."
+        },
+        {
+          "source_file": "planned_cash_needs.csv",
+          "row_or_id": "CN-002",
+          "field": "amount",
+          "value": "USD 4,200,000",
+          "snapshot_date": null,
+          "note": "Estimated Singapore tax on secondary share sale (Conditional on the sale completing)."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "No tax figure is calculated.",
+          "basis": "The dataset does not carry the residency history, allowances or acquisition dates a calculation would need.",
+          "impact_if_wrong": "None. The gap is stated rather than filled."
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Tax advice boundary",
+          "result": "attention",
+          "detail": "Clarity does not give tax advice. This routes to wealth planning.",
+          "reference": null
+        }
+      ],
+      "confidence": "measured",
+      "open_questions": [
+        "Has the wealth planning team already been engaged on this?",
+        "Are there prior-year losses available within the household?"
+      ],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 4200000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0002-explain-ytd",
+      "client_id": "CL-0002",
+      "category": "performance",
+      "severity": "low",
+      "headline": "Household up 6.6% year to date, driven by US technology and AI capital expenditure",
+      "summary": "Between 2025-12-31 and 2026-08-26 the household moved up USD 2,902,700, or 6.6%, from USD 43,796,500 to USD 46,699,200. Of that, +USD 1,402,700 came from market moves, +USD 0 from currency translation and +USD 1,500,000 from money paid in or taken out. US technology and AI capital expenditure contributed +USD 2,684,300 (+6.1 points), as Nasdaq Composite Index moved from 23150.0 to 26010.0 points. The event log records on 2026-06-05: Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before...",
+      "priority_score": 27.6,
+      "priority_reasons": [
+        "Severity low (weight 0.30)",
+        "Affects 6.6% of household wealth (USD 2,902,700)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Household value",
+          "value": "USD 43,796,500 to USD 46,699,200",
+          "numeric": 46699200.0,
+          "unit": "USD",
+          "trend": "up"
+        },
+        {
+          "label": "Change since year-end 2025",
+          "value": "+USD 2,902,700 (+6.6%)",
+          "numeric": 2902700.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Market effect",
+          "value": "+USD 1,402,700",
+          "numeric": 1402700.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Currency effect",
+          "value": "+USD 0",
+          "numeric": 0.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Money in and out",
+          "value": "+USD 1,500,000",
+          "numeric": 1500000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "US technology and AI capital expenditure",
+          "value": "+USD 2,684,300 (+6.1 points)",
+          "numeric": 2684300.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "This is the answer to the first question the client will ask. Having the attribution and the event behind it means the answer does not depend on recalling what happened in March.",
+      "suggested_next_step": "Open the meeting with the attribution rather than the headline number.",
+      "evidence": [
+        {
+          "source_file": "market_context.csv",
+          "row_or_id": "NASDAQ_COMP",
+          "field": "value",
+          "value": "23150.0 -> 26010.0 points",
+          "snapshot_date": "2026-08-26",
+          "note": "Nasdaq Composite Index, 2025-12-31 to 2026-08-26."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-11",
+          "field": "description",
+          "value": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+          "snapshot_date": "2026-06-05",
+          "note": "Transmission: US technology, concentrated equity, collateralised lending. Severity High."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "For positions opened during the period, money deployed is taken from cost_basis_base and converted at the closing snapshot's exchange rate.",
+          "basis": "cost_basis_base is struck at the rate prevailing when the position was acquired, and the dataset does not record the acquisition rate separately.",
+          "impact_if_wrong": "A small FX component of the gain or loss is reported as a price effect. It does not change the size of the total move."
+        }
+      ],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [
+        "EVT-11"
+      ],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 2902700.0,
+      "status": "new"
+    }
+  ],
+  "options": {
+    "CL-0002-collateral-CF-0001": [
+      {
+        "id": "CL-0002-collateral-CF-0001-opt-deleverage",
+        "label": "Sell USD 1,137,442 of Meridian Semiconductor Corp and repay the facility",
+        "rationale": "Repaying reduces the drawn balance one-for-one while removing only 50% of that amount from lending value, so loan-to-value falls from 73.71% to about 65% and headroom returns to 10 points.",
+        "mechanics": [
+          "Sell USD 1,137,442 (USD 1,137,442) of Meridian Semiconductor Corp",
+          "Apply the proceeds against CF-0001",
+          "Drawn falls from 6,500,000 to 5,362,558 USD"
+        ],
+        "trade_offs": [
+          "Removes USD 1,137,442 of income-producing assets from the portfolio",
+          "Crystallises whatever gain or loss sits in the position",
+          "Reduces the client's capacity to draw opportunistically"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Singapore. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Position is liquid enough to execute",
+            "result": "pass",
+            "detail": "Meridian Semiconductor Corp is Daily tier at USD 2,242,800.",
+            "reference": "holdings.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction",
+          "Credit desk sign-off"
+        ],
+        "estimated_impact": "Loan-to-value 73.71% to about 65%.",
+        "evidence": [
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-ST-0102",
+            "field": "advance_rate_pct",
+            "value": 50.0,
+            "snapshot_date": "2026-08-26",
+            "note": "USD 2,242,800 held, Daily liquidity."
+          },
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0001",
+            "field": "lending_value_2026-08-26",
+            "value": 8818810.0,
+            "snapshot_date": "2026-08-26",
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0002-collateral-CF-0001-opt-cap-withdrawals",
+        "label": "Cap withdrawals from the pledged account at USD 152,143",
+        "rationale": "Selling collateral and paying the proceeds out reduces lending value while the drawn balance is unchanged, so it raises loan-to-value. This is the amount that can leave without breaching the trigger.",
+        "mechanics": [
+          "Flag PF-0003 as collateral-constrained in the withdrawal workflow",
+          "Any request above USD 152,143 routes to the credit desk before confirmation to the client"
+        ],
+        "trade_offs": [
+          "Constrains the client at exactly the moment they want cash",
+          "Does not reduce the underlying leverage"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Credit desk notification"
+        ],
+        "estimated_impact": "No change to loan-to-value; prevents it worsening.",
+        "evidence": [
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0001",
+            "field": "margin_call_ltv_pct",
+            "value": 75.0,
+            "snapshot_date": null,
+            "note": "Margin-call trigger."
+          },
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0001",
+            "field": "ltv_pct_2025-12-31",
+            "value": 63.32,
+            "snapshot_date": "2025-12-31",
+            "note": null
+          },
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0001",
+            "field": "ltv_pct_2026-02-27",
+            "value": 59.72,
+            "snapshot_date": "2026-02-27",
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0002-collateral-CF-0001-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if CF-0001 loan-to-value exceeds 73%, or if collateral value falls more than 0.9%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "A 1.7% fall in collateral produces a margin call, which forces sales at whatever price exists that day rather than at a chosen one."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0002-theme-us_tech_ai": [
+      {
+        "id": "CL-0002-theme-us_tech_ai-opt-reduce",
+        "label": "Reduce total exposure to 15% by trimming USD 34,352,120, starting with Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M",
+        "rationale": "Taking the exposure from 88.6% to 15% of household wealth needs USD 34,352,120. Starting with Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M removes the wrapper with the least attractive payoff first rather than the one that is easiest to sell.",
+        "mechanics": [
+          "Reduce Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M (currently USD 1,572,000, 3.4%, Illiquid liquidity)",
+          "Reduce Unlisted Holding - Aranya Technologies Pte Ltd (currently USD 31,920,000, 68.4%, Illiquid liquidity)",
+          "Reduce US Technology Leaders Fund (currently USD 3,552,600, 7.6%, Daily liquidity)"
+        ],
+        "trade_offs": [
+          "Crystallises gains or losses on the positions sold",
+          "The client may read a reduction as a view on the issuer",
+          "Illiquid liquidity on the first line constrains timing"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Singapore. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Household exposure 88.6% to 15%.",
+        "evidence": [
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-AL-0308",
+            "field": "asset_class",
+            "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "snapshot_date": null,
+            "note": "USD 31,920,000 attributed via Private Equity."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-EQ-0003",
+            "field": "asset_class",
+            "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "snapshot_date": null,
+            "note": "USD 3,552,600 attributed via Developed Market Equity."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-ST-0102",
+            "field": "asset_class",
+            "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "snapshot_date": null,
+            "note": "USD 2,242,800 attributed via Single Stock."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-ST-0103",
+            "field": "asset_class",
+            "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "snapshot_date": null,
+            "note": "USD 2,069,600 attributed via Single Stock."
+          }
+        ]
+      },
+      {
+        "id": "CL-0002-theme-us_tech_ai-opt-cap",
+        "label": "Hold the position but cap it, and stop adding",
+        "rationale": "Where the client will not sell for business or family reasons, the achievable outcome is to stop the exposure growing and to route new money elsewhere.",
+        "mechanics": [
+          "Agree a ceiling as a percentage of household wealth and record it",
+          "Direct all new subscriptions away from this exposure",
+          "Review at each meeting against the agreed ceiling"
+        ],
+        "trade_offs": [
+          "Leaves the current concentration in place",
+          "Only reduces the exposure slowly, and only if the rest grows"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Concentration remains outside guidance",
+            "result": "attention",
+            "detail": "Exposure stays near 88.6% against a 15% reference level.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client agreement to the ceiling"
+        ],
+        "estimated_impact": "No immediate change; caps future growth.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0002-theme-us_tech_ai-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if exposure exceeds 94% of household wealth or if the issuer's price falls more than 15%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "USD 41,357,000 remains exposed to a single driver."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0002-liquidity-cover": [
+      {
+        "id": "CL-0002-liquidity-cover-opt-prefund",
+        "label": "Pre-fund USD 4,200,000 now from daily-liquidity assets",
+        "rationale": "The obligation is conditional on the sale completing and dated 2027-01-01. Raising it while markets are open is a choice; raising it against a deadline is not.",
+        "mechanics": [
+          "Sell USD 152,143 of Daily-tier positions",
+          "Hold the proceeds in USD until the obligation falls due",
+          "Book the sale against the specific obligation in the client file"
+        ],
+        "trade_offs": [
+          "Gives up market exposure and income between now and the due date",
+          "Crystallises gains or losses today rather than later",
+          "Only USD 152,143 is actually withdrawable, leaving USD 6,047,857 to find elsewhere"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Singapore. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Covers USD 152,143 of the USD 4,200,000 obligation.",
+        "evidence": [
+          {
+            "source_file": "planned_cash_needs.csv",
+            "row_or_id": "CN-002",
+            "field": "amount",
+            "value": "USD 4,200,000",
+            "snapshot_date": null,
+            "note": "Estimated Singapore tax on secondary share sale (Conditional on the sale completing, 2027-01-01 to 2027-04-30)."
+          },
+          {
+            "source_file": "planned_cash_needs.csv",
+            "row_or_id": "CN-003",
+            "field": "amount",
+            "value": "USD 2,000,000",
+            "snapshot_date": null,
+            "note": "Family trust establishment and funding (Likely, 2026-11-01 to 2027-03-31)."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-AL-0308",
+            "field": "liquidity_tier",
+            "value": "Illiquid",
+            "snapshot_date": "2026-08-26",
+            "note": "USD 31,920,000 not available on demand."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-SP-0502",
+            "field": "liquidity_tier",
+            "value": "Illiquid",
+            "snapshot_date": "2026-08-26",
+            "note": "USD 1,572,000 not available on demand."
+          }
+        ]
+      },
+      {
+        "id": "CL-0002-liquidity-cover-opt-stage",
+        "label": "Stage the obligation and agree the funding sequence in writing",
+        "rationale": "Where the full amount cannot be raised without forced sales, the decision is which tranche comes from where, agreed before the date rather than during it.",
+        "mechanics": [
+          "Split the obligation into dated tranches against the payment schedule",
+          "Nominate a funding source for each tranche, in order",
+          "Confirm with the counterparty whether the timing can move"
+        ],
+        "trade_offs": [
+          "Depends on the counterparty accepting a schedule",
+          "Leaves residual risk if the later tranches are unfunded"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client agreement",
+          "Counterparty confirmation"
+        ],
+        "estimated_impact": "Converts a single cliff into a dated plan.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0002-liquidity-cover-opt-gate",
+        "label": "Confirm redemption terms on Unlisted Holding - Aranya Technologies Pte Ltd",
+        "rationale": "A gated vehicle cannot be relied on to fund anything until the manager confirms the amount and date. Treat it as unavailable until it settles.",
+        "mechanics": [
+          "Request the current gate level and queue position from the manager",
+          "Restate the liquidity map with the position excluded",
+          "Tell the client what has actually been received, not what was requested"
+        ],
+        "trade_offs": [
+          "Removes a position the client may believe is available",
+          "May surface a worse liquidity picture than expected"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM action",
+          "Manager confirmation"
+        ],
+        "estimated_impact": "Clarifies the status of USD 31,920,000.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0002-liquidity-cover-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert 90 days before the earliest obligation, or if withdrawable value falls below the amount due.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The set of ways to fund the obligation narrows as the date approaches, and the last option is usually the most expensive."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0002-stale-marks": [
+      {
+        "id": "CL-0002-stale-marks-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Ask the custodian or manager for the latest available mark before the meeting, and present the total with the as-at date attached.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-AL-0308",
+            "field": "valuation_date",
+            "value": "2025-09-30",
+            "snapshot_date": "2026-08-26",
+            "note": "Unlisted Holding - Aranya Technologies Pte Ltd: 330 days behind the snapshot."
+          }
+        ]
+      },
+      {
+        "id": "CL-0002-stale-marks-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0002-samebet-us_tech_ai": [
+      {
+        "id": "CL-0002-samebet-us_tech_ai-opt-staged",
+        "label": "Agree a target allocation and move to it in dated tranches",
+        "rationale": "A single large rebalancing decision is hard for a client to accept and easy to defer. A target with dates attached converts it into a sequence of smaller confirmations.",
+        "mechanics": [
+          "Agree the destination allocation, not the first trade",
+          "Break the move into tranches with dates",
+          "Confirm each tranche in writing before execution"
+        ],
+        "trade_offs": [
+          "The portfolio remains unsuitable during the transition",
+          "Market moves during the programme change the arithmetic"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Singapore. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Moves the portfolio toward the recorded profile over time.",
+        "evidence": [
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0002",
+            "field": "source_of_wealth",
+            "value": "Entrepreneur - founder of enterprise software business",
+            "snapshot_date": null,
+            "note": "Matched on 'software'."
+          },
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0002",
+            "field": "objectives",
+            "value": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "snapshot_date": null,
+            "note": null
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-AL-0308",
+            "field": "asset_class",
+            "value": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "snapshot_date": null,
+            "note": "USD 31,920,000 attributed via Private Equity."
+          }
+        ]
+      },
+      {
+        "id": "CL-0002-samebet-us_tech_ai-opt-reprofile",
+        "label": "Re-run the risk profiling before changing anything",
+        "rationale": "If the recorded profile is wrong, every downstream check is wrong too. Where a profile was set during a life event, confirming it is the cheapest first step.",
+        "mechanics": [
+          "Re-run the profiling questionnaire with the client",
+          "Compare the result with the current allocation",
+          "Update clients.risk_profile and re-run the checks"
+        ],
+        "trade_offs": [
+          "Delays any portfolio change",
+          "May confirm the mismatch rather than resolve it"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM meeting",
+          "Client participation"
+        ],
+        "estimated_impact": "Confirms or corrects the basis for every other action.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0002-samebet-us_tech_ai-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if risk assets rise a further 5 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside what the client said they wanted, which is the position that has to be defended if markets fall."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0002-tax": [
+      {
+        "id": "CL-0002-tax-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Involve wealth planning before any disposal, and prepare a funding shortlist ranked by tax impact rather than by liquidity alone.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0002",
+            "field": "tax_domicile",
+            "value": "Singapore",
+            "snapshot_date": null,
+            "note": "Domicile, not residence, governs the treatment."
+          },
+          {
+            "source_file": "planned_cash_needs.csv",
+            "row_or_id": "CN-002",
+            "field": "amount",
+            "value": "USD 4,200,000",
+            "snapshot_date": null,
+            "note": "Estimated Singapore tax on secondary share sale (Conditional on the sale completing)."
+          }
+        ]
+      },
+      {
+        "id": "CL-0002-tax-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0002-explain-ytd": [
+      {
+        "id": "CL-0002-explain-ytd-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Open the meeting with the attribution rather than the headline number.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Growth, tolerance 8.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "market_context.csv",
+            "row_or_id": "NASDAQ_COMP",
+            "field": "value",
+            "value": "23150.0 -> 26010.0 points",
+            "snapshot_date": "2026-08-26",
+            "note": "Nasdaq Composite Index, 2025-12-31 to 2026-08-26."
+          },
+          {
+            "source_file": "event_log.csv",
+            "row_or_id": "EVT-11",
+            "field": "description",
+            "value": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+            "snapshot_date": "2026-06-05",
+            "note": "Transmission: US technology, concentrated equity, collateralised lending. Severity High."
+          }
+        ]
+      },
+      {
+        "id": "CL-0002-explain-ytd-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ]
+  },
+  "brief": {
+    "client_id": "CL-0002",
+    "generated_at": "2026-09-04T10:41:46+00:00",
+    "as_of": "2026-08-26",
+    "purpose": "Review Ravi Chandrasekaran. Lombard facility 1.29pp from a margin call. Then: 89% of the household moves with US technology and AI capital expenditure.",
+    "talking_points": [
+      "Between 2025-12-31 and 2026-08-26 the household moved up USD 2,902,700, or 6.6%, from USD 43,796,500 to USD 46,699,200.",
+      "Of that, +USD 1,402,700 came from market moves, +USD 0 from currency translation and +USD 1,500,000 from money paid in or taken out.",
+      "Lombard facility 1.29pp from a margin call. CF-0001 sits at 73.71% loan-to-value against a 75% trigger. A 1.7% fall in collateral value is enough to produce a margin call. The trigger was already breached at 2026-06-30. The breach at 2026-06-30 was cured by 2026-08-26 without any repayment: the drawn balance was unchanged and lending value rose by 225,160 USD as the collateral appreciated. The exposure was resolved by the market, not by an action, and would return if the move reversed.",
+      "89% of the household moves with US technology and AI capital expenditure. USD 41,357,000 across 5 positions responds to the same driver. The dataset records 1 events on this theme in 2026.",
+      "Known obligations of USD 6,200,000 against USD 152,143 the client can actually withdraw. Coverage is 0.02x. USD 13,055,057 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger. USD 33,492,000 of the household is illiquid.",
+      "USD 31,920,000 (68% of the household) is carried at a mark up to 330 days old. These positions have a valuation_date earlier than the snapshot they appear in. Quarterly-reported private marks lagging a quarter is normal and not an error, but the reported wealth figure is only as current as its oldest input, and any percentage of the household computed against it inherits the lag."
+    ],
+    "questions_to_ask": [
+      "Is the client willing to reduce the facility rather than sell?",
+      "Can any obligation be deferred or staged?",
+      "What is the most recent available valuation for this position?",
+      "Are these still the objectives? Recorded as: Bridge liquidity until the secondary sale of founder shares expected Q4 2026; build a diversified portfolio post-event; establish a family trust",
+      "Has anything changed in the client's circumstances? Life stage on file is \"Pre-liquidity event\"."
+    ],
+    "relationship_context": [
+      "2026-02-03 (Meeting, N-003): Secondary sale process is progressing, bankers indicate Q4 2026 at a valuation meaningfully above the last round. Client wants to avoid selling any listed positions before then because he views the tech complex as the best place to be. Comfortable increasing the Lombard line if needed.",
+      "2026-06-11 (Call, N-004): Difficult call. Client was agitated about the drop in his technology holdings last week and the effect on his collateral value. Drew a further USD 1.7m to fund a pre-IPO secondary. I flagged that this increases his utilisation at exactly the moment his collateral is most volatile. He acknowledged the point but proceeded. Needs monitoring."
+    ],
+    "contradictions": [
+      "The portfolio and the client's source of wealth are the same bet (89% on US technology and AI capital expenditure). Source of wealth is recorded as \"Entrepreneur - founder of enterprise software business\". USD 41,357,000 of the portfolio (88.6%) responds to the same driver, so the business and the portfolio would come under pressure together.",
+      "CF-0001 looks healthy today, but the previous breach was resolved by a market move rather than by an action."
+    ],
+    "do_not_say": [
+      "Do not present any figure as investment advice. These are options for review.",
+      "Do not quote a tax outcome. Tax domicile drives the treatment and wealth planning owns the answer.",
+      "Do not describe a private markets or unlisted mark as current without saying when it was struck.",
+      "Do not present an RM note as an independently verified fact.",
+      "Do not promise a redemption date for a gated vehicle.",
+      "Do not quote the total wealth figure without the as-at caveat: USD 31,920,000 (68% of the household) is carried at a mark up to 330 days old"
+    ],
+    "draft_follow_up": "Dear Ravi Chandrasekaran,\n\nThank you for your time today. A short summary of what we discussed and what happens next.\n\nWhere the portfolio stands. Between 2025-12-31 and 2026-08-26 the household moved up USD 2,902,700, or 6.6%, from USD 43,796,500 to USD 46,699,200. Of that, +USD 1,402,700 came from market moves, +USD 0 from currency translation and +USD 1,500,000 from money paid in or taken out.\n\nWhat we focused on. Lombard facility 1.29pp from a margin call. CF-0001 sits at 73.71% loan-to-value against a 75% trigger. A 1.7% fall in collateral value is enough to produce a margin call. The trigger was already breached at 2026-06-30. The breach at 2026-06-30 was cured by 2026-08-26 without any repayment: the drawn balance was unchanged and lending value rose by 225,160 USD as the collateral appreciated. The exposure was resolved by the market, not by an action, and would return if the move reversed.\n\nWhat we agreed to look at. Agree a collateral plan before the next client-driven withdrawal: either reduce drawn, add eligible collateral, or accept a smaller withdrawal than the client expects.\n\nNothing in this note is a recommendation to buy or sell. Any action will be confirmed with you in writing before it is taken, and the figures above are as at 2026-08-26.\n\nKind regards,\nPriscilla Ong\nAsia desk - Singapore and Hong Kong booking centres",
+    "provenance": "deterministic"
+  },
+  "notes": [
+    {
+      "note_id": "N-003",
+      "note_date": "2026-02-03",
+      "channel": "Meeting",
+      "rm_name": "Priscilla Ong",
+      "note": "Secondary sale process is progressing, bankers indicate Q4 2026 at a valuation meaningfully above the last round. Client wants to avoid selling any listed positions before then because he views the tech complex as the best place to be. Comfortable increasing the Lombard line if needed."
+    },
+    {
+      "note_id": "N-004",
+      "note_date": "2026-06-11",
+      "channel": "Call",
+      "rm_name": "Priscilla Ong",
+      "note": "Difficult call. Client was agitated about the drop in his technology holdings last week and the effect on his collateral value. Drew a further USD 1.7m to fund a pre-IPO secondary. I flagged that this increases his utilisation at exactly the moment his collateral is most volatile. He acknowledged the point but proceeded. Needs monitoring."
+    }
+  ],
+  "events": [
+    {
+      "event_id": "EVT-14",
+      "event_date": "2026-06-30",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "Half-year close. US equities near record levels on narrow, technology-led leadership. Non-traded private credit vehicles show continued redemption stress.",
+      "primary_transmission": "Private credit, semi-liquid alternatives",
+      "severity": "Medium"
+    },
+    {
+      "event_id": "EVT-11",
+      "event_date": "2026-06-05",
+      "event_type": "Market",
+      "region": "United States",
+      "description": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+      "primary_transmission": "US technology, concentrated equity, collateralised lending",
+      "severity": "High"
+    }
+  ],
+  "market": {
+    "series": [
+      {
+        "series_id": "BRENT_USD_BBL",
+        "series_name": "Brent crude",
+        "category": "Commodity",
+        "unit": "USD/barrel",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 69.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 72.4
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 104.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 96.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 101.5
+          }
+        ]
+      },
+      {
+        "series_id": "GOLD_USD_OZ",
+        "series_name": "Gold spot",
+        "category": "Commodity",
+        "unit": "USD/troy oz",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4310.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 5050.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 5240.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4780.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4622.6
+          }
+        ]
+      },
+      {
+        "series_id": "UST_10Y_PCT",
+        "series_name": "US Treasury 10-year yield",
+        "category": "Rates",
+        "unit": "percent",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4.05
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 3.95
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 4.35
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4.52
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4.66
+          }
+        ]
+      },
+      {
+        "series_id": "NASDAQ_COMP",
+        "series_name": "Nasdaq Composite Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 23150.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 24620.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 23880.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 25320.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 26010.0
+          }
+        ]
+      },
+      {
+        "series_id": "HSI",
+        "series_name": "Hang Seng Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 24800.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 25350.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 24100.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 24950.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25280.0
+          }
+        ]
+      },
+      {
+        "series_id": "VIX",
+        "series_name": "CBOE Volatility Index",
+        "category": "Volatility",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 15.2
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 17.8
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 31.4
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 22.6
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25.1
+          }
+        ]
+      }
+    ]
+  },
+  "audit": []
+}

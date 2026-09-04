@@ -1,0 +1,4149 @@
+{
+  "as_of": "2026-08-26",
+  "client": {
+    "client_id": "CL-0014",
+    "client_name": "Lau Chi Ming",
+    "age": 63.0,
+    "nationality": "Hong Kong SAR",
+    "country_of_residence": "Hong Kong SAR",
+    "tax_domicile": "Hong Kong SAR",
+    "booking_centre": "Hong Kong",
+    "base_currency": "HKD",
+    "wealth_band": "UHNW",
+    "life_stage": "Peak earning years",
+    "source_of_wealth": "Entrepreneur - Hong Kong residential and commercial property development",
+    "risk_profile": "Balanced",
+    "risk_tolerance_score": 5.0,
+    "investment_horizon_years": 12.0,
+    "liquidity_needs": "High",
+    "objectives": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+    "client_since": "2011-03-22",
+    "kyc_review_due": "2026-09-22",
+    "reporting_language": "Traditional Chinese",
+    "rm_name": "Priscilla Ong",
+    "total_usd": 26488970.55
+  },
+  "portfolios": [
+    {
+      "portfolio_id": "PF-0016",
+      "portfolio_name": "Advisory Balanced Portfolio",
+      "mandate_code": "BAL",
+      "mandate_name": "Balanced",
+      "service_model": "Advisory",
+      "base_currency": "HKD",
+      "benchmark": "JB Balanced HKD Composite",
+      "inception_date": "2011-04-01",
+      "value_usd": 26488970.55,
+      "aum_series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "value_base": 219536340.0
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "value_base": 245469500.0
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "value_base": 222792925.0
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "value_base": 212160650.0
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "value_base": 206878860.0
+        }
+      ],
+      "mandate_review": {
+        "portfolio_id": "PF-0016",
+        "client_id": "CL-0014",
+        "mandate_code": "BAL",
+        "mandate_name": "Balanced",
+        "service_model": "Advisory",
+        "governed": true,
+        "base_currency": "HKD",
+        "total_base": 206878860.0,
+        "allocation_pct": {
+          "Fixed Income": 44.19197785602647,
+          "Equity": 23.385666374998394,
+          "Structured Products": 7.0451857671682845,
+          "Alternatives": 19.576674001393858,
+          "Cash and Equivalents": 5.800496000412996
+        },
+        "band_breaches": [
+          {
+            "portfolio_id": "PF-0016",
+            "mandate_code": "BAL",
+            "asset_class": "Equity",
+            "actual_pct": 23.385666374998394,
+            "min_pct": 30.0,
+            "target_pct": 40.0,
+            "max_pct": 55.0,
+            "direction": "below",
+            "breach_pp": 6.614333625001606,
+            "value_base": 48380000.0,
+            "base_currency": "HKD"
+          }
+        ],
+        "position_breaches": [
+          {
+            "portfolio_id": "PF-0016",
+            "mandate_code": "BAL",
+            "instrument_id": "SYN-AL-0307",
+            "instrument_name": "Direct Property - Mid-Levels Apartment",
+            "actual_pct": 19.576674001393858,
+            "limit_pct": 12.0,
+            "breach_pp": 7.576674001393858,
+            "value_base": 40500000.0,
+            "base_currency": "HKD"
+          },
+          {
+            "portfolio_id": "PF-0016",
+            "mandate_code": "BAL",
+            "instrument_id": "SYN-FI-0206",
+            "instrument_name": "Pacific Rim Bank 4.75% Perpetual",
+            "actual_pct": 17.565801551690686,
+            "limit_pct": 12.0,
+            "breach_pp": 5.5658015516906865,
+            "value_base": 36339930.0,
+            "base_currency": "HKD"
+          },
+          {
+            "portfolio_id": "PF-0016",
+            "mandate_code": "BAL",
+            "instrument_id": "SYN-FI-0207",
+            "instrument_name": "Golden Harbour Properties 5.25% Perpetual",
+            "actual_pct": 12.86573214875604,
+            "limit_pct": 12.0,
+            "breach_pp": 0.8657321487560399,
+            "value_base": 26616480.0,
+            "base_currency": "HKD"
+          }
+        ],
+        "exclusion_breaches": []
+      },
+      "bands": {
+        "Cash and Equivalents": {
+          "min_pct": 2.0,
+          "target_pct": 7.0,
+          "max_pct": 18.0
+        },
+        "Fixed Income": {
+          "min_pct": 25.0,
+          "target_pct": 35.0,
+          "max_pct": 50.0
+        },
+        "Equity": {
+          "min_pct": 30.0,
+          "target_pct": 40.0,
+          "max_pct": 55.0
+        },
+        "Alternatives": {
+          "min_pct": 0.0,
+          "target_pct": 10.0,
+          "max_pct": 20.0
+        },
+        "Commodities": {
+          "min_pct": 0.0,
+          "target_pct": 3.0,
+          "max_pct": 10.0
+        },
+        "Structured Products": {
+          "min_pct": 0.0,
+          "target_pct": 5.0,
+          "max_pct": 15.0
+        }
+      },
+      "mandate_notes": "Balanced growth and income."
+    }
+  ],
+  "wealth": {
+    "total_usd": 26488970.55,
+    "timeseries": [
+      {
+        "snapshot": "2025-12-31",
+        "label": "Year-end 2025",
+        "total_usd": 28181815.15,
+        "change_usd": null,
+        "change_pct": null
+      },
+      {
+        "snapshot": "2026-02-27",
+        "label": "Pre-conflict",
+        "total_usd": 31470448.71,
+        "change_usd": 3288633.5600000024,
+        "change_pct": 11.669346145718377
+      },
+      {
+        "snapshot": "2026-03-31",
+        "label": "Post-Hormuz",
+        "total_usd": 28508371.72,
+        "change_usd": -2962076.990000002,
+        "change_pct": -9.412248987281764
+      },
+      {
+        "snapshot": "2026-06-30",
+        "label": "Half-year",
+        "total_usd": 27130517.89,
+        "change_usd": -1377853.8299999982,
+        "change_pct": -4.833155129071673
+      },
+      {
+        "snapshot": "2026-08-26",
+        "label": "Today",
+        "total_usd": 26488970.55,
+        "change_usd": -641547.3399999999,
+        "change_pct": -2.364670451928479
+      }
+    ],
+    "by_asset_class": {
+      "Alternatives": 5185659.41,
+      "Fixed Income": 11706000.0,
+      "Equity": 6194622.28,
+      "Structured Products": 1866197.18,
+      "Cash and Equivalents": 1536491.68
+    },
+    "by_liquidity_tier": {
+      "Illiquid": 7051856.59,
+      "Weekly": 8061000.0,
+      "Daily": 11376113.96
+    },
+    "by_currency": {
+      "HKD": 14782970.55,
+      "USD": 11706000.0
+    },
+    "by_region": {
+      "Hong Kong": 14523877.08,
+      "Asia": 8298000.0,
+      "Greater China": 3667093.47
+    },
+    "by_sector": {
+      "Real Estate": 12987385.4,
+      "Financials": 4653000.0,
+      "Diversified": 3667093.47,
+      "Corporate": 3645000.0,
+      "Cash": 1536491.68
+    },
+    "positions": [
+      {
+        "instrument_id": "SYN-AL-0307",
+        "instrument_name": "Direct Property - Mid-Levels Apartment",
+        "asset_class": "Alternatives",
+        "sub_asset_class": "Direct Real Estate",
+        "sector": "Real Estate",
+        "region": "Hong Kong",
+        "currency": "HKD",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 5185659.41,
+        "weight_pct": 19.57667399800103,
+        "lending_value_usd": 0.0,
+        "advance_rate_pct": 0.0,
+        "unrealised_pnl_usd": 1600512.1638924456,
+        "unrealised_pnl_pct": 44.642857142857146,
+        "portfolio_ids": [
+          "PF-0016"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0206",
+        "instrument_name": "Pacific Rim Bank 4.75% Perpetual",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Subordinated Perpetual",
+        "sector": "Financials",
+        "region": "Asia",
+        "currency": "USD",
+        "liquidity_tier": "Weekly",
+        "market_value_usd": 4653000.0,
+        "weight_pct": 17.565801552072774,
+        "lending_value_usd": 2326500.0,
+        "advance_rate_pct": 50.0,
+        "unrealised_pnl_usd": -789028.1690140845,
+        "unrealised_pnl_pct": -14.498788769721314,
+        "portfolio_ids": [
+          "PF-0016"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0021",
+        "instrument_name": "Greater China Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Emerging Market Equity",
+        "sector": "Diversified",
+        "region": "Greater China",
+        "currency": "HKD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 3667093.47,
+        "weight_pct": 13.84385045495851,
+        "lending_value_usd": 2200256.0819462226,
+        "advance_rate_pct": 60.0,
+        "unrealised_pnl_usd": -501920.6145966709,
+        "unrealised_pnl_pct": -12.039312039312039,
+        "portfolio_ids": [
+          "PF-0016"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0205",
+        "instrument_name": "Asia High Yield Bond Fund",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "High Yield Credit",
+        "sector": "Corporate",
+        "region": "Asia",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 3645000.0,
+        "weight_pct": 13.760444155879059,
+        "lending_value_usd": 1822500.0,
+        "advance_rate_pct": 50.0,
+        "unrealised_pnl_usd": -681891.1651728553,
+        "unrealised_pnl_pct": -15.759378711935184,
+        "portfolio_ids": [
+          "PF-0016"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0207",
+        "instrument_name": "Golden Harbour Properties 5.25% Perpetual",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Subordinated Perpetual",
+        "sector": "Real Estate",
+        "region": "Hong Kong",
+        "currency": "USD",
+        "liquidity_tier": "Weekly",
+        "market_value_usd": 3408000.0,
+        "weight_pct": 12.865732149035894,
+        "lending_value_usd": 1704000.0,
+        "advance_rate_pct": 50.0,
+        "unrealised_pnl_usd": -2433003.8412291934,
+        "unrealised_pnl_pct": -41.65386476988153,
+        "portfolio_ids": [
+          "PF-0016"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-ST-0106",
+        "instrument_name": "Golden Harbour Properties Ltd",
+        "asset_class": "Equity",
+        "sub_asset_class": "Single Stock",
+        "sector": "Real Estate",
+        "region": "Hong Kong",
+        "currency": "HKD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2527528.81,
+        "weight_pct": 9.541815923835514,
+        "lending_value_usd": 1263764.404609475,
+        "advance_rate_pct": 50.0,
+        "unrealised_pnl_usd": -2276568.5019206144,
+        "unrealised_pnl_pct": -47.38805970149253,
+        "portfolio_ids": [
+          "PF-0016"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-SP-0503",
+        "instrument_name": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+        "asset_class": "Structured Products",
+        "sub_asset_class": "Accumulator",
+        "sector": "Real Estate",
+        "region": "Hong Kong",
+        "currency": "HKD",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 1866197.18,
+        "weight_pct": 7.045185755623862,
+        "lending_value_usd": 0.0,
+        "advance_rate_pct": 0.0,
+        "unrealised_pnl_usd": -1334827.1446862996,
+        "unrealised_pnl_pct": -41.699999999999996,
+        "portfolio_ids": [
+          "PF-0016"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": "Daily accumulation at strike HKD 17.20, knock-out HKD 19.80, double-up below strike"
+      },
+      {
+        "instrument_id": "SYN-CA-0603",
+        "instrument_name": "HKD Call Deposit",
+        "asset_class": "Cash and Equivalents",
+        "sub_asset_class": "Deposit",
+        "sector": "Cash",
+        "region": "Hong Kong",
+        "currency": "HKD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1536491.68,
+        "weight_pct": 5.80049601059336,
+        "lending_value_usd": 1382842.509603073,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": 0.0,
+        "unrealised_pnl_pct": 0.0,
+        "portfolio_ids": [
+          "PF-0016"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      }
+    ]
+  },
+  "income": {
+    "client_id": "CL-0014",
+    "quarters_observed": 2,
+    "gross_income_usd": 1078653.3527528811,
+    "costs_usd": 297511.0320102433,
+    "net_income_usd": 781142.3207426379,
+    "annualised_gross_usd": 2157306.7055057622,
+    "annualised_net_usd": 1562284.6414852757,
+    "yield_pct": 8.14416967029231,
+    "by_instrument": {
+      "SYN-FI-0205": 304978.5,
+      "SYN-FI-0206": 265595.0,
+      "SYN-FI-0207": 214665.0,
+      "SYN-AL-0307": 153169.01408450704,
+      "SYN-EQ-0021": 92614.5966709347,
+      "SYN-CA-0603": 47631.24199743918
+    }
+  },
+  "explanation": {
+    "ytd": {
+      "client_id": "CL-0014",
+      "period": "ytd",
+      "primary_driver": "Interest rate duration",
+      "fx_dominates": false,
+      "start": "2025-12-31",
+      "end": "2026-08-26",
+      "start_label": "Year-end 2025",
+      "end_label": "Today",
+      "change_usd": -1692844.5999999978,
+      "change_pct": -6.0068685817066605,
+      "price_effect_usd": -4860706.480114859,
+      "fx_effect_usd": -33162.4476700319,
+      "flow_effect_usd": 3201024.3277848912,
+      "drivers": [
+        {
+          "theme_key": "duration",
+          "theme_name": "Interest rate duration",
+          "amount_usd": -2207000.0,
+          "pct_of_start": -7.831291165076001,
+          "market_moves": [
+            {
+              "series_id": "UST_10Y_PCT",
+              "series_name": "US Treasury 10-year yield",
+              "unit": "percent",
+              "start_value": 4.05,
+              "end_value": 4.66,
+              "change": 0.6100000000000003,
+              "change_pct": 15.061728395061746
+            },
+            {
+              "series_id": "UST_2Y_PCT",
+              "series_name": "US Treasury 2-year yield",
+              "unit": "percent",
+              "start_value": 3.68,
+              "end_value": 4.14,
+              "change": 0.4599999999999995,
+              "change_pct": 12.499999999999979
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-09",
+              "event_date": "2026-04-30",
+              "description": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+              "primary_transmission": "European fixed income, EUR assets",
+              "severity": "Medium"
+            },
+            {
+              "event_id": "EVT-12",
+              "event_date": "2026-06-17",
+              "description": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+              "primary_transmission": "Duration, rate-sensitive credit, USD",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-13",
+              "event_date": "2026-06-19",
+              "description": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+              "primary_transmission": "Long-duration fixed income",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-15",
+              "event_date": "2026-07-29",
+              "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+              "primary_transmission": "Duration, growth equity valuations",
+              "severity": "High"
+            }
+          ]
+        },
+        {
+          "theme_key": "hk_property",
+          "theme_name": "Hong Kong property",
+          "amount_usd": -690889.3099999994,
+          "pct_of_start": -2.4515429766417984,
+          "market_moves": [
+            {
+              "series_id": "HSI",
+              "series_name": "Hang Seng Index",
+              "unit": "points",
+              "start_value": 24800.0,
+              "end_value": 25280.0,
+              "change": 480.0,
+              "change_pct": 1.9354838709677358
+            }
+          ],
+          "events": []
+        },
+        {
+          "theme_key": "private_markets",
+          "theme_name": "Private markets and gated vehicles",
+          "amount_usd": -205868.18999999948,
+          "pct_of_start": -0.7305001076199291,
+          "market_moves": [],
+          "events": [
+            {
+              "event_id": "EVT-14",
+              "event_date": "2026-06-30",
+              "description": "Half-year close. US equities near record levels on narrow, technology-led leadership. Non-traded private credit vehicles show continued redemption stress.",
+              "primary_transmission": "Private credit, semi-liquid alternatives",
+              "severity": "Medium"
+            }
+          ]
+        }
+      ],
+      "detractors": [
+        {
+          "instrument_id": "SYN-FI-0207",
+          "instrument_name": "Golden Harbour Properties 5.25% Perpetual",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 4944000.0,
+          "end_value_usd": 3408000.0,
+          "price_effect_usd": -1536000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -1536000.0,
+          "price_return_pct": -31.06796116504855,
+          "price_start": 82.4,
+          "price_end": 56.8
+        },
+        {
+          "instrument_id": "SYN-SP-0503",
+          "instrument_name": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+          "asset_class": "Structured Products",
+          "currency": "HKD",
+          "start_value_usd": 0.0,
+          "end_value_usd": 1866197.18,
+          "price_effect_usd": -1334827.1477848913,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 3201024.3277848912,
+          "total_usd": 1866197.18,
+          "price_return_pct": -41.7,
+          "price_start": 100.0,
+          "price_end": 58.3
+        },
+        {
+          "instrument_id": "SYN-ST-0106",
+          "instrument_name": "Golden Harbour Properties Ltd",
+          "asset_class": "Equity",
+          "currency": "HKD",
+          "start_value_usd": 3342747.11,
+          "end_value_usd": 2527528.81,
+          "price_effect_usd": -808729.137460285,
+          "fx_effect_usd": -6489.162539714807,
+          "flow_effect_usd": 0.0,
+          "total_usd": -815218.2999999998,
+          "price_return_pct": -24.193548387096786,
+          "price_start": 18.6,
+          "price_end": 14.1
+        },
+        {
+          "instrument_id": "SYN-FI-0206",
+          "instrument_name": "Pacific Rim Bank 4.75% Perpetual",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 5324000.0,
+          "end_value_usd": 4653000.0,
+          "price_effect_usd": -671000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -671000.0,
+          "price_return_pct": -12.603305785123975,
+          "price_start": 96.8,
+          "price_end": 84.6
+        },
+        {
+          "instrument_id": "SYN-FI-0205",
+          "instrument_name": "Asia High Yield Bond Fund",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 3978000.0,
+          "end_value_usd": 3645000.0,
+          "price_effect_usd": -333000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -333000.0,
+          "price_return_pct": -8.371040723981904,
+          "price_start": 88.4,
+          "price_end": 81.0
+        }
+      ],
+      "contributors": [
+        {
+          "instrument_id": "SYN-EQ-0021",
+          "instrument_name": "Greater China Equity Fund",
+          "asset_class": "Equity",
+          "currency": "HKD",
+          "start_value_usd": 3661103.98,
+          "end_value_usd": 3667093.47,
+          "price_effect_usd": 15404.36412043751,
+          "fx_effect_usd": -9414.874120437287,
+          "flow_effect_usd": 0.0,
+          "total_usd": 5989.4900000002235,
+          "price_return_pct": 0.42075736325384305,
+          "price_start": 142.6,
+          "price_end": 143.2
+        }
+      ],
+      "narrative": [
+        "Between 2025-12-31 and 2026-08-26 the household moved down USD 1,692,845, or 6.0%, from USD 28,181,815 to USD 26,488,971.",
+        "Of that, -USD 4,860,706 came from market moves, -USD 33,162 from currency translation and +USD 3,201,024 from money paid in or taken out.",
+        "Interest rate duration contributed -USD 2,207,000 (-7.8 points), as US Treasury 10-year yield moved from 4.05 to 4.66 percent. The event log records on 2026-04-30: European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+        "Hong Kong property contributed -USD 690,889 (-2.5 points), as Hang Seng Index moved from 24800.0 to 25280.0 points.",
+        "Private markets and gated vehicles contributed -USD 205,868 (-0.7 points). The event log records on 2026-06-30: Half-year close. US equities near record levels on narrow, technology-led leadership. Non-traded private credit vehicles show..."
+      ],
+      "provenance": "deterministic"
+    },
+    "recent": {
+      "client_id": "CL-0014",
+      "period": "recent",
+      "primary_driver": "Hong Kong property",
+      "fx_dominates": false,
+      "start": "2026-06-30",
+      "end": "2026-08-26",
+      "start_label": "Half-year",
+      "end_label": "Today",
+      "change_usd": -641547.3399999999,
+      "change_pct": -2.364670451928479,
+      "price_effect_usd": -660451.3944124999,
+      "fx_effect_usd": 18904.054412500427,
+      "flow_effect_usd": 0.0,
+      "drivers": [
+        {
+          "theme_key": "hk_property",
+          "theme_name": "Hong Kong property",
+          "amount_usd": -566967.5299999996,
+          "pct_of_start": -2.0897777635456687,
+          "market_moves": [
+            {
+              "series_id": "HSI",
+              "series_name": "Hang Seng Index",
+              "unit": "points",
+              "start_value": 24950.0,
+              "end_value": 25280.0,
+              "change": 330.0,
+              "change_pct": 1.3226452905811703
+            }
+          ],
+          "events": []
+        },
+        {
+          "theme_key": "duration",
+          "theme_name": "Interest rate duration",
+          "amount_usd": -352000.0,
+          "pct_of_start": -1.2974319230734006,
+          "market_moves": [
+            {
+              "series_id": "UST_10Y_PCT",
+              "series_name": "US Treasury 10-year yield",
+              "unit": "percent",
+              "start_value": 4.52,
+              "end_value": 4.66,
+              "change": 0.14000000000000057,
+              "change_pct": 3.0973451327433787
+            },
+            {
+              "series_id": "UST_2Y_PCT",
+              "series_name": "US Treasury 2-year yield",
+              "unit": "percent",
+              "start_value": 4.05,
+              "end_value": 4.14,
+              "change": 0.08999999999999986,
+              "change_pct": 2.2222222222222143
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-15",
+              "event_date": "2026-07-29",
+              "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+              "primary_transmission": "Duration, growth equity valuations",
+              "severity": "High"
+            }
+          ]
+        },
+        {
+          "theme_key": "greater_china_consumer",
+          "theme_name": "Greater China consumer demand",
+          "amount_usd": 60955.360000000335,
+          "pct_of_start": 0.2246745168932724,
+          "market_moves": [
+            {
+              "series_id": "HSI",
+              "series_name": "Hang Seng Index",
+              "unit": "points",
+              "start_value": 24950.0,
+              "end_value": 25280.0,
+              "change": 330.0,
+              "change_pct": 1.3226452905811703
+            }
+          ],
+          "events": []
+        }
+      ],
+      "detractors": [
+        {
+          "instrument_id": "SYN-FI-0207",
+          "instrument_name": "Golden Harbour Properties 5.25% Perpetual",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 3672000.0,
+          "end_value_usd": 3408000.0,
+          "price_effect_usd": -264000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -264000.0,
+          "price_return_pct": -7.189542483660139,
+          "price_start": 61.2,
+          "price_end": 56.8
+        },
+        {
+          "instrument_id": "SYN-SP-0503",
+          "instrument_name": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+          "asset_class": "Structured Products",
+          "currency": "HKD",
+          "start_value_usd": 2071611.25,
+          "end_value_usd": 1866197.18,
+          "price_effect_usd": -207800.51141061194,
+          "fx_effect_usd": 2386.4414106118725,
+          "flow_effect_usd": 0.0,
+          "total_usd": -205414.07000000007,
+          "price_return_pct": -10.030864197530864,
+          "price_start": 64.8,
+          "price_end": 58.3
+        },
+        {
+          "instrument_id": "SYN-ST-0106",
+          "instrument_name": "Golden Harbour Properties Ltd",
+          "asset_class": "Equity",
+          "currency": "HKD",
+          "start_value_usd": 2631713.55,
+          "end_value_usd": 2527528.81,
+          "price_effect_usd": -107416.87402713377,
+          "fx_effect_usd": 3232.1340271340214,
+          "flow_effect_usd": 0.0,
+          "total_usd": -104184.73999999976,
+          "price_return_pct": -4.081632653061218,
+          "price_start": 14.7,
+          "price_end": 14.1
+        },
+        {
+          "instrument_id": "SYN-FI-0206",
+          "instrument_name": "Pacific Rim Bank 4.75% Perpetual",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 4741000.0,
+          "end_value_usd": 4653000.0,
+          "price_effect_usd": -88000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -88000.0,
+          "price_return_pct": -1.8561484918793614,
+          "price_start": 86.2,
+          "price_end": 84.6
+        },
+        {
+          "instrument_id": "SYN-FI-0205",
+          "instrument_name": "Asia High Yield Bond Fund",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 3694500.0,
+          "end_value_usd": 3645000.0,
+          "price_effect_usd": -49500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -49500.0,
+          "price_return_pct": -1.3398294762484664,
+          "price_start": 82.1,
+          "price_end": 81.0
+        }
+      ],
+      "contributors": [
+        {
+          "instrument_id": "SYN-EQ-0021",
+          "instrument_name": "Greater China Equity Fund",
+          "asset_class": "Equity",
+          "currency": "HKD",
+          "start_value_usd": 3606138.11,
+          "end_value_usd": 3667093.47,
+          "price_effect_usd": 56265.98216124054,
+          "fx_effect_usd": 4689.377838759796,
+          "flow_effect_usd": 0.0,
+          "total_usd": 60955.360000000335,
+          "price_return_pct": 1.5602836879432536,
+          "price_start": 141.0,
+          "price_end": 143.2
+        },
+        {
+          "instrument_id": "SYN-CA-0603",
+          "instrument_name": "HKD Call Deposit",
+          "asset_class": "Cash and Equivalents",
+          "currency": "HKD",
+          "start_value_usd": 1534526.85,
+          "end_value_usd": 1536491.68,
+          "price_effect_usd": 0.006883201044274756,
+          "fx_effect_usd": 1964.8231167987974,
+          "flow_effect_usd": 0.0,
+          "total_usd": 1964.8299999998417,
+          "price_return_pct": 0.0,
+          "price_start": 1.0,
+          "price_end": 1.0
+        },
+        {
+          "instrument_id": "SYN-AL-0307",
+          "instrument_name": "Direct Property - Mid-Levels Apartment",
+          "asset_class": "Alternatives",
+          "currency": "HKD",
+          "start_value_usd": 5179028.13,
+          "end_value_usd": 5185659.41,
+          "price_effect_usd": 0.0019808043198281666,
+          "fx_effect_usd": 6631.278019195941,
+          "flow_effect_usd": 0.0,
+          "total_usd": 6631.280000000261,
+          "price_return_pct": 0.0,
+          "price_start": 40500000.0,
+          "price_end": 40500000.0
+        }
+      ],
+      "narrative": [
+        "Between 2026-06-30 and 2026-08-26 the household moved down USD 641,547, or 2.4%, from USD 27,130,518 to USD 26,488,971.",
+        "Of that, -USD 660,451 came from market moves, +USD 18,904 from currency translation and +USD 0 from money paid in or taken out.",
+        "Hong Kong property contributed -USD 566,968 (-2.1 points), as Hang Seng Index moved from 24950.0 to 25280.0 points.",
+        "Interest rate duration contributed -USD 352,000 (-1.3 points), as US Treasury 10-year yield moved from 4.52 to 4.66 percent. The event log records on 2026-07-29: Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts...",
+        "Greater China consumer demand contributed +USD 60,955 (+0.2 points), as Hang Seng Index moved from 24950.0 to 25280.0 points."
+      ],
+      "provenance": "deterministic"
+    }
+  },
+  "exposures": {
+    "issuers": [
+      {
+        "key": "GOLDEN_HARBOUR",
+        "name": "Golden Harbour Properties Ltd",
+        "kind": "issuer",
+        "attributed_usd": 7801725.99,
+        "pct_of_household": 29.45273382849527,
+        "direct_usd": 5935528.8100000005,
+        "looked_through_usd": 1866197.1799999997,
+        "hidden": true,
+        "legs": [
+          {
+            "instrument_id": "SYN-FI-0207",
+            "instrument_name": "Golden Harbour Properties 5.25% Perpetual",
+            "wrapper": "Subordinated Perpetual",
+            "market_value_usd": 3408000.0,
+            "attributed_usd": 3408000.0,
+            "basis_field": "instrument_name",
+            "basis_note": "Subordinated perpetual issued by the same company. Ranks below senior debt.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          },
+          {
+            "instrument_id": "SYN-ST-0106",
+            "instrument_name": "Golden Harbour Properties Ltd",
+            "wrapper": "Single Stock",
+            "market_value_usd": 2527528.81,
+            "attributed_usd": 2527528.81,
+            "basis_field": "instrument_name",
+            "basis_note": "Direct equity in the issuer.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          },
+          {
+            "instrument_id": "SYN-SP-0503",
+            "instrument_name": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+            "wrapper": "Accumulator",
+            "market_value_usd": 1866197.18,
+            "attributed_usd": 1866197.18,
+            "basis_field": "underlying_reference",
+            "basis_note": "Accumulator on the issuer's shares, with a double-up feature below strike.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          }
+        ],
+        "event_ids": []
+      },
+      {
+        "key": "PACIFIC_RIM_BANK",
+        "name": "Pacific Rim Bank",
+        "kind": "issuer",
+        "attributed_usd": 4653000.0,
+        "pct_of_household": 17.565801552072774,
+        "direct_usd": 4653000.0,
+        "looked_through_usd": 0.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-FI-0206",
+            "instrument_name": "Pacific Rim Bank 4.75% Perpetual",
+            "wrapper": "Subordinated Perpetual",
+            "market_value_usd": 4653000.0,
+            "attributed_usd": 4653000.0,
+            "basis_field": "instrument_name",
+            "basis_note": "Subordinated perpetual issued by the bank.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          }
+        ],
+        "event_ids": []
+      }
+    ],
+    "themes": [
+      {
+        "key": "hk_property",
+        "name": "Hong Kong property",
+        "kind": "theme",
+        "attributed_usd": 12987385.4,
+        "pct_of_household": 49.0294078264963,
+        "direct_usd": 0,
+        "looked_through_usd": 12987385.4,
+        "hidden": true,
+        "legs": [
+          {
+            "instrument_id": "SYN-AL-0307",
+            "instrument_name": "Direct Property - Mid-Levels Apartment",
+            "wrapper": "Direct Real Estate",
+            "market_value_usd": 5185659.41,
+            "attributed_usd": 5185659.41,
+            "basis_field": "asset_class",
+            "basis_note": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          },
+          {
+            "instrument_id": "SYN-FI-0207",
+            "instrument_name": "Golden Harbour Properties 5.25% Perpetual",
+            "wrapper": "Subordinated Perpetual",
+            "market_value_usd": 3408000.0,
+            "attributed_usd": 3408000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          },
+          {
+            "instrument_id": "SYN-ST-0106",
+            "instrument_name": "Golden Harbour Properties Ltd",
+            "wrapper": "Single Stock",
+            "market_value_usd": 2527528.81,
+            "attributed_usd": 2527528.81,
+            "basis_field": "asset_class",
+            "basis_note": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          },
+          {
+            "instrument_id": "SYN-SP-0503",
+            "instrument_name": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+            "wrapper": "Accumulator",
+            "market_value_usd": 1866197.18,
+            "attributed_usd": 1866197.18,
+            "basis_field": "underlying_reference",
+            "basis_note": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          }
+        ],
+        "event_ids": []
+      },
+      {
+        "key": "duration",
+        "name": "Interest rate duration",
+        "kind": "theme",
+        "attributed_usd": 8061000.0,
+        "pct_of_household": 30.431533701108666,
+        "direct_usd": 0,
+        "looked_through_usd": 8061000.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-FI-0206",
+            "instrument_name": "Pacific Rim Bank 4.75% Perpetual",
+            "wrapper": "Subordinated Perpetual",
+            "market_value_usd": 4653000.0,
+            "attributed_usd": 4653000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          },
+          {
+            "instrument_id": "SYN-FI-0207",
+            "instrument_name": "Golden Harbour Properties 5.25% Perpetual",
+            "wrapper": "Subordinated Perpetual",
+            "market_value_usd": 3408000.0,
+            "attributed_usd": 3408000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-09",
+          "EVT-12",
+          "EVT-13",
+          "EVT-15"
+        ]
+      },
+      {
+        "key": "private_markets",
+        "name": "Private markets and gated vehicles",
+        "kind": "theme",
+        "attributed_usd": 5185659.41,
+        "pct_of_household": 19.57667399800103,
+        "direct_usd": 0,
+        "looked_through_usd": 5185659.41,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-AL-0307",
+            "instrument_name": "Direct Property - Mid-Levels Apartment",
+            "wrapper": "Direct Real Estate",
+            "market_value_usd": 5185659.41,
+            "attributed_usd": 5185659.41,
+            "basis_field": "asset_class",
+            "basis_note": "Positions that cannot be sold on demand: private funds, semi-liquid vehicles subject to gates, and direct real estate.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-14"
+        ]
+      },
+      {
+        "key": "greater_china_consumer",
+        "name": "Greater China consumer demand",
+        "kind": "theme",
+        "attributed_usd": 3667093.47,
+        "pct_of_household": 13.84385045495851,
+        "direct_usd": 0,
+        "looked_through_usd": 3667093.47,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-EQ-0021",
+            "instrument_name": "Greater China Equity Fund",
+            "wrapper": "Emerging Market Equity",
+            "market_value_usd": 3667093.47,
+            "attributed_usd": 3667093.47,
+            "basis_field": "asset_class",
+            "basis_note": "Revenue exposure to Greater China discretionary spending, including luxury distribution.",
+            "portfolio_ids": [
+              "PF-0016"
+            ]
+          }
+        ],
+        "event_ids": []
+      }
+    ],
+    "unresolved": []
+  },
+  "liquidity": {
+    "client_id": "CL-0014",
+    "snapshot": "2026-08-26",
+    "horizon_months": 18,
+    "horizon_end": "2028-02-26",
+    "total_usd": 26488970.55,
+    "by_tier": {
+      "Daily": 11376113.96,
+      "Weekly": 8061000.0,
+      "Monthly": 0.0,
+      "Quarterly Gate": 0.0,
+      "Illiquid": 7051856.59
+    },
+    "readily_realisable_usd": 19437113.96,
+    "encumbered_cap_usd": 19346360.164499726,
+    "withdrawable_usd": 90753.79550027475,
+    "gated_usd": 0.0,
+    "illiquid_usd": 7051856.59,
+    "obligations": [
+      {
+        "id": "CN-013",
+        "source": "planned_cash_needs",
+        "description": "Mid-Levels redevelopment equity contribution",
+        "currency": "HKD",
+        "amount_ccy": 60000000.0,
+        "amount_usd": 7682458.386683739,
+        "occurrences": 1,
+        "total_usd": 7682458.386683739,
+        "due_from": "2026-11-01",
+        "due_to": "2027-06-30",
+        "certainty": "Confirmed",
+        "recurrence": "One-off"
+      }
+    ],
+    "obligations_confirmed_usd": 7682458.386683739,
+    "obligations_total_usd": 7682458.386683739,
+    "coverage_ratio": 0.011813119047619097,
+    "shortfall_usd": 7591704.591183464,
+    "gated_positions": [
+      {
+        "instrument_id": "SYN-AL-0307",
+        "instrument_name": "Direct Property - Mid-Levels Apartment",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 5185659.41,
+        "advance_rate_pct": 0.0
+      },
+      {
+        "instrument_id": "SYN-SP-0503",
+        "instrument_name": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 1866197.18,
+        "advance_rate_pct": 0.0
+      }
+    ],
+    "notes": [
+      "USD 19,346,360 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger."
+    ]
+  },
+  "facilities": [
+    {
+      "facility_id": "CF-0002",
+      "client_id": "CL-0014",
+      "portfolio_id": "PF-0016",
+      "facility_type": "Lombard Credit Facility",
+      "currency": "HKD",
+      "credit_limit": 70000000.0,
+      "interest_rate_pct": 5.95,
+      "margin_call_ltv_pct": 70.0,
+      "series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "drawn": 52000000.0,
+          "collateral_market_value": 219536340.0,
+          "lending_value": 96420170.0,
+          "ltv_pct": 53.93,
+          "headroom": 44420170.0,
+          "breached": false
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "drawn": 52000000.0,
+          "collateral_market_value": 245469500.0,
+          "lending_value": 97141750.0,
+          "ltv_pct": 53.53,
+          "headroom": 45141750.0,
+          "breached": false
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "drawn": 58000000.0,
+          "collateral_market_value": 222792925.0,
+          "lending_value": 88390462.5,
+          "ltv_pct": 65.62,
+          "headroom": 30390462.5,
+          "breached": false
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "drawn": 58000000.0,
+          "collateral_market_value": 212160650.0,
+          "lending_value": 85350325.0,
+          "ltv_pct": 67.96,
+          "headroom": 27350325.0,
+          "breached": false
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "drawn": 58000000.0,
+          "collateral_market_value": 206878860.0,
+          "lending_value": 83565930.0,
+          "ltv_pct": 69.41,
+          "headroom": 25565930.0,
+          "breached": false
+        }
+      ],
+      "headroom_pp": 0.5900000000000034,
+      "collateral_fall_to_trigger_pct": 0.8428571428571452,
+      "breaches": [],
+      "cure_narrative": null,
+      "drawn_reconciliation": [
+        {
+          "from_snapshot": "2026-02-27",
+          "to_snapshot": "2026-03-31",
+          "drawn_change": 6000000.0,
+          "explained_by_transactions": 4000000.0,
+          "unexplained": 2000000.0,
+          "transaction_ids": [
+            "TXN-0013"
+          ]
+        }
+      ]
+    }
+  ],
+  "insights": [
+    {
+      "id": "CL-0014-collateral-CF-0002",
+      "client_id": "CL-0014",
+      "category": "collateral",
+      "severity": "critical",
+      "headline": "Lombard facility 0.59pp from a margin call",
+      "summary": "CF-0002 sits at 69.41% loan-to-value against a 70% trigger. A 0.8% fall in collateral value is enough to produce a margin call.",
+      "priority_score": 98.0,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 28.0% of household wealth (USD 7,426,376)",
+        "Live today"
+      ],
+      "observed_facts": [
+        {
+          "label": "Loan-to-value today",
+          "value": "69.41%",
+          "numeric": 69.41,
+          "unit": "%",
+          "trend": "up"
+        },
+        {
+          "label": "Margin-call trigger",
+          "value": "70%",
+          "numeric": 70.0,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Headroom",
+          "value": "0.59 percentage points",
+          "numeric": 0.5900000000000034,
+          "unit": "pp",
+          "trend": null
+        },
+        {
+          "label": "Collateral fall that triggers a call",
+          "value": "0.8%",
+          "numeric": 0.8428571428571452,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Drawn",
+          "value": "HKD 58,000,000",
+          "numeric": 58000000.0,
+          "unit": "HKD",
+          "trend": null
+        },
+        {
+          "label": "Cash that can leave the pledged account",
+          "value": "HKD 708,787",
+          "numeric": 708787.1428571343,
+          "unit": "HKD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "The pledged account is Advisory Balanced Portfolio. Any sale and withdrawal from it reduces lending value while the drawn balance stays put, so it raises loan-to-value rather than lowering it.",
+      "suggested_next_step": "Agree a collateral plan before the next client-driven withdrawal: either reduce drawn, add eligible collateral, or accept a smaller withdrawal than the client expects.",
+      "evidence": [
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0002",
+          "field": "margin_call_ltv_pct",
+          "value": 70.0,
+          "snapshot_date": null,
+          "note": "Margin-call trigger."
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0002",
+          "field": "ltv_pct_2025-12-31",
+          "value": 53.93,
+          "snapshot_date": "2025-12-31",
+          "note": null
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0002",
+          "field": "ltv_pct_2026-02-27",
+          "value": 53.53,
+          "snapshot_date": "2026-02-27",
+          "note": null
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0002",
+          "field": "ltv_pct_2026-03-31",
+          "value": 65.62,
+          "snapshot_date": "2026-03-31",
+          "note": null
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0002",
+          "field": "ltv_pct_2026-06-30",
+          "value": 67.96,
+          "snapshot_date": "2026-06-30",
+          "note": null
+        },
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0002",
+          "field": "ltv_pct_2026-08-26",
+          "value": 69.41,
+          "snapshot_date": "2026-08-26",
+          "note": null
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "Lending value is used for loan-to-value, not market value.",
+          "basis": "Advance rates haircut each asset; illiquid alternatives carry a 0% advance rate and add no borrowing capacity.",
+          "impact_if_wrong": null
+        },
+        {
+          "statement": "Withdrawable value from a pledged portfolio is capped at lending_value - drawn / margin_call_ltv, not at market value.",
+          "basis": "Selling collateral and withdrawing the proceeds reduces lending value while the drawn balance is unchanged, so LTV rises.",
+          "impact_if_wrong": "Overstates what the client can raise without a margin call."
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Leverage consistent with risk profile",
+          "result": "attention",
+          "detail": "Client risk profile is Balanced (tolerance 5.0/10) with High stated liquidity needs.",
+          "reference": "clients.csv"
+        }
+      ],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0016"
+      ],
+      "instrument_ids": [],
+      "amount_usd": 7426376.440460947,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-liquidity-cover",
+      "client_id": "CL-0014",
+      "category": "liquidity",
+      "severity": "critical",
+      "headline": "Known obligations of USD 7,682,458 against USD 90,754 the client can actually withdraw",
+      "summary": "Coverage is 0.01x. USD 19,346,360 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger. USD 7,051,857 of the household is illiquid.",
+      "priority_score": 94.0,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 29.0% of household wealth (USD 7,682,458)",
+        "Due in 67 days"
+      ],
+      "observed_facts": [
+        {
+          "label": "Obligations inside the horizon",
+          "value": "USD 7,682,458",
+          "numeric": 7682458.386683739,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Of which confirmed",
+          "value": "USD 7,682,458",
+          "numeric": 7682458.386683739,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Daily and weekly assets",
+          "value": "USD 19,437,114",
+          "numeric": 19437113.96,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Withdrawable after collateral constraints",
+          "value": "USD 90,754",
+          "numeric": 90753.79550027475,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Coverage",
+          "value": "0.01x",
+          "numeric": 0.011813119047619097,
+          "unit": "x",
+          "trend": "down"
+        },
+        {
+          "label": "Shortfall",
+          "value": "USD 7,591,705",
+          "numeric": 7591704.591183464,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Mid-Levels redevelopment equity contribution",
+          "value": "HKD 60,000,000 - Confirmed",
+          "numeric": 7682458.386683739,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "The gap is a funding question, not a performance question. It has to be solved before the obligation falls due, and the options narrow as the date approaches.",
+      "suggested_next_step": "Produce a dated liquidity map: what is sellable, by when, and what it costs to raise the shortfall each way.",
+      "evidence": [
+        {
+          "source_file": "planned_cash_needs.csv",
+          "row_or_id": "CN-013",
+          "field": "amount",
+          "value": "HKD 60,000,000",
+          "snapshot_date": null,
+          "note": "Mid-Levels redevelopment equity contribution (Confirmed, 2026-11-01 to 2027-06-30)."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0307",
+          "field": "liquidity_tier",
+          "value": "Illiquid",
+          "snapshot_date": "2026-08-26",
+          "note": "USD 5,185,659 not available on demand."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-SP-0503",
+          "field": "liquidity_tier",
+          "value": "Illiquid",
+          "snapshot_date": "2026-08-26",
+          "note": "USD 1,866,197 not available on demand."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "'Annual' rows in planned_cash_needs are read as an amount per year; 'Annual instalments' rows are read as a total spread evenly across the due_from to due_to window.",
+          "basis": "The file uses both wordings. CN-012 (USD 1.28m, 'Annual') matches the client's stated USD 1.1m annual drawdown in clients.objectives as raised in note N-016, so 'Annual' is per year. CN-007 (USD 5m, 'Annual instalments', two children, four-year window) would exceed the client's entire household wealth if read the same way, so 'instalments' is read as a total.",
+          "impact_if_wrong": "Reading CN-007 as USD 5m per year would put this client's obligations above their total wealth. Each row is listed individually with its recurrence so the RM can check the source."
+        },
+        {
+          "statement": "Withdrawable value from a pledged portfolio is capped at lending_value - drawn / margin_call_ltv, not at market value.",
+          "basis": "Selling collateral and withdrawing the proceeds reduces lending value while the drawn balance is unchanged, so LTV rises.",
+          "impact_if_wrong": "Overstates what the client can raise without a margin call."
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Stated liquidity needs",
+          "result": "attention",
+          "detail": "clients.liquidity_needs is recorded as High.",
+          "reference": "clients.csv"
+        }
+      ],
+      "confidence": "derived",
+      "open_questions": [
+        "Is the client willing to reduce the facility rather than sell?",
+        "Can any obligation be deferred or staged?"
+      ],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 7682458.386683739,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-theme-hk_property",
+      "client_id": "CL-0014",
+      "category": "concentration",
+      "severity": "critical",
+      "headline": "49% of the household moves with Hong Kong property",
+      "summary": "USD 12,987,385 across 4 positions responds to the same driver. This is a structural exposure rather than an event-driven one.",
+      "priority_score": 82.5,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 49.0% of household wealth (USD 12,987,385)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Direct Property - Mid-Levels Apartment",
+          "value": "USD 5,185,659 (19.6%) via Direct Real Estate",
+          "numeric": 5185659.41,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Golden Harbour Properties 5.25% Perpetual",
+          "value": "USD 3,408,000 (12.9%) via Subordinated Perpetual",
+          "numeric": 3408000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Golden Harbour Properties Ltd",
+          "value": "USD 2,527,529 (9.5%) via Single Stock",
+          "numeric": 2527528.81,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+          "value": "USD 1,866,197 (7.0%) via Accumulator",
+          "numeric": 1866197.18,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+      "suggested_next_step": "Frame the review around the driver rather than the instruments: one decision covers all of them.",
+      "evidence": [
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-AL-0307",
+          "field": "asset_class",
+          "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+          "snapshot_date": null,
+          "note": "USD 5,185,659 attributed via Direct Real Estate."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-FI-0207",
+          "field": "asset_class",
+          "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+          "snapshot_date": null,
+          "note": "USD 3,408,000 attributed via Subordinated Perpetual."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0106",
+          "field": "asset_class",
+          "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+          "snapshot_date": null,
+          "note": "USD 2,527,529 attributed via Single Stock."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-SP-0503",
+          "field": "underlying_reference",
+          "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+          "snapshot_date": null,
+          "note": "USD 1,866,197 attributed via Accumulator."
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [
+        "SYN-AL-0307",
+        "SYN-FI-0207",
+        "SYN-ST-0106",
+        "SYN-SP-0503"
+      ],
+      "amount_usd": 12987385.4,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-issuer-golden_harbour",
+      "client_id": "CL-0014",
+      "category": "concentration",
+      "severity": "critical",
+      "headline": "29% of household wealth sits with Golden Harbour Properties Ltd, across 3 line items",
+      "summary": "Golden Harbour Properties Ltd appears as Accumulator, Single Stock, Subordinated Perpetual. Each line looks moderate on its own; together they are USD 7,801,726, or 29.5% of everything the client holds. A single credit or price event on this issuer hits all of them at once.",
+      "priority_score": 82.0,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 29.5% of household wealth (USD 7,801,726)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Total exposure to this issuer",
+          "value": "USD 7,801,726",
+          "numeric": 7801725.99,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Share of household wealth",
+          "value": "29.5%",
+          "numeric": 29.45273382849527,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Number of separate line items",
+          "value": "3",
+          "numeric": 3,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Wrappers involved",
+          "value": "Accumulator, Single Stock, Subordinated Perpetual",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Golden Harbour Properties 5.25% Perpetual",
+          "value": "USD 3,408,000 (12.9%)",
+          "numeric": 3408000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Golden Harbour Properties Ltd",
+          "value": "USD 2,527,529 (9.5%)",
+          "numeric": 2527528.81,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+          "value": "USD 1,866,197 (7.0%)",
+          "numeric": 1866197.18,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "The positions rank differently in a stress: the perpetual is subordinated, the accumulator obliges further purchases below strike, and the equity is the first to move.",
+      "suggested_next_step": "Show the client the aggregated figure before discussing any single position, then agree a ceiling for total issuer exposure.",
+      "evidence": [
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-FI-0207",
+          "field": "instrument_name",
+          "value": "Golden Harbour Properties 5.25% Perpetual",
+          "snapshot_date": null,
+          "note": "USD 3,408,000 attributed via Subordinated Perpetual."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0106",
+          "field": "instrument_name",
+          "value": "Golden Harbour Properties Ltd",
+          "snapshot_date": null,
+          "note": "USD 2,527,529 attributed via Single Stock."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-SP-0503",
+          "field": "underlying_reference",
+          "value": "Accumulator on the issuer's shares, with a double-up feature below strike.",
+          "snapshot_date": null,
+          "note": "USD 1,866,197 attributed via Accumulator."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "Worst-of structured products are counted at 100% of notional against each named underlying rather than a 1/n share.",
+          "basis": "The holder bears the downside of whichever basket member performs worst, so notional exposure to each name is the conservative reading for a concentration check.",
+          "impact_if_wrong": "A delta-adjusted treatment would show a smaller figure. The direction of the finding does not change, only its size."
+        }
+      ],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0016"
+      ],
+      "instrument_ids": [
+        "SYN-FI-0207",
+        "SYN-ST-0106",
+        "SYN-SP-0503"
+      ],
+      "amount_usd": 7801725.99,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-poslimit-PF-0016",
+      "client_id": "CL-0014",
+      "category": "mandate",
+      "severity": "high",
+      "headline": "3 position(s) above the 12% single-position limit",
+      "summary": "Direct Property - Mid-Levels Apartment is 19.6% of Advisory Balanced Portfolio against a 12% ceiling. The limit applies to single-name and single-asset exposures; diversified funds and sovereign bonds are excluded from the test.",
+      "priority_score": 72.6,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 50.0% of household wealth",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Direct Property - Mid-Levels Apartment",
+          "value": "19.6% vs 12% limit (HKD 40,500,000)",
+          "numeric": 19.576674001393858,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Pacific Rim Bank 4.75% Perpetual",
+          "value": "17.6% vs 12% limit (HKD 36,339,930)",
+          "numeric": 17.565801551690686,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Golden Harbour Properties 5.25% Perpetual",
+          "value": "12.9% vs 12% limit (HKD 26,616,480)",
+          "numeric": 12.86573214875604,
+          "unit": "%",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Single-position limits exist to cap the damage one issuer can do. Where several breaches share an underlying driver, the effective concentration is larger than any one line suggests.",
+      "suggested_next_step": "Rank the breaches by how correlated they are with each other before deciding which to reduce first.",
+      "evidence": [
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "BAL",
+          "field": "max_single_position_pct",
+          "value": 12.0,
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-AL-0307",
+          "field": "concentration_limit_applies",
+          "value": "Y",
+          "snapshot_date": null,
+          "note": "Direct Property - Mid-Levels Apartment at 19.6%."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-FI-0206",
+          "field": "concentration_limit_applies",
+          "value": "Y",
+          "snapshot_date": null,
+          "note": "Pacific Rim Bank 4.75% Perpetual at 17.6%."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-FI-0207",
+          "field": "concentration_limit_applies",
+          "value": "Y",
+          "snapshot_date": null,
+          "note": "Golden Harbour Properties 5.25% Perpetual at 12.9%."
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0016"
+      ],
+      "instrument_ids": [
+        "SYN-AL-0307",
+        "SYN-FI-0206",
+        "SYN-FI-0207"
+      ],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-theme-duration",
+      "client_id": "CL-0014",
+      "category": "concentration",
+      "severity": "high",
+      "headline": "30% of the household moves with Interest rate duration",
+      "summary": "USD 8,061,000 across 2 positions responds to the same driver. The dataset records 4 events on this theme in 2026.",
+      "priority_score": 72.6,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 30.4% of household wealth (USD 8,061,000)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Pacific Rim Bank 4.75% Perpetual",
+          "value": "USD 4,653,000 (17.6%) via Subordinated Perpetual",
+          "numeric": 4653000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Golden Harbour Properties 5.25% Perpetual",
+          "value": "USD 3,408,000 (12.9%) via Subordinated Perpetual",
+          "numeric": 3408000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+      "suggested_next_step": "Frame the review around the driver rather than the instruments: one decision covers all of them.",
+      "evidence": [
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-FI-0206",
+          "field": "asset_class",
+          "value": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+          "snapshot_date": null,
+          "note": "USD 4,653,000 attributed via Subordinated Perpetual."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-FI-0207",
+          "field": "asset_class",
+          "value": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+          "snapshot_date": null,
+          "note": "USD 3,408,000 attributed via Subordinated Perpetual."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-09",
+          "field": "description",
+          "value": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+          "snapshot_date": "2026-04-30",
+          "note": "Transmission: European fixed income, EUR assets"
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-12",
+          "field": "description",
+          "value": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+          "snapshot_date": "2026-06-17",
+          "note": "Transmission: Duration, rate-sensitive credit, USD"
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-13",
+          "field": "description",
+          "value": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+          "snapshot_date": "2026-06-19",
+          "note": "Transmission: Long-duration fixed income"
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-15",
+          "field": "description",
+          "value": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+          "snapshot_date": "2026-07-29",
+          "note": "Transmission: Duration, growth equity valuations"
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [
+        "EVT-09",
+        "EVT-12",
+        "EVT-13",
+        "EVT-15"
+      ],
+      "portfolio_ids": [],
+      "instrument_ids": [
+        "SYN-FI-0206",
+        "SYN-FI-0207"
+      ],
+      "amount_usd": 8061000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-bands-PF-0016",
+      "client_id": "CL-0014",
+      "category": "mandate",
+      "severity": "medium",
+      "headline": "Advisory Balanced Portfolio sits outside 1 of its Balanced bands",
+      "summary": "The largest gap is Equity at 23.4% against a 30-55% band, 6.6 percentage points below the limit. Across all asset classes the portfolio is 6.6 percentage points away from its permitted ranges.",
+      "priority_score": 60.9,
+      "priority_reasons": [
+        "Severity medium (weight 0.52)",
+        "Affects 100.0% of household wealth (USD 26,488,971)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Equity",
+          "value": "23.4% vs band 30-55% (target 40%), 6.6pp below",
+          "numeric": 23.385666374998394,
+          "unit": "%",
+          "trend": "down"
+        }
+      ],
+      "client_relevance": "This is a advisory portfolio. Positions are client-directed, so the fix needs the client's agreement.",
+      "suggested_next_step": "Agree a dated correction plan, or record a documented decision to stay outside the band.",
+      "evidence": [
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "BAL/Equity",
+          "field": "min_pct/max_pct",
+          "value": "30.0-55.0",
+          "snapshot_date": null,
+          "note": "Actual 23.4% at 2026-08-26."
+        },
+        {
+          "source_file": "portfolios.csv",
+          "row_or_id": "PF-0016",
+          "field": "service_model",
+          "value": "Advisory",
+          "snapshot_date": null,
+          "note": null
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "Weights are measured within the portfolio in its base currency, as the mandate is written.",
+          "basis": "mandates.csv bands apply per portfolio, not per household.",
+          "impact_if_wrong": null
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Breach is drift or client-directed",
+          "result": "not_assessed",
+          "detail": "No RM note in the file reads as an instruction or waiver for this portfolio, so the breach is treated as drift.",
+          "reference": "rm_notes.json"
+        }
+      ],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0016"
+      ],
+      "instrument_ids": [],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-samebet-hk_property",
+      "client_id": "CL-0014",
+      "category": "suitability",
+      "severity": "medium",
+      "headline": "The portfolio and the client's source of wealth are the same bet (49% on Hong Kong property)",
+      "summary": "Source of wealth is recorded as \"Entrepreneur - Hong Kong residential and commercial property development\". USD 12,987,385 of the portfolio (49.0%) responds to the same driver, so the business and the portfolio would come under pressure together.",
+      "priority_score": 60.9,
+      "priority_reasons": [
+        "Severity medium (weight 0.52)",
+        "Affects 49.0% of household wealth (USD 12,987,385)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Source of wealth",
+          "value": "Entrepreneur - Hong Kong residential and commercial property development",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Stated objectives",
+          "value": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Portfolio exposure to the same theme",
+          "value": "USD 12,987,385 (49.0%)",
+          "numeric": 12987385.4,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Total household risk is higher than the portfolio alone suggests, because the operating business is not in the portfolio view.",
+      "suggested_next_step": "Put the combined picture in front of the client and agree what share of the theme belongs in the portfolio given the business exposure.",
+      "evidence": [
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0014",
+          "field": "source_of_wealth",
+          "value": "Entrepreneur - Hong Kong residential and commercial property development",
+          "snapshot_date": null,
+          "note": "Matched on 'property development'."
+        },
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0014",
+          "field": "objectives",
+          "value": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-AL-0307",
+          "field": "asset_class",
+          "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+          "snapshot_date": null,
+          "note": "USD 5,185,659 attributed via Direct Real Estate."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-FI-0207",
+          "field": "asset_class",
+          "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+          "snapshot_date": null,
+          "note": "USD 3,408,000 attributed via Subordinated Perpetual."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0106",
+          "field": "asset_class",
+          "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+          "snapshot_date": null,
+          "note": "USD 2,527,529 attributed via Single Stock."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-SP-0503",
+          "field": "underlying_reference",
+          "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+          "snapshot_date": null,
+          "note": "USD 1,866,197 attributed via Accumulator."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "The link between source of wealth and theme is matched on the term 'property development' in clients.source_of_wealth.",
+          "basis": "The dataset holds no direct mapping between the two.",
+          "impact_if_wrong": "The RM can dismiss the insight in one click."
+        }
+      ],
+      "suitability_checks": [],
+      "confidence": "derived",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [
+        "SYN-AL-0307",
+        "SYN-FI-0207",
+        "SYN-ST-0106",
+        "SYN-SP-0503"
+      ],
+      "amount_usd": 12987385.4,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-recon-CF-0002",
+      "client_id": "CL-0014",
+      "category": "data_quality",
+      "severity": "medium",
+      "headline": "HKD 2,000,000 of drawdown on CF-0002 is not explained by the transaction ledger",
+      "summary": "Between 2026-02-27 and 2026-03-31 the drawn balance moved by HKD 6,000,000, while transactions.csv records HKD 4,000,000 of facility activity in the same window. The difference is reported rather than reconciled away, because the loan-to-value figures depend on the drawn balance being right.",
+      "priority_score": 41.4,
+      "priority_reasons": [
+        "Severity medium (weight 0.52)",
+        "Size not quantified; scored at the book average",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "2026-02-27 to 2026-03-31",
+          "value": "drawn +6,000,000, transactions +4,000,000, gap +2,000,000 HKD",
+          "numeric": 2000000.0,
+          "unit": "HKD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Not a client conversation. It is a note for the file and a question for operations before the numbers are used externally.",
+      "suggested_next_step": "Confirm the drawdown history with operations before quoting loan-to-value to the client or to credit risk.",
+      "evidence": [
+        {
+          "source_file": "credit_facilities.csv",
+          "row_or_id": "CF-0002",
+          "field": "drawn_2026-03-31",
+          "value": 6000000.0,
+          "snapshot_date": "2026-03-31",
+          "note": "Change in drawn balance over the period."
+        },
+        {
+          "source_file": "transactions.csv",
+          "row_or_id": "TXN-0013",
+          "field": "amount",
+          "value": 4000000.0,
+          "snapshot_date": null,
+          "note": "Facility activity recorded in the same window."
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0016"
+      ],
+      "instrument_ids": [],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-kyc",
+      "client_id": "CL-0014",
+      "category": "admin",
+      "severity": "low",
+      "headline": "KYC review due in 27 days",
+      "summary": "clients.kyc_review_due is 2026-09-22 against a dataset date of 2026-08-26. Worth clearing in the same meeting rather than as a separate contact.",
+      "priority_score": 38.5,
+      "priority_reasons": [
+        "Severity low (weight 0.30)",
+        "Affects 0.0% of household wealth",
+        "Due in 27 days"
+      ],
+      "observed_facts": [
+        {
+          "label": "Review due",
+          "value": "2026-09-22",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Days",
+          "value": "27",
+          "numeric": 27,
+          "unit": null,
+          "trend": null
+        }
+      ],
+      "client_relevance": "Administrative, but it blocks other actions if it lapses.",
+      "suggested_next_step": "Fold the review into the next scheduled meeting.",
+      "evidence": [
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0014",
+          "field": "kyc_review_due",
+          "value": "2026-09-22",
+          "snapshot_date": null,
+          "note": null
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0014-explain-ytd",
+      "client_id": "CL-0014",
+      "category": "performance",
+      "severity": "medium",
+      "headline": "Household down 6.0% year to date, driven by Interest rate duration",
+      "summary": "Between 2025-12-31 and 2026-08-26 the household moved down USD 1,692,845, or 6.0%, from USD 28,181,815 to USD 26,488,971. Of that, -USD 4,860,706 came from market moves, -USD 33,162 from currency translation and +USD 3,201,024 from money paid in or taken out. Interest rate duration contributed -USD 2,207,000 (-7.8 points), as US Treasury 10-year yield moved from 4.05 to 4.66 percent. The event log records on 2026-04-30: European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse. Hong Kong property contributed -USD 690,889 (-2.5 points), as Hang Seng Index moved from 24800.0 to 25280.0 points. Private markets and gated vehicles contributed -USD 205,868 (-0.7 points). The event log records on 2026-06-30: Half-year close. US equities near record levels on narrow, technology-led leadership. Non-traded private credit vehicles show...",
+      "priority_score": 36.9,
+      "priority_reasons": [
+        "Severity medium (weight 0.52)",
+        "Affects 6.0% of household wealth (USD 1,692,845)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Household value",
+          "value": "USD 28,181,815 to USD 26,488,971",
+          "numeric": 26488970.55,
+          "unit": "USD",
+          "trend": "down"
+        },
+        {
+          "label": "Change since year-end 2025",
+          "value": "-USD 1,692,845 (-6.0%)",
+          "numeric": -1692844.5999999978,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Market effect",
+          "value": "-USD 4,860,706",
+          "numeric": -4860706.480114859,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Currency effect",
+          "value": "-USD 33,162",
+          "numeric": -33162.4476700319,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Money in and out",
+          "value": "+USD 3,201,024",
+          "numeric": 3201024.3277848912,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Interest rate duration",
+          "value": "-USD 2,207,000 (-7.8 points)",
+          "numeric": -2207000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Hong Kong property",
+          "value": "-USD 690,889 (-2.5 points)",
+          "numeric": -690889.3099999994,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Private markets and gated vehicles",
+          "value": "-USD 205,868 (-0.7 points)",
+          "numeric": -205868.18999999948,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Golden Harbour Properties 5.25% Perpetual",
+          "value": "USD 1,536,000 from the market move, price 82.4 to 56.8",
+          "numeric": -1536000.0,
+          "unit": "USD",
+          "trend": "down"
+        },
+        {
+          "label": "Accumulator ref. Golden Harbour Properties Ltd, 12M",
+          "value": "USD 1,334,827 from the market move, price 100.0 to 58.3",
+          "numeric": -1334827.1477848913,
+          "unit": "USD",
+          "trend": "down"
+        },
+        {
+          "label": "Golden Harbour Properties Ltd",
+          "value": "USD 808,729 from the market move, price 18.6 to 14.1",
+          "numeric": -808729.137460285,
+          "unit": "USD",
+          "trend": "down"
+        }
+      ],
+      "client_relevance": "This is the answer to the first question the client will ask. Having the attribution and the event behind it means the answer does not depend on recalling what happened in March.",
+      "suggested_next_step": "Open the meeting with the attribution rather than the headline number.",
+      "evidence": [
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-FI-0207",
+          "field": "market_value_usd",
+          "value": "4,944,000 -> 3,408,000",
+          "snapshot_date": "2026-08-26",
+          "note": "Golden Harbour Properties 5.25% Perpetual: price effect USD -1,536,000, FX USD 0, flows USD 0 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-SP-0503",
+          "field": "market_value_usd",
+          "value": "0 -> 1,866,197",
+          "snapshot_date": "2026-08-26",
+          "note": "Accumulator ref. Golden Harbour Properties Ltd, 12M: price effect USD -1,334,827, FX USD 0, flows USD 3,201,024 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-ST-0106",
+          "field": "market_value_usd",
+          "value": "3,342,747 -> 2,527,529",
+          "snapshot_date": "2026-08-26",
+          "note": "Golden Harbour Properties Ltd: price effect USD -808,729, FX USD -6,489, flows USD 0 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-FI-0206",
+          "field": "market_value_usd",
+          "value": "5,324,000 -> 4,653,000",
+          "snapshot_date": "2026-08-26",
+          "note": "Pacific Rim Bank 4.75% Perpetual: price effect USD -671,000, FX USD 0, flows USD 0 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-FI-0205",
+          "field": "market_value_usd",
+          "value": "3,978,000 -> 3,645,000",
+          "snapshot_date": "2026-08-26",
+          "note": "Asia High Yield Bond Fund: price effect USD -333,000, FX USD 0, flows USD 0 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "market_context.csv",
+          "row_or_id": "UST_10Y_PCT",
+          "field": "value",
+          "value": "4.05 -> 4.66 percent",
+          "snapshot_date": "2026-08-26",
+          "note": "US Treasury 10-year yield, 2025-12-31 to 2026-08-26."
+        },
+        {
+          "source_file": "market_context.csv",
+          "row_or_id": "UST_2Y_PCT",
+          "field": "value",
+          "value": "3.68 -> 4.14 percent",
+          "snapshot_date": "2026-08-26",
+          "note": "US Treasury 2-year yield, 2025-12-31 to 2026-08-26."
+        },
+        {
+          "source_file": "market_context.csv",
+          "row_or_id": "HSI",
+          "field": "value",
+          "value": "24800.0 -> 25280.0 points",
+          "snapshot_date": "2026-08-26",
+          "note": "Hang Seng Index, 2025-12-31 to 2026-08-26."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-09",
+          "field": "description",
+          "value": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+          "snapshot_date": "2026-04-30",
+          "note": "Transmission: European fixed income, EUR assets. Severity Medium."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-12",
+          "field": "description",
+          "value": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+          "snapshot_date": "2026-06-17",
+          "note": "Transmission: Duration, rate-sensitive credit, USD. Severity High."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-13",
+          "field": "description",
+          "value": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+          "snapshot_date": "2026-06-19",
+          "note": "Transmission: Long-duration fixed income. Severity High."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-15",
+          "field": "description",
+          "value": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+          "snapshot_date": "2026-07-29",
+          "note": "Transmission: Duration, growth equity valuations. Severity High."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-14",
+          "field": "description",
+          "value": "Half-year close. US equities near record levels on narrow, technology-led leadership. Non-traded private credit vehicles show continued redemption stress.",
+          "snapshot_date": "2026-06-30",
+          "note": "Transmission: Private credit, semi-liquid alternatives. Severity Medium."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "For positions opened during the period, money deployed is taken from cost_basis_base and converted at the closing snapshot's exchange rate.",
+          "basis": "cost_basis_base is struck at the rate prevailing when the position was acquired, and the dataset does not record the acquisition rate separately.",
+          "impact_if_wrong": "A small FX component of the gain or loss is reported as a price effect. It does not change the size of the total move."
+        }
+      ],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [
+        "EVT-09",
+        "EVT-12",
+        "EVT-13",
+        "EVT-15",
+        "EVT-14"
+      ],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 1692844.5999999978,
+      "status": "new"
+    }
+  ],
+  "options": {
+    "CL-0014-collateral-CF-0002": [
+      {
+        "id": "CL-0014-collateral-CF-0002-opt-deleverage",
+        "label": "Sell HKD 11,229,203 of Asia High Yield Bond Fund and repay the facility",
+        "rationale": "Repaying reduces the drawn balance one-for-one while removing only 50% of that amount from lending value, so loan-to-value falls from 69.41% to about 60% and headroom returns to 10 points.",
+        "mechanics": [
+          "Sell HKD 11,229,203 (USD 1,437,798) of Asia High Yield Bond Fund",
+          "Apply the proceeds against CF-0002",
+          "Drawn falls from 58,000,000 to 46,770,797 HKD"
+        ],
+        "trade_offs": [
+          "Removes USD 1,437,798 of income-producing assets from the portfolio",
+          "Crystallises whatever gain or loss sits in the position",
+          "Reduces the client's capacity to draw opportunistically"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Position is liquid enough to execute",
+            "result": "pass",
+            "detail": "Asia High Yield Bond Fund is Daily tier at USD 3,645,000.",
+            "reference": "holdings.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction",
+          "Credit desk sign-off"
+        ],
+        "estimated_impact": "Loan-to-value 69.41% to about 60%.",
+        "evidence": [
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-FI-0205",
+            "field": "advance_rate_pct",
+            "value": 50.0,
+            "snapshot_date": "2026-08-26",
+            "note": "USD 3,645,000 held, Daily liquidity."
+          },
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0002",
+            "field": "lending_value_2026-08-26",
+            "value": 83565930.0,
+            "snapshot_date": "2026-08-26",
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-collateral-CF-0002-opt-cap-withdrawals",
+        "label": "Cap withdrawals from the pledged account at HKD 708,787",
+        "rationale": "Selling collateral and paying the proceeds out reduces lending value while the drawn balance is unchanged, so it raises loan-to-value. This is the amount that can leave without breaching the trigger.",
+        "mechanics": [
+          "Flag PF-0016 as collateral-constrained in the withdrawal workflow",
+          "Any request above HKD 708,787 routes to the credit desk before confirmation to the client"
+        ],
+        "trade_offs": [
+          "Constrains the client at exactly the moment they want cash",
+          "Does not reduce the underlying leverage"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Credit desk notification"
+        ],
+        "estimated_impact": "No change to loan-to-value; prevents it worsening.",
+        "evidence": [
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0002",
+            "field": "margin_call_ltv_pct",
+            "value": 70.0,
+            "snapshot_date": null,
+            "note": "Margin-call trigger."
+          },
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0002",
+            "field": "ltv_pct_2025-12-31",
+            "value": 53.93,
+            "snapshot_date": "2025-12-31",
+            "note": null
+          },
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0002",
+            "field": "ltv_pct_2026-02-27",
+            "value": 53.53,
+            "snapshot_date": "2026-02-27",
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-collateral-CF-0002-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if CF-0002 loan-to-value exceeds 68%, or if collateral value falls more than 0.5%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "A 0.8% fall in collateral produces a margin call, which forces sales at whatever price exists that day rather than at a chosen one."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-liquidity-cover": [
+      {
+        "id": "CL-0014-liquidity-cover-opt-prefund",
+        "label": "Pre-fund HKD 60,000,000 now from daily-liquidity assets",
+        "rationale": "The obligation is confirmed and dated 2026-11-01. Raising it while markets are open is a choice; raising it against a deadline is not.",
+        "mechanics": [
+          "Sell USD 90,754 of Daily-tier positions",
+          "Hold the proceeds in HKD until the obligation falls due",
+          "Book the sale against the specific obligation in the client file"
+        ],
+        "trade_offs": [
+          "Gives up market exposure and income between now and the due date",
+          "Crystallises gains or losses today rather than later",
+          "Only USD 90,754 is actually withdrawable, leaving USD 7,591,705 to find elsewhere"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Covers USD 90,754 of the USD 7,682,458 obligation.",
+        "evidence": [
+          {
+            "source_file": "planned_cash_needs.csv",
+            "row_or_id": "CN-013",
+            "field": "amount",
+            "value": "HKD 60,000,000",
+            "snapshot_date": null,
+            "note": "Mid-Levels redevelopment equity contribution (Confirmed, 2026-11-01 to 2027-06-30)."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-AL-0307",
+            "field": "liquidity_tier",
+            "value": "Illiquid",
+            "snapshot_date": "2026-08-26",
+            "note": "USD 5,185,659 not available on demand."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-SP-0503",
+            "field": "liquidity_tier",
+            "value": "Illiquid",
+            "snapshot_date": "2026-08-26",
+            "note": "USD 1,866,197 not available on demand."
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-liquidity-cover-opt-stage",
+        "label": "Stage the obligation and agree the funding sequence in writing",
+        "rationale": "Where the full amount cannot be raised without forced sales, the decision is which tranche comes from where, agreed before the date rather than during it.",
+        "mechanics": [
+          "Split the obligation into dated tranches against the payment schedule",
+          "Nominate a funding source for each tranche, in order",
+          "Confirm with the counterparty whether the timing can move"
+        ],
+        "trade_offs": [
+          "Depends on the counterparty accepting a schedule",
+          "Leaves residual risk if the later tranches are unfunded"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client agreement",
+          "Counterparty confirmation"
+        ],
+        "estimated_impact": "Converts a single cliff into a dated plan.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0014-liquidity-cover-opt-gate",
+        "label": "Confirm redemption terms on Direct Property - Mid-Levels Apartment",
+        "rationale": "A gated vehicle cannot be relied on to fund anything until the manager confirms the amount and date. Treat it as unavailable until it settles.",
+        "mechanics": [
+          "Request the current gate level and queue position from the manager",
+          "Restate the liquidity map with the position excluded",
+          "Tell the client what has actually been received, not what was requested"
+        ],
+        "trade_offs": [
+          "Removes a position the client may believe is available",
+          "May surface a worse liquidity picture than expected"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM action",
+          "Manager confirmation"
+        ],
+        "estimated_impact": "Clarifies the status of USD 5,185,659.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0014-liquidity-cover-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert 90 days before the earliest obligation, or if withdrawable value falls below the amount due.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The set of ways to fund the obligation narrows as the date approaches, and the last option is usually the most expensive."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-theme-hk_property": [
+      {
+        "id": "CL-0014-theme-hk_property-opt-reduce",
+        "label": "Reduce total exposure to 15% by trimming USD 9,014,040, starting with Accumulator ref. Golden Harbour Properties Ltd, 12M",
+        "rationale": "Taking the exposure from 49.0% to 15% of household wealth needs USD 9,014,040. Starting with Accumulator ref. Golden Harbour Properties Ltd, 12M removes the wrapper with the least attractive payoff first rather than the one that is easiest to sell.",
+        "mechanics": [
+          "Reduce Accumulator ref. Golden Harbour Properties Ltd, 12M (currently USD 1,866,197, 7.0%, Illiquid liquidity)",
+          "Reduce Golden Harbour Properties 5.25% Perpetual (currently USD 3,408,000, 12.9%, Weekly liquidity)",
+          "Reduce Direct Property - Mid-Levels Apartment (currently USD 5,185,659, 19.6%, Illiquid liquidity)"
+        ],
+        "trade_offs": [
+          "Crystallises gains or losses on the positions sold",
+          "The client may read a reduction as a view on the issuer",
+          "Illiquid liquidity on the first line constrains timing"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Household exposure 49.0% to 15%.",
+        "evidence": [
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-AL-0307",
+            "field": "asset_class",
+            "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "snapshot_date": null,
+            "note": "USD 5,185,659 attributed via Direct Real Estate."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-FI-0207",
+            "field": "asset_class",
+            "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "snapshot_date": null,
+            "note": "USD 3,408,000 attributed via Subordinated Perpetual."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-ST-0106",
+            "field": "asset_class",
+            "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "snapshot_date": null,
+            "note": "USD 2,527,529 attributed via Single Stock."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-SP-0503",
+            "field": "underlying_reference",
+            "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "snapshot_date": null,
+            "note": "USD 1,866,197 attributed via Accumulator."
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-theme-hk_property-opt-cap",
+        "label": "Hold the position but cap it, and stop adding",
+        "rationale": "Where the client will not sell for business or family reasons, the achievable outcome is to stop the exposure growing and to route new money elsewhere.",
+        "mechanics": [
+          "Agree a ceiling as a percentage of household wealth and record it",
+          "Direct all new subscriptions away from this exposure",
+          "Review at each meeting against the agreed ceiling"
+        ],
+        "trade_offs": [
+          "Leaves the current concentration in place",
+          "Only reduces the exposure slowly, and only if the rest grows"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Concentration remains outside guidance",
+            "result": "attention",
+            "detail": "Exposure stays near 49.0% against a 15% reference level.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client agreement to the ceiling"
+        ],
+        "estimated_impact": "No immediate change; caps future growth.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0014-theme-hk_property-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if exposure exceeds 54% of household wealth or if the issuer's price falls more than 15%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "USD 12,987,385 remains exposed to a single driver."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-issuer-golden_harbour": [
+      {
+        "id": "CL-0014-issuer-golden_harbour-opt-reduce",
+        "label": "Reduce total exposure to 15% by trimming USD 3,828,380, starting with Accumulator ref. Golden Harbour Properties Ltd, 12M",
+        "rationale": "Taking the exposure from 29.5% to 15% of household wealth needs USD 3,828,380. Starting with Accumulator ref. Golden Harbour Properties Ltd, 12M removes the wrapper with the least attractive payoff first rather than the one that is easiest to sell.",
+        "mechanics": [
+          "Reduce Accumulator ref. Golden Harbour Properties Ltd, 12M (currently USD 1,866,197, 7.0%, Illiquid liquidity)",
+          "Reduce Golden Harbour Properties 5.25% Perpetual (currently USD 3,408,000, 12.9%, Weekly liquidity)",
+          "Reduce Golden Harbour Properties Ltd (currently USD 2,527,529, 9.5%, Daily liquidity)"
+        ],
+        "trade_offs": [
+          "Crystallises gains or losses on the positions sold",
+          "The client may read a reduction as a view on the issuer",
+          "Illiquid liquidity on the first line constrains timing"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Household exposure 29.5% to 15%.",
+        "evidence": [
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-FI-0207",
+            "field": "instrument_name",
+            "value": "Golden Harbour Properties 5.25% Perpetual",
+            "snapshot_date": null,
+            "note": "USD 3,408,000 attributed via Subordinated Perpetual."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-ST-0106",
+            "field": "instrument_name",
+            "value": "Golden Harbour Properties Ltd",
+            "snapshot_date": null,
+            "note": "USD 2,527,529 attributed via Single Stock."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-SP-0503",
+            "field": "underlying_reference",
+            "value": "Accumulator on the issuer's shares, with a double-up feature below strike.",
+            "snapshot_date": null,
+            "note": "USD 1,866,197 attributed via Accumulator."
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-issuer-golden_harbour-opt-cap",
+        "label": "Hold the position but cap it, and stop adding",
+        "rationale": "Where the client will not sell for business or family reasons, the achievable outcome is to stop the exposure growing and to route new money elsewhere.",
+        "mechanics": [
+          "Agree a ceiling as a percentage of household wealth and record it",
+          "Direct all new subscriptions away from this exposure",
+          "Review at each meeting against the agreed ceiling"
+        ],
+        "trade_offs": [
+          "Leaves the current concentration in place",
+          "Only reduces the exposure slowly, and only if the rest grows"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Concentration remains outside guidance",
+            "result": "attention",
+            "detail": "Exposure stays near 29.5% against a 15% reference level.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client agreement to the ceiling"
+        ],
+        "estimated_impact": "No immediate change; caps future growth.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0014-issuer-golden_harbour-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if exposure exceeds 34% of household wealth or if the issuer's price falls more than 15%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "USD 7,801,726 remains exposed to a single driver."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-poslimit-PF-0016": [
+      {
+        "id": "CL-0014-poslimit-PF-0016-opt-correct",
+        "label": "Correct to the mandate bands over a staged programme",
+        "rationale": "Bringing the portfolio inside its bands is the contractual position. Staging it avoids putting the whole correction through the market on one day, which matters most for the largest gaps.",
+        "mechanics": [
+          "Increase Equity from 23.4% toward the 40% target (HKD 34,371,544 to trade)",
+          "Agree tranche sizes and dates, and record the end state"
+        ],
+        "trade_offs": [
+          "Executes into current prices rather than chosen ones",
+          "Crystallises gains or losses across several positions",
+          "Takes time, so the breach persists during the programme"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Brings 1 asset class(es) inside their bands.",
+        "evidence": [
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "BAL",
+            "field": "max_single_position_pct",
+            "value": 12.0,
+            "snapshot_date": null,
+            "note": null
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-AL-0307",
+            "field": "concentration_limit_applies",
+            "value": "Y",
+            "snapshot_date": null,
+            "note": "Direct Property - Mid-Levels Apartment at 19.6%."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-FI-0206",
+            "field": "concentration_limit_applies",
+            "value": "Y",
+            "snapshot_date": null,
+            "note": "Pacific Rim Bank 4.75% Perpetual at 17.6%."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-FI-0207",
+            "field": "concentration_limit_applies",
+            "value": "Y",
+            "snapshot_date": null,
+            "note": "Golden Harbour Properties 5.25% Perpetual at 12.9%."
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-poslimit-PF-0016-opt-document",
+        "label": "Document a client-directed exception with a review date",
+        "rationale": "Where the client has instructed the position and understands the consequence, the honest outcome is a recorded exception rather than a correction plan nobody intends to execute.",
+        "mechanics": [
+          "Record the client's instruction and confirmation in writing",
+          "Log the exception with a defined size limit and review date",
+          "Report the breach in the periodic mandate review"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside its bands",
+          "Requires the client to accept the position in writing",
+          "Does not remove the underlying risk"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Written client instruction on file",
+            "result": "not_assessed",
+            "detail": "No instruction found in the RM notes for this breach.",
+            "reference": "rm_notes.json"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Compliance sign-off",
+          "Client confirmation in writing"
+        ],
+        "estimated_impact": "No portfolio change; the exception becomes visible and dated.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0014-poslimit-PF-0016-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if any band gap widens by more than 3 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio remains outside a contractual limit, which is reportable whether or not it is discussed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-theme-duration": [
+      {
+        "id": "CL-0014-theme-duration-opt-reduce",
+        "label": "Reduce total exposure to 15% by trimming USD 4,087,654, starting with Pacific Rim Bank 4.75% Perpetual",
+        "rationale": "Taking the exposure from 30.4% to 15% of household wealth needs USD 4,087,654. Starting with Pacific Rim Bank 4.75% Perpetual removes the wrapper with the least attractive payoff first rather than the one that is easiest to sell.",
+        "mechanics": [
+          "Reduce Pacific Rim Bank 4.75% Perpetual (currently USD 4,653,000, 17.6%, Weekly liquidity)",
+          "Reduce Golden Harbour Properties 5.25% Perpetual (currently USD 3,408,000, 12.9%, Weekly liquidity)"
+        ],
+        "trade_offs": [
+          "Crystallises gains or losses on the positions sold",
+          "The client may read a reduction as a view on the issuer",
+          "Execution is straightforward at this liquidity tier"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Household exposure 30.4% to 15%.",
+        "evidence": [
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-FI-0206",
+            "field": "asset_class",
+            "value": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+            "snapshot_date": null,
+            "note": "USD 4,653,000 attributed via Subordinated Perpetual."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-FI-0207",
+            "field": "asset_class",
+            "value": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+            "snapshot_date": null,
+            "note": "USD 3,408,000 attributed via Subordinated Perpetual."
+          },
+          {
+            "source_file": "event_log.csv",
+            "row_or_id": "EVT-09",
+            "field": "description",
+            "value": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+            "snapshot_date": "2026-04-30",
+            "note": "Transmission: European fixed income, EUR assets"
+          },
+          {
+            "source_file": "event_log.csv",
+            "row_or_id": "EVT-12",
+            "field": "description",
+            "value": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+            "snapshot_date": "2026-06-17",
+            "note": "Transmission: Duration, rate-sensitive credit, USD"
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-theme-duration-opt-cap",
+        "label": "Hold the position but cap it, and stop adding",
+        "rationale": "Where the client will not sell for business or family reasons, the achievable outcome is to stop the exposure growing and to route new money elsewhere.",
+        "mechanics": [
+          "Agree a ceiling as a percentage of household wealth and record it",
+          "Direct all new subscriptions away from this exposure",
+          "Review at each meeting against the agreed ceiling"
+        ],
+        "trade_offs": [
+          "Leaves the current concentration in place",
+          "Only reduces the exposure slowly, and only if the rest grows"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Concentration remains outside guidance",
+            "result": "attention",
+            "detail": "Exposure stays near 30.4% against a 15% reference level.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client agreement to the ceiling"
+        ],
+        "estimated_impact": "No immediate change; caps future growth.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0014-theme-duration-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if exposure exceeds 35% of household wealth or if the issuer's price falls more than 15%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "USD 8,061,000 remains exposed to a single driver."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-bands-PF-0016": [
+      {
+        "id": "CL-0014-bands-PF-0016-opt-correct",
+        "label": "Correct to the mandate bands over a staged programme",
+        "rationale": "Bringing the portfolio inside its bands is the contractual position. Staging it avoids putting the whole correction through the market on one day, which matters most for the largest gaps.",
+        "mechanics": [
+          "Increase Equity from 23.4% toward the 40% target (HKD 34,371,544 to trade)",
+          "Agree tranche sizes and dates, and record the end state"
+        ],
+        "trade_offs": [
+          "Executes into current prices rather than chosen ones",
+          "Crystallises gains or losses across several positions",
+          "Takes time, so the breach persists during the programme"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Brings 1 asset class(es) inside their bands.",
+        "evidence": [
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "BAL/Equity",
+            "field": "min_pct/max_pct",
+            "value": "30.0-55.0",
+            "snapshot_date": null,
+            "note": "Actual 23.4% at 2026-08-26."
+          },
+          {
+            "source_file": "portfolios.csv",
+            "row_or_id": "PF-0016",
+            "field": "service_model",
+            "value": "Advisory",
+            "snapshot_date": null,
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-bands-PF-0016-opt-document",
+        "label": "Document a client-directed exception with a review date",
+        "rationale": "Where the client has instructed the position and understands the consequence, the honest outcome is a recorded exception rather than a correction plan nobody intends to execute.",
+        "mechanics": [
+          "Record the client's instruction and confirmation in writing",
+          "Log the exception with a defined size limit and review date",
+          "Report the breach in the periodic mandate review"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside its bands",
+          "Requires the client to accept the position in writing",
+          "Does not remove the underlying risk"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Written client instruction on file",
+            "result": "not_assessed",
+            "detail": "No instruction found in the RM notes for this breach.",
+            "reference": "rm_notes.json"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Compliance sign-off",
+          "Client confirmation in writing"
+        ],
+        "estimated_impact": "No portfolio change; the exception becomes visible and dated.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0014-bands-PF-0016-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if any band gap widens by more than 3 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio remains outside a contractual limit, which is reportable whether or not it is discussed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-samebet-hk_property": [
+      {
+        "id": "CL-0014-samebet-hk_property-opt-staged",
+        "label": "Agree a target allocation and move to it in dated tranches",
+        "rationale": "A single large rebalancing decision is hard for a client to accept and easy to defer. A target with dates attached converts it into a sequence of smaller confirmations.",
+        "mechanics": [
+          "Agree the destination allocation, not the first trade",
+          "Break the move into tranches with dates",
+          "Confirm each tranche in writing before execution"
+        ],
+        "trade_offs": [
+          "The portfolio remains unsuitable during the transition",
+          "Market moves during the programme change the arithmetic"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Moves the portfolio toward the recorded profile over time.",
+        "evidence": [
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0014",
+            "field": "source_of_wealth",
+            "value": "Entrepreneur - Hong Kong residential and commercial property development",
+            "snapshot_date": null,
+            "note": "Matched on 'property development'."
+          },
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0014",
+            "field": "objectives",
+            "value": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "snapshot_date": null,
+            "note": null
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-AL-0307",
+            "field": "asset_class",
+            "value": "Hong Kong real estate exposure across every wrapper it appears in: direct property, listed equity, subordinated debt and equity derivatives.",
+            "snapshot_date": null,
+            "note": "USD 5,185,659 attributed via Direct Real Estate."
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-samebet-hk_property-opt-reprofile",
+        "label": "Re-run the risk profiling before changing anything",
+        "rationale": "If the recorded profile is wrong, every downstream check is wrong too. Where a profile was set during a life event, confirming it is the cheapest first step.",
+        "mechanics": [
+          "Re-run the profiling questionnaire with the client",
+          "Compare the result with the current allocation",
+          "Update clients.risk_profile and re-run the checks"
+        ],
+        "trade_offs": [
+          "Delays any portfolio change",
+          "May confirm the mismatch rather than resolve it"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM meeting",
+          "Client participation"
+        ],
+        "estimated_impact": "Confirms or corrects the basis for every other action.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0014-samebet-hk_property-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if risk assets rise a further 5 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside what the client said they wanted, which is the position that has to be defended if markets fall."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-recon-CF-0002": [
+      {
+        "id": "CL-0014-recon-CF-0002-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Confirm the drawdown history with operations before quoting loan-to-value to the client or to credit risk.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "credit_facilities.csv",
+            "row_or_id": "CF-0002",
+            "field": "drawn_2026-03-31",
+            "value": 6000000.0,
+            "snapshot_date": "2026-03-31",
+            "note": "Change in drawn balance over the period."
+          },
+          {
+            "source_file": "transactions.csv",
+            "row_or_id": "TXN-0013",
+            "field": "amount",
+            "value": 4000000.0,
+            "snapshot_date": null,
+            "note": "Facility activity recorded in the same window."
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-recon-CF-0002-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-kyc": [
+      {
+        "id": "CL-0014-kyc-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Fold the review into the next scheduled meeting.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0014",
+            "field": "kyc_review_due",
+            "value": "2026-09-22",
+            "snapshot_date": null,
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-kyc-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0014-explain-ytd": [
+      {
+        "id": "CL-0014-explain-ytd-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Open the meeting with the attribution rather than the headline number.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 12.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as High.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-FI-0207",
+            "field": "market_value_usd",
+            "value": "4,944,000 -> 3,408,000",
+            "snapshot_date": "2026-08-26",
+            "note": "Golden Harbour Properties 5.25% Perpetual: price effect USD -1,536,000, FX USD 0, flows USD 0 between 2025-12-31 and 2026-08-26."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-SP-0503",
+            "field": "market_value_usd",
+            "value": "0 -> 1,866,197",
+            "snapshot_date": "2026-08-26",
+            "note": "Accumulator ref. Golden Harbour Properties Ltd, 12M: price effect USD -1,334,827, FX USD 0, flows USD 3,201,024 between 2025-12-31 and 2026-08-26."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-ST-0106",
+            "field": "market_value_usd",
+            "value": "3,342,747 -> 2,527,529",
+            "snapshot_date": "2026-08-26",
+            "note": "Golden Harbour Properties Ltd: price effect USD -808,729, FX USD -6,489, flows USD 0 between 2025-12-31 and 2026-08-26."
+          }
+        ]
+      },
+      {
+        "id": "CL-0014-explain-ytd-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ]
+  },
+  "brief": {
+    "client_id": "CL-0014",
+    "generated_at": "2026-09-04T10:41:46+00:00",
+    "as_of": "2026-08-26",
+    "purpose": "Review Lau Chi Ming. Lombard facility 0.59pp from a margin call. Then: Known obligations of USD 7,682,458 against USD 90,754 the client can actually withdraw.",
+    "talking_points": [
+      "Between 2025-12-31 and 2026-08-26 the household moved down USD 1,692,845, or 6.0%, from USD 28,181,815 to USD 26,488,971.",
+      "Of that, -USD 4,860,706 came from market moves, -USD 33,162 from currency translation and +USD 3,201,024 from money paid in or taken out.",
+      "Lombard facility 0.59pp from a margin call. CF-0002 sits at 69.41% loan-to-value against a 70% trigger. A 0.8% fall in collateral value is enough to produce a margin call.",
+      "Known obligations of USD 7,682,458 against USD 90,754 the client can actually withdraw. Coverage is 0.01x. USD 19,346,360 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger. USD 7,051,857 of the household is illiquid.",
+      "49% of the household moves with Hong Kong property. USD 12,987,385 across 4 positions responds to the same driver. This is a structural exposure rather than an event-driven one.",
+      "29% of household wealth sits with Golden Harbour Properties Ltd, across 3 line items. Golden Harbour Properties Ltd appears as Accumulator, Single Stock, Subordinated Perpetual. Each line looks moderate on its own; together they are USD 7,801,726, or 29.5% of everything the client holds. A single credit or price event on this issuer hits all of them at once."
+    ],
+    "questions_to_ask": [
+      "Is the client willing to reduce the facility rather than sell?",
+      "Can any obligation be deferred or staged?",
+      "Are these still the objectives? Recorded as: Generate yield to service development financing; retain exposure to the Hong Kong property recovery; fund a Mid-Levels redevelopment project",
+      "Has anything changed in the client's circumstances? Life stage on file is \"Peak earning years\"."
+    ],
+    "relationship_context": [
+      "2026-03-05 (Call, N-018): Accumulator settlements are running against the client. Drew a further HKD 4m on the facility to meet obligations. Client remains convinced the Hong Kong property market turns this year. I pointed out that the perpetual, the shares, the accumulator and his own development business are all the same bet. He said that is why he is confident.",
+      "2026-08-11 (Meeting, N-019): Redevelopment project needs an HKD 60m equity contribution by mid-2027. Client expects to fund it partly from the portfolio. Reviewed what is actually sellable. He was surprised how little of it is liquid."
+    ],
+    "contradictions": [
+      "The portfolio and the client's source of wealth are the same bet (49% on Hong Kong property). Source of wealth is recorded as \"Entrepreneur - Hong Kong residential and commercial property development\". USD 12,987,385 of the portfolio (49.0%) responds to the same driver, so the business and the portfolio would come under pressure together."
+    ],
+    "do_not_say": [
+      "Do not present any figure as investment advice. These are options for review.",
+      "Do not quote a tax outcome. Tax domicile drives the treatment and wealth planning owns the answer.",
+      "Do not describe a private markets or unlisted mark as current without saying when it was struck.",
+      "Do not present an RM note as an independently verified fact.",
+      "Do not promise a redemption date for a gated vehicle.",
+      "Do not quote loan-to-value externally until operations confirm the drawn balance: HKD 2,000,000 of drawdown on CF-0002 is not explained by the transaction ledger"
+    ],
+    "draft_follow_up": "Dear Lau Chi Ming,\n\nThank you for your time today. A short summary of what we discussed and what happens next.\n\nWhere the portfolio stands. Between 2025-12-31 and 2026-08-26 the household moved down USD 1,692,845, or 6.0%, from USD 28,181,815 to USD 26,488,971. Of that, -USD 4,860,706 came from market moves, -USD 33,162 from currency translation and +USD 3,201,024 from money paid in or taken out.\n\nWhat we focused on. Lombard facility 0.59pp from a margin call. CF-0002 sits at 69.41% loan-to-value against a 70% trigger. A 0.8% fall in collateral value is enough to produce a margin call.\n\nWhat we agreed to look at. Agree a collateral plan before the next client-driven withdrawal: either reduce drawn, add eligible collateral, or accept a smaller withdrawal than the client expects.\n\nNothing in this note is a recommendation to buy or sell. Any action will be confirmed with you in writing before it is taken, and the figures above are as at 2026-08-26.\n\nKind regards,\nPriscilla Ong\nAsia desk - Singapore and Hong Kong booking centres\n\n[Draft is in English. Client's reporting language is Traditional Chinese; route through translation before sending.]",
+    "provenance": "deterministic"
+  },
+  "notes": [
+    {
+      "note_id": "N-018",
+      "note_date": "2026-03-05",
+      "channel": "Call",
+      "rm_name": "Priscilla Ong",
+      "note": "Accumulator settlements are running against the client. Drew a further HKD 4m on the facility to meet obligations. Client remains convinced the Hong Kong property market turns this year. I pointed out that the perpetual, the shares, the accumulator and his own development business are all the same bet. He said that is why he is confident."
+    },
+    {
+      "note_id": "N-019",
+      "note_date": "2026-08-11",
+      "channel": "Meeting",
+      "rm_name": "Priscilla Ong",
+      "note": "Redevelopment project needs an HKD 60m equity contribution by mid-2027. Client expects to fund it partly from the portfolio. Reviewed what is actually sellable. He was surprised how little of it is liquid."
+    }
+  ],
+  "events": [
+    {
+      "event_id": "EVT-15",
+      "event_date": "2026-07-29",
+      "event_type": "Policy",
+      "region": "United States",
+      "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+      "primary_transmission": "Duration, growth equity valuations",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-14",
+      "event_date": "2026-06-30",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "Half-year close. US equities near record levels on narrow, technology-led leadership. Non-traded private credit vehicles show continued redemption stress.",
+      "primary_transmission": "Private credit, semi-liquid alternatives",
+      "severity": "Medium"
+    },
+    {
+      "event_id": "EVT-13",
+      "event_date": "2026-06-19",
+      "event_type": "Market",
+      "region": "United States",
+      "description": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+      "primary_transmission": "Long-duration fixed income",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-12",
+      "event_date": "2026-06-17",
+      "event_type": "Policy",
+      "region": "United States",
+      "description": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+      "primary_transmission": "Duration, rate-sensitive credit, USD",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-09",
+      "event_date": "2026-04-30",
+      "event_type": "Policy",
+      "region": "Europe",
+      "description": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+      "primary_transmission": "European fixed income, EUR assets",
+      "severity": "Medium"
+    }
+  ],
+  "market": {
+    "series": [
+      {
+        "series_id": "BRENT_USD_BBL",
+        "series_name": "Brent crude",
+        "category": "Commodity",
+        "unit": "USD/barrel",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 69.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 72.4
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 104.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 96.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 101.5
+          }
+        ]
+      },
+      {
+        "series_id": "GOLD_USD_OZ",
+        "series_name": "Gold spot",
+        "category": "Commodity",
+        "unit": "USD/troy oz",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4310.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 5050.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 5240.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4780.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4622.6
+          }
+        ]
+      },
+      {
+        "series_id": "UST_10Y_PCT",
+        "series_name": "US Treasury 10-year yield",
+        "category": "Rates",
+        "unit": "percent",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4.05
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 3.95
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 4.35
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4.52
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4.66
+          }
+        ]
+      },
+      {
+        "series_id": "NASDAQ_COMP",
+        "series_name": "Nasdaq Composite Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 23150.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 24620.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 23880.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 25320.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 26010.0
+          }
+        ]
+      },
+      {
+        "series_id": "HSI",
+        "series_name": "Hang Seng Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 24800.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 25350.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 24100.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 24950.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25280.0
+          }
+        ]
+      },
+      {
+        "series_id": "VIX",
+        "series_name": "CBOE Volatility Index",
+        "category": "Volatility",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 15.2
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 17.8
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 31.4
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 22.6
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25.1
+          }
+        ]
+      }
+    ]
+  },
+  "audit": []
+}

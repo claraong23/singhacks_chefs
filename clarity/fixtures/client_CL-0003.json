@@ -1,0 +1,2513 @@
+{
+  "as_of": "2026-08-26",
+  "client": {
+    "client_id": "CL-0003",
+    "client_name": "Margarethe Voss-Brenner",
+    "age": 58.0,
+    "nationality": "Germany",
+    "country_of_residence": "Singapore",
+    "tax_domicile": "Germany",
+    "booking_centre": "Singapore",
+    "base_currency": "EUR",
+    "wealth_band": "HNW",
+    "life_stage": "Recently inherited - transition",
+    "source_of_wealth": "Inheritance - late spouse's industrial holding, received Feb 2026",
+    "risk_profile": "Conservative",
+    "risk_tolerance_score": 2.0,
+    "investment_horizon_years": 15.0,
+    "liquidity_needs": "Medium",
+    "objectives": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+    "client_since": "2026-02-16",
+    "kyc_review_due": "2027-02-16",
+    "reporting_language": "German",
+    "rm_name": "Priscilla Ong",
+    "total_usd": 22181135.66
+  },
+  "portfolios": [
+    {
+      "portfolio_id": "PF-0005",
+      "portfolio_name": "Inherited Portfolio - Under Review",
+      "mandate_code": "CONS",
+      "mandate_name": "Conservative",
+      "service_model": "Advisory",
+      "base_currency": "EUR",
+      "benchmark": "JB Conservative EUR Composite",
+      "inception_date": "2026-02-16",
+      "value_usd": 22181135.66,
+      "aum_series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "value_base": 20273256.61
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "value_base": 20850743.23
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "value_base": 19869207.46
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "value_base": 20188438.85
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "value_base": 20312395.29
+        }
+      ],
+      "mandate_review": {
+        "portfolio_id": "PF-0005",
+        "client_id": "CL-0003",
+        "mandate_code": "CONS",
+        "mandate_name": "Conservative",
+        "service_model": "Advisory",
+        "governed": true,
+        "base_currency": "EUR",
+        "total_base": 20312395.29,
+        "allocation_pct": {
+          "Equity": 71.46062422852741,
+          "Structured Products": 5.388362496759978,
+          "Fixed Income": 9.147124076079361,
+          "Alternatives": 6.317981270440312,
+          "Cash and Equivalents": 7.685907928192943
+        },
+        "band_breaches": [
+          {
+            "portfolio_id": "PF-0005",
+            "mandate_code": "CONS",
+            "asset_class": "Equity",
+            "actual_pct": 71.46062422852741,
+            "min_pct": 10.0,
+            "target_pct": 20.0,
+            "max_pct": 30.0,
+            "direction": "above",
+            "breach_pp": 41.46062422852741,
+            "value_base": 14515364.47,
+            "base_currency": "EUR"
+          },
+          {
+            "portfolio_id": "PF-0005",
+            "mandate_code": "CONS",
+            "asset_class": "Fixed Income",
+            "actual_pct": 9.147124076079361,
+            "min_pct": 45.0,
+            "target_pct": 60.0,
+            "max_pct": 75.0,
+            "direction": "below",
+            "breach_pp": 35.852875923920635,
+            "value_base": 1858000.0,
+            "base_currency": "EUR"
+          }
+        ],
+        "position_breaches": [
+          {
+            "portfolio_id": "PF-0005",
+            "mandate_code": "CONS",
+            "instrument_id": "SYN-ST-0107",
+            "instrument_name": "Nordvind Industrial AB",
+            "actual_pct": 18.374494719672228,
+            "limit_pct": 10.0,
+            "breach_pp": 8.374494719672228,
+            "value_base": 3732300.0,
+            "base_currency": "EUR"
+          }
+        ],
+        "exclusion_breaches": []
+      },
+      "bands": {
+        "Cash and Equivalents": {
+          "min_pct": 5.0,
+          "target_pct": 10.0,
+          "max_pct": 25.0
+        },
+        "Fixed Income": {
+          "min_pct": 45.0,
+          "target_pct": 60.0,
+          "max_pct": 75.0
+        },
+        "Equity": {
+          "min_pct": 10.0,
+          "target_pct": 20.0,
+          "max_pct": 30.0
+        },
+        "Alternatives": {
+          "min_pct": 0.0,
+          "target_pct": 5.0,
+          "max_pct": 15.0
+        },
+        "Commodities": {
+          "min_pct": 0.0,
+          "target_pct": 5.0,
+          "max_pct": 10.0
+        },
+        "Structured Products": {
+          "min_pct": 0.0,
+          "target_pct": 0.0,
+          "max_pct": 10.0
+        }
+      },
+      "mandate_notes": "Capital preservation. Max 10% in any single position."
+    }
+  ],
+  "wealth": {
+    "total_usd": 22181135.66,
+    "timeseries": [
+      {
+        "snapshot": "2025-12-31",
+        "label": "Year-end 2025",
+        "total_usd": 23516977.67,
+        "change_usd": null,
+        "change_pct": null
+      },
+      {
+        "snapshot": "2026-02-27",
+        "label": "Pre-conflict",
+        "total_usd": 23874101.0,
+        "change_usd": 357123.3299999982,
+        "change_pct": 1.5185766428462921
+      },
+      {
+        "snapshot": "2026-03-31",
+        "label": "Post-Hormuz",
+        "total_usd": 22154166.32,
+        "change_usd": -1719934.6799999997,
+        "change_pct": -7.204186159721783
+      },
+      {
+        "snapshot": "2026-06-30",
+        "label": "Half-year",
+        "total_usd": 22166905.85,
+        "change_usd": 12739.530000001192,
+        "change_pct": 0.05750399187217618
+      },
+      {
+        "snapshot": "2026-08-26",
+        "label": "Today",
+        "total_usd": 22181135.66,
+        "change_usd": 14229.809999998659,
+        "change_pct": 0.06419393891186062
+      }
+    ],
+    "by_asset_class": {
+      "Equity": 15850778.0,
+      "Fixed Income": 2028936.0,
+      "Alternatives": 1401400.0,
+      "Structured Products": 1195200.0,
+      "Cash and Equivalents": 1704821.6600000001
+    },
+    "by_liquidity_tier": {
+      "Daily": 19584535.66,
+      "Monthly": 1401400.0,
+      "Illiquid": 1195200.0
+    },
+    "by_currency": {
+      "EUR": 16494114.0,
+      "USD": 4965000.0,
+      "CHF": 722021.66
+    },
+    "by_region": {
+      "Europe": 17216135.66,
+      "North America": 2368400.0,
+      "Global": 1401400.0,
+      "Asia": 1195200.0
+    },
+    "by_sector": {
+      "Consumer Discretionary": 5780174.4,
+      "Industrials": 4075671.6,
+      "Diversified": 3626532.0,
+      "Information Technology": 2368400.0,
+      "Corporate": 2028936.0,
+      "Equity Long Short": 1401400.0,
+      "Unclassified": 1195200.0,
+      "Cash": 1704821.6600000001
+    },
+    "positions": [
+      {
+        "instrument_id": "SYN-EQ-0010",
+        "instrument_name": "Global Luxury and Consumer Brands Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Consumer Discretionary",
+        "region": "Europe",
+        "currency": "EUR",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 5780174.4,
+        "weight_pct": 26.058965098092727,
+        "lending_value_usd": 3757113.3600000003,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 1013812.8,
+        "unrealised_pnl_pct": 21.27016129032258,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-ST-0107",
+        "instrument_name": "Nordvind Industrial AB",
+        "asset_class": "Equity",
+        "sub_asset_class": "Single Stock",
+        "sector": "Industrials",
+        "region": "Europe",
+        "currency": "EUR",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 4075671.6,
+        "weight_pct": 18.374494716921994,
+        "lending_value_usd": 2037835.8,
+        "advance_rate_pct": 50.0,
+        "unrealised_pnl_usd": 0.0,
+        "unrealised_pnl_pct": null,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0004",
+        "instrument_name": "European Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Diversified",
+        "region": "Europe",
+        "currency": "EUR",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 3626532.0,
+        "weight_pct": 16.349622740641944,
+        "lending_value_usd": 2357245.8000000003,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 646682.4,
+        "unrealised_pnl_pct": 21.701846965699207,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0003",
+        "instrument_name": "US Technology Leaders Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Information Technology",
+        "region": "North America",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2368400.0,
+        "weight_pct": 10.677541656584413,
+        "lending_value_usd": 1539459.9948,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 884805.9402000001,
+        "unrealised_pnl_pct": 59.639355766883476,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0209",
+        "instrument_name": "EUR Investment Grade Bond Fund",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Investment Grade Credit",
+        "sector": "Corporate",
+        "region": "Europe",
+        "currency": "EUR",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2028936.0,
+        "weight_pct": 9.147124074710248,
+        "lending_value_usd": 1521702.0,
+        "advance_rate_pct": 75.0,
+        "unrealised_pnl_usd": -246792.00000000003,
+        "unrealised_pnl_pct": -10.844529750479847,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-AL-0304",
+        "instrument_name": "Harborline Long Short Equity Fund",
+        "asset_class": "Alternatives",
+        "sub_asset_class": "Hedge Fund",
+        "sector": "Equity Long Short",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Monthly",
+        "market_value_usd": 1401400.0,
+        "weight_pct": 6.317981285904997,
+        "lending_value_usd": 420420.00000000006,
+        "advance_rate_pct": 30.0,
+        "unrealised_pnl_usd": 259997.73072000002,
+        "unrealised_pnl_pct": 22.77879924955429,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-SP-0506",
+        "instrument_name": "Autocallable ref. Asia Banks Basket, 7.80% p.a.",
+        "asset_class": "Structured Products",
+        "sub_asset_class": "Yield Enhancement",
+        "sector": "",
+        "region": "Asia",
+        "currency": "USD",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 1195200.0,
+        "weight_pct": 5.388362518134475,
+        "lending_value_usd": 358560.0018,
+        "advance_rate_pct": 30.0,
+        "unrealised_pnl_usd": 50745.851520000004,
+        "unrealised_pnl_pct": 4.434065952362866,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": "Worst-of basket: three Asian banking majors, autocall observation quarterly"
+      },
+      {
+        "instrument_id": "SYN-CA-0604",
+        "instrument_name": "EUR Call Deposit",
+        "asset_class": "Cash and Equivalents",
+        "sub_asset_class": "Deposit",
+        "sector": "Cash",
+        "region": "Europe",
+        "currency": "EUR",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 982800.0,
+        "weight_pct": 4.4307920706346735,
+        "lending_value_usd": 884520.0000000001,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": 0.0,
+        "unrealised_pnl_pct": 0.0,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-CA-0605",
+        "instrument_name": "CHF Call Deposit",
+        "asset_class": "Cash and Equivalents",
+        "sub_asset_class": "Deposit",
+        "sector": "Cash",
+        "region": "Europe",
+        "currency": "CHF",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 722021.66,
+        "weight_pct": 3.2551158383745262,
+        "lending_value_usd": 649819.4976000001,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": 6737.81472,
+        "unrealised_pnl_pct": 0.9419777658402622,
+        "portfolio_ids": [
+          "PF-0005"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      }
+    ]
+  },
+  "income": {
+    "client_id": "CL-0003",
+    "quarters_observed": 2,
+    "gross_income_usd": 362039.89948014444,
+    "costs_usd": 60146.55192,
+    "net_income_usd": 301893.34756014444,
+    "annualised_gross_usd": 724079.7989602889,
+    "annualised_net_usd": 603786.6951202889,
+    "yield_pct": 3.2643946191900657,
+    "by_instrument": {
+      "SYN-EQ-0010": 106702.596,
+      "SYN-FI-0209": 99275.90400000001,
+      "SYN-EQ-0004": 63154.728,
+      "SYN-EQ-0003": 40057.2,
+      "SYN-CA-0604": 30466.800000000003,
+      "SYN-CA-0605": 22382.671480144407
+    }
+  },
+  "explanation": {
+    "ytd": {
+      "client_id": "CL-0003",
+      "period": "ytd",
+      "primary_driver": "currency translation",
+      "fx_dominates": true,
+      "start": "2025-12-31",
+      "end": "2026-08-26",
+      "start_label": "Year-end 2025",
+      "end_label": "Today",
+      "change_usd": -1335842.0100000016,
+      "change_pct": -5.68033030751269,
+      "price_effect_usd": -271263.99976374564,
+      "fx_effect_usd": -1064578.010236254,
+      "flow_effect_usd": 0.0,
+      "drivers": [
+        {
+          "theme_key": "greater_china_consumer",
+          "theme_name": "Greater China consumer demand",
+          "amount_usd": -977521.5999999996,
+          "pct_of_start": -4.156663384712902,
+          "market_moves": [
+            {
+              "series_id": "HSI",
+              "series_name": "Hang Seng Index",
+              "unit": "points",
+              "start_value": 24800.0,
+              "end_value": 25280.0,
+              "change": 480.0,
+              "change_pct": 1.9354838709677358
+            }
+          ],
+          "events": []
+        },
+        {
+          "theme_key": "us_tech_ai",
+          "theme_name": "US technology and AI capital expenditure",
+          "amount_usd": 317200.0,
+          "pct_of_start": 1.3488127787978632,
+          "market_moves": [
+            {
+              "series_id": "NASDAQ_COMP",
+              "series_name": "Nasdaq Composite Index",
+              "unit": "points",
+              "start_value": 23150.0,
+              "end_value": 26010.0,
+              "change": 2860.0,
+              "change_pct": 12.35421166306696
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-11",
+              "event_date": "2026-06-05",
+              "description": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+              "primary_transmission": "US technology, concentrated equity, collateralised lending",
+              "severity": "High"
+            }
+          ]
+        },
+        {
+          "theme_key": "duration",
+          "theme_name": "Interest rate duration",
+          "amount_usd": -286424.0,
+          "pct_of_start": -1.2179456221765421,
+          "market_moves": [
+            {
+              "series_id": "UST_10Y_PCT",
+              "series_name": "US Treasury 10-year yield",
+              "unit": "percent",
+              "start_value": 4.05,
+              "end_value": 4.66,
+              "change": 0.6100000000000003,
+              "change_pct": 15.061728395061746
+            },
+            {
+              "series_id": "UST_2Y_PCT",
+              "series_name": "US Treasury 2-year yield",
+              "unit": "percent",
+              "start_value": 3.68,
+              "end_value": 4.14,
+              "change": 0.4599999999999995,
+              "change_pct": 12.499999999999979
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-09",
+              "event_date": "2026-04-30",
+              "description": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+              "primary_transmission": "European fixed income, EUR assets",
+              "severity": "Medium"
+            },
+            {
+              "event_id": "EVT-12",
+              "event_date": "2026-06-17",
+              "description": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+              "primary_transmission": "Duration, rate-sensitive credit, USD",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-13",
+              "event_date": "2026-06-19",
+              "description": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+              "primary_transmission": "Long-duration fixed income",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-15",
+              "event_date": "2026-07-29",
+              "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+              "primary_transmission": "Duration, growth equity valuations",
+              "severity": "High"
+            }
+          ]
+        }
+      ],
+      "detractors": [
+        {
+          "instrument_id": "SYN-EQ-0010",
+          "instrument_name": "Global Luxury and Consumer Brands Fund",
+          "asset_class": "Equity",
+          "currency": "EUR",
+          "start_value_usd": 6757696.0,
+          "end_value_usd": 5780174.4,
+          "price_effect_usd": -617584.0000000005,
+          "fx_effect_usd": -359937.59999999916,
+          "flow_effect_usd": 0.0,
+          "total_usd": -977521.5999999996,
+          "price_return_pct": -9.138972809667678,
+          "price_start": 264.8,
+          "price_end": 240.6
+        },
+        {
+          "instrument_id": "SYN-FI-0209",
+          "instrument_name": "EUR Investment Grade Bond Fund",
+          "asset_class": "Fixed Income",
+          "currency": "EUR",
+          "start_value_usd": 2315360.0,
+          "end_value_usd": 2028936.0,
+          "price_effect_usd": -160080.00000000032,
+          "fx_effect_usd": -126343.9999999997,
+          "flow_effect_usd": 0.0,
+          "total_usd": -286424.0,
+          "price_return_pct": -6.9138276553106115,
+          "price_start": 99.8,
+          "price_end": 92.9
+        },
+        {
+          "instrument_id": "SYN-SP-0506",
+          "instrument_name": "Autocallable ref. Asia Banks Basket, 7.80% p.a.",
+          "asset_class": "Structured Products",
+          "currency": "USD",
+          "start_value_usd": 1200000.0,
+          "end_value_usd": 1195200.0,
+          "price_effect_usd": -4800.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -4800.0,
+          "price_return_pct": -0.40000000000000036,
+          "price_start": 100.0,
+          "price_end": 99.6
+        },
+        {
+          "instrument_id": "SYN-CA-0604",
+          "instrument_name": "EUR Call Deposit",
+          "asset_class": "Cash and Equivalents",
+          "currency": "EUR",
+          "start_value_usd": 1044000.0,
+          "end_value_usd": 982800.0,
+          "price_effect_usd": -1.4551915228366852e-10,
+          "fx_effect_usd": -61199.999999999854,
+          "flow_effect_usd": 0.0,
+          "total_usd": -61200.0,
+          "price_return_pct": 0.0,
+          "price_start": 1.0,
+          "price_end": 1.0
+        }
+      ],
+      "contributors": [
+        {
+          "instrument_id": "SYN-EQ-0003",
+          "instrument_name": "US Technology Leaders Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 2051200.0,
+          "end_value_usd": 2368400.0,
+          "price_effect_usd": 317200.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 317200.0,
+          "price_return_pct": 15.464118564742613,
+          "price_start": 512.8,
+          "price_end": 592.1
+        },
+        {
+          "instrument_id": "SYN-EQ-0004",
+          "instrument_name": "European Equity Fund",
+          "asset_class": "Equity",
+          "currency": "EUR",
+          "start_value_usd": 3720816.0,
+          "end_value_usd": 3626532.0,
+          "price_effect_usd": 131543.99999999948,
+          "fx_effect_usd": -225827.99999999948,
+          "flow_effect_usd": 0.0,
+          "total_usd": -94284.0,
+          "price_return_pct": 3.535353535353547,
+          "price_start": 178.2,
+          "price_end": 184.5
+        },
+        {
+          "instrument_id": "SYN-AL-0304",
+          "instrument_name": "Harborline Long Short Equity Fund",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 1364000.0,
+          "end_value_usd": 1401400.0,
+          "price_effect_usd": 37400.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 37400.0,
+          "price_return_pct": 2.741935483870961,
+          "price_start": 1240.0,
+          "price_end": 1274.0
+        },
+        {
+          "instrument_id": "SYN-ST-0107",
+          "instrument_name": "Nordvind Industrial AB",
+          "asset_class": "Equity",
+          "currency": "EUR",
+          "start_value_usd": 4304412.0,
+          "end_value_usd": 4075671.6,
+          "price_effect_usd": 25055.999999999472,
+          "fx_effect_usd": -253796.39999999938,
+          "flow_effect_usd": 0.0,
+          "total_usd": -228740.3999999999,
+          "price_return_pct": 0.5821004123211182,
+          "price_start": 412.3,
+          "price_end": 414.7
+        },
+        {
+          "instrument_id": "SYN-CA-0605",
+          "instrument_name": "CHF Call Deposit",
+          "asset_class": "Cash and Equivalents",
+          "currency": "CHF",
+          "start_value_usd": 759493.67,
+          "end_value_usd": 722021.66,
+          "price_effect_usd": 0.00023625631729373708,
+          "fx_effect_usd": -37472.01023625633,
+          "flow_effect_usd": 0.0,
+          "total_usd": -37472.01000000001,
+          "price_return_pct": 0.0,
+          "price_start": 1.0,
+          "price_end": 1.0
+        }
+      ],
+      "narrative": [
+        "Between 2025-12-31 and 2026-08-26 the household moved down USD 1,335,842, or 5.7%, from USD 23,516,978 to USD 22,181,136.",
+        "Of that, -USD 271,264 came from market moves, -USD 1,064,578 from currency translation and +USD 0 from money paid in or taken out.",
+        "Currency did more of the work than markets: reported in USD, the translation effect of USD 1,064,578 is larger than the USD 271,264 of market movement. Measured in the client's own EUR reporting currency, the picture is different.",
+        "Greater China consumer demand contributed -USD 977,522 (-4.2 points), as Hang Seng Index moved from 24800.0 to 25280.0 points.",
+        "US technology and AI capital expenditure contributed +USD 317,200 (+1.3 points), as Nasdaq Composite Index moved from 23150.0 to 26010.0 points. The event log records on 2026-06-05: Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before...",
+        "Interest rate duration contributed -USD 286,424 (-1.2 points), as US Treasury 10-year yield moved from 4.05 to 4.66 percent. The event log records on 2026-04-30: European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse."
+      ],
+      "provenance": "deterministic"
+    },
+    "recent": {
+      "client_id": "CL-0003",
+      "period": "recent",
+      "primary_driver": "Greater China consumer demand",
+      "fx_dominates": false,
+      "start": "2026-06-30",
+      "end": "2026-08-26",
+      "start_label": "Half-year",
+      "end_label": "Today",
+      "change_usd": 14229.809999998659,
+      "change_pct": 0.06419393891186062,
+      "price_effect_usd": 109227.40116616202,
+      "fx_effect_usd": -94997.59116616116,
+      "flow_effect_usd": 0.0,
+      "drivers": [
+        {
+          "theme_key": "greater_china_consumer",
+          "theme_name": "Greater China consumer demand",
+          "amount_usd": -116305.19999999925,
+          "pct_of_start": -0.5246794513723224,
+          "market_moves": [
+            {
+              "series_id": "HSI",
+              "series_name": "Hang Seng Index",
+              "unit": "points",
+              "start_value": 24950.0,
+              "end_value": 25280.0,
+              "change": 330.0,
+              "change_pct": 1.3226452905811703
+            }
+          ],
+          "events": []
+        },
+        {
+          "theme_key": "us_tech_ai",
+          "theme_name": "US technology and AI capital expenditure",
+          "amount_usd": 74000.0,
+          "pct_of_start": 0.333830984354544,
+          "market_moves": [
+            {
+              "series_id": "NASDAQ_COMP",
+              "series_name": "Nasdaq Composite Index",
+              "unit": "points",
+              "start_value": 25320.0,
+              "end_value": 26010.0,
+              "change": 690.0,
+              "change_pct": 2.7251184834123254
+            }
+          ],
+          "events": []
+        }
+      ],
+      "detractors": [
+        {
+          "instrument_id": "SYN-EQ-0010",
+          "instrument_name": "Global Luxury and Consumer Brands Fund",
+          "asset_class": "Equity",
+          "currency": "EUR",
+          "start_value_usd": 5896479.6,
+          "end_value_usd": 5780174.4,
+          "price_effect_usd": -84545.99999999923,
+          "fx_effect_usd": -31759.20000000003,
+          "flow_effect_usd": 0.0,
+          "total_usd": -116305.19999999925,
+          "price_return_pct": -1.4338385907414986,
+          "price_start": 244.1,
+          "price_end": 240.6
+        },
+        {
+          "instrument_id": "SYN-FI-0209",
+          "instrument_name": "EUR Investment Grade Bond Fund",
+          "asset_class": "Fixed Income",
+          "currency": "EUR",
+          "start_value_usd": 2059848.0,
+          "end_value_usd": 2028936.0,
+          "price_effect_usd": -19763.99999999999,
+          "fx_effect_usd": -11148.00000000001,
+          "flow_effect_usd": 0.0,
+          "total_usd": -30912.0,
+          "price_return_pct": -0.9594882729211052,
+          "price_start": 93.8,
+          "price_end": 92.9
+        }
+      ],
+      "contributors": [
+        {
+          "instrument_id": "SYN-EQ-0003",
+          "instrument_name": "US Technology Leaders Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 2294400.0,
+          "end_value_usd": 2368400.0,
+          "price_effect_usd": 74000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 74000.0,
+          "price_return_pct": 3.2252440725244025,
+          "price_start": 573.6,
+          "price_end": 592.1
+        },
+        {
+          "instrument_id": "SYN-ST-0107",
+          "instrument_name": "Nordvind Industrial AB",
+          "asset_class": "Equity",
+          "currency": "EUR",
+          "start_value_usd": 4043714.4,
+          "end_value_usd": 4075671.6,
+          "price_effect_usd": 54351.000000000204,
+          "fx_effect_usd": -22393.80000000002,
+          "flow_effect_usd": 0.0,
+          "total_usd": 31957.200000000183,
+          "price_return_pct": 1.3440860215053752,
+          "price_start": 409.2,
+          "price_end": 414.7
+        },
+        {
+          "instrument_id": "SYN-EQ-0004",
+          "instrument_name": "European Equity Fund",
+          "asset_class": "Equity",
+          "currency": "EUR",
+          "start_value_usd": 3595071.6,
+          "end_value_usd": 3626532.0,
+          "price_effect_usd": 51386.39999999992,
+          "fx_effect_usd": -19926.00000000002,
+          "flow_effect_usd": 0.0,
+          "total_usd": 31460.399999999903,
+          "price_return_pct": 1.4293567894447357,
+          "price_start": 181.9,
+          "price_end": 184.5
+        },
+        {
+          "instrument_id": "SYN-AL-0304",
+          "instrument_name": "Harborline Long Short Equity Fund",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 1377200.0,
+          "end_value_usd": 1401400.0,
+          "price_effect_usd": 24200.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 24200.0,
+          "price_return_pct": 1.757188498402562,
+          "price_start": 1252.0,
+          "price_end": 1274.0
+        },
+        {
+          "instrument_id": "SYN-SP-0506",
+          "instrument_name": "Autocallable ref. Asia Banks Basket, 7.80% p.a.",
+          "asset_class": "Structured Products",
+          "currency": "USD",
+          "start_value_usd": 1185600.0,
+          "end_value_usd": 1195200.0,
+          "price_effect_usd": 9600.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 9600.0,
+          "price_return_pct": 0.809716599190291,
+          "price_start": 98.8,
+          "price_end": 99.6
+        }
+      ],
+      "narrative": [
+        "Between 2026-06-30 and 2026-08-26 the household moved up USD 14,230, or 0.1%, from USD 22,166,906 to USD 22,181,136.",
+        "Of that, +USD 109,227 came from market moves, -USD 94,998 from currency translation and +USD 0 from money paid in or taken out.",
+        "Greater China consumer demand contributed -USD 116,305 (-0.5 points), as Hang Seng Index moved from 24950.0 to 25280.0 points.",
+        "US technology and AI capital expenditure contributed +USD 74,000 (+0.3 points), as Nasdaq Composite Index moved from 25320.0 to 26010.0 points."
+      ],
+      "provenance": "deterministic"
+    }
+  },
+  "exposures": {
+    "issuers": [
+      {
+        "key": "NORDVIND",
+        "name": "Nordvind Industrial AB",
+        "kind": "issuer",
+        "attributed_usd": 4075671.6,
+        "pct_of_household": 18.374494716921994,
+        "direct_usd": 4075671.6,
+        "looked_through_usd": 0.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-ST-0107",
+            "instrument_name": "Nordvind Industrial AB",
+            "wrapper": "Single Stock",
+            "market_value_usd": 4075671.6,
+            "attributed_usd": 4075671.6,
+            "basis_field": "instrument_name",
+            "basis_note": "Direct equity in the issuer.",
+            "portfolio_ids": [
+              "PF-0005"
+            ]
+          }
+        ],
+        "event_ids": []
+      }
+    ],
+    "themes": [
+      {
+        "key": "greater_china_consumer",
+        "name": "Greater China consumer demand",
+        "kind": "theme",
+        "attributed_usd": 5780174.4,
+        "pct_of_household": 26.058965098092727,
+        "direct_usd": 0,
+        "looked_through_usd": 5780174.4,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-EQ-0010",
+            "instrument_name": "Global Luxury and Consumer Brands Fund",
+            "wrapper": "Developed Market Equity",
+            "market_value_usd": 5780174.4,
+            "attributed_usd": 5780174.4,
+            "basis_field": "asset_class",
+            "basis_note": "Revenue exposure to Greater China discretionary spending, including luxury distribution.",
+            "portfolio_ids": [
+              "PF-0005"
+            ]
+          }
+        ],
+        "event_ids": []
+      },
+      {
+        "key": "us_tech_ai",
+        "name": "US technology and AI capital expenditure",
+        "kind": "theme",
+        "attributed_usd": 2368400.0,
+        "pct_of_household": 10.677541656584413,
+        "direct_usd": 0,
+        "looked_through_usd": 2368400.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-EQ-0003",
+            "instrument_name": "US Technology Leaders Fund",
+            "wrapper": "Developed Market Equity",
+            "market_value_usd": 2368400.0,
+            "attributed_usd": 2368400.0,
+            "basis_field": "asset_class",
+            "basis_note": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "portfolio_ids": [
+              "PF-0005"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-11"
+        ]
+      },
+      {
+        "key": "duration",
+        "name": "Interest rate duration",
+        "kind": "theme",
+        "attributed_usd": 2028936.0,
+        "pct_of_household": 9.147124074710248,
+        "direct_usd": 0,
+        "looked_through_usd": 2028936.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-FI-0209",
+            "instrument_name": "EUR Investment Grade Bond Fund",
+            "wrapper": "Investment Grade Credit",
+            "market_value_usd": 2028936.0,
+            "attributed_usd": 2028936.0,
+            "basis_field": "asset_class",
+            "basis_note": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+            "portfolio_ids": [
+              "PF-0005"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-09",
+          "EVT-12",
+          "EVT-13",
+          "EVT-15"
+        ]
+      }
+    ],
+    "unresolved": [
+      "underlying_reference names 'three Asian banking majors' without identifying them, so the individual issuers behind this note cannot be verified from the dataset."
+    ]
+  },
+  "liquidity": {
+    "client_id": "CL-0003",
+    "snapshot": "2026-08-26",
+    "horizon_months": 18,
+    "horizon_end": "2028-02-26",
+    "total_usd": 22181135.66,
+    "by_tier": {
+      "Daily": 19584535.66,
+      "Weekly": 0.0,
+      "Monthly": 1401400.0,
+      "Quarterly Gate": 0.0,
+      "Illiquid": 1195200.0
+    },
+    "readily_realisable_usd": 19584535.66,
+    "encumbered_cap_usd": null,
+    "withdrawable_usd": 19584535.66,
+    "gated_usd": 0.0,
+    "illiquid_usd": 1195200.0,
+    "obligations": [
+      {
+        "id": "CN-004",
+        "source": "planned_cash_needs",
+        "description": "German inheritance tax instalment",
+        "currency": "EUR",
+        "amount_ccy": 3400000.0,
+        "amount_usd": 3712800.0000000005,
+        "occurrences": 1,
+        "total_usd": 3712800.0000000005,
+        "due_from": "2026-10-01",
+        "due_to": "2026-12-31",
+        "certainty": "Confirmed",
+        "recurrence": "One-off"
+      }
+    ],
+    "obligations_confirmed_usd": 3712800.0000000005,
+    "obligations_total_usd": 3712800.0000000005,
+    "coverage_ratio": 5.274869548588666,
+    "shortfall_usd": 0.0,
+    "gated_positions": [
+      {
+        "instrument_id": "SYN-SP-0506",
+        "instrument_name": "Autocallable ref. Asia Banks Basket, 7.80% p.a.",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 1195200.0,
+        "advance_rate_pct": 30.0
+      }
+    ],
+    "notes": []
+  },
+  "facilities": [],
+  "insights": [
+    {
+      "id": "CL-0003-bands-PF-0005",
+      "client_id": "CL-0003",
+      "category": "mandate",
+      "severity": "critical",
+      "headline": "Inherited Portfolio - Under Review sits outside 2 of its Conservative bands",
+      "summary": "The largest gap is Equity at 71.5% against a 10-30% band, 41.5 percentage points above the limit. Across all asset classes the portfolio is 77.3 percentage points away from its permitted ranges.",
+      "priority_score": 82.5,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 100.0% of household wealth (USD 22,181,136)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Equity",
+          "value": "71.5% vs band 10-30% (target 20%), 41.5pp above",
+          "numeric": 71.46062422852741,
+          "unit": "%",
+          "trend": "up"
+        },
+        {
+          "label": "Fixed Income",
+          "value": "9.1% vs band 45-75% (target 60%), 35.9pp below",
+          "numeric": 9.147124076079361,
+          "unit": "%",
+          "trend": "down"
+        }
+      ],
+      "client_relevance": "This is a advisory portfolio. Positions are client-directed, so the fix needs the client's agreement.",
+      "suggested_next_step": "Agree a dated correction plan, or record a documented decision to stay outside the band.",
+      "evidence": [
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "CONS/Equity",
+          "field": "min_pct/max_pct",
+          "value": "10.0-30.0",
+          "snapshot_date": null,
+          "note": "Actual 71.5% at 2026-08-26."
+        },
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "CONS/Fixed Income",
+          "field": "min_pct/max_pct",
+          "value": "45.0-75.0",
+          "snapshot_date": null,
+          "note": "Actual 9.1% at 2026-08-26."
+        },
+        {
+          "source_file": "portfolios.csv",
+          "row_or_id": "PF-0005",
+          "field": "service_model",
+          "value": "Advisory",
+          "snapshot_date": null,
+          "note": null
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "Weights are measured within the portfolio in its base currency, as the mandate is written.",
+          "basis": "mandates.csv bands apply per portfolio, not per household.",
+          "impact_if_wrong": null
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Breach is drift or client-directed",
+          "result": "not_assessed",
+          "detail": "No RM note in the file reads as an instruction or waiver for this portfolio, so the breach is treated as drift.",
+          "reference": "rm_notes.json"
+        }
+      ],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0005"
+      ],
+      "instrument_ids": [],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0003-riskprofile",
+      "client_id": "CL-0003",
+      "category": "suitability",
+      "severity": "critical",
+      "headline": "Portfolio holds 83% risk assets against a Conservative profile",
+      "summary": "Equity, alternatives, structured products and commodities total USD 18,447,378, 83.2% of household wealth. The client is profiled Conservative with a risk tolerance of 2/10 and an investment horizon of 15.0 years.",
+      "priority_score": 82.5,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 76.3% of household wealth",
+        "No dated deadline; scored as background risk",
+        "Risk assets 83% against about 45% implied by a tolerance score of 2/10"
+      ],
+      "observed_facts": [
+        {
+          "label": "Cash and Equivalents",
+          "value": "7.7% (USD 1,704,822)",
+          "numeric": 7.6859079090092,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Fixed Income",
+          "value": "9.1% (USD 2,028,936)",
+          "numeric": 9.147124074710248,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Equity",
+          "value": "71.5% (USD 15,850,778)",
+          "numeric": 71.46062421224107,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Alternatives",
+          "value": "6.3% (USD 1,401,400)",
+          "numeric": 6.317981285904997,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Structured Products",
+          "value": "5.4% (USD 1,195,200)",
+          "numeric": 5.388362518134475,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Recorded risk profile",
+          "value": "Conservative",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Risk tolerance",
+          "value": "2/10",
+          "numeric": 2.0,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Life stage",
+          "value": "Recently inherited - transition",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        }
+      ],
+      "client_relevance": "Where a portfolio was inherited or transferred in, the allocation reflects the previous owner's decisions rather than this client's.",
+      "suggested_next_step": "Agree a target allocation and a staged path to it, rather than presenting a single large rebalancing decision.",
+      "evidence": [
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0003",
+          "field": "risk_profile",
+          "value": "Conservative",
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0003",
+          "field": "risk_tolerance_score",
+          "value": 2.0,
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "rm_notes.json",
+          "row_or_id": "N-005",
+          "field": "note",
+          "value": "First meeting following the transfer in. Mrs Voss-Brenner is still grieving and asked that we not make any changes for now. She said several times that she does not understand what is in the portfolio and that her husband handled all of it. She described herself as someone who has never taken a risk with money. Risk profiling completed as Conservative. The portfolio as transferred is not conservative.",
+          "snapshot_date": "2026-02-16",
+          "note": "RM note. Client's own words, not independently verified."
+        },
+        {
+          "source_file": "rm_notes.json",
+          "row_or_id": "N-006",
+          "field": "note",
+          "value": "Client asked whether she should be worried about the news from the Middle East. Sent a short note. She replied asking whether her portfolio would be affected and said she would prefer 'something safe and boring'. German inheritance tax instalment of around EUR 3.4m falls due before year end.",
+          "snapshot_date": "2026-05-29",
+          "note": "RM note. Client's own words, not independently verified."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "The risk-asset ceiling implied by a tolerance score is a reference band, not a bank policy limit.",
+          "basis": "Derived from the mandate bands for the matching strategy.",
+          "impact_if_wrong": "The mandate band check is the contractual test; this signal adds the client's own framing to it."
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Allocation consistent with recorded profile",
+          "result": "fail",
+          "detail": "83.2% risk assets against a Conservative profile.",
+          "reference": "clients.csv, holdings.csv"
+        }
+      ],
+      "confidence": "derived",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 18447378.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0003-tax",
+      "client_id": "CL-0003",
+      "category": "tax",
+      "severity": "high",
+      "headline": "Tax-sensitive decision ahead under Germany domicile, with EUR 3,400,000 due from 2026-10-01",
+      "summary": "Tax domicile is Germany while country of residence is Singapore. Domicile governs the treatment, and this engine does not calculate tax outcomes: it flags that funding this from the portfolio is a decision with a tax dimension that needs the wealth planning team.",
+      "priority_score": 71.8,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 16.7% of household wealth (USD 3,712,800)",
+        "Due in 36 days"
+      ],
+      "observed_facts": [
+        {
+          "label": "Tax domicile",
+          "value": "Germany",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Country of residence",
+          "value": "Singapore",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        },
+        {
+          "label": "Unrealised gains in the household",
+          "value": "USD 2,862,783",
+          "numeric": 2862782.5371600003,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Unrealised losses in the household",
+          "value": "USD -246,792",
+          "numeric": -246792.00000000003,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "German inheritance tax instalment",
+          "value": "EUR 3,400,000, 2026-10-01 to 2026-12-31 (Confirmed)",
+          "numeric": 3400000.0,
+          "unit": "EUR",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Which positions are sold, and in what order, changes the outcome. Gains and losses within the household can be considered together.",
+      "suggested_next_step": "Involve wealth planning before any disposal, and prepare a funding shortlist ranked by tax impact rather than by liquidity alone.",
+      "evidence": [
+        {
+          "source_file": "clients.csv",
+          "row_or_id": "CL-0003",
+          "field": "tax_domicile",
+          "value": "Germany",
+          "snapshot_date": null,
+          "note": "Domicile, not residence, governs the treatment."
+        },
+        {
+          "source_file": "planned_cash_needs.csv",
+          "row_or_id": "CN-004",
+          "field": "amount",
+          "value": "EUR 3,400,000",
+          "snapshot_date": null,
+          "note": "German inheritance tax instalment (Confirmed)."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "No tax figure is calculated.",
+          "basis": "The dataset does not carry the residency history, allowances or acquisition dates a calculation would need.",
+          "impact_if_wrong": "None. The gap is stated rather than filled."
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Tax advice boundary",
+          "result": "attention",
+          "detail": "Clarity does not give tax advice. This routes to wealth planning.",
+          "reference": null
+        }
+      ],
+      "confidence": "measured",
+      "open_questions": [
+        "Has the wealth planning team already been engaged on this?",
+        "Are there prior-year losses available within the household?"
+      ],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 3712800.0000000005,
+      "status": "new"
+    },
+    {
+      "id": "CL-0003-poslimit-PF-0005",
+      "client_id": "CL-0003",
+      "category": "mandate",
+      "severity": "high",
+      "headline": "1 position(s) above the 10% single-position limit",
+      "summary": "Nordvind Industrial AB is 18.4% of Inherited Portfolio - Under Review against a 10% ceiling. The limit applies to single-name and single-asset exposures; diversified funds and sovereign bonds are excluded from the test.",
+      "priority_score": 61.0,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 18.4% of household wealth",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Nordvind Industrial AB",
+          "value": "18.4% vs 10% limit (EUR 3,732,300)",
+          "numeric": 18.374494719672228,
+          "unit": "%",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Single-position limits exist to cap the damage one issuer can do. Where several breaches share an underlying driver, the effective concentration is larger than any one line suggests.",
+      "suggested_next_step": "Rank the breaches by how correlated they are with each other before deciding which to reduce first.",
+      "evidence": [
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "CONS",
+          "field": "max_single_position_pct",
+          "value": 10.0,
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0107",
+          "field": "concentration_limit_applies",
+          "value": "Y",
+          "snapshot_date": null,
+          "note": "Nordvind Industrial AB at 18.4%."
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0005"
+      ],
+      "instrument_ids": [
+        "SYN-ST-0107"
+      ],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0003-explain-ytd",
+      "client_id": "CL-0003",
+      "category": "performance",
+      "severity": "medium",
+      "headline": "Household down 5.7% year to date, driven by currency translation",
+      "summary": "Between 2025-12-31 and 2026-08-26 the household moved down USD 1,335,842, or 5.7%, from USD 23,516,978 to USD 22,181,136. Of that, -USD 271,264 came from market moves, -USD 1,064,578 from currency translation and +USD 0 from money paid in or taken out. Currency did more of the work than markets: reported in USD, the translation effect of USD 1,064,578 is larger than the USD 271,264 of market movement. Measured in the client's own EUR reporting currency, the picture is different. Greater China consumer demand contributed -USD 977,522 (-4.2 points), as Hang Seng Index moved from 24800.0 to 25280.0 points. US technology and AI capital expenditure contributed +USD 317,200 (+1.3 points), as Nasdaq Composite Index moved from 23150.0 to 26010.0 points. The event log records on 2026-06-05: Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before... Interest rate duration contributed -USD 286,424 (-1.2 points), as US Treasury 10-year yield moved from 4.05 to 4.66 percent. The event log records on 2026-04-30: European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+      "priority_score": 36.6,
+      "priority_reasons": [
+        "Severity medium (weight 0.52)",
+        "Affects 5.7% of household wealth (USD 1,335,842)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Household value",
+          "value": "USD 23,516,978 to USD 22,181,136",
+          "numeric": 22181135.66,
+          "unit": "USD",
+          "trend": "down"
+        },
+        {
+          "label": "Change since year-end 2025",
+          "value": "-USD 1,335,842 (-5.7%)",
+          "numeric": -1335842.0100000016,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Market effect",
+          "value": "-USD 271,264",
+          "numeric": -271263.99976374564,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Currency effect",
+          "value": "-USD 1,064,578",
+          "numeric": -1064578.010236254,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Money in and out",
+          "value": "+USD 0",
+          "numeric": 0.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Greater China consumer demand",
+          "value": "-USD 977,522 (-4.2 points)",
+          "numeric": -977521.5999999996,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "US technology and AI capital expenditure",
+          "value": "+USD 317,200 (+1.3 points)",
+          "numeric": 317200.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Interest rate duration",
+          "value": "-USD 286,424 (-1.2 points)",
+          "numeric": -286424.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Global Luxury and Consumer Brands Fund",
+          "value": "USD 617,584 from the market move, price 264.8 to 240.6",
+          "numeric": -617584.0000000005,
+          "unit": "USD",
+          "trend": "down"
+        },
+        {
+          "label": "EUR Investment Grade Bond Fund",
+          "value": "USD 160,080 from the market move, price 99.8 to 92.9",
+          "numeric": -160080.00000000032,
+          "unit": "USD",
+          "trend": "down"
+        },
+        {
+          "label": "Autocallable ref. Asia Banks Basket, 7.80% p.a.",
+          "value": "USD 4,800 from the market move, price 100.0 to 99.6",
+          "numeric": -4800.0,
+          "unit": "USD",
+          "trend": "down"
+        }
+      ],
+      "client_relevance": "This is the answer to the first question the client will ask. Having the attribution and the event behind it means the answer does not depend on recalling what happened in March.",
+      "suggested_next_step": "Open the meeting with the attribution rather than the headline number.",
+      "evidence": [
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-EQ-0010",
+          "field": "market_value_usd",
+          "value": "6,757,696 -> 5,780,174",
+          "snapshot_date": "2026-08-26",
+          "note": "Global Luxury and Consumer Brands Fund: price effect USD -617,584, FX USD -359,938, flows USD 0 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-FI-0209",
+          "field": "market_value_usd",
+          "value": "2,315,360 -> 2,028,936",
+          "snapshot_date": "2026-08-26",
+          "note": "EUR Investment Grade Bond Fund: price effect USD -160,080, FX USD -126,344, flows USD 0 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-SP-0506",
+          "field": "market_value_usd",
+          "value": "1,200,000 -> 1,195,200",
+          "snapshot_date": "2026-08-26",
+          "note": "Autocallable ref. Asia Banks Basket, 7.80% p.a.: price effect USD -4,800, FX USD 0, flows USD 0 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-CA-0604",
+          "field": "market_value_usd",
+          "value": "1,044,000 -> 982,800",
+          "snapshot_date": "2026-08-26",
+          "note": "EUR Call Deposit: price effect USD -0, FX USD -61,200, flows USD 0 between 2025-12-31 and 2026-08-26."
+        },
+        {
+          "source_file": "market_context.csv",
+          "row_or_id": "HSI",
+          "field": "value",
+          "value": "24800.0 -> 25280.0 points",
+          "snapshot_date": "2026-08-26",
+          "note": "Hang Seng Index, 2025-12-31 to 2026-08-26."
+        },
+        {
+          "source_file": "market_context.csv",
+          "row_or_id": "NASDAQ_COMP",
+          "field": "value",
+          "value": "23150.0 -> 26010.0 points",
+          "snapshot_date": "2026-08-26",
+          "note": "Nasdaq Composite Index, 2025-12-31 to 2026-08-26."
+        },
+        {
+          "source_file": "market_context.csv",
+          "row_or_id": "UST_10Y_PCT",
+          "field": "value",
+          "value": "4.05 -> 4.66 percent",
+          "snapshot_date": "2026-08-26",
+          "note": "US Treasury 10-year yield, 2025-12-31 to 2026-08-26."
+        },
+        {
+          "source_file": "market_context.csv",
+          "row_or_id": "UST_2Y_PCT",
+          "field": "value",
+          "value": "3.68 -> 4.14 percent",
+          "snapshot_date": "2026-08-26",
+          "note": "US Treasury 2-year yield, 2025-12-31 to 2026-08-26."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-11",
+          "field": "description",
+          "value": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+          "snapshot_date": "2026-06-05",
+          "note": "Transmission: US technology, concentrated equity, collateralised lending. Severity High."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-09",
+          "field": "description",
+          "value": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+          "snapshot_date": "2026-04-30",
+          "note": "Transmission: European fixed income, EUR assets. Severity Medium."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-12",
+          "field": "description",
+          "value": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+          "snapshot_date": "2026-06-17",
+          "note": "Transmission: Duration, rate-sensitive credit, USD. Severity High."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-13",
+          "field": "description",
+          "value": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+          "snapshot_date": "2026-06-19",
+          "note": "Transmission: Long-duration fixed income. Severity High."
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-15",
+          "field": "description",
+          "value": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+          "snapshot_date": "2026-07-29",
+          "note": "Transmission: Duration, growth equity valuations. Severity High."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "For positions opened during the period, money deployed is taken from cost_basis_base and converted at the closing snapshot's exchange rate.",
+          "basis": "cost_basis_base is struck at the rate prevailing when the position was acquired, and the dataset does not record the acquisition rate separately.",
+          "impact_if_wrong": "A small FX component of the gain or loss is reported as a price effect. It does not change the size of the total move."
+        }
+      ],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [
+        "EVT-11",
+        "EVT-09",
+        "EVT-12",
+        "EVT-13",
+        "EVT-15"
+      ],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 1335842.0100000016,
+      "status": "new"
+    }
+  ],
+  "options": {
+    "CL-0003-bands-PF-0005": [
+      {
+        "id": "CL-0003-bands-PF-0005-opt-correct",
+        "label": "Correct to the mandate bands over a staged programme",
+        "rationale": "Bringing the portfolio inside its bands is the contractual position. Staging it avoids putting the whole correction through the market on one day, which matters most for the largest gaps.",
+        "mechanics": [
+          "Reduce Equity from 71.5% toward the 20% target (EUR 10,452,885 to trade)",
+          "Increase Fixed Income from 9.1% toward the 60% target (EUR 10,329,437 to trade)",
+          "Agree tranche sizes and dates, and record the end state"
+        ],
+        "trade_offs": [
+          "Executes into current prices rather than chosen ones",
+          "Crystallises gains or losses across several positions",
+          "Takes time, so the breach persists during the programme"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Conservative, tolerance 2.0/10, horizon 15.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Germany. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Brings 2 asset class(es) inside their bands.",
+        "evidence": [
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "CONS/Equity",
+            "field": "min_pct/max_pct",
+            "value": "10.0-30.0",
+            "snapshot_date": null,
+            "note": "Actual 71.5% at 2026-08-26."
+          },
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "CONS/Fixed Income",
+            "field": "min_pct/max_pct",
+            "value": "45.0-75.0",
+            "snapshot_date": null,
+            "note": "Actual 9.1% at 2026-08-26."
+          },
+          {
+            "source_file": "portfolios.csv",
+            "row_or_id": "PF-0005",
+            "field": "service_model",
+            "value": "Advisory",
+            "snapshot_date": null,
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0003-bands-PF-0005-opt-document",
+        "label": "Document a client-directed exception with a review date",
+        "rationale": "Where the client has instructed the position and understands the consequence, the honest outcome is a recorded exception rather than a correction plan nobody intends to execute.",
+        "mechanics": [
+          "Record the client's instruction and confirmation in writing",
+          "Log the exception with a defined size limit and review date",
+          "Report the breach in the periodic mandate review"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside its bands",
+          "Requires the client to accept the position in writing",
+          "Does not remove the underlying risk"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Conservative, tolerance 2.0/10, horizon 15.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Written client instruction on file",
+            "result": "not_assessed",
+            "detail": "No instruction found in the RM notes for this breach.",
+            "reference": "rm_notes.json"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Compliance sign-off",
+          "Client confirmation in writing"
+        ],
+        "estimated_impact": "No portfolio change; the exception becomes visible and dated.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0003-bands-PF-0005-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if any band gap widens by more than 3 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio remains outside a contractual limit, which is reportable whether or not it is discussed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0003-riskprofile": [
+      {
+        "id": "CL-0003-riskprofile-opt-staged",
+        "label": "Agree a target allocation and move to it in dated tranches",
+        "rationale": "A single large rebalancing decision is hard for a client to accept and easy to defer. A target with dates attached converts it into a sequence of smaller confirmations.",
+        "mechanics": [
+          "Agree the destination allocation, not the first trade",
+          "Break the move into tranches with dates",
+          "Confirm each tranche in writing before execution"
+        ],
+        "trade_offs": [
+          "The portfolio remains unsuitable during the transition",
+          "Market moves during the programme change the arithmetic"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Conservative, tolerance 2.0/10, horizon 15.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Germany. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Moves the portfolio toward the recorded profile over time.",
+        "evidence": [
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0003",
+            "field": "risk_profile",
+            "value": "Conservative",
+            "snapshot_date": null,
+            "note": null
+          },
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0003",
+            "field": "risk_tolerance_score",
+            "value": 2.0,
+            "snapshot_date": null,
+            "note": null
+          },
+          {
+            "source_file": "rm_notes.json",
+            "row_or_id": "N-005",
+            "field": "note",
+            "value": "First meeting following the transfer in. Mrs Voss-Brenner is still grieving and asked that we not make any changes for now. She said several times that she does not understand what is in the portfolio and that her husband handled all of it. She described herself as someone who has never taken a risk with money. Risk profiling completed as Conservative. The portfolio as transferred is not conservative.",
+            "snapshot_date": "2026-02-16",
+            "note": "RM note. Client's own words, not independently verified."
+          }
+        ]
+      },
+      {
+        "id": "CL-0003-riskprofile-opt-reprofile",
+        "label": "Re-run the risk profiling before changing anything",
+        "rationale": "If the recorded profile is wrong, every downstream check is wrong too. Where a profile was set during a life event, confirming it is the cheapest first step.",
+        "mechanics": [
+          "Re-run the profiling questionnaire with the client",
+          "Compare the result with the current allocation",
+          "Update clients.risk_profile and re-run the checks"
+        ],
+        "trade_offs": [
+          "Delays any portfolio change",
+          "May confirm the mismatch rather than resolve it"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Conservative, tolerance 2.0/10, horizon 15.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM meeting",
+          "Client participation"
+        ],
+        "estimated_impact": "Confirms or corrects the basis for every other action.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0003-riskprofile-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if risk assets rise a further 5 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside what the client said they wanted, which is the position that has to be defended if markets fall."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0003-tax": [
+      {
+        "id": "CL-0003-tax-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Involve wealth planning before any disposal, and prepare a funding shortlist ranked by tax impact rather than by liquidity alone.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Conservative, tolerance 2.0/10, horizon 15.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "clients.csv",
+            "row_or_id": "CL-0003",
+            "field": "tax_domicile",
+            "value": "Germany",
+            "snapshot_date": null,
+            "note": "Domicile, not residence, governs the treatment."
+          },
+          {
+            "source_file": "planned_cash_needs.csv",
+            "row_or_id": "CN-004",
+            "field": "amount",
+            "value": "EUR 3,400,000",
+            "snapshot_date": null,
+            "note": "German inheritance tax instalment (Confirmed)."
+          }
+        ]
+      },
+      {
+        "id": "CL-0003-tax-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0003-poslimit-PF-0005": [
+      {
+        "id": "CL-0003-poslimit-PF-0005-opt-correct",
+        "label": "Correct to the mandate bands over a staged programme",
+        "rationale": "Bringing the portfolio inside its bands is the contractual position. Staging it avoids putting the whole correction through the market on one day, which matters most for the largest gaps.",
+        "mechanics": [
+          "Reduce Equity from 71.5% toward the 20% target (EUR 10,452,885 to trade)",
+          "Increase Fixed Income from 9.1% toward the 60% target (EUR 10,329,437 to trade)",
+          "Agree tranche sizes and dates, and record the end state"
+        ],
+        "trade_offs": [
+          "Executes into current prices rather than chosen ones",
+          "Crystallises gains or losses across several positions",
+          "Takes time, so the breach persists during the programme"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Conservative, tolerance 2.0/10, horizon 15.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Germany. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Brings 2 asset class(es) inside their bands.",
+        "evidence": [
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "CONS",
+            "field": "max_single_position_pct",
+            "value": 10.0,
+            "snapshot_date": null,
+            "note": null
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-ST-0107",
+            "field": "concentration_limit_applies",
+            "value": "Y",
+            "snapshot_date": null,
+            "note": "Nordvind Industrial AB at 18.4%."
+          }
+        ]
+      },
+      {
+        "id": "CL-0003-poslimit-PF-0005-opt-document",
+        "label": "Document a client-directed exception with a review date",
+        "rationale": "Where the client has instructed the position and understands the consequence, the honest outcome is a recorded exception rather than a correction plan nobody intends to execute.",
+        "mechanics": [
+          "Record the client's instruction and confirmation in writing",
+          "Log the exception with a defined size limit and review date",
+          "Report the breach in the periodic mandate review"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside its bands",
+          "Requires the client to accept the position in writing",
+          "Does not remove the underlying risk"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Conservative, tolerance 2.0/10, horizon 15.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Written client instruction on file",
+            "result": "not_assessed",
+            "detail": "No instruction found in the RM notes for this breach.",
+            "reference": "rm_notes.json"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Compliance sign-off",
+          "Client confirmation in writing"
+        ],
+        "estimated_impact": "No portfolio change; the exception becomes visible and dated.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0003-poslimit-PF-0005-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if any band gap widens by more than 3 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio remains outside a contractual limit, which is reportable whether or not it is discussed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0003-explain-ytd": [
+      {
+        "id": "CL-0003-explain-ytd-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Open the meeting with the attribution rather than the headline number.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Conservative, tolerance 2.0/10, horizon 15.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-EQ-0010",
+            "field": "market_value_usd",
+            "value": "6,757,696 -> 5,780,174",
+            "snapshot_date": "2026-08-26",
+            "note": "Global Luxury and Consumer Brands Fund: price effect USD -617,584, FX USD -359,938, flows USD 0 between 2025-12-31 and 2026-08-26."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-FI-0209",
+            "field": "market_value_usd",
+            "value": "2,315,360 -> 2,028,936",
+            "snapshot_date": "2026-08-26",
+            "note": "EUR Investment Grade Bond Fund: price effect USD -160,080, FX USD -126,344, flows USD 0 between 2025-12-31 and 2026-08-26."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-SP-0506",
+            "field": "market_value_usd",
+            "value": "1,200,000 -> 1,195,200",
+            "snapshot_date": "2026-08-26",
+            "note": "Autocallable ref. Asia Banks Basket, 7.80% p.a.: price effect USD -4,800, FX USD 0, flows USD 0 between 2025-12-31 and 2026-08-26."
+          }
+        ]
+      },
+      {
+        "id": "CL-0003-explain-ytd-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ]
+  },
+  "brief": {
+    "client_id": "CL-0003",
+    "generated_at": "2026-09-04T10:41:46+00:00",
+    "as_of": "2026-08-26",
+    "purpose": "Review Margarethe Voss-Brenner. Inherited Portfolio - Under Review sits outside 2 of its Conservative bands. Then: Portfolio holds 83% risk assets against a Conservative profile.",
+    "talking_points": [
+      "Between 2025-12-31 and 2026-08-26 the household moved down USD 1,335,842, or 5.7%, from USD 23,516,978 to USD 22,181,136.",
+      "Of that, -USD 271,264 came from market moves, -USD 1,064,578 from currency translation and +USD 0 from money paid in or taken out.",
+      "Inherited Portfolio - Under Review sits outside 2 of its Conservative bands. The largest gap is Equity at 71.5% against a 10-30% band, 41.5 percentage points above the limit. Across all asset classes the portfolio is 77.3 percentage points away from its permitted ranges.",
+      "Portfolio holds 83% risk assets against a Conservative profile. Equity, alternatives, structured products and commodities total USD 18,447,378, 83.2% of household wealth. The client is profiled Conservative with a risk tolerance of 2/10 and an investment horizon of 15.0 years.",
+      "Tax-sensitive decision ahead under Germany domicile, with EUR 3,400,000 due from 2026-10-01. Tax domicile is Germany while country of residence is Singapore. Domicile governs the treatment, and this engine does not calculate tax outcomes: it flags that funding this from the portfolio is a decision with a tax dimension that needs the wealth planning team.",
+      "1 position(s) above the 10% single-position limit. Nordvind Industrial AB is 18.4% of Inherited Portfolio - Under Review against a 10% ceiling. The limit applies to single-name and single-asset exposures; diversified funds and sovereign bonds are excluded from the test."
+    ],
+    "questions_to_ask": [
+      "Has the wealth planning team already been engaged on this?",
+      "Are there prior-year losses available within the household?",
+      "Are these still the objectives? Recorded as: Understand and de-risk the inherited portfolio; secure a stable income; German inheritance tax planning",
+      "Has anything changed in the client's circumstances? Life stage on file is \"Recently inherited - transition\"."
+    ],
+    "relationship_context": [
+      "2026-02-16 (Meeting, N-005): First meeting following the transfer in. Mrs Voss-Brenner is still grieving and asked that we not make any changes for now. She said several times that she does not understand what is in the portfolio and that her husband handled all of it. She described herself as someone who has never taken a risk with money. Risk profiling completed as Conservative. The portfolio as transferred is not conservative.",
+      "2026-05-29 (Email, N-006): Client asked whether she should be worried about the news from the Middle East. Sent a short note. She replied asking whether her portfolio would be affected and said she would prefer 'something safe and boring'. German inheritance tax instalment of around EUR 3.4m falls due before year end."
+    ],
+    "contradictions": [
+      "Portfolio holds 83% risk assets against a Conservative profile. Equity, alternatives, structured products and commodities total USD 18,447,378, 83.2% of household wealth. The client is profiled Conservative with a risk tolerance of 2/10 and an investment horizon of 15.0 years."
+    ],
+    "do_not_say": [
+      "Do not present any figure as investment advice. These are options for review.",
+      "Do not quote a tax outcome. Tax domicile drives the treatment and wealth planning owns the answer.",
+      "Do not describe a private markets or unlisted mark as current without saying when it was struck.",
+      "Do not present an RM note as an independently verified fact.",
+      "Do not promise a redemption date for a gated vehicle."
+    ],
+    "draft_follow_up": "Dear Margarethe Voss-Brenner,\n\nThank you for your time today. A short summary of what we discussed and what happens next.\n\nWhere the portfolio stands. Between 2025-12-31 and 2026-08-26 the household moved down USD 1,335,842, or 5.7%, from USD 23,516,978 to USD 22,181,136. Of that, -USD 271,264 came from market moves, -USD 1,064,578 from currency translation and +USD 0 from money paid in or taken out.\n\nWhat we focused on. Inherited Portfolio - Under Review sits outside 2 of its Conservative bands. The largest gap is Equity at 71.5% against a 10-30% band, 41.5 percentage points above the limit. Across all asset classes the portfolio is 77.3 percentage points away from its permitted ranges.\n\nWhat we agreed to look at. Agree a dated correction plan, or record a documented decision to stay outside the band.\n\nNothing in this note is a recommendation to buy or sell. Any action will be confirmed with you in writing before it is taken, and the figures above are as at 2026-08-26.\n\nKind regards,\nPriscilla Ong\nAsia desk - Singapore and Hong Kong booking centres\n\n[Draft is in English. Client's reporting language is German; route through translation before sending.]",
+    "provenance": "deterministic"
+  },
+  "notes": [
+    {
+      "note_id": "N-005",
+      "note_date": "2026-02-16",
+      "channel": "Meeting",
+      "rm_name": "Priscilla Ong",
+      "note": "First meeting following the transfer in. Mrs Voss-Brenner is still grieving and asked that we not make any changes for now. She said several times that she does not understand what is in the portfolio and that her husband handled all of it. She described herself as someone who has never taken a risk with money. Risk profiling completed as Conservative. The portfolio as transferred is not conservative."
+    },
+    {
+      "note_id": "N-006",
+      "note_date": "2026-05-29",
+      "channel": "Email",
+      "rm_name": "Priscilla Ong",
+      "note": "Client asked whether she should be worried about the news from the Middle East. Sent a short note. She replied asking whether her portfolio would be affected and said she would prefer 'something safe and boring'. German inheritance tax instalment of around EUR 3.4m falls due before year end."
+    }
+  ],
+  "events": [
+    {
+      "event_id": "EVT-15",
+      "event_date": "2026-07-29",
+      "event_type": "Policy",
+      "region": "United States",
+      "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+      "primary_transmission": "Duration, growth equity valuations",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-13",
+      "event_date": "2026-06-19",
+      "event_type": "Market",
+      "region": "United States",
+      "description": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+      "primary_transmission": "Long-duration fixed income",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-12",
+      "event_date": "2026-06-17",
+      "event_type": "Policy",
+      "region": "United States",
+      "description": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+      "primary_transmission": "Duration, rate-sensitive credit, USD",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-11",
+      "event_date": "2026-06-05",
+      "event_type": "Market",
+      "region": "United States",
+      "description": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+      "primary_transmission": "US technology, concentrated equity, collateralised lending",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-09",
+      "event_date": "2026-04-30",
+      "event_type": "Policy",
+      "region": "Europe",
+      "description": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+      "primary_transmission": "European fixed income, EUR assets",
+      "severity": "Medium"
+    }
+  ],
+  "market": {
+    "series": [
+      {
+        "series_id": "BRENT_USD_BBL",
+        "series_name": "Brent crude",
+        "category": "Commodity",
+        "unit": "USD/barrel",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 69.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 72.4
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 104.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 96.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 101.5
+          }
+        ]
+      },
+      {
+        "series_id": "GOLD_USD_OZ",
+        "series_name": "Gold spot",
+        "category": "Commodity",
+        "unit": "USD/troy oz",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4310.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 5050.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 5240.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4780.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4622.6
+          }
+        ]
+      },
+      {
+        "series_id": "UST_10Y_PCT",
+        "series_name": "US Treasury 10-year yield",
+        "category": "Rates",
+        "unit": "percent",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4.05
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 3.95
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 4.35
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4.52
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4.66
+          }
+        ]
+      },
+      {
+        "series_id": "NASDAQ_COMP",
+        "series_name": "Nasdaq Composite Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 23150.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 24620.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 23880.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 25320.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 26010.0
+          }
+        ]
+      },
+      {
+        "series_id": "HSI",
+        "series_name": "Hang Seng Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 24800.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 25350.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 24100.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 24950.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25280.0
+          }
+        ]
+      },
+      {
+        "series_id": "VIX",
+        "series_name": "CBOE Volatility Index",
+        "category": "Volatility",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 15.2
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 17.8
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 31.4
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 22.6
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25.1
+          }
+        ]
+      }
+    ]
+  },
+  "audit": []
+}

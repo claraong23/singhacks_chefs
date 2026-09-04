@@ -1,0 +1,3159 @@
+{
+  "as_of": "2026-08-26",
+  "client": {
+    "client_id": "CL-0017",
+    "client_name": "Fong Enterprises Family Office",
+    "age": null,
+    "nationality": "Hong Kong SAR",
+    "country_of_residence": "Hong Kong SAR",
+    "tax_domicile": "Hong Kong SAR",
+    "booking_centre": "Hong Kong",
+    "base_currency": "USD",
+    "wealth_band": "UHNW",
+    "life_stage": "Multi-generational - G2 and G3",
+    "source_of_wealth": "Inherited - textiles and logistics group sold in 2009",
+    "risk_profile": "Balanced",
+    "risk_tolerance_score": 5.0,
+    "investment_horizon_years": 50.0,
+    "liquidity_needs": "Medium",
+    "objectives": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+    "client_since": "2009-11-13",
+    "kyc_review_due": "2026-11-13",
+    "reporting_language": "English",
+    "rm_name": "Priscilla Ong",
+    "total_usd": 87902980.0
+  },
+  "portfolios": [
+    {
+      "portfolio_id": "PF-0019",
+      "portfolio_name": "Family Office Core Mandate",
+      "mandate_code": "BAL",
+      "mandate_name": "Balanced",
+      "service_model": "Discretionary",
+      "base_currency": "USD",
+      "benchmark": "JB Balanced USD Composite",
+      "inception_date": "2009-12-01",
+      "value_usd": 41809580.0,
+      "aum_series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "value_base": 40901240.0
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "value_base": 42041260.0
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "value_base": 41026130.0
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "value_base": 41622224.0
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "value_base": 41809580.0
+        }
+      ],
+      "mandate_review": {
+        "portfolio_id": "PF-0019",
+        "client_id": "CL-0017",
+        "mandate_code": "BAL",
+        "mandate_name": "Balanced",
+        "service_model": "Discretionary",
+        "governed": true,
+        "base_currency": "USD",
+        "total_base": 41809580.0,
+        "allocation_pct": {
+          "Equity": 56.20501330077939,
+          "Fixed Income": 32.46863517882744,
+          "Commodities": 5.1076810625698705,
+          "Cash and Equivalents": 6.218670457823302
+        },
+        "band_breaches": [
+          {
+            "portfolio_id": "PF-0019",
+            "mandate_code": "BAL",
+            "asset_class": "Equity",
+            "actual_pct": 56.20501330077939,
+            "min_pct": 30.0,
+            "target_pct": 40.0,
+            "max_pct": 55.0,
+            "direction": "above",
+            "breach_pp": 1.2050133007793917,
+            "value_base": 23499080.0,
+            "base_currency": "USD"
+          }
+        ],
+        "position_breaches": [],
+        "exclusion_breaches": []
+      },
+      "bands": {
+        "Cash and Equivalents": {
+          "min_pct": 2.0,
+          "target_pct": 7.0,
+          "max_pct": 18.0
+        },
+        "Fixed Income": {
+          "min_pct": 25.0,
+          "target_pct": 35.0,
+          "max_pct": 50.0
+        },
+        "Equity": {
+          "min_pct": 30.0,
+          "target_pct": 40.0,
+          "max_pct": 55.0
+        },
+        "Alternatives": {
+          "min_pct": 0.0,
+          "target_pct": 10.0,
+          "max_pct": 20.0
+        },
+        "Commodities": {
+          "min_pct": 0.0,
+          "target_pct": 3.0,
+          "max_pct": 10.0
+        },
+        "Structured Products": {
+          "min_pct": 0.0,
+          "target_pct": 5.0,
+          "max_pct": 15.0
+        }
+      },
+      "mandate_notes": "Balanced growth and income."
+    },
+    {
+      "portfolio_id": "PF-0020",
+      "portfolio_name": "Alternatives Sleeve",
+      "mandate_code": "ALTS",
+      "mandate_name": "Alternatives Sleeve",
+      "service_model": "Advisory",
+      "base_currency": "USD",
+      "benchmark": "JB Alternatives USD Composite",
+      "inception_date": "2013-03-01",
+      "value_usd": 34178000.0,
+      "aum_series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "value_base": 33452000.0
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "value_base": 33819000.0
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "value_base": 33952700.0
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "value_base": 33955500.0
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "value_base": 34178000.0
+        }
+      ],
+      "mandate_review": {
+        "portfolio_id": "PF-0020",
+        "client_id": "CL-0017",
+        "mandate_code": "ALTS",
+        "mandate_name": "Alternatives Sleeve",
+        "service_model": "Advisory",
+        "governed": true,
+        "base_currency": "USD",
+        "total_base": 34178000.0,
+        "allocation_pct": {
+          "Alternatives": 97.36672713441395,
+          "Cash and Equivalents": 2.6332728655860493
+        },
+        "band_breaches": [],
+        "position_breaches": [
+          {
+            "portfolio_id": "PF-0020",
+            "mandate_code": "ALTS",
+            "instrument_id": "SYN-AL-0301",
+            "instrument_name": "Meridian Private Equity Fund VII",
+            "actual_pct": 35.29755983381123,
+            "limit_pct": 25.0,
+            "breach_pp": 10.297559833811228,
+            "value_base": 12064000.0,
+            "base_currency": "USD"
+          },
+          {
+            "portfolio_id": "PF-0020",
+            "mandate_code": "ALTS",
+            "instrument_id": "SYN-AL-0302",
+            "instrument_name": "Orchard Private Credit Fund II",
+            "actual_pct": 27.96243197378431,
+            "limit_pct": 25.0,
+            "breach_pp": 2.962431973784309,
+            "value_base": 9557000.0,
+            "base_currency": "USD"
+          }
+        ],
+        "exclusion_breaches": []
+      },
+      "bands": {
+        "Cash and Equivalents": {
+          "min_pct": 0.0,
+          "target_pct": 3.0,
+          "max_pct": 15.0
+        },
+        "Fixed Income": {
+          "min_pct": 0.0,
+          "target_pct": 5.0,
+          "max_pct": 25.0
+        },
+        "Equity": {
+          "min_pct": 0.0,
+          "target_pct": 0.0,
+          "max_pct": 20.0
+        },
+        "Alternatives": {
+          "min_pct": 60.0,
+          "target_pct": 85.0,
+          "max_pct": 100.0
+        },
+        "Commodities": {
+          "min_pct": 0.0,
+          "target_pct": 0.0,
+          "max_pct": 10.0
+        },
+        "Structured Products": {
+          "min_pct": 0.0,
+          "target_pct": 0.0,
+          "max_pct": 15.0
+        }
+      },
+      "mandate_notes": "Dedicated private markets and hedge fund sleeve. Measured separately from the household strategic allocation. Max 25% in any single fund."
+    },
+    {
+      "portfolio_id": "PF-0021",
+      "portfolio_name": "Next Generation Account",
+      "mandate_code": "GROW",
+      "mandate_name": "Growth",
+      "service_model": "Custody",
+      "base_currency": "USD",
+      "benchmark": "None - custody only",
+      "inception_date": "2020-09-01",
+      "value_usd": 11915400.0,
+      "aum_series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "value_base": 11147600.0
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "value_base": 11628800.0
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "value_base": 11508500.0
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "value_base": 11765900.0
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "value_base": 11915400.0
+        }
+      ],
+      "mandate_review": {
+        "portfolio_id": "PF-0021",
+        "client_id": "CL-0017",
+        "mandate_code": "GROW",
+        "mandate_name": "Growth",
+        "service_model": "Custody",
+        "governed": false,
+        "base_currency": "USD",
+        "total_base": 11915400.0,
+        "allocation_pct": {
+          "Equity": 55.60115480806351,
+          "Fixed Income": 21.337932423586285,
+          "Commodities": 7.168873894288064,
+          "Cash and Equivalents": 15.89203887406214
+        },
+        "band_breaches": [],
+        "position_breaches": [],
+        "exclusion_breaches": []
+      },
+      "bands": {
+        "Cash and Equivalents": {
+          "min_pct": 1.0,
+          "target_pct": 4.0,
+          "max_pct": 12.0
+        },
+        "Fixed Income": {
+          "min_pct": 5.0,
+          "target_pct": 12.0,
+          "max_pct": 25.0
+        },
+        "Equity": {
+          "min_pct": 50.0,
+          "target_pct": 62.0,
+          "max_pct": 78.0
+        },
+        "Alternatives": {
+          "min_pct": 0.0,
+          "target_pct": 17.0,
+          "max_pct": 30.0
+        },
+        "Commodities": {
+          "min_pct": 0.0,
+          "target_pct": 2.0,
+          "max_pct": 8.0
+        },
+        "Structured Products": {
+          "min_pct": 0.0,
+          "target_pct": 3.0,
+          "max_pct": 15.0
+        }
+      },
+      "mandate_notes": "Long-horizon capital appreciation."
+    }
+  ],
+  "wealth": {
+    "total_usd": 87902980.0,
+    "timeseries": [
+      {
+        "snapshot": "2025-12-31",
+        "label": "Year-end 2025",
+        "total_usd": 85500840.0,
+        "change_usd": null,
+        "change_pct": null
+      },
+      {
+        "snapshot": "2026-02-27",
+        "label": "Pre-conflict",
+        "total_usd": 87489060.0,
+        "change_usd": 1988220.0,
+        "change_pct": 2.3253806629268206
+      },
+      {
+        "snapshot": "2026-03-31",
+        "label": "Post-Hormuz",
+        "total_usd": 86487330.0,
+        "change_usd": -1001730.0,
+        "change_pct": -1.1449774406080029
+      },
+      {
+        "snapshot": "2026-06-30",
+        "label": "Half-year",
+        "total_usd": 87343624.0,
+        "change_usd": 856294.0,
+        "change_pct": 0.9900802811232581
+      },
+      {
+        "snapshot": "2026-08-26",
+        "label": "Today",
+        "total_usd": 87902980.0,
+        "change_usd": 559356.0,
+        "change_pct": 0.6404085088111298
+      }
+    ],
+    "by_asset_class": {
+      "Alternatives": 33278000.0,
+      "Equity": 30124180.0,
+      "Fixed Income": 16117500.0,
+      "Cash and Equivalents": 5393600.0,
+      "Commodities": 2989700.0
+    },
+    "by_liquidity_tier": {
+      "Illiquid": 12064000.0,
+      "Quarterly Gate": 12062000.0,
+      "Daily": 54624980.0,
+      "Monthly": 9152000.0
+    },
+    "by_currency": {
+      "USD": 83873500.0,
+      "EUR": 4029480.0
+    },
+    "by_region": {
+      "Global": 61222800.0,
+      "North America": 13980700.0,
+      "Europe": 4029480.0,
+      "Asia ex-Japan": 3972000.0,
+      "Asia": 3286500.0,
+      "South Asia": 1411500.0
+    },
+    "by_sector": {
+      "Diversified": 36974580.0,
+      "Corporate": 21224000.0,
+      "Macro": 5584800.0,
+      "Sovereign": 4450500.0,
+      "Equity Long Short": 3567200.0,
+      "Information Technology": 3552600.0,
+      "Cash": 5393600.0,
+      "Gold": 2989700.0,
+      "Infrastructure": 2505000.0,
+      "Health Care": 1661000.0
+    },
+    "positions": [
+      {
+        "instrument_id": "SYN-AL-0301",
+        "instrument_name": "Meridian Private Equity Fund VII",
+        "asset_class": "Alternatives",
+        "sub_asset_class": "Private Equity",
+        "sector": "Diversified",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 12064000.0,
+        "weight_pct": 13.724221863695634,
+        "lending_value_usd": 0.0,
+        "advance_rate_pct": 0.0,
+        "unrealised_pnl_usd": 4064000.0,
+        "unrealised_pnl_pct": 50.8,
+        "portfolio_ids": [
+          "PF-0020"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-AL-0302",
+        "instrument_name": "Orchard Private Credit Fund II",
+        "asset_class": "Alternatives",
+        "sub_asset_class": "Private Credit",
+        "sector": "Corporate",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Quarterly Gate",
+        "market_value_usd": 9557000.0,
+        "weight_pct": 10.872213888539388,
+        "lending_value_usd": 0.0,
+        "advance_rate_pct": 0.0,
+        "unrealised_pnl_usd": 57000.0,
+        "unrealised_pnl_pct": 0.6,
+        "portfolio_ids": [
+          "PF-0020"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0001",
+        "instrument_name": "Global Developed Equity Index Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Diversified",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 9520000.0,
+        "weight_pct": 10.830122027717376,
+        "lending_value_usd": 6188000.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 4216000.0,
+        "unrealised_pnl_pct": 79.48717948717949,
+        "portfolio_ids": [
+          "PF-0019"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0002",
+        "instrument_name": "US Large Cap Core Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Diversified",
+        "region": "North America",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 5977600.0,
+        "weight_pct": 6.80022452026086,
+        "lending_value_usd": 3885440.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 2803200.0,
+        "unrealised_pnl_pct": 88.30645161290323,
+        "portfolio_ids": [
+          "PF-0019"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0203",
+        "instrument_name": "Global Investment Grade Corporate Bond Fund",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Investment Grade Credit",
+        "sector": "Corporate",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 5838000.0,
+        "weight_pct": 6.6414130669972735,
+        "lending_value_usd": 4378500.0,
+        "advance_rate_pct": 75.0,
+        "unrealised_pnl_usd": -414000.0,
+        "unrealised_pnl_pct": -6.621880998080615,
+        "portfolio_ids": [
+          "PF-0019"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-AL-0303",
+        "instrument_name": "Tanjong Global Macro Fund",
+        "asset_class": "Alternatives",
+        "sub_asset_class": "Hedge Fund",
+        "sector": "Macro",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Monthly",
+        "market_value_usd": 5584800.0,
+        "weight_pct": 6.353368224831513,
+        "lending_value_usd": 1675440.0,
+        "advance_rate_pct": 30.0,
+        "unrealised_pnl_usd": 2501200.0,
+        "unrealised_pnl_pct": 81.11298482293424,
+        "portfolio_ids": [
+          "PF-0020"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0202",
+        "instrument_name": "US Treasury 4.125% due 2028",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Government Bond",
+        "sector": "Sovereign",
+        "region": "North America",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 4450500.0,
+        "weight_pct": 5.062968286171868,
+        "lending_value_usd": 4005450.0,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": -31500.0,
+        "unrealised_pnl_pct": -0.7028112449799196,
+        "portfolio_ids": [
+          "PF-0019"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0004",
+        "instrument_name": "European Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Diversified",
+        "region": "Europe",
+        "currency": "EUR",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 4029480.0,
+        "weight_pct": 4.5840084147317866,
+        "lending_value_usd": 2619162.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 575000.0,
+        "unrealised_pnl_pct": 16.645052222042104,
+        "portfolio_ids": [
+          "PF-0019"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0020",
+        "instrument_name": "Asia ex-Japan Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Emerging Market Equity",
+        "sector": "Diversified",
+        "region": "Asia ex-Japan",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 3972000.0,
+        "weight_pct": 4.518618140135863,
+        "lending_value_usd": 2383200.0,
+        "advance_rate_pct": 60.0,
+        "unrealised_pnl_usd": 900000.0,
+        "unrealised_pnl_pct": 29.296875,
+        "portfolio_ids": [
+          "PF-0019"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-AL-0304",
+        "instrument_name": "Harborline Long Short Equity Fund",
+        "asset_class": "Alternatives",
+        "sub_asset_class": "Hedge Fund",
+        "sector": "Equity Long Short",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Monthly",
+        "market_value_usd": 3567200.0,
+        "weight_pct": 4.058110430385864,
+        "lending_value_usd": 1070160.0,
+        "advance_rate_pct": 30.0,
+        "unrealised_pnl_usd": 649600.0,
+        "unrealised_pnl_pct": 22.264875239923224,
+        "portfolio_ids": [
+          "PF-0020"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0003",
+        "instrument_name": "US Technology Leaders Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Information Technology",
+        "region": "North America",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 3552600.0,
+        "weight_pct": 4.041501209629071,
+        "lending_value_usd": 2309190.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 1234200.0,
+        "unrealised_pnl_pct": 53.23498964803313,
+        "portfolio_ids": [
+          "PF-0021"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-CA-0601",
+        "instrument_name": "USD Call Deposit",
+        "asset_class": "Cash and Equivalents",
+        "sub_asset_class": "Deposit",
+        "sector": "Cash",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 3500000.0,
+        "weight_pct": 3.981662510190212,
+        "lending_value_usd": 3150000.0,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": 0.0,
+        "unrealised_pnl_pct": 0.0,
+        "portfolio_ids": [
+          "PF-0019",
+          "PF-0020"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0204",
+        "instrument_name": "Asia Investment Grade Credit Fund",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Investment Grade Credit",
+        "sector": "Corporate",
+        "region": "Asia",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 3286500.0,
+        "weight_pct": 3.7387810970686086,
+        "lending_value_usd": 2464875.0,
+        "advance_rate_pct": 75.0,
+        "unrealised_pnl_usd": -241500.0,
+        "unrealised_pnl_pct": -6.845238095238096,
+        "portfolio_ids": [
+          "PF-0019"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-CM-0402",
+        "instrument_name": "Gold Bullion ETF",
+        "asset_class": "Commodities",
+        "sub_asset_class": "Precious Metals",
+        "sector": "Gold",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2989700.0,
+        "weight_pct": 3.401136116204479,
+        "lending_value_usd": 1793820.0,
+        "advance_rate_pct": 60.0,
+        "unrealised_pnl_usd": 1521900.0,
+        "unrealised_pnl_pct": 103.68578825453059,
+        "portfolio_ids": [
+          "PF-0019",
+          "PF-0021"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": "XAU spot"
+      },
+      {
+        "instrument_id": "SYN-FI-0208",
+        "instrument_name": "Short Duration USD Bond Fund",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Short Duration",
+        "sector": "Corporate",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2542500.0,
+        "weight_pct": 2.8923934091881756,
+        "lending_value_usd": 2161125.0,
+        "advance_rate_pct": 85.0,
+        "unrealised_pnl_usd": 37500.0,
+        "unrealised_pnl_pct": 1.4970059880239521,
+        "portfolio_ids": [
+          "PF-0021"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-AL-0309",
+        "instrument_name": "Global Infrastructure Debt Fund",
+        "asset_class": "Alternatives",
+        "sub_asset_class": "Private Credit",
+        "sector": "Infrastructure",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Quarterly Gate",
+        "market_value_usd": 2505000.0,
+        "weight_pct": 2.849732739436137,
+        "lending_value_usd": 0.0,
+        "advance_rate_pct": 0.0,
+        "unrealised_pnl_usd": 5000.0,
+        "unrealised_pnl_pct": 0.2,
+        "portfolio_ids": [
+          "PF-0020"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-CA-0607",
+        "instrument_name": "USD Money Market Fund",
+        "asset_class": "Cash and Equivalents",
+        "sub_asset_class": "Money Market",
+        "sector": "Cash",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1893600.0,
+        "weight_pct": 2.1541931797989102,
+        "lending_value_usd": 1704240.0,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": 126000.0,
+        "unrealised_pnl_pct": 7.128309572301425,
+        "portfolio_ids": [
+          "PF-0021"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0006",
+        "instrument_name": "Global Healthcare Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Health Care",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1661000.0,
+        "weight_pct": 1.8895832655502691,
+        "lending_value_usd": 1079650.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 275000.0,
+        "unrealised_pnl_pct": 19.841269841269842,
+        "portfolio_ids": [
+          "PF-0021"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0022",
+        "instrument_name": "India Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Emerging Market Equity",
+        "sector": "Diversified",
+        "region": "South Asia",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1411500.0,
+        "weight_pct": 1.6057476094667098,
+        "lending_value_usd": 846900.0,
+        "advance_rate_pct": 60.0,
+        "unrealised_pnl_usd": 319500.0,
+        "unrealised_pnl_pct": 29.25824175824176,
+        "portfolio_ids": [
+          "PF-0021"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      }
+    ]
+  },
+  "income": {
+    "client_id": "CL-0017",
+    "quarters_observed": 2,
+    "gross_income_usd": 2439516.7699999996,
+    "costs_usd": 277729.43,
+    "net_income_usd": 2161787.3399999994,
+    "annualised_gross_usd": 4879033.539999999,
+    "annualised_net_usd": 4323574.679999999,
+    "yield_pct": 5.550475694908181,
+    "by_instrument": {
+      "SYN-AL-0302": 802659.75,
+      "SYN-FI-0203": 284688.0,
+      "SYN-AL-0309": 200363.75,
+      "SYN-EQ-0001": 164592.0,
+      "SYN-FI-0204": 159936.0,
+      "SYN-FI-0202": 138453.75,
+      "SYN-FI-0208": 111100.0,
+      "SYN-CA-0601": 108500.0,
+      "SYN-EQ-0002": 103334.4,
+      "SYN-EQ-0020": 99996.0,
+      "SYN-CA-0607": 71375.4,
+      "SYN-EQ-0004": 70171.92000000001,
+      "SYN-EQ-0003": 60085.8,
+      "SYN-EQ-0022": 35100.0,
+      "SYN-EQ-0006": 29160.0
+    }
+  },
+  "explanation": {
+    "ytd": {
+      "client_id": "CL-0017",
+      "period": "ytd",
+      "primary_driver": "US technology and AI capital expenditure",
+      "fx_dominates": false,
+      "start": "2025-12-31",
+      "end": "2026-08-26",
+      "start_label": "Year-end 2025",
+      "end_label": "Today",
+      "change_usd": 2402140.0,
+      "change_pct": 2.8094928658010847,
+      "price_effect_usd": 2653059.9999999995,
+      "fx_effect_usd": -250919.99999999942,
+      "flow_effect_usd": 0.0,
+      "drivers": [
+        {
+          "theme_key": "us_tech_ai",
+          "theme_name": "US technology and AI capital expenditure",
+          "amount_usd": 475800.0,
+          "pct_of_start": 0.5564857608416479,
+          "market_moves": [
+            {
+              "series_id": "NASDAQ_COMP",
+              "series_name": "Nasdaq Composite Index",
+              "unit": "points",
+              "start_value": 23150.0,
+              "end_value": 26010.0,
+              "change": 2860.0,
+              "change_pct": 12.35421166306696
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-11",
+              "event_date": "2026-06-05",
+              "description": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+              "primary_transmission": "US technology, concentrated equity, collateralised lending",
+              "severity": "High"
+            }
+          ]
+        },
+        {
+          "theme_key": "duration",
+          "theme_name": "Interest rate duration",
+          "amount_usd": -306000.0,
+          "pct_of_start": -0.3578912207178315,
+          "market_moves": [
+            {
+              "series_id": "UST_10Y_PCT",
+              "series_name": "US Treasury 10-year yield",
+              "unit": "percent",
+              "start_value": 4.05,
+              "end_value": 4.66,
+              "change": 0.6100000000000003,
+              "change_pct": 15.061728395061746
+            },
+            {
+              "series_id": "UST_2Y_PCT",
+              "series_name": "US Treasury 2-year yield",
+              "unit": "percent",
+              "start_value": 3.68,
+              "end_value": 4.14,
+              "change": 0.4599999999999995,
+              "change_pct": 12.499999999999979
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-09",
+              "event_date": "2026-04-30",
+              "description": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+              "primary_transmission": "European fixed income, EUR assets",
+              "severity": "Medium"
+            },
+            {
+              "event_id": "EVT-12",
+              "event_date": "2026-06-17",
+              "description": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+              "primary_transmission": "Duration, rate-sensitive credit, USD",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-13",
+              "event_date": "2026-06-19",
+              "description": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+              "primary_transmission": "Long-duration fixed income",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-15",
+              "event_date": "2026-07-29",
+              "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+              "primary_transmission": "Duration, growth equity valuations",
+              "severity": "High"
+            }
+          ]
+        },
+        {
+          "theme_key": "gold_monetary",
+          "theme_name": "Gold and monetary debasement hedges",
+          "amount_usd": 202300.0,
+          "pct_of_start": 0.2366058625856775,
+          "market_moves": [
+            {
+              "series_id": "GOLD_USD_OZ",
+              "series_name": "Gold spot",
+              "unit": "USD/troy oz",
+              "start_value": 4310.0,
+              "end_value": 4622.6,
+              "change": 312.60000000000036,
+              "change_pct": 7.2529002320185665
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-01",
+              "event_date": "2025-12-31",
+              "description": "Gold closes 2025 up roughly 64% for the year after breaching USD 3,000 and USD 4,000 for the first time. Record annual gold ETF inflows of about USD 89bn.",
+              "primary_transmission": "Gold, precious metals miners, inflation hedges",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-02",
+              "event_date": "2026-01-26",
+              "description": "Spot gold trades above USD 5,000 per ounce for the first time.",
+              "primary_transmission": "Gold, precious metals",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-03",
+              "event_date": "2026-01-28",
+              "description": "Gold prints an intraday all-time high near USD 5,589 per ounce, then begins a multi-month consolidation.",
+              "primary_transmission": "Gold, precious metals",
+              "severity": "High"
+            }
+          ]
+        }
+      ],
+      "detractors": [
+        {
+          "instrument_id": "SYN-AL-0302",
+          "instrument_name": "Orchard Private Credit Fund II",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 10279000.0,
+          "end_value_usd": 9557000.0,
+          "price_effect_usd": -722000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -722000.0,
+          "price_return_pct": -7.024029574861368,
+          "price_start": 1082.0,
+          "price_end": 1006.0
+        },
+        {
+          "instrument_id": "SYN-FI-0203",
+          "instrument_name": "Global Investment Grade Corporate Bond Fund",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 6144000.0,
+          "end_value_usd": 5838000.0,
+          "price_effect_usd": -306000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -306000.0,
+          "price_return_pct": -4.980468750000011,
+          "price_start": 102.4,
+          "price_end": 97.3
+        },
+        {
+          "instrument_id": "SYN-FI-0204",
+          "instrument_name": "Asia Investment Grade Credit Fund",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 3451000.0,
+          "end_value_usd": 3286500.0,
+          "price_effect_usd": -164500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -164500.0,
+          "price_return_pct": -4.7667342799188495,
+          "price_start": 98.6,
+          "price_end": 93.9
+        },
+        {
+          "instrument_id": "SYN-AL-0309",
+          "instrument_name": "Global Infrastructure Debt Fund",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 2605000.0,
+          "end_value_usd": 2505000.0,
+          "price_effect_usd": -100000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -100000.0,
+          "price_return_pct": -3.8387715930902067,
+          "price_start": 104.2,
+          "price_end": 100.2
+        },
+        {
+          "instrument_id": "SYN-FI-0202",
+          "instrument_name": "US Treasury 4.125% due 2028",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 4509000.0,
+          "end_value_usd": 4450500.0,
+          "price_effect_usd": -58500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -58500.0,
+          "price_return_pct": -1.2974051896207595,
+          "price_start": 100.2,
+          "price_end": 98.9
+        }
+      ],
+      "contributors": [
+        {
+          "instrument_id": "SYN-EQ-0001",
+          "instrument_name": "Global Developed Equity Index Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 8736000.0,
+          "end_value_usd": 9520000.0,
+          "price_effect_usd": 784000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 784000.0,
+          "price_return_pct": 8.974358974358964,
+          "price_start": 218.4,
+          "price_end": 238.0
+        },
+        {
+          "instrument_id": "SYN-AL-0303",
+          "instrument_name": "Tanjong Global Macro Fund",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 4836000.0,
+          "end_value_usd": 5584800.0,
+          "price_effect_usd": 748800.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 748800.0,
+          "price_return_pct": 15.48387096774193,
+          "price_start": 1860.0,
+          "price_end": 2148.0
+        },
+        {
+          "instrument_id": "SYN-AL-0301",
+          "instrument_name": "Meridian Private Equity Fund VII",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 11360000.0,
+          "end_value_usd": 12064000.0,
+          "price_effect_usd": 704000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 704000.0,
+          "price_return_pct": 6.197183098591541,
+          "price_start": 1420.0,
+          "price_end": 1508.0
+        },
+        {
+          "instrument_id": "SYN-EQ-0002",
+          "instrument_name": "US Large Cap Core Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 5480000.0,
+          "end_value_usd": 5977600.0,
+          "price_effect_usd": 497600.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 497600.0,
+          "price_return_pct": 9.080291970802934,
+          "price_start": 342.5,
+          "price_end": 373.6
+        },
+        {
+          "instrument_id": "SYN-EQ-0003",
+          "instrument_name": "US Technology Leaders Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 3076800.0,
+          "end_value_usd": 3552600.0,
+          "price_effect_usd": 475800.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 475800.0,
+          "price_return_pct": 15.464118564742613,
+          "price_start": 512.8,
+          "price_end": 592.1
+        }
+      ],
+      "narrative": [
+        "Between 2025-12-31 and 2026-08-26 the household moved up USD 2,402,140, or 2.8%, from USD 85,500,840 to USD 87,902,980.",
+        "Of that, +USD 2,653,060 came from market moves, -USD 250,920 from currency translation and +USD 0 from money paid in or taken out.",
+        "US technology and AI capital expenditure contributed +USD 475,800 (+0.6 points), as Nasdaq Composite Index moved from 23150.0 to 26010.0 points. The event log records on 2026-06-05: Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before...",
+        "Interest rate duration contributed -USD 306,000 (-0.4 points), as US Treasury 10-year yield moved from 4.05 to 4.66 percent. The event log records on 2026-04-30: European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+        "Gold and monetary debasement hedges contributed +USD 202,300 (+0.2 points), as Gold spot moved from 4310.0 to 4622.6 USD/troy oz. The event log records on 2025-12-31: Gold closes 2025 up roughly 64% for the year after breaching USD 3,000 and USD 4,000 for the first time. Record annual gold ETF..."
+      ],
+      "provenance": "deterministic"
+    },
+    "recent": {
+      "client_id": "CL-0017",
+      "period": "recent",
+      "primary_driver": "broad market moves",
+      "fx_dominates": false,
+      "start": "2026-06-30",
+      "end": "2026-08-26",
+      "start_label": "Half-year",
+      "end_label": "Today",
+      "change_usd": 559356.0,
+      "change_pct": 0.6404085088111298,
+      "price_effect_usd": 581496.0,
+      "fx_effect_usd": -22140.00000000002,
+      "flow_effect_usd": 0.0,
+      "drivers": [],
+      "detractors": [
+        {
+          "instrument_id": "SYN-AL-0302",
+          "instrument_name": "Orchard Private Credit Fund II",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 9889500.0,
+          "end_value_usd": 9557000.0,
+          "price_effect_usd": -332500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -332500.0,
+          "price_return_pct": -3.3621517771373677,
+          "price_start": 1041.0,
+          "price_end": 1006.0
+        },
+        {
+          "instrument_id": "SYN-CM-0402",
+          "instrument_name": "Gold Bullion ETF",
+          "asset_class": "Commodities",
+          "currency": "USD",
+          "start_value_usd": 3091200.0,
+          "end_value_usd": 2989700.0,
+          "price_effect_usd": -101500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -101500.0,
+          "price_return_pct": -3.2835144927536253,
+          "price_start": 441.6,
+          "price_end": 427.1
+        },
+        {
+          "instrument_id": "SYN-FI-0203",
+          "instrument_name": "Global Investment Grade Corporate Bond Fund",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 5886000.0,
+          "end_value_usd": 5838000.0,
+          "price_effect_usd": -48000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -48000.0,
+          "price_return_pct": -0.8154943934760461,
+          "price_start": 98.1,
+          "price_end": 97.3
+        },
+        {
+          "instrument_id": "SYN-FI-0204",
+          "instrument_name": "Asia Investment Grade Credit Fund",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 3311000.0,
+          "end_value_usd": 3286500.0,
+          "price_effect_usd": -24500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -24500.0,
+          "price_return_pct": -0.7399577167018889,
+          "price_start": 94.6,
+          "price_end": 93.9
+        },
+        {
+          "instrument_id": "SYN-AL-0309",
+          "instrument_name": "Global Infrastructure Debt Fund",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 2520000.0,
+          "end_value_usd": 2505000.0,
+          "price_effect_usd": -15000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -15000.0,
+          "price_return_pct": -0.5952380952380931,
+          "price_start": 100.8,
+          "price_end": 100.2
+        }
+      ],
+      "contributors": [
+        {
+          "instrument_id": "SYN-AL-0301",
+          "instrument_name": "Meridian Private Equity Fund VII",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 11696000.0,
+          "end_value_usd": 12064000.0,
+          "price_effect_usd": 368000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 368000.0,
+          "price_return_pct": 3.146374829001375,
+          "price_start": 1462.0,
+          "price_end": 1508.0
+        },
+        {
+          "instrument_id": "SYN-EQ-0001",
+          "instrument_name": "Global Developed Equity Index Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 9368000.0,
+          "end_value_usd": 9520000.0,
+          "price_effect_usd": 152000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 152000.0,
+          "price_return_pct": 1.6225448334756587,
+          "price_start": 234.2,
+          "price_end": 238.0
+        },
+        {
+          "instrument_id": "SYN-AL-0303",
+          "instrument_name": "Tanjong Global Macro Fund",
+          "asset_class": "Alternatives",
+          "currency": "USD",
+          "start_value_usd": 5444400.0,
+          "end_value_usd": 5584800.0,
+          "price_effect_usd": 140400.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 140400.0,
+          "price_return_pct": 2.5787965616045794,
+          "price_start": 2094.0,
+          "price_end": 2148.0
+        },
+        {
+          "instrument_id": "SYN-EQ-0003",
+          "instrument_name": "US Technology Leaders Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 3441600.0,
+          "end_value_usd": 3552600.0,
+          "price_effect_usd": 111000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 111000.0,
+          "price_return_pct": 3.2252440725244025,
+          "price_start": 573.6,
+          "price_end": 592.1
+        },
+        {
+          "instrument_id": "SYN-EQ-0002",
+          "instrument_name": "US Large Cap Core Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 5883200.0,
+          "end_value_usd": 5977600.0,
+          "price_effect_usd": 94400.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 94400.0,
+          "price_return_pct": 1.6045689420723486,
+          "price_start": 367.7,
+          "price_end": 373.6
+        }
+      ],
+      "narrative": [
+        "Between 2026-06-30 and 2026-08-26 the household moved up USD 559,356, or 0.6%, from USD 87,343,624 to USD 87,902,980.",
+        "Of that, +USD 581,496 came from market moves, -USD 22,140 from currency translation and +USD 0 from money paid in or taken out."
+      ],
+      "provenance": "deterministic"
+    }
+  },
+  "exposures": {
+    "issuers": [],
+    "themes": [
+      {
+        "key": "private_markets",
+        "name": "Private markets and gated vehicles",
+        "kind": "theme",
+        "attributed_usd": 24126000.0,
+        "pct_of_household": 27.44616849167116,
+        "direct_usd": 0,
+        "looked_through_usd": 24126000.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-AL-0301",
+            "instrument_name": "Meridian Private Equity Fund VII",
+            "wrapper": "Private Equity",
+            "market_value_usd": 12064000.0,
+            "attributed_usd": 12064000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Positions that cannot be sold on demand: private funds, semi-liquid vehicles subject to gates, and direct real estate.",
+            "portfolio_ids": [
+              "PF-0020"
+            ]
+          },
+          {
+            "instrument_id": "SYN-AL-0302",
+            "instrument_name": "Orchard Private Credit Fund II",
+            "wrapper": "Private Credit",
+            "market_value_usd": 9557000.0,
+            "attributed_usd": 9557000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Positions that cannot be sold on demand: private funds, semi-liquid vehicles subject to gates, and direct real estate.",
+            "portfolio_ids": [
+              "PF-0020"
+            ]
+          },
+          {
+            "instrument_id": "SYN-AL-0309",
+            "instrument_name": "Global Infrastructure Debt Fund",
+            "wrapper": "Private Credit",
+            "market_value_usd": 2505000.0,
+            "attributed_usd": 2505000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Positions that cannot be sold on demand: private funds, semi-liquid vehicles subject to gates, and direct real estate.",
+            "portfolio_ids": [
+              "PF-0020"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-14"
+        ]
+      },
+      {
+        "key": "duration",
+        "name": "Interest rate duration",
+        "kind": "theme",
+        "attributed_usd": 5838000.0,
+        "pct_of_household": 6.6414130669972735,
+        "direct_usd": 0,
+        "looked_through_usd": 5838000.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-FI-0203",
+            "instrument_name": "Global Investment Grade Corporate Bond Fund",
+            "wrapper": "Investment Grade Credit",
+            "market_value_usd": 5838000.0,
+            "attributed_usd": 5838000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+            "portfolio_ids": [
+              "PF-0019"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-09",
+          "EVT-12",
+          "EVT-13",
+          "EVT-15"
+        ]
+      },
+      {
+        "key": "us_tech_ai",
+        "name": "US technology and AI capital expenditure",
+        "kind": "theme",
+        "attributed_usd": 3552600.0,
+        "pct_of_household": 4.041501209629071,
+        "direct_usd": 0,
+        "looked_through_usd": 3552600.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-EQ-0003",
+            "instrument_name": "US Technology Leaders Fund",
+            "wrapper": "Developed Market Equity",
+            "market_value_usd": 3552600.0,
+            "attributed_usd": 3552600.0,
+            "basis_field": "asset_class",
+            "basis_note": "Exposure to the megacap technology complex, including single names and notes written on them.",
+            "portfolio_ids": [
+              "PF-0021"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-11"
+        ]
+      },
+      {
+        "key": "gold_monetary",
+        "name": "Gold and monetary debasement hedges",
+        "kind": "theme",
+        "attributed_usd": 2989700.0,
+        "pct_of_household": 3.401136116204479,
+        "direct_usd": 0,
+        "looked_through_usd": 2989700.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-CM-0402",
+            "instrument_name": "Gold Bullion ETF",
+            "wrapper": "Precious Metals",
+            "market_value_usd": 2989700.0,
+            "attributed_usd": 2989700.0,
+            "basis_field": "asset_class",
+            "basis_note": "Physical gold, gold ETFs and notes referencing XAU spot.",
+            "portfolio_ids": [
+              "PF-0019",
+              "PF-0021"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-01",
+          "EVT-02",
+          "EVT-03"
+        ]
+      },
+      {
+        "key": "healthcare",
+        "name": "Healthcare and pharmaceuticals",
+        "kind": "theme",
+        "attributed_usd": 1661000.0,
+        "pct_of_household": 1.8895832655502691,
+        "direct_usd": 0,
+        "looked_through_usd": 1661000.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-EQ-0006",
+            "instrument_name": "Global Healthcare Equity Fund",
+            "wrapper": "Developed Market Equity",
+            "market_value_usd": 1661000.0,
+            "attributed_usd": 1661000.0,
+            "basis_field": "asset_class",
+            "basis_note": "Healthcare revenue exposure, including single employer or family business holdings in the sector.",
+            "portfolio_ids": [
+              "PF-0021"
+            ]
+          }
+        ],
+        "event_ids": []
+      }
+    ],
+    "unresolved": []
+  },
+  "liquidity": {
+    "client_id": "CL-0017",
+    "snapshot": "2026-08-26",
+    "horizon_months": 18,
+    "horizon_end": "2028-02-26",
+    "total_usd": 87902980.0,
+    "by_tier": {
+      "Daily": 54624980.0,
+      "Weekly": 0.0,
+      "Monthly": 9152000.0,
+      "Quarterly Gate": 12062000.0,
+      "Illiquid": 12064000.0
+    },
+    "readily_realisable_usd": 54624980.0,
+    "encumbered_cap_usd": null,
+    "withdrawable_usd": 54624980.0,
+    "gated_usd": 12062000.0,
+    "illiquid_usd": 12064000.0,
+    "obligations": [
+      {
+        "id": "COM-001",
+        "source": "commitments",
+        "description": "Uncalled commitment to Meridian Private Equity Fund VII",
+        "currency": "USD",
+        "amount_ccy": 14000000.0,
+        "amount_usd": 14000000.0,
+        "occurrences": 1,
+        "total_usd": 14000000.0,
+        "due_from": "2026 Q4 to 2028 Q2",
+        "due_to": "2026 Q4 to 2028 Q2",
+        "certainty": "Committed - callable at the manager's discretion",
+        "recurrence": "Irregular"
+      },
+      {
+        "id": "CN-015",
+        "source": "planned_cash_needs",
+        "description": "G3 education programme",
+        "currency": "USD",
+        "amount_ccy": 900000.0,
+        "amount_usd": 900000.0,
+        "occurrences": 2,
+        "total_usd": 1800000.0,
+        "due_from": "2026-09-01",
+        "due_to": "2034-09-01",
+        "certainty": "Confirmed",
+        "recurrence": "Annual"
+      },
+      {
+        "id": "COM-002",
+        "source": "commitments",
+        "description": "Uncalled commitment to Global Infrastructure Debt Fund",
+        "currency": "USD",
+        "amount_ccy": 1800000.0,
+        "amount_usd": 1800000.0,
+        "occurrences": 1,
+        "total_usd": 1800000.0,
+        "due_from": "2026 Q4 to 2027 Q3",
+        "due_to": "2026 Q4 to 2027 Q3",
+        "certainty": "Committed - callable at the manager's discretion",
+        "recurrence": "Irregular"
+      }
+    ],
+    "obligations_confirmed_usd": 17600000.0,
+    "obligations_total_usd": 17600000.0,
+    "coverage_ratio": 3.1036920454545456,
+    "shortfall_usd": 0.0,
+    "gated_positions": [
+      {
+        "instrument_id": "SYN-AL-0301",
+        "instrument_name": "Meridian Private Equity Fund VII",
+        "liquidity_tier": "Illiquid",
+        "market_value_usd": 12064000.0,
+        "advance_rate_pct": 0.0
+      },
+      {
+        "instrument_id": "SYN-AL-0302",
+        "instrument_name": "Orchard Private Credit Fund II",
+        "liquidity_tier": "Quarterly Gate",
+        "market_value_usd": 9557000.0,
+        "advance_rate_pct": 0.0
+      },
+      {
+        "instrument_id": "SYN-AL-0309",
+        "instrument_name": "Global Infrastructure Debt Fund",
+        "liquidity_tier": "Quarterly Gate",
+        "market_value_usd": 2505000.0,
+        "advance_rate_pct": 0.0
+      }
+    ],
+    "notes": [
+      "USD 12,062,000 sits in vehicles subject to a redemption gate; a submitted redemption is not the same as cash received.",
+      "planned_cash_needs CN-016 restates the uncalled column of commitments.csv (USD 15,800,000); it is counted once, from commitments.csv."
+    ]
+  },
+  "facilities": [],
+  "insights": [
+    {
+      "id": "CL-0017-sleeve-PF-0020",
+      "client_id": "CL-0017",
+      "category": "liquidity",
+      "severity": "critical",
+      "headline": "Alternatives Sleeve owes USD 15,800,000 in uncalled commitments against USD 900,000 it can sell",
+      "summary": "The sleeve holds USD 34,178,000, of which USD 900,000 is cash and USD 900,000 is realisable within a week. Uncalled commitments are USD 15,800,000, expected 2026 Q4 to 2028 Q2. Cover is 0.06x. Meeting a call from elsewhere in the household is possible but is an investment committee decision, not an operational transfer.",
+      "priority_score": 83.0,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 18.0% of household wealth (USD 15,800,000)",
+        "Due in 90 days",
+        "Measured against Alternatives Sleeve alone, not the household"
+      ],
+      "observed_facts": [
+        {
+          "label": "Sleeve value",
+          "value": "USD 34,178,000",
+          "numeric": 34178000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Sleeve cash",
+          "value": "USD 900,000",
+          "numeric": 900000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Realisable within a week",
+          "value": "USD 900,000",
+          "numeric": 900000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Uncalled commitments",
+          "value": "USD 15,800,000",
+          "numeric": 15800000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Cover",
+          "value": "0.06x",
+          "numeric": 0.056962025316455694,
+          "unit": "x",
+          "trend": "down"
+        },
+        {
+          "label": "Meridian Private Equity Fund VII",
+          "value": "USD 14,000,000 uncalled of 22,000,000 committed, expected 2026 Q4 to 2028 Q2",
+          "numeric": 14000000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Global Infrastructure Debt Fund",
+          "value": "USD 1,800,000 uncalled of 8,000,000 committed, expected 2026 Q4 to 2027 Q3",
+          "numeric": 1800000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Capital calls arrive at the manager's discretion. A sleeve that has to sell its remaining liquid assets to meet one stops being able to meet the next.",
+      "suggested_next_step": "Produce the liquidity map by account and by date, showing which account funds each call and what that leaves behind.",
+      "evidence": [
+        {
+          "source_file": "commitments.csv",
+          "row_or_id": "COM-001",
+          "field": "uncalled",
+          "value": "USD 14,000,000",
+          "snapshot_date": null,
+          "note": "Meridian Private Equity Fund VII, expected 2026 Q4 to 2028 Q2."
+        },
+        {
+          "source_file": "commitments.csv",
+          "row_or_id": "COM-002",
+          "field": "uncalled",
+          "value": "USD 1,800,000",
+          "snapshot_date": null,
+          "note": "Global Infrastructure Debt Fund, expected 2026 Q4 to 2027 Q3."
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0301",
+          "field": "liquidity_tier",
+          "value": "Illiquid",
+          "snapshot_date": "2026-08-26",
+          "note": "Meridian Private Equity Fund VII: USD 12,064,000"
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0302",
+          "field": "liquidity_tier",
+          "value": "Quarterly Gate",
+          "snapshot_date": "2026-08-26",
+          "note": "Orchard Private Credit Fund II: USD 9,557,000"
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0303",
+          "field": "liquidity_tier",
+          "value": "Monthly",
+          "snapshot_date": "2026-08-26",
+          "note": "Tanjong Global Macro Fund: USD 5,584,800"
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0304",
+          "field": "liquidity_tier",
+          "value": "Monthly",
+          "snapshot_date": "2026-08-26",
+          "note": "Harborline Long Short Equity Fund: USD 3,567,200"
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0309",
+          "field": "liquidity_tier",
+          "value": "Quarterly Gate",
+          "snapshot_date": "2026-08-26",
+          "note": "Global Infrastructure Debt Fund: USD 2,505,000"
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-CA-0601",
+          "field": "liquidity_tier",
+          "value": "Daily",
+          "snapshot_date": "2026-08-26",
+          "note": "USD Call Deposit: USD 900,000"
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [
+        "Which account is nominated to fund the next call?",
+        "Has the manager indicated the size or timing of the next call?"
+      ],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0020"
+      ],
+      "instrument_ids": [],
+      "amount_usd": 15800000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0017-poslimit-PF-0020",
+      "client_id": "CL-0017",
+      "category": "mandate",
+      "severity": "high",
+      "headline": "2 position(s) above the 25% single-position limit",
+      "summary": "Meridian Private Equity Fund VII is 35.3% of Alternatives Sleeve against a 25% ceiling. The limit applies to single-name and single-asset exposures; diversified funds and sovereign bonds are excluded from the test.",
+      "priority_score": 67.2,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 24.6% of household wealth",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Meridian Private Equity Fund VII",
+          "value": "35.3% vs 25% limit (USD 12,064,000)",
+          "numeric": 35.29755983381123,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Orchard Private Credit Fund II",
+          "value": "28.0% vs 25% limit (USD 9,557,000)",
+          "numeric": 27.96243197378431,
+          "unit": "%",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Single-position limits exist to cap the damage one issuer can do. Where several breaches share an underlying driver, the effective concentration is larger than any one line suggests.",
+      "suggested_next_step": "Rank the breaches by how correlated they are with each other before deciding which to reduce first.",
+      "evidence": [
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "ALTS",
+          "field": "max_single_position_pct",
+          "value": 25.0,
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-AL-0301",
+          "field": "concentration_limit_applies",
+          "value": "Y",
+          "snapshot_date": null,
+          "note": "Meridian Private Equity Fund VII at 35.3%."
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-AL-0302",
+          "field": "concentration_limit_applies",
+          "value": "Y",
+          "snapshot_date": null,
+          "note": "Orchard Private Credit Fund II at 28.0%."
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0020"
+      ],
+      "instrument_ids": [
+        "SYN-AL-0301",
+        "SYN-AL-0302"
+      ],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0017-bands-PF-0019",
+      "client_id": "CL-0017",
+      "category": "mandate",
+      "severity": "medium",
+      "headline": "Family Office Core Mandate sits outside 1 of its Balanced bands",
+      "summary": "The largest gap is Equity at 56.2% against a 30-55% band, 1.2 percentage points above the limit. Across all asset classes the portfolio is 1.2 percentage points away from its permitted ranges.",
+      "priority_score": 60.9,
+      "priority_reasons": [
+        "Severity medium (weight 0.52)",
+        "Affects 47.6% of household wealth (USD 41,809,580)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Equity",
+          "value": "56.2% vs band 30-55% (target 40%), 1.2pp above",
+          "numeric": 56.20501330077939,
+          "unit": "%",
+          "trend": "up"
+        }
+      ],
+      "client_relevance": "This is a discretionary portfolio. The bank selected these positions, so the breach is the bank's to explain.",
+      "suggested_next_step": "Agree a dated correction plan, or record a documented decision to stay outside the band.",
+      "evidence": [
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "BAL/Equity",
+          "field": "min_pct/max_pct",
+          "value": "30.0-55.0",
+          "snapshot_date": null,
+          "note": "Actual 56.2% at 2026-08-26."
+        },
+        {
+          "source_file": "portfolios.csv",
+          "row_or_id": "PF-0019",
+          "field": "service_model",
+          "value": "Discretionary",
+          "snapshot_date": null,
+          "note": null
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "Weights are measured within the portfolio in its base currency, as the mandate is written.",
+          "basis": "mandates.csv bands apply per portfolio, not per household.",
+          "impact_if_wrong": null
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Breach is drift or client-directed",
+          "result": "not_assessed",
+          "detail": "No RM note in the file reads as an instruction or waiver for this portfolio, so the breach is treated as drift.",
+          "reference": "rm_notes.json"
+        }
+      ],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0019"
+      ],
+      "instrument_ids": [],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0017-gated",
+      "client_id": "CL-0017",
+      "category": "liquidity",
+      "severity": "high",
+      "headline": "USD 12,062,000 sits in vehicles that can refuse a redemption",
+      "summary": "2 position(s) carry a Quarterly Gate liquidity tier, 13.7% of household wealth. A submitted redemption is a request, not a settlement date. RM notes record this: \"Investment committee review. G2 wants to keep the core mandate conservative. G3 representatives pushed for more technology and venture exposure in the next generation account. Unre\"",
+      "priority_score": 56.3,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 13.7% of household wealth (USD 12,062,000)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Orchard Private Credit Fund II",
+          "value": "USD 9,557,000 (10.9%), advance rate 0%",
+          "numeric": 9557000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Global Infrastructure Debt Fund",
+          "value": "USD 2,505,000 (2.8%), advance rate 0%",
+          "numeric": 2505000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "These positions also contribute nothing to borrowing capacity where the advance rate is zero, so they cannot be used to bridge a cash need either.",
+      "suggested_next_step": "Confirm the current gate terms with the manager and treat the position as unavailable until cash is received.",
+      "evidence": [
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0302",
+          "field": "liquidity_tier",
+          "value": "Quarterly Gate",
+          "snapshot_date": "2026-08-26",
+          "note": "USD 9,557,000"
+        },
+        {
+          "source_file": "holdings.csv",
+          "row_or_id": "SYN-AL-0309",
+          "field": "liquidity_tier",
+          "value": "Quarterly Gate",
+          "snapshot_date": "2026-08-26",
+          "note": "USD 2,505,000"
+        },
+        {
+          "source_file": "event_log.csv",
+          "row_or_id": "EVT-14",
+          "field": "description",
+          "value": "Half-year close. US equities near record levels on narrow, technology-led leadership. Non-traded private credit vehicles show continued redemption stress.",
+          "snapshot_date": "2026-06-30",
+          "note": null
+        },
+        {
+          "source_file": "rm_notes.json",
+          "row_or_id": "N-022",
+          "field": "note",
+          "value": "Capital call of USD 3.2m met from the sleeve's cash. Flagged to the family office CFO that between the remaining commitments and the gated private credit position, the sleeve's liquidity is thin. He asked for a full liquidity map before the next investment committee in October.",
+          "snapshot_date": "2026-02-10",
+          "note": "RM note. Relationship context, not independently verified."
+        },
+        {
+          "source_file": "rm_notes.json",
+          "row_or_id": "N-023",
+          "field": "note",
+          "value": "Investment committee review. G2 wants to keep the core mandate conservative. G3 representatives pushed for more technology and venture exposure in the next generation account. Unresolved. Private credit manager has now gated three consecutive quarters.",
+          "snapshot_date": "2026-06-30",
+          "note": "RM note. Relationship context, not independently verified."
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "reported",
+      "open_questions": [],
+      "related_event_ids": [
+        "EVT-14"
+      ],
+      "portfolio_ids": [],
+      "instrument_ids": [
+        "SYN-AL-0302",
+        "SYN-AL-0309"
+      ],
+      "amount_usd": 12062000.0,
+      "status": "new"
+    },
+    {
+      "id": "CL-0017-income-cover",
+      "client_id": "CL-0017",
+      "category": "life_event",
+      "severity": "low",
+      "headline": "Portfolio income covers 4.80x the client's planned annual drawdown",
+      "summary": "Recorded annual needs total USD 900,000. Income received in 2026 annualises to USD 4,879,034 gross and USD 4,323,575 after fees and facility interest, a yield of 5.55% on household wealth.",
+      "priority_score": 39.5,
+      "priority_reasons": [
+        "Severity low (weight 0.30)",
+        "Affects 1.0% of household wealth (USD 900,000)",
+        "Due in 6 days"
+      ],
+      "observed_facts": [
+        {
+          "label": "Annual need",
+          "value": "USD 900,000",
+          "numeric": 900000.0,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Gross income run rate",
+          "value": "USD 4,879,034",
+          "numeric": 4879033.539999999,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Net of fees and facility interest",
+          "value": "USD 4,323,575",
+          "numeric": 4323574.679999999,
+          "unit": "USD",
+          "trend": null
+        },
+        {
+          "label": "Portfolio yield",
+          "value": "5.55%",
+          "numeric": 5.550475694908181,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Cover",
+          "value": "4.80x",
+          "numeric": 4.803971866666665,
+          "unit": "x",
+          "trend": null
+        },
+        {
+          "label": "G3 education programme",
+          "value": "USD 900,000 per year from 2026-09-01 (Annual, Confirmed)",
+          "numeric": 900000.0,
+          "unit": "USD",
+          "trend": null
+        }
+      ],
+      "client_relevance": "Income that covers the drawdown means capital does not have to be sold into a weak market to fund living costs. Where cover is thin, the sequence of returns starts to matter more than the average.",
+      "suggested_next_step": "Confirm the drawdown amount and timing, then check the income is durable rather than a one-off distribution.",
+      "evidence": [
+        {
+          "source_file": "transactions.csv",
+          "row_or_id": "CL-0017 income",
+          "field": "amount",
+          "value": "USD 2,439,517 over 2 quarters",
+          "snapshot_date": "2026-08-26",
+          "note": "Coupon, dividend, interest and distribution rows for 2026."
+        },
+        {
+          "source_file": "transactions.csv",
+          "row_or_id": "CL-0017 costs",
+          "field": "amount",
+          "value": "USD 277,729",
+          "snapshot_date": "2026-08-26",
+          "note": "Management fees and facility interest charges."
+        },
+        {
+          "source_file": "planned_cash_needs.csv",
+          "row_or_id": "CN-015",
+          "field": "amount",
+          "value": "USD 900,000",
+          "snapshot_date": null,
+          "note": "G3 education programme (Annual, Confirmed)."
+        },
+        {
+          "source_file": "rm_notes.json",
+          "row_or_id": "N-023",
+          "field": "note",
+          "value": "Investment committee review. G2 wants to keep the core mandate conservative. G3 representatives pushed for more technology and venture exposure in the next generation account. Unresolved. Private credit manager has now gated three consecutive quarters.",
+          "snapshot_date": "2026-06-30",
+          "note": "RM note. Client's framing, not independently verified."
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "Annual income is estimated by doubling the two quarters of receipts recorded in transactions.csv for 2026.",
+          "basis": "The file records income at 31 March and 30 June 2026 only; no full-year figure is provided.",
+          "impact_if_wrong": "Semi-annual coupons or irregular distributions would make the run rate over- or under-stated. Check against the coupon schedule before quoting it to a client."
+        },
+        {
+          "statement": "'Annual' rows in planned_cash_needs are read as an amount per year; 'Annual instalments' rows are read as a total spread evenly across the due_from to due_to window.",
+          "basis": "The file uses both wordings. CN-012 (USD 1.28m, 'Annual') matches the client's stated USD 1.1m annual drawdown in clients.objectives as raised in note N-016, so 'Annual' is per year. CN-007 (USD 5m, 'Annual instalments', two children, four-year window) would exceed the client's entire household wealth if read the same way, so 'instalments' is read as a total.",
+          "impact_if_wrong": "Reading CN-007 as USD 5m per year would put this client's obligations above their total wealth. Each row is listed individually with its recurrence so the RM can check the source."
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Income objective",
+          "result": "pass",
+          "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+          "reference": "clients.csv"
+        }
+      ],
+      "confidence": "derived",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [],
+      "instrument_ids": [],
+      "amount_usd": 900000.0,
+      "status": "new"
+    }
+  ],
+  "options": {
+    "CL-0017-sleeve-PF-0020": [
+      {
+        "id": "CL-0017-sleeve-PF-0020-opt-prefund",
+        "label": "Pre-fund USD 14,000,000 now from daily-liquidity assets",
+        "rationale": "The obligation is committed - callable at the manager's discretion and dated 2026 Q4 to 2028 Q2. Raising it while markets are open is a choice; raising it against a deadline is not.",
+        "mechanics": [
+          "Sell USD 14,000,000 of Daily-tier positions",
+          "Hold the proceeds in USD until the obligation falls due",
+          "Book the sale against the specific obligation in the client file"
+        ],
+        "trade_offs": [
+          "Gives up market exposure and income between now and the due date",
+          "Crystallises gains or losses today rather than later"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Covers USD 14,000,000 of the USD 14,000,000 obligation.",
+        "evidence": [
+          {
+            "source_file": "commitments.csv",
+            "row_or_id": "COM-001",
+            "field": "uncalled",
+            "value": "USD 14,000,000",
+            "snapshot_date": null,
+            "note": "Uncalled commitment to Meridian Private Equity Fund VII (Committed - callable at the manager's discretion, 2026 Q4 to 2028 Q2 to 2026 Q4 to 2028 Q2)."
+          },
+          {
+            "source_file": "planned_cash_needs.csv",
+            "row_or_id": "CN-015",
+            "field": "amount",
+            "value": "USD 900,000",
+            "snapshot_date": null,
+            "note": "G3 education programme (Confirmed, 2026-09-01 to 2034-09-01)."
+          },
+          {
+            "source_file": "commitments.csv",
+            "row_or_id": "COM-002",
+            "field": "uncalled",
+            "value": "USD 1,800,000",
+            "snapshot_date": null,
+            "note": "Uncalled commitment to Global Infrastructure Debt Fund (Committed - callable at the manager's discretion, 2026 Q4 to 2027 Q3 to 2026 Q4 to 2027 Q3)."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-AL-0301",
+            "field": "liquidity_tier",
+            "value": "Illiquid",
+            "snapshot_date": "2026-08-26",
+            "note": "USD 12,064,000 not available on demand."
+          }
+        ]
+      },
+      {
+        "id": "CL-0017-sleeve-PF-0020-opt-stage",
+        "label": "Stage the obligation and agree the funding sequence in writing",
+        "rationale": "Where the full amount cannot be raised without forced sales, the decision is which tranche comes from where, agreed before the date rather than during it.",
+        "mechanics": [
+          "Split the obligation into dated tranches against the payment schedule",
+          "Nominate a funding source for each tranche, in order",
+          "Confirm with the counterparty whether the timing can move"
+        ],
+        "trade_offs": [
+          "Depends on the counterparty accepting a schedule",
+          "Leaves residual risk if the later tranches are unfunded"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client agreement",
+          "Counterparty confirmation"
+        ],
+        "estimated_impact": "Converts a single cliff into a dated plan.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0017-sleeve-PF-0020-opt-gate",
+        "label": "Confirm redemption terms on Meridian Private Equity Fund VII",
+        "rationale": "A gated vehicle cannot be relied on to fund anything until the manager confirms the amount and date. Treat it as unavailable until it settles.",
+        "mechanics": [
+          "Request the current gate level and queue position from the manager",
+          "Restate the liquidity map with the position excluded",
+          "Tell the client what has actually been received, not what was requested"
+        ],
+        "trade_offs": [
+          "Removes a position the client may believe is available",
+          "May surface a worse liquidity picture than expected"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM action",
+          "Manager confirmation"
+        ],
+        "estimated_impact": "Clarifies the status of USD 12,064,000.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0017-sleeve-PF-0020-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert 90 days before the earliest obligation, or if withdrawable value falls below the amount due.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The set of ways to fund the obligation narrows as the date approaches, and the last option is usually the most expensive."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0017-poslimit-PF-0020": [
+      {
+        "id": "CL-0017-poslimit-PF-0020-opt-correct",
+        "label": "Correct to the mandate bands over a staged programme",
+        "rationale": "Bringing the portfolio inside its bands is the contractual position. Staging it avoids putting the whole correction through the market on one day, which matters most for the largest gaps.",
+        "mechanics": [
+          "Agree tranche sizes and dates, and record the end state"
+        ],
+        "trade_offs": [
+          "Executes into current prices rather than chosen ones",
+          "Crystallises gains or losses across several positions",
+          "Takes time, so the breach persists during the programme"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Brings 0 asset class(es) inside their bands.",
+        "evidence": [
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "ALTS",
+            "field": "max_single_position_pct",
+            "value": 25.0,
+            "snapshot_date": null,
+            "note": null
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-AL-0301",
+            "field": "concentration_limit_applies",
+            "value": "Y",
+            "snapshot_date": null,
+            "note": "Meridian Private Equity Fund VII at 35.3%."
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-AL-0302",
+            "field": "concentration_limit_applies",
+            "value": "Y",
+            "snapshot_date": null,
+            "note": "Orchard Private Credit Fund II at 28.0%."
+          }
+        ]
+      },
+      {
+        "id": "CL-0017-poslimit-PF-0020-opt-document",
+        "label": "Document a client-directed exception with a review date",
+        "rationale": "Where the client has instructed the position and understands the consequence, the honest outcome is a recorded exception rather than a correction plan nobody intends to execute.",
+        "mechanics": [
+          "Record the client's instruction and confirmation in writing",
+          "Log the exception with a defined size limit and review date",
+          "Report the breach in the periodic mandate review"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside its bands",
+          "Requires the client to accept the position in writing",
+          "Does not remove the underlying risk"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Written client instruction on file",
+            "result": "not_assessed",
+            "detail": "No instruction found in the RM notes for this breach.",
+            "reference": "rm_notes.json"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Compliance sign-off",
+          "Client confirmation in writing"
+        ],
+        "estimated_impact": "No portfolio change; the exception becomes visible and dated.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0017-poslimit-PF-0020-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if any band gap widens by more than 3 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio remains outside a contractual limit, which is reportable whether or not it is discussed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0017-bands-PF-0019": [
+      {
+        "id": "CL-0017-bands-PF-0019-opt-correct",
+        "label": "Correct to the mandate bands over a staged programme",
+        "rationale": "Bringing the portfolio inside its bands is the contractual position. Staging it avoids putting the whole correction through the market on one day, which matters most for the largest gaps.",
+        "mechanics": [
+          "Reduce Equity from 56.2% toward the 40% target (USD 6,775,248 to trade)",
+          "Agree tranche sizes and dates, and record the end state"
+        ],
+        "trade_offs": [
+          "Executes into current prices rather than chosen ones",
+          "Crystallises gains or losses across several positions",
+          "Takes time, so the breach persists during the programme"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction",
+          "Investment committee note"
+        ],
+        "estimated_impact": "Brings 1 asset class(es) inside their bands.",
+        "evidence": [
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "BAL/Equity",
+            "field": "min_pct/max_pct",
+            "value": "30.0-55.0",
+            "snapshot_date": null,
+            "note": "Actual 56.2% at 2026-08-26."
+          },
+          {
+            "source_file": "portfolios.csv",
+            "row_or_id": "PF-0019",
+            "field": "service_model",
+            "value": "Discretionary",
+            "snapshot_date": null,
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0017-bands-PF-0019-opt-document",
+        "label": "Document a client-directed exception with a review date",
+        "rationale": "Where the client has instructed the position and understands the consequence, the honest outcome is a recorded exception rather than a correction plan nobody intends to execute.",
+        "mechanics": [
+          "Record the client's instruction and confirmation in writing",
+          "Log the exception with a defined size limit and review date",
+          "Report the breach in the periodic mandate review"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside its bands",
+          "Requires the client to accept the position in writing",
+          "Does not remove the underlying risk"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Written client instruction on file",
+            "result": "not_assessed",
+            "detail": "No instruction found in the RM notes for this breach.",
+            "reference": "rm_notes.json"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Compliance sign-off",
+          "Client confirmation in writing"
+        ],
+        "estimated_impact": "No portfolio change; the exception becomes visible and dated.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0017-bands-PF-0019-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if any band gap widens by more than 3 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio remains outside a contractual limit, which is reportable whether or not it is discussed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0017-gated": [
+      {
+        "id": "CL-0017-gated-opt-prefund",
+        "label": "Pre-fund USD 14,000,000 now from daily-liquidity assets",
+        "rationale": "The obligation is committed - callable at the manager's discretion and dated 2026 Q4 to 2028 Q2. Raising it while markets are open is a choice; raising it against a deadline is not.",
+        "mechanics": [
+          "Sell USD 14,000,000 of Daily-tier positions",
+          "Hold the proceeds in USD until the obligation falls due",
+          "Book the sale against the specific obligation in the client file"
+        ],
+        "trade_offs": [
+          "Gives up market exposure and income between now and the due date",
+          "Crystallises gains or losses today rather than later"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Hong Kong SAR. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction"
+        ],
+        "estimated_impact": "Covers USD 14,000,000 of the USD 14,000,000 obligation.",
+        "evidence": [
+          {
+            "source_file": "commitments.csv",
+            "row_or_id": "COM-001",
+            "field": "uncalled",
+            "value": "USD 14,000,000",
+            "snapshot_date": null,
+            "note": "Uncalled commitment to Meridian Private Equity Fund VII (Committed - callable at the manager's discretion, 2026 Q4 to 2028 Q2 to 2026 Q4 to 2028 Q2)."
+          },
+          {
+            "source_file": "planned_cash_needs.csv",
+            "row_or_id": "CN-015",
+            "field": "amount",
+            "value": "USD 900,000",
+            "snapshot_date": null,
+            "note": "G3 education programme (Confirmed, 2026-09-01 to 2034-09-01)."
+          },
+          {
+            "source_file": "commitments.csv",
+            "row_or_id": "COM-002",
+            "field": "uncalled",
+            "value": "USD 1,800,000",
+            "snapshot_date": null,
+            "note": "Uncalled commitment to Global Infrastructure Debt Fund (Committed - callable at the manager's discretion, 2026 Q4 to 2027 Q3 to 2026 Q4 to 2027 Q3)."
+          },
+          {
+            "source_file": "holdings.csv",
+            "row_or_id": "SYN-AL-0301",
+            "field": "liquidity_tier",
+            "value": "Illiquid",
+            "snapshot_date": "2026-08-26",
+            "note": "USD 12,064,000 not available on demand."
+          }
+        ]
+      },
+      {
+        "id": "CL-0017-gated-opt-stage",
+        "label": "Stage the obligation and agree the funding sequence in writing",
+        "rationale": "Where the full amount cannot be raised without forced sales, the decision is which tranche comes from where, agreed before the date rather than during it.",
+        "mechanics": [
+          "Split the obligation into dated tranches against the payment schedule",
+          "Nominate a funding source for each tranche, in order",
+          "Confirm with the counterparty whether the timing can move"
+        ],
+        "trade_offs": [
+          "Depends on the counterparty accepting a schedule",
+          "Leaves residual risk if the later tranches are unfunded"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client agreement",
+          "Counterparty confirmation"
+        ],
+        "estimated_impact": "Converts a single cliff into a dated plan.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0017-gated-opt-gate",
+        "label": "Confirm redemption terms on Meridian Private Equity Fund VII",
+        "rationale": "A gated vehicle cannot be relied on to fund anything until the manager confirms the amount and date. Treat it as unavailable until it settles.",
+        "mechanics": [
+          "Request the current gate level and queue position from the manager",
+          "Restate the liquidity map with the position excluded",
+          "Tell the client what has actually been received, not what was requested"
+        ],
+        "trade_offs": [
+          "Removes a position the client may believe is available",
+          "May surface a worse liquidity picture than expected"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM action",
+          "Manager confirmation"
+        ],
+        "estimated_impact": "Clarifies the status of USD 12,064,000.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0017-gated-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert 90 days before the earliest obligation, or if withdrawable value falls below the amount due.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The set of ways to fund the obligation narrows as the date approaches, and the last option is usually the most expensive."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0017-income-cover": [
+      {
+        "id": "CL-0017-income-cover-opt-discuss",
+        "label": "Raise it at the next meeting with the evidence attached",
+        "rationale": "Confirm the drawdown amount and timing, then check the income is durable rather than a one-off distribution.",
+        "mechanics": [
+          "Add to the meeting agenda with the supporting figures",
+          "Record the client's response in the file"
+        ],
+        "trade_offs": [
+          "Nothing changes until the meeting happens"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Balanced, tolerance 5.0/10, horizon 50.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Medium.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "Moves the item from the engine to the conversation.",
+        "evidence": [
+          {
+            "source_file": "transactions.csv",
+            "row_or_id": "CL-0017 income",
+            "field": "amount",
+            "value": "USD 2,439,517 over 2 quarters",
+            "snapshot_date": "2026-08-26",
+            "note": "Coupon, dividend, interest and distribution rows for 2026."
+          },
+          {
+            "source_file": "transactions.csv",
+            "row_or_id": "CL-0017 costs",
+            "field": "amount",
+            "value": "USD 277,729",
+            "snapshot_date": "2026-08-26",
+            "note": "Management fees and facility interest charges."
+          },
+          {
+            "source_file": "planned_cash_needs.csv",
+            "row_or_id": "CN-015",
+            "field": "amount",
+            "value": "USD 900,000",
+            "snapshot_date": null,
+            "note": "G3 education programme (Annual, Confirmed)."
+          }
+        ]
+      },
+      {
+        "id": "CL-0017-income-cover-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if the underlying figure moves by more than 20%.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The finding stands until it is addressed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ]
+  },
+  "brief": {
+    "client_id": "CL-0017",
+    "generated_at": "2026-09-04T10:41:46+00:00",
+    "as_of": "2026-08-26",
+    "purpose": "Review Fong Enterprises Family Office. Alternatives Sleeve owes USD 15,800,000 in uncalled commitments against USD 900,000 it can sell. Then: 2 position(s) above the 25% single-position limit.",
+    "talking_points": [
+      "Between 2025-12-31 and 2026-08-26 the household moved up USD 2,402,140, or 2.8%, from USD 85,500,840 to USD 87,902,980.",
+      "Of that, +USD 2,653,060 came from market moves, -USD 250,920 from currency translation and +USD 0 from money paid in or taken out.",
+      "Alternatives Sleeve owes USD 15,800,000 in uncalled commitments against USD 900,000 it can sell. The sleeve holds USD 34,178,000, of which USD 900,000 is cash and USD 900,000 is realisable within a week. Uncalled commitments are USD 15,800,000, expected 2026 Q4 to 2028 Q2. Cover is 0.06x. Meeting a call from elsewhere in the household is possible but is an investment committee decision, not an operational transfer.",
+      "2 position(s) above the 25% single-position limit. Meridian Private Equity Fund VII is 35.3% of Alternatives Sleeve against a 25% ceiling. The limit applies to single-name and single-asset exposures; diversified funds and sovereign bonds are excluded from the test.",
+      "Family Office Core Mandate sits outside 1 of its Balanced bands. The largest gap is Equity at 56.2% against a 30-55% band, 1.2 percentage points above the limit. Across all asset classes the portfolio is 1.2 percentage points away from its permitted ranges.",
+      "USD 12,062,000 sits in vehicles that can refuse a redemption. 2 position(s) carry a Quarterly Gate liquidity tier, 13.7% of household wealth. A submitted redemption is a request, not a settlement date. RM notes record this: \"Investment committee review. G2 wants to keep the core mandate conservative. G3 representatives pushed for more technology and venture exposure in the next generation account. Unre\""
+    ],
+    "questions_to_ask": [
+      "Which account is nominated to fund the next call?",
+      "Has the manager indicated the size or timing of the next call?",
+      "Are these still the objectives? Recorded as: Perpetual capital preservation across generations; fund G3 education and venture allocations; meet outstanding private markets commitments",
+      "Has anything changed in the client's circumstances? Life stage on file is \"Multi-generational - G2 and G3\"."
+    ],
+    "relationship_context": [
+      "2026-02-10 (Email, N-022): Capital call of USD 3.2m met from the sleeve's cash. Flagged to the family office CFO that between the remaining commitments and the gated private credit position, the sleeve's liquidity is thin. He asked for a full liquidity map before the next investment committee in October.",
+      "2026-06-30 (Meeting, N-023): Investment committee review. G2 wants to keep the core mandate conservative. G3 representatives pushed for more technology and venture exposure in the next generation account. Unresolved. Private credit manager has now gated three consecutive quarters."
+    ],
+    "contradictions": [],
+    "do_not_say": [
+      "Do not present any figure as investment advice. These are options for review.",
+      "Do not quote a tax outcome. Tax domicile drives the treatment and wealth planning owns the answer.",
+      "Do not describe a private markets or unlisted mark as current without saying when it was struck.",
+      "Do not present an RM note as an independently verified fact.",
+      "Do not promise a redemption date for a gated vehicle."
+    ],
+    "draft_follow_up": "Dear Fong Enterprises Family Office,\n\nThank you for your time today. A short summary of what we discussed and what happens next.\n\nWhere the portfolio stands. Between 2025-12-31 and 2026-08-26 the household moved up USD 2,402,140, or 2.8%, from USD 85,500,840 to USD 87,902,980. Of that, +USD 2,653,060 came from market moves, -USD 250,920 from currency translation and +USD 0 from money paid in or taken out.\n\nWhat we focused on. Alternatives Sleeve owes USD 15,800,000 in uncalled commitments against USD 900,000 it can sell. The sleeve holds USD 34,178,000, of which USD 900,000 is cash and USD 900,000 is realisable within a week. Uncalled commitments are USD 15,800,000, expected 2026 Q4 to 2028 Q2. Cover is 0.06x. Meeting a call from elsewhere in the household is possible but is an investment committee decision, not an operational transfer.\n\nWhat we agreed to look at. Produce the liquidity map by account and by date, showing which account funds each call and what that leaves behind.\n\nNothing in this note is a recommendation to buy or sell. Any action will be confirmed with you in writing before it is taken, and the figures above are as at 2026-08-26.\n\nKind regards,\nPriscilla Ong\nAsia desk - Singapore and Hong Kong booking centres",
+    "provenance": "deterministic"
+  },
+  "notes": [
+    {
+      "note_id": "N-022",
+      "note_date": "2026-02-10",
+      "channel": "Email",
+      "rm_name": "Priscilla Ong",
+      "note": "Capital call of USD 3.2m met from the sleeve's cash. Flagged to the family office CFO that between the remaining commitments and the gated private credit position, the sleeve's liquidity is thin. He asked for a full liquidity map before the next investment committee in October."
+    },
+    {
+      "note_id": "N-023",
+      "note_date": "2026-06-30",
+      "channel": "Meeting",
+      "rm_name": "Priscilla Ong",
+      "note": "Investment committee review. G2 wants to keep the core mandate conservative. G3 representatives pushed for more technology and venture exposure in the next generation account. Unresolved. Private credit manager has now gated three consecutive quarters."
+    }
+  ],
+  "events": [
+    {
+      "event_id": "EVT-15",
+      "event_date": "2026-07-29",
+      "event_type": "Policy",
+      "region": "United States",
+      "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+      "primary_transmission": "Duration, growth equity valuations",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-14",
+      "event_date": "2026-06-30",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "Half-year close. US equities near record levels on narrow, technology-led leadership. Non-traded private credit vehicles show continued redemption stress.",
+      "primary_transmission": "Private credit, semi-liquid alternatives",
+      "severity": "Medium"
+    },
+    {
+      "event_id": "EVT-13",
+      "event_date": "2026-06-19",
+      "event_type": "Market",
+      "region": "United States",
+      "description": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+      "primary_transmission": "Long-duration fixed income",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-12",
+      "event_date": "2026-06-17",
+      "event_type": "Policy",
+      "region": "United States",
+      "description": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+      "primary_transmission": "Duration, rate-sensitive credit, USD",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-11",
+      "event_date": "2026-06-05",
+      "event_type": "Market",
+      "region": "United States",
+      "description": "Megacap technology complex briefly sheds around USD 2 trillion in market value on AI capital expenditure concerns before recovering later in the month.",
+      "primary_transmission": "US technology, concentrated equity, collateralised lending",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-09",
+      "event_date": "2026-04-30",
+      "event_type": "Policy",
+      "region": "Europe",
+      "description": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+      "primary_transmission": "European fixed income, EUR assets",
+      "severity": "Medium"
+    },
+    {
+      "event_id": "EVT-03",
+      "event_date": "2026-01-28",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "Gold prints an intraday all-time high near USD 5,589 per ounce, then begins a multi-month consolidation.",
+      "primary_transmission": "Gold, precious metals",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-02",
+      "event_date": "2026-01-26",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "Spot gold trades above USD 5,000 per ounce for the first time.",
+      "primary_transmission": "Gold, precious metals",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-01",
+      "event_date": "2025-12-31",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "Gold closes 2025 up roughly 64% for the year after breaching USD 3,000 and USD 4,000 for the first time. Record annual gold ETF inflows of about USD 89bn.",
+      "primary_transmission": "Gold, precious metals miners, inflation hedges",
+      "severity": "High"
+    }
+  ],
+  "market": {
+    "series": [
+      {
+        "series_id": "BRENT_USD_BBL",
+        "series_name": "Brent crude",
+        "category": "Commodity",
+        "unit": "USD/barrel",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 69.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 72.4
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 104.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 96.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 101.5
+          }
+        ]
+      },
+      {
+        "series_id": "GOLD_USD_OZ",
+        "series_name": "Gold spot",
+        "category": "Commodity",
+        "unit": "USD/troy oz",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4310.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 5050.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 5240.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4780.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4622.6
+          }
+        ]
+      },
+      {
+        "series_id": "UST_10Y_PCT",
+        "series_name": "US Treasury 10-year yield",
+        "category": "Rates",
+        "unit": "percent",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4.05
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 3.95
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 4.35
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4.52
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4.66
+          }
+        ]
+      },
+      {
+        "series_id": "NASDAQ_COMP",
+        "series_name": "Nasdaq Composite Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 23150.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 24620.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 23880.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 25320.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 26010.0
+          }
+        ]
+      },
+      {
+        "series_id": "HSI",
+        "series_name": "Hang Seng Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 24800.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 25350.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 24100.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 24950.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25280.0
+          }
+        ]
+      },
+      {
+        "series_id": "VIX",
+        "series_name": "CBOE Volatility Index",
+        "category": "Volatility",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 15.2
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 17.8
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 31.4
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 22.6
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25.1
+          }
+        ]
+      }
+    ]
+  },
+  "audit": []
+}
