@@ -438,6 +438,65 @@ class ReevaluationRequest:
 
 
 @dataclass(frozen=True)
+class KnowledgeCitation:
+    """A precise citation to an approved synthetic internal reference."""
+
+    document_id: str
+    version: int
+    title: str
+    effective_date: str
+    source_refs: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class KnowledgeDocumentVersion:
+    version: int
+    status: Literal["draft", "submitted", "approved", "rejected", "superseded"]
+    body: str
+    source_refs: list[str]
+    effective_date: str
+    created_at: str
+    created_by: str
+    rationale: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class KnowledgeDocument:
+    id: str
+    title: str
+    category: str
+    tags: list[str]
+    owner: str
+    current_version: int
+    versions: list[KnowledgeDocumentVersion]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {**dataclasses.asdict(self), "versions": [item.to_dict() for item in self.versions]}
+
+
+@dataclass(frozen=True)
+class KnowledgeSearchResult:
+    citation: KnowledgeCitation
+    category: str
+    tags: list[str]
+    excerpt: str
+    matched_terms: list[str]
+    matched_fields: list[str]
+    score: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"citation": self.citation.to_dict(), "category": self.category, "tags": self.tags,
+                "excerpt": self.excerpt, "matched_terms": self.matched_terms,
+                "matched_fields": self.matched_fields, "score": self.score}
+
+
+@dataclass(frozen=True)
 class AuditTimelineEvent:
     id: str
     timestamp: str

@@ -9,7 +9,8 @@ import {
   saveMeetingSection,
 } from '../api'
 import { shortDate } from '../format'
-import type { CommunicationChannel, Dossier, Insight, InsightStatus, MeetingPackage } from '../types'
+import type { CommunicationChannel, Dossier, Insight, InsightStatus, MeetingPackage, SimulatedRole } from '../types'
+import { KnowledgeReferencePanel } from './KnowledgeReference'
 
 function versionOf(item: MeetingPackage) {
   return item.versions.find((version) => version.version === item.current_version) ?? item.versions[item.versions.length - 1]
@@ -280,6 +281,7 @@ export function MeetingStudio({
   dossier,
   onDecide,
   onReset,
+  role = 'rm',
 }: {
   dossier: Dossier
   onDecide?: (
@@ -292,6 +294,7 @@ export function MeetingStudio({
     },
   ) => Promise<void>
   onReset?: (insight: Insight) => Promise<void>
+  role?: SimulatedRole
 }) {
   const clientId = String(dossier.client.client_id)
   const eligible = dossier.insights.filter((insight) => insight.status === 'client_ready')
@@ -609,6 +612,8 @@ export function MeetingStudio({
           )}
         </div>
       </div>
+
+      <KnowledgeReferencePanel role={role} location="meeting_studio" />
 
       {/* SECTION 2: Client-Facing Communication Package & Preflight */}
       {eligible.length === 0 ? (

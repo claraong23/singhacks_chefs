@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-63 backend tests. They check the things a judge would push on: that holdings reconcile to
+67 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
@@ -127,6 +127,25 @@ The policy version, feedback, evaluation, and approval stay append-only in the
 audit trail; no threshold, evidence, historical decision, recommendation, or
 client-ready gate is changed.
 
+### 7. Knowledge Library — governed reference, never a client-data search
+
+The global **Knowledge** view provides deterministic lexical search over five
+approved, fictional internal reference guides: evidence/data quality,
+collateral/liquidity, mandate/suitability, tax/planning escalation and
+private-markets commitments/liquidity. Every result includes its document,
+version, effective date, source reference, exact matched fields and a bounded
+excerpt. It is visibly labelled synthetic prototype material—not Julius Baer
+policy, client evidence, advice, a tax conclusion or a recommendation.
+
+Only approved versions are searchable. Product Operations can author drafts and
+revisions; Compliance/Audit must approve or reject a submitted version with a
+rationale. Approved revisions supersede rather than overwrite prior versions.
+Search excludes all CSVs, RM notes, meeting packages, client statements and
+external sources, and it cannot inject wording into a decision, scenario,
+meeting package or client communication. Action Review and Meeting Studio open
+only safe category shortcuts; retrieval activity and document lineage appear in
+the unified audit timeline.
+
 ---
 
 ## What it found
@@ -175,6 +194,7 @@ clarity/
     meeting_store.py   Versioned Meeting Studio JSON adapter
     followthrough.py   Controlled post-meeting workflow validation
     followthrough_store.py Local tasks, referrals, outcomes and source-update adapter
+    knowledge_store.py Local approved-reference lifecycle and lexical retrieval adapter
     audit.py           Unified origin-labelled audit reconstruction
     brief.py           Legacy deterministic brief used by the terminal fallback
     review.py          RM decisions and the audit trail
@@ -280,6 +300,10 @@ The seams are already cut, so four people can work without colliding.
 | `GET /api/priority-policies` | Active policy, candidate policies, and curated transparent templates |
 | `GET /api/priority-policies/<id>/evaluation` | Deterministic candidate-versus-active shadow ranking |
 | `POST /api/priority-policies` and `/<id>/(revise|submit|approve|reject)` | Governed RM proposal and Compliance/Audit lifecycle |
+| `GET /api/knowledge-documents` | Role-scoped approved reference register and controlled version visibility |
+| `GET /api/knowledge-documents/<id>` | One permitted document with immutable version history |
+| `GET /api/knowledge/search?q=&category=&tag=` | Approved-only lexical reference search with citation provenance |
+| `POST /api/knowledge-documents` and `/<id>/(revise|submit|approve|reject)` | Product Operations authoring and Compliance/Audit lifecycle |
 | `GET /api/clients/<id>/scenario-templates` | Supported bounded comparisons for an anchor client |
 | `GET /api/clients/<id>/scenarios` | Saved RM scenario comparisons |
 | `POST /api/clients/<id>/scenarios/evaluate` | Evaluate `{template_id, insight_id, option_id, inputs}` |
@@ -292,7 +316,7 @@ The seams are already cut, so four people can work without colliding.
 | `GET /api/follow-through?role=<role>` | Role-scoped local tasks, referrals, outcomes and re-evaluation work |
 | `POST /api/follow-through/(tasks|referrals|outcomes|evidence-updates)` | Create governed post-meeting workflow records |
 | `POST /api/follow-through/<collection>/<id>/update` | Controlled work or re-evaluation status update |
-| `POST /api/reset` | Clear all local demo workflow state (demo reset) |
+| `POST /api/reset` | Clear local demo workflow state and reseed the five approved synthetic knowledge fixtures |
 
 ---
 

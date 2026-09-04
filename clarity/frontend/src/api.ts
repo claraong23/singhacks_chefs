@@ -21,6 +21,8 @@ import type {
   PriorityPolicy,
   PriorityPolicyEvaluation,
   RMFeedbackInput,
+  KnowledgeDocument,
+  KnowledgeSearchResult,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -38,6 +40,26 @@ async function json<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const getBook = () => json<BookView>('/api/book')
+
+export const getKnowledgeDocuments = (role: SimulatedRole) =>
+  json<{ documents: KnowledgeDocument[] }>(`/api/knowledge-documents?role=${role}`)
+
+export const getKnowledgeDocument = (id: string, role: SimulatedRole) =>
+  json<{ document: KnowledgeDocument }>(`/api/knowledge-documents/${id}?role=${role}`)
+
+export const searchKnowledge = (input: { query?: string; category?: string; tag?: string; role: SimulatedRole; location: string }) => {
+  const query = new URLSearchParams({ role: input.role, location: input.location })
+  if (input.query) query.set('q', input.query)
+  if (input.category) query.set('category', input.category)
+  if (input.tag) query.set('tag', input.tag)
+  return json<{ results: KnowledgeSearchResult[] }>(`/api/knowledge/search?${query.toString()}`)
+}
+
+export const createKnowledgeDocument = (input: Record<string, unknown>) =>
+  json<{ document: KnowledgeDocument }>('/api/knowledge-documents', { method: 'POST', body: JSON.stringify(input) })
+
+export const knowledgeDocumentAction = (id: string, action: 'revise' | 'submit' | 'approve' | 'reject', input: Record<string, unknown>) =>
+  json<{ document: KnowledgeDocument }>(`/api/knowledge-documents/${id}/${action}`, { method: 'POST', body: JSON.stringify(input) })
 
 export const getPriorityPolicies = () =>
   json<{ active_policy: PriorityPolicy; policies: PriorityPolicy[]; templates: Record<string, { name: string; weights: PriorityPolicy['weights'] }> }>('/api/priority-policies')

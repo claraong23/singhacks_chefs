@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getDecisionReadiness } from '../api'
 import type { ActionOption, DecisionReadiness, Insight, InsightStatus, RMFeedbackInput, SimulatedRole } from '../types'
+import { KnowledgeReferencePanel } from './KnowledgeReference'
 
 const TERMINAL: InsightStatus[] = ['client_ready', 'deferred', 'dismissed']
 
@@ -42,6 +43,12 @@ export function ActionReview({
   const canWork = role === 'rm' && ['under_review', 'rm_edited', 'rm_reviewed'].includes(insight.status)
   const isTerminal = TERMINAL.includes(insight.status)
   const hasDraftChanges = Boolean(selected || note.trim() || edited)
+  const knowledgeCategory = insight.client_id === 'CL-0017'
+    ? 'private_markets'
+    : insight.category === 'tax' ? 'tax_planning'
+    : insight.category === 'mandate' || insight.category === 'suitability' ? 'mandate_suitability'
+      : insight.category === 'collateral' || insight.category === 'liquidity' ? 'collateral_liquidity'
+        : undefined
 
   useEffect(() => {
     let active = true
@@ -333,6 +340,7 @@ export function ActionReview({
             {insight.status === 'rm_reviewed' && readiness && !readiness.can_mark_client_ready && (
               <div className="footnote">Resolve the blocking checks, or record escalation, deferral, or dismissal. Client-ready remains unavailable.</div>
             )}
+            <KnowledgeReferencePanel role={role} category={knowledgeCategory} location="action_review" />
           </>
         )}
 

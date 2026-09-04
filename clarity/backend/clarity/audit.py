@@ -6,6 +6,7 @@ from typing import Any
 
 from .followthrough_store import get_followthrough_store
 from .calibration_store import get_calibration_store
+from .knowledge_store import get_knowledge_repository
 from .loaders import get_book
 from .meeting_store import get_meeting_store
 from .review import get_store
@@ -38,4 +39,5 @@ def timeline(client_id: str | None = None) -> list[dict[str, Any]]:
             events.append(_event(timestamp=scenario["saved_at"], origin="system", object_type="scenario", object_id=scenario["id"], action="saved_current_state_comparison", actor=scenario["saved_by"], client_id=cid, insight_id=result["insight_id"], detail={"calculation_version": result["calculation_version"]}))
     events.extend(get_followthrough_store().audit(client_id))
     events.extend(get_calibration_store().audit(client_id))
+    events.extend(get_knowledge_repository().audit(client_id))
     return sorted(events, key=lambda item: item["timestamp"], reverse=True)

@@ -228,7 +228,7 @@ export function ClientDossier({
       )}
       {tab === 'risk' && <ExposureTab dossier={localDossier} />}
       {tab === 'liquidity' && <LiquidityTab dossier={localDossier} />}
-      {tab === 'brief' && <MeetingStudio dossier={localDossier} onDecide={onDecide} onReset={onReset} />}
+      {tab === 'brief' && <MeetingStudio dossier={localDossier} onDecide={onDecide} onReset={onReset} role={role} />}
       {tab === 'follow' && <FollowThroughPanel dossier={localDossier} role={role} />}
 
       {evidenceFor && (

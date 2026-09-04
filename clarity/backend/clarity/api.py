@@ -61,6 +61,7 @@ from .followthrough import (
     reevaluation_update, required_text, status_update, work_record,
 )
 from .followthrough_store import get_followthrough_store
+from .knowledge_store import get_knowledge_repository
 from .signals.base import SignalContext, run_for_client
 from .signals.holding_explain import explain_holding
 
@@ -218,6 +219,21 @@ class ClarityHandler(BaseHTTPRequestHandler):
             if path == "/api/priority-policies":
                 store = get_calibration_store()
                 return self._send_json({"active_policy": store.active(), "policies": store.list(), "templates": TEMPLATES})
+            if path == "/api/knowledge-documents":
+                role = query.get("role", ["rm"])[0]
+                return self._send_json({"documents": get_knowledge_repository().list(role)})
+            if path == "/api/knowledge/search":
+                role = query.get("role", ["rm"])[0]
+                results = get_knowledge_repository().search(
+                    query=query.get("q", [""])[0], category=query.get("category", [None])[0],
+                    tag=query.get("tag", [None])[0], role=role, location=query.get("location", ["knowledge_library"])[0],
+                )
+                return self._send_json({"results": results})
+            if path.startswith("/api/knowledge-documents/"):
+                document_id = path[len("/api/knowledge-documents/") :]
+                if "/" not in document_id:
+                    role = query.get("role", ["rm"])[0]
+                    return self._send_json({"document": get_knowledge_repository().get(document_id, role)})
             if path.startswith("/api/priority-policies/") and path.endswith("/evaluation"):
                 policy_id = path[len("/api/priority-policies/") : -len("/evaluation")]
                 return self._send_json({"evaluation": evaluate_policy(policy_id)})
@@ -312,7 +328,25 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 get_meeting_store().reset()
                 get_followthrough_store().reset()
                 get_calibration_store().reset()
+                get_knowledge_repository().reset()
                 return self._send_json({"status": "reset"})
+            if path == "/api/knowledge-documents":
+                payload = self._read_json(); role = payload.get("role", "operations")
+                return self._send_json({"document": get_knowledge_repository().create(payload, role)}, 201)
+            if path.startswith("/api/knowledge-documents/"):
+                remainder = path[len("/api/knowledge-documents/") :].strip("/")
+                document_id, _, action = remainder.partition("/")
+                payload = self._read_json(); role = payload.get("role", "rm")
+                repository = get_knowledge_repository()
+                if action == "revise":
+                    return self._send_json({"document": repository.revise(document_id, payload, role)})
+                if action == "submit":
+                    return self._send_json({"document": repository.submit(document_id, payload.get("rationale"), role)})
+                if action == "approve":
+                    return self._send_json({"document": repository.review(document_id, True, payload.get("rationale"), role)})
+                if action == "reject":
+                    return self._send_json({"document": repository.review(document_id, False, payload.get("rationale"), role)})
+                return self._send_json({"error": "Unknown knowledge document action."}, 404)
             if path == "/api/priority-policies":
                 payload = self._read_json()
                 if payload.get("role", "rm") != "rm":

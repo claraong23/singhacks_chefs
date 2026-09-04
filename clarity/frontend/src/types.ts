@@ -590,6 +590,49 @@ export interface AuditTimelineEvent {
   detail: Record<string, unknown>
 }
 
+export type KnowledgeDocumentStatus = 'draft' | 'submitted' | 'approved' | 'rejected' | 'superseded'
+export interface KnowledgeDocumentVersion {
+  version: number
+  status: KnowledgeDocumentStatus
+  body: string
+  source_refs: string[]
+  effective_date: string
+  created_at: string
+  created_by: string
+  rationale: string
+  reviewed_by?: string
+  reviewed_at?: string
+  review_rationale?: string
+}
+export interface KnowledgeDocument {
+  id: string
+  title: string
+  category: string
+  tags: string[]
+  owner: string
+  current_version: number
+  approved_version?: number | null
+  version?: KnowledgeDocumentVersion
+  seeded?: boolean
+  versions?: KnowledgeDocumentVersion[]
+}
+export interface KnowledgeCitation {
+  document_id: string
+  version: number
+  title: string
+  effective_date: string
+  source_refs: string[]
+}
+export interface KnowledgeSearchResult {
+  citation: KnowledgeCitation
+  category: string
+  tags: string[]
+  excerpt: string
+  matched_terms: string[]
+  matched_fields: string[]
+  score: number
+}
+
 export interface Dossier {
   as_of: string
   client: Record<string, string | number | null>

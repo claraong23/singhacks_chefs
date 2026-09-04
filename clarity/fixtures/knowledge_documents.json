@@ -1,0 +1,52 @@
+[
+  {
+    "id": "KN-EVIDENCE-001",
+    "title": "Evidence, data quality and RM communication standard",
+    "category": "evidence",
+    "tags": ["evidence", "data_quality", "source_date", "rm"],
+    "owner": "Product Operations",
+    "effective_date": "2026-08-26",
+    "source_refs": ["clarity/docs/METHOD.md", "clarity/README.md"],
+    "body": "SYNTHETIC PROTOTYPE REFERENCE — not Julius Baer policy. Treat every material financial statement as a cited source fact with a row or identifier, field, value and relevant as-of date. Present stale, missing and conflicting data as an RM review state. Do not turn an RM note or client statement into a verified portfolio fact. Escalate an unresolved data question before client-ready communication rather than filling a gap with an assumption."
+  },
+  {
+    "id": "KN-COLLATERAL-001",
+    "title": "Collateral, liquidity and funding-conversation reference",
+    "category": "collateral_liquidity",
+    "tags": ["collateral", "ltv", "liquidity", "funding", "lau"],
+    "owner": "Credit",
+    "effective_date": "2026-08-26",
+    "source_refs": ["clarity/docs/METHOD.md", "clarity/docs/DEMO.md"],
+    "body": "SYNTHETIC PROTOTYPE REFERENCE — not Julius Baer policy. For a collateral or funding conversation, distinguish market value from lending value and confirm the current facility balance before quoting loan-to-value. Liquidity that is pledged, gated or illiquid is not automatically available for withdrawal. Frame funding paths as RM discussion options and involve Credit when headroom, collateral treatment or facility terms require confirmation. Lau's redevelopment discussion requires confirmed cash-need timing and a controlled funding conversation, not a trade instruction."
+  },
+  {
+    "id": "KN-SUITABILITY-001",
+    "title": "Mandate, suitability and client-context review reference",
+    "category": "mandate_suitability",
+    "tags": ["mandate", "suitability", "risk_profile", "objectives", "margarethe"],
+    "owner": "Investment Governance",
+    "effective_date": "2026-08-26",
+    "source_refs": ["clarity/docs/METHOD.md", "clarity/README.md"],
+    "body": "SYNTHETIC PROTOTYPE REFERENCE — not Julius Baer policy. Review household context and portfolio mandate separately: a household exposure can be relevant even where a custody sleeve is outside the bank mandate. Do not present a mandate deviation as an instruction to trade. Confirm risk profile, objectives, liquidity needs, product knowledge and any unresolved suitability control before a client-ready discussion. Margarethe's inherited portfolio requires a sensitive RM conversation and documented mandate review."
+  },
+  {
+    "id": "KN-TAX-001",
+    "title": "Tax and wealth-planning escalation reference",
+    "category": "tax_planning",
+    "tags": ["tax", "wealth_planning", "escalation", "margarethe"],
+    "owner": "Wealth Planning",
+    "effective_date": "2026-08-26",
+    "source_refs": ["clarity/docs/METHOD.md", "clarity/README.md"],
+    "body": "SYNTHETIC PROTOTYPE REFERENCE — not Julius Baer policy. Use tax domicile rather than residence when identifying a tax-sensitive question. Do not calculate, predict or communicate a tax outcome without complete jurisdictional facts, acquisition records and qualified specialist review. Record missing tax information as a control, ring-fence only documented obligations in current-state comparisons, and refer the matter to Wealth Planning. Margarethe's confirmed instalment is a planning fact, not a tax calculation."
+  },
+  {
+    "id": "KN-COMMITMENTS-001",
+    "title": "Private-markets commitments and gated-liquidity reference",
+    "category": "private_markets",
+    "tags": ["commitments", "private_markets", "gated_liquidity", "fong"],
+    "owner": "Alternatives Advisory",
+    "effective_date": "2026-08-26",
+    "source_refs": ["clarity/docs/METHOD.md", "clarity/README.md"],
+    "body": "SYNTHETIC PROTOTYPE REFERENCE — not Julius Baer policy. Build a dated commitment and cash-need map before discussing funding order. Reconcile duplicate descriptions and amounts so an obligation is not counted twice. A gated private-credit position is not available funding, and an uncertain capital-call window is not a confirmed payment date. Fong's discussion should focus on reserve coverage, sleeve-level liquidity and open questions for the family office rather than an execution recommendation."
+  }
+]

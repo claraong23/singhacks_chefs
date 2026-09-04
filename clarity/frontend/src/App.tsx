@@ -7,6 +7,7 @@ import { ClientDossier } from './components/ClientDossier'
 import { FollowThroughBoard } from './components/FollowThrough'
 import { AuditConsole } from './components/AuditConsole'
 import { CalibrationLab } from './components/CalibrationLab'
+import { KnowledgeLibrary } from './components/KnowledgeReference'
 import { shortDate } from './format'
 
 export default function App() {
@@ -16,7 +17,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [role, setRole] = useState<SimulatedRole>('rm')
-  const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit' | 'calibration'>('book')
+  const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit' | 'calibration' | 'knowledge'>('book')
 
   const loadBook = useCallback(async () => {
     try {
@@ -150,6 +151,7 @@ export default function App() {
         <button aria-current={view === 'client'} disabled={!dossier} onClick={() => dossier && setView('client')}>Client</button>
         <button aria-current={view === 'follow'} onClick={() => setView('follow')}>Follow-through</button>
         <button aria-current={view === 'calibration'} onClick={() => setView('calibration')}>Calibration Lab</button>
+        <button aria-current={view === 'knowledge'} onClick={() => setView('knowledge')}>Knowledge</button>
         <button aria-current={view === 'audit'} onClick={() => setView('audit')}>Audit</button>
       </nav>
 
@@ -170,6 +172,7 @@ export default function App() {
 
         {view === 'follow' && <FollowThroughBoard role={role} onOpenClient={openClient} />}
         {view === 'calibration' && <CalibrationLab role={role} onActivePolicyChanged={() => void loadBook()} />}
+        {view === 'knowledge' && <KnowledgeLibrary role={role} />}
         {view === 'audit' && <AuditConsole role={role} />}
 
         {view === 'client' && clientId && dossier && (
