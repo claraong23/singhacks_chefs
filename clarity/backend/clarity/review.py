@@ -193,6 +193,7 @@ class ReviewStore:
         evidence_version: str | None = None,
         selected_scenario_id: str | None = None,
         scenario_calculation_version: str | None = None,
+        feedback: dict[str, Any] | None = None,
     ) -> Decision:
         with self._lock:
             previous = self._decisions.get(insight_id)
@@ -245,6 +246,7 @@ class ReviewStore:
                         "evidence_version": evidence_version,
                         "selected_scenario_id": selected_scenario_id,
                         "scenario_calculation_version": scenario_calculation_version,
+                        "feedback": feedback or None,
                     },
                 )
             )

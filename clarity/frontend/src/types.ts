@@ -68,6 +68,7 @@ export interface Insight {
   summary: string
   priority_score: number
   priority_reasons: string[]
+  priority_factors?: PriorityFactors | null
   observed_facts: Fact[]
   client_relevance: string
   suggested_next_step: string
@@ -90,6 +91,52 @@ export interface Insight {
   edited?: boolean
   headline_original?: string
   suggested_next_step_original?: string
+}
+
+export interface PriorityFactors {
+  severity_weight: number
+  materiality_pct: number | null
+  days_until: number | null
+  amount_usd: number | null
+}
+
+export type PriorityPolicyStatus = 'draft' | 'submitted' | 'active' | 'rejected' | 'retired'
+export interface PriorityPolicy {
+  id: string
+  name: string
+  weights: { severity: number; materiality: number; urgency: number }
+  status: PriorityPolicyStatus
+  rationale: string
+  created_by: string
+  created_at: string
+  template?: string | null
+  activation_history: Record<string, unknown>[]
+}
+
+export interface PriorityPolicyEvaluation {
+  policy_id: string
+  active_policy_id: string
+  feedback_count: number
+  anchor_coverage: string[]
+  activation_eligible: boolean
+  warnings: string[]
+  top_five_relevance_rate: number | null
+  urgency_alignment_rate: number | null
+  rank_changes: Array<{
+    client_id: string
+    headline: string
+    candidate_rank: number
+    active_rank: number
+    rank_delta: number
+    candidate_score: number
+    active_score: number
+  }>
+}
+
+export interface RMFeedbackInput {
+  usefulness: 'useful' | 'partly_useful' | 'not_useful'
+  urgencyAssessment: 'right' | 'overstated' | 'understated'
+  rationale: string
 }
 
 export interface ActionOption {
@@ -193,7 +240,7 @@ export interface BookView {
   }
   clients: BookRow[]
   data_warnings: string[]
-  scoring: Record<string, string>
+  scoring: { formula: string; materiality: string; urgency: string; note: string; policy?: PriorityPolicy }
 }
 
 export interface Position {
@@ -602,6 +649,7 @@ export interface Dossier {
     }[]
   }
   follow_through: FollowThroughView
+  priority_policy?: PriorityPolicy
   audit: AuditTimelineEvent[]
 }
 

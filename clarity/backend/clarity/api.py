@@ -54,6 +54,8 @@ from .review import InvalidTransitionError, VALID_STATUSES, get_store
 from .scenario_store import get_scenario_store
 from .scenarios import evaluate_scenario, templates_for_client
 from .audit import timeline
+from .calibration import create_policy, evaluate as evaluate_policy, validate_feedback, validate_weights
+from .calibration_store import TEMPLATES, get_calibration_store
 from .followthrough import (
     actor as follow_actor, ensure_create, ensure_update, evidence_record, outcome_record,
     reevaluation_update, required_text, status_update, work_record,
@@ -63,6 +65,13 @@ from .signals.base import SignalContext, run_for_client
 from .signals.holding_explain import explain_holding
 
 FRONTEND_DIST = config.REPO_ROOT / "clarity" / "frontend" / "dist"
+CALIBRATION_ACTORS = {"rm": "RM-SG-014", "compliance_audit": "COMPLIANCE-SG-001"}
+
+
+def _calibration_actor(role: str) -> str:
+    if role not in CALIBRATION_ACTORS:
+        raise PermissionError("This simulated role cannot change priority calibration.")
+    return CALIBRATION_ACTORS[role]
 
 
 def _meta() -> dict:
@@ -206,6 +215,12 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 return self._send_json(_meta())
             if path == "/api/book":
                 return self._send_json(book_view())
+            if path == "/api/priority-policies":
+                store = get_calibration_store()
+                return self._send_json({"active_policy": store.active(), "policies": store.list(), "templates": TEMPLATES})
+            if path.startswith("/api/priority-policies/") and path.endswith("/evaluation"):
+                policy_id = path[len("/api/priority-policies/") : -len("/evaluation")]
+                return self._send_json({"evaluation": evaluate_policy(policy_id)})
             if path == "/api/events":
                 return self._send_json({"events": all_events()})
             if path == "/api/audit":
@@ -296,7 +311,50 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 get_scenario_store().reset()
                 get_meeting_store().reset()
                 get_followthrough_store().reset()
+                get_calibration_store().reset()
                 return self._send_json({"status": "reset"})
+            if path == "/api/priority-policies":
+                payload = self._read_json()
+                if payload.get("role", "rm") != "rm":
+                    raise PermissionError("Only the RM role can propose a priority policy.")
+                policy = create_policy(payload, _calibration_actor("rm"))
+                return self._send_json({"policy": policy, "evaluation": evaluate_policy(policy["id"])}, 201)
+            if path.startswith("/api/priority-policies/"):
+                remainder = path[len("/api/priority-policies/") :].strip("/")
+                policy_id, _, action = remainder.partition("/")
+                payload = self._read_json()
+                role = payload.get("role", "rm")
+                store = get_calibration_store()
+                if action == "revise":
+                    if role != "rm":
+                        raise PermissionError("Only the RM role can revise a priority policy.")
+                    name = str(payload.get("name") or "").strip()
+                    rationale = str(payload.get("rationale") or "").strip()
+                    if not name or not rationale:
+                        raise ValueError("A policy name and RM rationale are required.")
+                    saved = store.revise(policy_id, name=name, weights=validate_weights(payload.get("weights")), rationale=rationale, actor=_calibration_actor(role))
+                    return self._send_json({"policy": saved, "evaluation": evaluate_policy(policy_id)})
+                if action == "submit":
+                    if role != "rm":
+                        raise PermissionError("Only the RM role can submit a priority policy.")
+                    rationale = str(payload.get("rationale") or "").strip()
+                    if not rationale:
+                        raise ValueError("An RM submission rationale is required.")
+                    return self._send_json({"policy": store.transition(policy_id, status="submitted", actor=_calibration_actor(role), rationale=rationale)})
+                if action in {"approve", "reject"}:
+                    if role != "compliance_audit":
+                        raise PermissionError("Only Compliance/Audit can approve or reject a priority policy.")
+                    rationale = str(payload.get("rationale") or "").strip()
+                    if not rationale:
+                        raise ValueError("A Compliance/Audit rationale is required.")
+                    if action == "approve":
+                        evaluation = evaluate_policy(policy_id)
+                        if not evaluation["activation_eligible"]:
+                            return self._send_json({"error": "Priority policy lacks the required feedback coverage.", "evaluation": evaluation}, 409)
+                        saved = store.activate(policy_id, actor=_calibration_actor(role), rationale=rationale)
+                    else:
+                        saved = store.transition(policy_id, status="rejected", actor=_calibration_actor(role), rationale=rationale)
+                    return self._send_json({"policy": saved})
             if path == "/api/follow-through/tasks" or path == "/api/follow-through/referrals":
                 payload = self._read_json()
                 role = payload.get("role") or "rm"
@@ -502,6 +560,8 @@ class ClarityHandler(BaseHTTPRequestHandler):
                         {"error": f"status must be one of {list(VALID_STATUSES)}"}, 400
                     )
                 client_id = _client_id_for(insight_id, payload)
+                if payload.get("role", "rm") != "rm":
+                    raise PermissionError("Only the RM role can change RM decisions.")
                 actor = payload.get("actor") or "RM-SG-014"
                 saved_scenario = _saved_scenario(payload, client_id, insight_id)
                 readiness = None
@@ -531,6 +591,10 @@ class ClarityHandler(BaseHTTPRequestHandler):
                             },
                             409,
                         )
+                feedback = validate_feedback(payload, status)
+                feedback_readiness = readiness
+                if feedback and feedback_readiness is None:
+                    _, feedback_readiness = _readiness(insight_id, payload)
                 # Resolve every decision against the current deterministic
                 # source payload, even where readiness is not required.
                 _decision_subject(client_id, insight_id)
@@ -555,8 +619,22 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     scenario_calculation_version=(
                         saved_scenario["result"]["calculation_version"] if saved_scenario else None
                     ),
+                    feedback=feedback or None,
                 )
-                return self._send_json({"decision": decision.to_dict()})
+                saved_feedback = None
+                if feedback:
+                    saved_feedback = get_calibration_store().feedback(
+                        client_id=client_id,
+                        insight_id=insight_id,
+                        decision_status=status,
+                        usefulness=feedback["usefulness"],
+                        urgency_assessment=feedback["urgency_assessment"],
+                        rationale=feedback["rationale"],
+                        actor=actor,
+                        evidence_version=feedback_readiness.evidence_version if feedback_readiness else None,
+                        policy_id=get_calibration_store().active()["id"],
+                    )
+                return self._send_json({"decision": decision.to_dict(), "feedback": saved_feedback})
             if path.startswith("/api/insights/") and path.endswith("/reset"):
                 insight_id = path[len("/api/insights/") : -len("/reset")]
                 payload = self._read_json() if self.headers.get("content-length") else {}

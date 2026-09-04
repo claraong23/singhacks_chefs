@@ -49,8 +49,9 @@ export function EvidenceDrawer({
             <div className="footnote">
               Score {insight.priority_score.toFixed(1)} of 100 = 0.45 × severity + 0.30 ×
               materiality + 0.25 × urgency. The weights are a judgement and are published
-              so they can be argued with.
+              so they can be argued with. Active weights are shown in the Morning Book and Calibration Lab.
             </div>
+            {insight.priority_factors && <div className="footnote" style={{ marginTop: 6 }}>Immutable score inputs: severity weight {insight.priority_factors.severity_weight.toFixed(2)} · materiality {insight.priority_factors.materiality_pct === null ? 'not quantified' : `${insight.priority_factors.materiality_pct.toFixed(1)}%`} · urgency {insight.priority_factors.days_until === null ? 'no dated deadline' : `${insight.priority_factors.days_until} days`}.</div>}
           </section>
 
           <section style={{ marginBottom: 26 }}>

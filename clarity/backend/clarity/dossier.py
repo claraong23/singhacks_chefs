@@ -21,6 +21,7 @@ from .analytics import income as income_mod
 from .analytics import lookthrough
 from .analytics.valuation import household_view, household_timeseries
 from .brief import build_brief
+from .calibration_store import get_calibration_store
 from .audit import timeline
 from .followthrough_store import get_followthrough_store
 from .contracts import Insight, InsightStatus
@@ -68,10 +69,11 @@ def book_view(book: DataBook | None = None, store: ReviewStore | None = None) ->
     book = book or get_book()
     store = store or get_store()
 
+    active_policy = get_calibration_store().active()
     rows: list[dict[str, Any]] = []
     total_aum = 0.0
     for client_id, client in book.clients.items():
-        insights = run_for_client(client_id, book)
+        insights = run_for_client(client_id, book, priority_weights=active_policy["weights"])
         live = [i for i in insights if store.status_of(i.id) != "dismissed"]
         view = household_view(book, client_id)
         total_aum += view.total_usd
@@ -140,7 +142,8 @@ def book_view(book: DataBook | None = None, store: ReviewStore | None = None) ->
         "clients": rows,
         "data_warnings": book.warnings,
         "scoring": {
-            "formula": "0.45 x severity + 0.30 x materiality + 0.25 x urgency, scaled to 100",
+            "formula": "severity + materiality + urgency, using the active published policy and scaled to 100",
+            "policy": active_policy,
             "materiality": "share of household wealth affected, capped at 30%",
             "urgency": "days until the driving date, banded",
             "note": (
@@ -164,7 +167,8 @@ def client_dossier(
     ctx = SignalContext(book=book, client_id=client_id)
     client = ctx.client
 
-    insights = run_for_client(client_id, book)
+    active_policy = get_calibration_store().active()
+    insights = run_for_client(client_id, book, priority_weights=active_policy["weights"])
     insight_payloads = _apply_decisions(insights, store)
 
     options: dict[str, list[dict[str, Any]]] = {}
@@ -317,6 +321,7 @@ def client_dossier(
             key: get_followthrough_store().list(key, client_id=client_id)
             for key in ("tasks", "referrals", "outcomes", "evidence_updates", "reevaluations")
         },
+        "priority_policy": active_policy,
         "audit": timeline(client_id),
     }
 

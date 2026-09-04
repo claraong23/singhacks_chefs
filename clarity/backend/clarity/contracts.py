@@ -16,9 +16,26 @@ Two rules hold everywhere:
 from __future__ import annotations
 
 import dataclasses
+from contextvars import ContextVar
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Literal
+
+
+_PENDING_PRIORITY_FACTORS: ContextVar["PriorityFactors | None"] = ContextVar(
+    "pending_priority_factors", default=None
+)
+
+
+def capture_priority_factors(factors: "PriorityFactors") -> None:
+    """Associate a score calculation with the immediately-created insight."""
+    _PENDING_PRIORITY_FACTORS.set(factors)
+
+
+def consume_priority_factors() -> "PriorityFactors | None":
+    factors = _PENDING_PRIORITY_FACTORS.get()
+    _PENDING_PRIORITY_FACTORS.set(None)
+    return factors
 
 # ---------------------------------------------------------------------------
 # Enumerations
@@ -79,6 +96,79 @@ class Confidence(str, Enum):
     #: Depends on an RM note or a client statement that structured data does
     #: not independently confirm.
     REPORTED = "reported"
+
+
+# ---------------------------------------------------------------------------
+# Priority calibration
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class PriorityFactors:
+    """Immutable deterministic inputs to an insight's published priority score."""
+
+    severity_weight: float
+    materiality_pct: float | None = None
+    days_until: int | None = None
+    amount_usd: float | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class PriorityPolicy:
+    """A versioned, transparent set of score weights; never a predictive model."""
+
+    id: str
+    name: str
+    weights: dict[str, float]
+    status: Literal["draft", "submitted", "active", "rejected", "retired"]
+    rationale: str
+    created_by: str
+    created_at: str
+    activation_history: list[dict[str, Any]] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class RMFeedback:
+    """An RM's governed assessment of a final finding disposition."""
+
+    id: str
+    client_id: str
+    insight_id: str
+    decision_status: str
+    usefulness: Literal["useful", "partly_useful", "not_useful"]
+    urgency_assessment: Literal["right", "overstated", "understated"]
+    rationale: str
+    actor: str
+    timestamp: str
+    evidence_version: str | None
+    policy_id: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class PriorityPolicyEvaluation:
+    """A deterministic candidate-versus-active scoring comparison."""
+
+    policy_id: str
+    active_policy_id: str
+    feedback_count: int
+    anchor_coverage: list[str]
+    activation_eligible: bool
+    warnings: list[str]
+    top_five_relevance_rate: float | None = None
+    urgency_alignment_rate: float | None = None
+    rank_changes: list[dict[str, Any]] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
 
 
 # ---------------------------------------------------------------------------
@@ -400,6 +490,7 @@ class Insight:
     summary: str
     priority_score: float
     priority_reasons: list[str] = field(default_factory=list)
+    priority_factors: PriorityFactors | None = None
     observed_facts: list[Fact] = field(default_factory=list)
     client_relevance: str = ""
     suggested_next_step: str = ""
@@ -414,6 +505,10 @@ class Insight:
     amount_usd: float | None = None
     status: InsightStatus = InsightStatus.NEW
 
+    def __post_init__(self) -> None:
+        if self.priority_factors is None:
+            self.priority_factors = consume_priority_factors()
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "id": self.id,
@@ -424,6 +519,7 @@ class Insight:
             "summary": self.summary,
             "priority_score": round(self.priority_score, 1),
             "priority_reasons": list(self.priority_reasons),
+            "priority_factors": self.priority_factors.to_dict() if self.priority_factors else None,
             "observed_facts": [f.to_dict() for f in self.observed_facts],
             "client_relevance": self.client_relevance,
             "suggested_next_step": self.suggested_next_step,

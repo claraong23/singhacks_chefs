@@ -145,7 +145,8 @@ class TestMeetingHttpApi(unittest.TestCase):
 
         payload = {"client_id": client_id, "selected_option_id": option.id, "rm_note": "Controlled review."}
         for status in ("opened", "under_review", "rm_reviewed", "client_ready"):
-            code, body = self.request(f"/api/insights/{insight.id}/decision", {**payload, "status": status})
+            feedback = {"usefulness": "useful", "urgency_assessment": "right", "rationale": "The finding supports this meeting."} if status in {"rm_reviewed", "client_ready"} else None
+            code, body = self.request(f"/api/insights/{insight.id}/decision", {**payload, "status": status, **({"feedback": feedback} if feedback else {})})
             self.assertEqual(code, 200, body)
         audit_before = len(__import__("clarity.review", fromlist=["get_store"]).get_store().audit(client_id))
         code, created = self.request(f"/api/insights/{insight.id}/meeting-packages", {"client_id": client_id})

@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-61 backend tests. They check the things a judge would push on: that holdings reconcile to
+63 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
@@ -116,6 +116,16 @@ decisions. A simulated least-privilege role switcher demonstrates what an RM,
 specialist, Compliance/Audit user and Product Operations user can see or change.
 The Audit Console keeps source-data, deterministic system and user-decision
 activity visibly separate.
+
+### 6. Calibration Lab — improve the queue without an opaque model
+
+Final RM dispositions collect a governed usefulness and urgency assessment. An
+RM can compare baseline, urgency-first, materiality-first, or bounded custom
+weights against the same deterministic signal set. Compliance/Audit can activate
+a submitted candidate only after final feedback covers Lau, Margarethe and Fong.
+The policy version, feedback, evaluation, and approval stay append-only in the
+audit trail; no threshold, evidence, historical decision, recommendation, or
+client-ready gate is changed.
 
 ---
 
@@ -222,6 +232,8 @@ FollowUpTask / SpecialistReferral  client_id, insight_id?, owner_role, due_date,
                                    evidence_refs[], history[]
 EvidenceUpdate / ReevaluationRequest source_ref, affected_insight_ids[], immutable history
 AuditTimelineEvent timestamp, origin {source_data|system|user_decision}, object, actor
+PriorityPolicy  weights {severity, materiality, urgency}, versioned lifecycle and approval history
+RMFeedback      final disposition usefulness, urgency assessment, rationale, policy and evidence version
 ```
 
 Two rules hold everywhere: **no claim without a citation**, and **computed
@@ -265,6 +277,9 @@ The seams are already cut, so four people can work without colliding.
 | `GET /api/events` | `event_log.csv`, normalised with stable ids |
 | `GET /api/meta` | Snapshots, categories, thresholds, load warnings |
 | `GET /api/audit` | Unified origin-labelled audit timeline; supports client and origin filters |
+| `GET /api/priority-policies` | Active policy, candidate policies, and curated transparent templates |
+| `GET /api/priority-policies/<id>/evaluation` | Deterministic candidate-versus-active shadow ranking |
+| `POST /api/priority-policies` and `/<id>/(revise|submit|approve|reject)` | Governed RM proposal and Compliance/Audit lifecycle |
 | `GET /api/clients/<id>/scenario-templates` | Supported bounded comparisons for an anchor client |
 | `GET /api/clients/<id>/scenarios` | Saved RM scenario comparisons |
 | `POST /api/clients/<id>/scenarios/evaluate` | Evaluate `{template_id, insight_id, option_id, inputs}` |

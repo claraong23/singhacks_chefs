@@ -5,6 +5,7 @@ import type {
   Insight,
   InsightStatus,
   ProposedObjective,
+  RMFeedbackInput,
   SavedScenario,
   SimulatedRole,
 } from '../types'
@@ -56,6 +57,7 @@ export function ClientDossier({
       rmNote: string
       selectedOptionId: string | null
       editedNextStep: string | null
+      feedback?: RMFeedbackInput
     },
   ) => Promise<void>
   onAttachScenario: (insight: Insight, scenario: SavedScenario) => Promise<void>
@@ -143,6 +145,7 @@ export function ClientDossier({
               insight={insight}
               options={dossier.options[insight.id] ?? []}
               busy={busy}
+              role={role}
               onEvidence={setEvidenceFor}
               onDecide={onDecide}
             />

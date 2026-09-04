@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getBook, getClient, recordDecision, resetDecision } from './api'
-import type { BookView, Dossier, Insight, InsightStatus, SavedScenario } from './types'
+import type { BookView, Dossier, Insight, InsightStatus, RMFeedbackInput, SavedScenario } from './types'
 import type { SimulatedRole } from './types'
 import { BookWorkbench } from './components/BookWorkbench'
 import { ClientDossier } from './components/ClientDossier'
 import { FollowThroughBoard } from './components/FollowThrough'
 import { AuditConsole } from './components/AuditConsole'
+import { CalibrationLab } from './components/CalibrationLab'
 import { shortDate } from './format'
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [role, setRole] = useState<SimulatedRole>('rm')
-  const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit'>('book')
+  const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit' | 'calibration'>('book')
 
   const loadBook = useCallback(async () => {
     try {
@@ -64,6 +65,7 @@ export default function App() {
         selectedOptionId: string | null
         editedNextStep: string | null
         selectedScenarioId?: string | null
+        feedback?: RMFeedbackInput
       },
     ) => {
       setBusy(true)
@@ -76,6 +78,8 @@ export default function App() {
           selectedOptionId: input.selectedOptionId,
           editedNextStep: input.editedNextStep,
           selectedScenarioId: input.selectedScenarioId,
+          role,
+          feedback: input.feedback,
         })
         const [nextDossier] = await Promise.all([getClient(insight.client_id), loadBook()])
         setDossier(nextDossier)
@@ -85,7 +89,7 @@ export default function App() {
         setBusy(false)
       }
     },
-    [loadBook],
+    [loadBook, role],
   )
 
   const resetPlan = useCallback(
@@ -145,6 +149,7 @@ export default function App() {
         <button aria-current={view === 'book'} onClick={() => setView('book')}>Book</button>
         <button aria-current={view === 'client'} disabled={!dossier} onClick={() => dossier && setView('client')}>Client</button>
         <button aria-current={view === 'follow'} onClick={() => setView('follow')}>Follow-through</button>
+        <button aria-current={view === 'calibration'} onClick={() => setView('calibration')}>Calibration Lab</button>
         <button aria-current={view === 'audit'} onClick={() => setView('audit')}>Audit</button>
       </nav>
 
@@ -164,6 +169,7 @@ export default function App() {
         {book && view === 'book' && <BookWorkbench book={book} onOpenClient={openClient} />}
 
         {view === 'follow' && <FollowThroughBoard role={role} onOpenClient={openClient} />}
+        {view === 'calibration' && <CalibrationLab role={role} onActivePolicyChanged={() => void loadBook()} />}
         {view === 'audit' && <AuditConsole role={role} />}
 
         {view === 'client' && clientId && dossier && (

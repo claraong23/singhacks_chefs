@@ -43,6 +43,7 @@ export function BookWorkbench({
             critical. Ranked by a published formula, not by an opaque score — open any
             client to see the reasons behind their position.
           </p>
+          {book.scoring.policy && <p className="footnote" style={{ marginBottom: 0 }}>Active priority policy: <strong>{book.scoring.policy.name}</strong> · severity {Math.round(book.scoring.policy.weights.severity * 100)}%, materiality {Math.round(book.scoring.policy.weights.materiality * 100)}%, urgency {Math.round(book.scoring.policy.weights.urgency * 100)}%.</p>}
         </div>
         <div className="kpis">
           <div className="stat">

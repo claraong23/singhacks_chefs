@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getDecisionReadiness } from '../api'
-import type { ActionOption, DecisionReadiness, Insight, InsightStatus } from '../types'
+import type { ActionOption, DecisionReadiness, Insight, InsightStatus, RMFeedbackInput, SimulatedRole } from '../types'
 
 const TERMINAL: InsightStatus[] = ['client_ready', 'deferred', 'dismissed']
 
@@ -9,6 +9,7 @@ type DecisionInput = {
   rmNote: string
   selectedOptionId: string | null
   editedNextStep: string | null
+  feedback?: RMFeedbackInput
 }
 
 export function ActionReview({
@@ -17,12 +18,14 @@ export function ActionReview({
   busy,
   onDecide,
   onClose,
+  role = 'rm',
 }: {
   insight: Insight
   options: ActionOption[]
   busy: boolean
   onDecide: (input: DecisionInput) => Promise<void>
   onClose: () => void
+  role?: SimulatedRole
 }) {
   const [selected, setSelected] = useState<string | null>(insight.selected_option_id ?? null)
   const [note, setNote] = useState(insight.rm_note ?? '')
@@ -30,9 +33,13 @@ export function ActionReview({
   const [expanded, setExpanded] = useState<string | null>(options[0]?.id ?? null)
   const [readiness, setReadiness] = useState<DecisionReadiness | null>(null)
   const [readinessError, setReadinessError] = useState<string | null>(null)
+  const [usefulness, setUsefulness] = useState<RMFeedbackInput['usefulness'] | ''>('')
+  const [urgencyAssessment, setUrgencyAssessment] = useState<RMFeedbackInput['urgencyAssessment'] | ''>('')
+  const [feedbackRationale, setFeedbackRationale] = useState('')
+  const [feedbackError, setFeedbackError] = useState<string | null>(null)
 
   const edited = nextStep.trim() !== insight.suggested_next_step.trim()
-  const canWork = ['under_review', 'rm_edited', 'rm_reviewed'].includes(insight.status)
+  const canWork = role === 'rm' && ['under_review', 'rm_edited', 'rm_reviewed'].includes(insight.status)
   const isTerminal = TERMINAL.includes(insight.status)
   const hasDraftChanges = Boolean(selected || note.trim() || edited)
 
@@ -59,11 +66,22 @@ export function ActionReview({
   }, [edited, insight.client_id, insight.id, nextStep, note, selected])
 
   const submit = async (status: InsightStatus) => {
+    const needsFeedback = ['rm_reviewed', 'client_ready', 'deferred', 'dismissed'].includes(status)
+    if (needsFeedback && (!usefulness || !urgencyAssessment || !feedbackRationale.trim())) {
+      setFeedbackError('Record usefulness, urgency assessment, and an RM feedback rationale before finalising this disposition.')
+      return
+    }
+    setFeedbackError(null)
     await onDecide({
       status,
       rmNote: note,
       selectedOptionId: selected,
       editedNextStep: nextStep.trim() ? nextStep : null,
+      feedback: needsFeedback ? {
+        usefulness: usefulness as RMFeedbackInput['usefulness'],
+        urgencyAssessment: urgencyAssessment as RMFeedbackInput['urgencyAssessment'],
+        rationale: feedbackRationale,
+      } : undefined,
     })
   }
 
@@ -166,6 +184,19 @@ export function ActionReview({
                 onChange={(event) => setNote(event.target.value)}
                 aria-label="RM rationale"
               />
+            </div>
+
+            <div className="card" style={{ marginBottom: 16, background: 'var(--surface)' }}>
+              <div className="card-head"><h3>Calibration feedback</h3><span className="sub">Required when recording a final disposition</span></div>
+              <div className="card-body">
+                <div className="grid2">
+                  <label className="fact"><span>Finding usefulness</span><select className="select" value={usefulness} onChange={(event) => setUsefulness(event.target.value as RMFeedbackInput['usefulness'] | '')}><option value="">Select assessment</option><option value="useful">Useful</option><option value="partly_useful">Partly useful</option><option value="not_useful">Not useful</option></select></label>
+                  <label className="fact"><span>Urgency assessment</span><select className="select" value={urgencyAssessment} onChange={(event) => setUrgencyAssessment(event.target.value as RMFeedbackInput['urgencyAssessment'] | '')}><option value="">Select assessment</option><option value="right">Right</option><option value="overstated">Overstated</option><option value="understated">Understated</option></select></label>
+                </div>
+                <textarea className="rmnote" rows={2} value={feedbackRationale} onChange={(event) => setFeedbackRationale(event.target.value)} placeholder="Why was this finding useful or not useful for this client?" aria-label="Calibration feedback rationale" />
+                <p className="footnote" style={{ marginBottom: 0 }}>This governed RM feedback calibrates transparent priority weights only. It does not train a model or alter this finding.</p>
+                {feedbackError && <div className="banner" role="alert" style={{ marginTop: 8 }}>{feedbackError}</div>}
+              </div>
             </div>
 
             {/* Optional Collapsible Bank Reference Ideas */}

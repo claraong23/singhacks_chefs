@@ -216,7 +216,8 @@ class TestWorkflowHttpApi(unittest.TestCase):
         insight, option = ready_subject()
         payload = {"client_id": insight.client_id, "selected_option_id": option.id, "rm_note": "Reviewed with evidence."}
         for status in ("opened", "under_review", "rm_reviewed", "client_ready"):
-            code, body = self.post(f"/api/insights/{insight.id}/decision", {**payload, "status": status})
+            feedback = {"usefulness": "useful", "urgency_assessment": "right", "rationale": "The reviewed finding is relevant."} if status in {"rm_reviewed", "client_ready"} else None
+            code, body = self.post(f"/api/insights/{insight.id}/decision", {**payload, "status": status, **({"feedback": feedback} if feedback else {})})
             self.assertEqual(code, 200, body)
             self.assertEqual(body["decision"]["status"], status)
 

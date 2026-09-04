@@ -18,6 +18,9 @@ import type {
   FollowThroughView,
   SimulatedRole,
   WorkStatus,
+  PriorityPolicy,
+  PriorityPolicyEvaluation,
+  RMFeedbackInput,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -36,6 +39,18 @@ async function json<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const getBook = () => json<BookView>('/api/book')
 
+export const getPriorityPolicies = () =>
+  json<{ active_policy: PriorityPolicy; policies: PriorityPolicy[]; templates: Record<string, { name: string; weights: PriorityPolicy['weights'] }> }>('/api/priority-policies')
+
+export const getPriorityPolicyEvaluation = (policyId: string) =>
+  json<{ evaluation: PriorityPolicyEvaluation }>(`/api/priority-policies/${policyId}/evaluation`)
+
+export const createPriorityPolicy = (input: Record<string, unknown>) =>
+  json<{ policy: PriorityPolicy; evaluation: PriorityPolicyEvaluation }>('/api/priority-policies', { method: 'POST', body: JSON.stringify(input) })
+
+export const priorityPolicyAction = (policyId: string, action: 'revise' | 'submit' | 'approve' | 'reject', input: Record<string, unknown>) =>
+  json<{ policy: PriorityPolicy; evaluation?: PriorityPolicyEvaluation }>(`/api/priority-policies/${policyId}/${action}`, { method: 'POST', body: JSON.stringify(input) })
+
 export const getClient = (clientId: string) => json<Dossier>(`/api/clients/${clientId}`)
 
 export interface DecisionInput {
@@ -45,6 +60,8 @@ export interface DecisionInput {
   selectedOptionId?: string | null
   editedNextStep?: string | null
   selectedScenarioId?: string | null
+  role?: SimulatedRole
+  feedback?: RMFeedbackInput
 }
 
 export interface ReadinessInput {
@@ -162,6 +179,12 @@ export const recordDecision = (insightId: string, input: DecisionInput) =>
       selected_option_id: input.selectedOptionId ?? null,
       selected_scenario_id: input.selectedScenarioId ?? null,
       edited_next_step: input.editedNextStep ?? null,
+      role: input.role ?? 'rm',
+      feedback: input.feedback ? {
+        usefulness: input.feedback.usefulness,
+        urgency_assessment: input.feedback.urgencyAssessment,
+        rationale: input.feedback.rationale,
+      } : undefined,
     }),
   })
 

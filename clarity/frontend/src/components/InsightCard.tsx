@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { ActionOption, Insight, InsightStatus } from '../types'
+import type { ActionOption, Insight, InsightStatus, RMFeedbackInput, SimulatedRole } from '../types'
 import { CONFIDENCE_LABEL, SEVERITY_LABEL, titleCase, usd } from '../format'
 import { ActionReview } from './ActionReview'
 
@@ -22,6 +22,7 @@ export function InsightCard({
   busy,
   onEvidence,
   onDecide,
+  role,
 }: {
   insight: Insight
   options: ActionOption[]
@@ -34,8 +35,10 @@ export function InsightCard({
       rmNote: string
       selectedOptionId: string | null
       editedNextStep: string | null
+      feedback?: RMFeedbackInput
     },
   ) => Promise<void>
+  role: SimulatedRole
 }) {
   const [showFacts, setShowFacts] = useState(false)
   const [reviewing, setReviewing] = useState(false)
@@ -173,6 +176,7 @@ export function InsightCard({
             insight={insight}
             options={options}
             busy={busy}
+            role={role}
             onClose={() => setReviewing(false)}
             onDecide={async (input) => {
               await onDecide(insight, input)

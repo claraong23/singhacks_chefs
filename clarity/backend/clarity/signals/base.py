@@ -13,6 +13,7 @@ a client is at the top of her list will not trust the list.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from contextvars import ContextVar
 from functools import cached_property
 from typing import Any, Callable, Iterable
 
@@ -21,7 +22,7 @@ from ..analytics import attribution as attribution_mod
 from ..analytics import collateral as collateral_mod
 from ..analytics import liquidity as liquidity_mod
 from ..analytics import lookthrough, mandate as mandate_mod, valuation
-from ..contracts import Category, Insight, Severity
+from ..contracts import Category, Insight, PriorityFactors, Severity, capture_priority_factors
 from ..loaders import DataBook, days_between, get_book
 
 
@@ -114,6 +115,12 @@ class SignalContext:
 # ---------------------------------------------------------------------------
 
 
+DEFAULT_PRIORITY_WEIGHTS = {"severity": 0.45, "materiality": 0.30, "urgency": 0.25}
+_ACTIVE_PRIORITY_WEIGHTS: ContextVar[dict[str, float]] = ContextVar(
+    "active_priority_weights", default=DEFAULT_PRIORITY_WEIGHTS
+)
+
+
 def _urgency(days: int | None) -> tuple[float, str]:
     if days is None:
         return 0.30, "No dated deadline; scored as background risk"
@@ -160,7 +167,20 @@ def priority(
     urgency, urgency_reason = _urgency(days_until)
     reasons.append(urgency_reason)
 
-    score = 100 * (0.45 * severity_component + 0.30 * materiality + 0.25 * urgency)
+    weights = _ACTIVE_PRIORITY_WEIGHTS.get()
+    capture_priority_factors(
+        PriorityFactors(
+            severity_weight=severity_component,
+            materiality_pct=materiality_pct,
+            days_until=days_until,
+            amount_usd=amount_usd,
+        )
+    )
+    score = 100 * (
+        weights["severity"] * severity_component
+        + weights["materiality"] * materiality
+        + weights["urgency"] * urgency
+    )
     return score, reasons
 
 
@@ -188,37 +208,44 @@ def registered() -> list[tuple[str, SignalFn]]:
 
 
 def run_for_client(
-    client_id: str, book: DataBook | None = None, snapshot: str = config.AS_OF
+    client_id: str, book: DataBook | None = None, snapshot: str = config.AS_OF,
+    priority_weights: dict[str, float] | None = None,
 ) -> list[Insight]:
     """Run every registered check against one client, ranked by priority."""
-    ctx = SignalContext(book=book or get_book(), client_id=client_id, snapshot=snapshot)
-    insights: list[Insight] = []
-    for name, fn in _REGISTRY:
-        try:
-            produced = list(fn(ctx) or [])
-        except Exception as exc:  # a broken check must not take down the book
-            insights.append(
-                Insight(
-                    id=f"{client_id}-{name}-error",
-                    client_id=client_id,
-                    category=Category.DATA_QUALITY,
-                    severity=Severity.INFO,
-                    headline=f"Check '{name}' could not be evaluated",
-                    summary=(
-                        "This check failed to run, so anything it would have found is "
-                        f"missing from this client's list. Error: {exc}"
-                    ),
-                    priority_score=1.0,
-                    priority_reasons=["Engine error, surfaced rather than hidden"],
+    token = _ACTIVE_PRIORITY_WEIGHTS.set(priority_weights or DEFAULT_PRIORITY_WEIGHTS)
+    try:
+        ctx = SignalContext(book=book or get_book(), client_id=client_id, snapshot=snapshot)
+        insights: list[Insight] = []
+        for name, fn in _REGISTRY:
+            try:
+                produced = list(fn(ctx) or [])
+            except Exception as exc:  # a broken check must not take down the book
+                insights.append(
+                    Insight(
+                        id=f"{client_id}-{name}-error",
+                        client_id=client_id,
+                        category=Category.DATA_QUALITY,
+                        severity=Severity.INFO,
+                        headline=f"Check '{name}' could not be evaluated",
+                        summary=(
+                            "This check failed to run, so anything it would have found is "
+                            f"missing from this client's list. Error: {exc}"
+                        ),
+                        priority_score=1.0,
+                        priority_reasons=["Engine error, surfaced rather than hidden"],
+                    )
                 )
-            )
-            continue
-        insights.extend(produced)
+                continue
+            insights.extend(produced)
 
-    insights.sort(key=lambda i: (-i.priority_score, i.id))
-    return insights
+        insights.sort(key=lambda i: (-i.priority_score, i.id))
+        return insights
+    finally:
+        _ACTIVE_PRIORITY_WEIGHTS.reset(token)
 
 
-def run_for_book(book: DataBook | None = None) -> dict[str, list[Insight]]:
+def run_for_book(
+    book: DataBook | None = None, priority_weights: dict[str, float] | None = None,
+) -> dict[str, list[Insight]]:
     book = book or get_book()
-    return {cid: run_for_client(cid, book) for cid in book.clients}
+    return {cid: run_for_client(cid, book, priority_weights=priority_weights) for cid in book.clients}
