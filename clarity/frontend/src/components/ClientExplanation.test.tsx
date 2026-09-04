@@ -202,6 +202,7 @@ const mockDossier: Dossier = {
   notes: [],
   events: [],
   market: { series: [] },
+  follow_through: { tasks: [], referrals: [], outcomes: [], evidence_updates: [], reevaluations: [] },
   audit: [],
 }
 

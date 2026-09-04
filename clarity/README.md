@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-57 backend tests. They check the things a judge would push on: that holdings reconcile to
+61 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
