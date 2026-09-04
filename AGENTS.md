@@ -86,26 +86,33 @@ Start with a well-structured modular application rather than premature distribut
 
 ```text
 data/ or repository CSVs          Source-of-truth synthetic data
-backend/
+clarity/backend/clarity/
   loaders/                        CSV/JSON parsing and normalised client view
   analytics/                      Deterministic calculations and rule checks
-  evidence/                       Source rows, dates, assumptions, confidence
-  api/                            Stable payloads for the UI
-frontend/
-  pages/                          Book workbench, client dossier, action review
-  components/                     Shared cards, charts, evidence drawer, controls
-  styles/                         Accessible Julius Baer-inspired visual system
-fixtures/                         Three demo-client payloads and test expectations
+  signals/                        Evidence-backed risk, governance and planning checks
+  contracts.py                    Stable Python contracts for the UI
+  api.py                          Standard-library HTTP API and static-file server
+  review.py                       JSON-backed RM decisions and append-only audit trail
+clarity/frontend/
+  src/                            Vite React TypeScript workbench
+  components/                     Book, dossier, evidence, action and meeting components
+  charts.tsx                      Purpose-built accessible SVG charts
+  styles.css                      Hand-written private-bank design system
+  types.ts                        TypeScript mirror of backend contracts
+clarity/fixtures/                 Frozen payloads for demo and offline frontend work
+clarity/state/                    Local persisted review/audit state (runtime only)
 ```
 
-Recommended product architecture:
+### Selected current product stack
 
-- Use **deterministic Python calculations** for money, allocations, LTV, liquidity, mandate and priority scoring; make them inspectable and testable.
-- Use an LLM only to turn already-computed facts into concise explanations or meeting-brief prose. Pass structured facts and citation IDs, never raw unrestricted portfolio data plus an open-ended prompt.
-- Use a typed React/Next.js frontend for the workbench and a FastAPI or equivalent Python analytics API. If deployed on Vercel, use the App Router/serverless layer as a UI-facing adapter; keep auditable financial calculations in deterministic, independently tested domain modules.
-- Use accessible shared components, responsive split-pane layouts, purposeful transitions, and compact charts. Visual polish must increase comprehension and confidence, not create a trading-terminal aesthetic.
-- Do not introduce LangGraph, vector search, multiple agents, or a relational database merely to appear sophisticated. Adopt them only when a validated product need requires orchestration, retrieval, concurrency, or persistence.
-- The organiser's optional accelerators are Groq (fast inference), LangChain/LangGraph, Chroma/Weaviate/Pinecone, Streamlit/Chainlit, Vercel/Railway, Tavily, and LlamaIndex. They are optional, not requirements.
+- **Frontend:** Vite 5, React 18 and TypeScript 5. The interface is built from purpose-specific components and hand-written CSS; do not migrate to Next.js, Tailwind, shadcn/ui, or another design system while this product already has a coherent one.
+- **Visualisation:** lightweight, accessible inline SVG charts in `frontend/src/components/charts.tsx`. Do not add a charting dependency unless a required chart cannot be represented and tested clearly with the current primitives.
+- **Frontend-to-backend integration:** browser `fetch`, a Vite development proxy from port 5173 to port 8000, and TypeScript types in `frontend/src/types.ts` that mirror `backend/clarity/contracts.py`. Contract changes must update both sides together.
+- **Backend and analytics:** dependency-free Python standard library, including CSV/JSON loaders, deterministic analytics and `ThreadingHTTPServer`. Do not replace it with FastAPI or pandas unless a concrete capability—not framework preference—requires it.
+- **Workflow persistence:** a thread-safe JSON review store at `clarity/state/decisions.json` for the prototype. Move to SQLite or PostgreSQL only when multi-user concurrency, durable retention, role-based access, migrations, or operational reporting are actually in scope.
+- **AI and external services:** none are required for the current product. Deterministic templates already produce cited narratives. Any later LLM integration must be a replaceable structured-output adapter that receives only approved facts/evidence and always has a deterministic fallback.
+- **Runtime and delivery:** `npm run build` produces `clarity/frontend/dist`, which `python -m clarity.api` serves from one process on port 8000. Keep this single-process demo path as the reliable default. If a hosted deployment is needed, deploy the unified Python service; split a static frontend to Vercel only when there is a demonstrated benefit.
+- **Testing:** Python `unittest` verifies the calculations and signal integrity; TypeScript compilation plus Vite build verifies the frontend. Add React component tests and browser end-to-end tests when the workflow grows beyond the current controlled decision paths.
 
 ## Shared contracts
 
