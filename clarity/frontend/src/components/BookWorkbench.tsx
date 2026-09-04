@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import type { BookView, Severity } from '../types'
 import { pct, shortDate, titleCase, usd } from '../format'
+import type { EventImpactView, EventSummary } from '../types'
+import { getEventImpact, getEvents } from '../api'
 
 const SEVERITY_ORDER: Severity[] = ['critical', 'high', 'medium', 'low', 'info']
 
@@ -13,6 +15,40 @@ export function BookWorkbench({
 }) {
   const [filter, setFilter] = useState<string>('all')
   const [centre, setCentre] = useState<string>('all')
+  const [eventMode, setEventMode] = useState(false)
+  const [events, setEvents] = useState<EventSummary[]>([])
+  const [eventImpact, setEventImpact] = useState<EventImpactView | null>(null)
+  const [eventBusy, setEventBusy] = useState(false)
+  const [eventError, setEventError] = useState<string | null>(null)
+
+  const openEventMode = async () => {
+    setEventMode(true)
+    if (events.length > 0) return
+    setEventBusy(true)
+    setEventError(null)
+    try {
+      const result = await getEvents()
+      const newest = [...result.events].reverse()
+      setEvents(newest)
+      if (newest[0]) setEventImpact(await getEventImpact(newest[0].event_id))
+    } catch (error) {
+      setEventError(error instanceof Error ? error.message : 'Could not load events')
+    } finally {
+      setEventBusy(false)
+    }
+  }
+
+  const chooseEvent = async (eventId: string) => {
+    setEventBusy(true)
+    setEventError(null)
+    try {
+      setEventImpact(await getEventImpact(eventId))
+    } catch (error) {
+      setEventError(error instanceof Error ? error.message : 'Could not map event')
+    } finally {
+      setEventBusy(false)
+    }
+  }
 
   const categories = useMemo(() => {
     const counts = new Map<string, number>()
@@ -71,6 +107,60 @@ export function BookWorkbench({
       )}
 
       <div className="filters">
+        <button className="chip" aria-pressed={!eventMode} onClick={() => setEventMode(false)}>
+          Client-first view
+        </button>
+        <button className="chip" aria-pressed={eventMode} onClick={() => void openEventMode()}>
+          Event impact: who should I call?
+        </button>
+      </div>
+
+      {eventMode && (
+        <div className="stack">
+          <div className="card">
+            <div className="card-head"><h2>Event-to-client detection</h2><span className="sub">From event_log.csv, not live news or AI memory</span></div>
+            <div className="card-body">
+              <label>
+                <span className="k">Select a dated event</span>
+                <select
+                  value={eventImpact?.event.event_id ?? ''}
+                  disabled={eventBusy}
+                  onChange={(event) => void chooseEvent(event.target.value)}
+                  style={{ display: 'block', width: '100%', marginTop: 7, padding: 9 }}
+                >
+                  {events.map((event) => <option key={event.event_id} value={event.event_id}>{shortDate(event.event_date)} · {event.description}</option>)}
+                </select>
+              </label>
+              {eventError && <div className="banner" style={{ marginTop: 12 }}>{eventError}</div>}
+              {eventBusy && <p className="muted">Mapping the event to current holdings…</p>}
+              {eventImpact && !eventBusy && (
+                <>
+                  <p><strong>{eventImpact.event.description}</strong></p>
+                  <p className="muted">Transmission: {eventImpact.event.primary_transmission}. Mapped themes: {eventImpact.themes.map((theme) => theme.name).join(', ') || 'none'}.</p>
+                  <table className="postable">
+                    <thead><tr><th>Priority</th><th>Client</th><th>Mapped exposure</th><th>Estimated impact</th><th></th></tr></thead>
+                    <tbody>
+                      {eventImpact.affected_clients.map((item) => (
+                        <tr key={`${item.client_id}-${item.theme_key}`}>
+                          <td>{item.priority_score.toFixed(0)}</td>
+                          <td><strong>{item.client_name}</strong><div className="footnote">{item.theme_name}</div></td>
+                          <td>{usd(item.exposure_usd)} · {pct(item.exposure_pct)}</td>
+                          <td>{item.estimated_impact_usd === null ? 'Exposure only' : `${usd(item.estimated_impact_usd)} · ${item.estimated_impact_pct?.toFixed(1)}%`}<div className="footnote">{item.scenario_name}{item.shock_pct === null ? '' : ` (${item.shock_pct > 0 ? '+' : ''}${item.shock_pct}%)`}</div></td>
+                          <td><button className="btn" onClick={() => onOpenClient(item.client_id)}>Open client</button></td>
+                        </tr>
+                      ))}
+                      {eventImpact.affected_clients.length === 0 && <tr><td colSpan={5} className="muted">No current holding maps to this event.</td></tr>}
+                    </tbody>
+                  </table>
+                  <p className="footnote"><strong>Method.</strong> {eventImpact.method}. {eventImpact.limitations.join(' ')}</p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {!eventMode && <div className="filters">
         <button className="chip" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>
           All findings
         </button>
@@ -88,9 +178,9 @@ export function BookWorkbench({
             {value === 'all' ? 'Both desks' : value}
           </button>
         ))}
-      </div>
+      </div>}
 
-      <div className="card" style={{ overflow: 'hidden' }}>
+      {!eventMode && <div className="card" style={{ overflow: 'hidden' }}>
         <table className="booktable">
           <thead>
             <tr>
@@ -179,7 +269,7 @@ export function BookWorkbench({
             )}
           </tbody>
         </table>
-      </div>
+      </div>}
 
       <div className="footnote" style={{ maxWidth: '80ch' }}>
         <strong>How the ranking works.</strong> {book.scoring.formula}. Materiality is the{' '}

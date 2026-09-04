@@ -34,6 +34,7 @@ whole product runs from one process.
 
 from __future__ import annotations
 
+import hmac
 import json
 import mimetypes
 import traceback
@@ -42,8 +43,10 @@ from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlparse
 
 from . import config
+from .ai_adapter import draft_insight_narrative
 from .actions import options_for
 from .analytics.attribution import attribute, detect_meaningful_changes
+from .analytics.event_impact import event_impact_view
 from .attribution_ai import generate_client_attribution
 from .contracts import Category, MeetingHandoffEvent, Severity
 from .dossier import all_events, book_view, client_dossier
@@ -178,7 +181,7 @@ class ClarityHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
@@ -198,6 +201,13 @@ class ClarityHandler(BaseHTTPRequestHandler):
         if not length:
             return {}
         return json.loads(self.rfile.read(length).decode("utf-8"))
+
+    def _authorized(self) -> bool:
+        """Optional bearer protection for mutations; disabled for local demos."""
+        if not config.API_TOKEN:
+            return True
+        supplied = self.headers.get("Authorization", "")
+        return hmac.compare_digest(supplied, f"Bearer {config.API_TOKEN}")
 
     def log_message(self, fmt: str, *args) -> None:  # quieter console
         print(f"  {self.command} {self.path} -> {args[1] if len(args) > 1 else ''}")
@@ -243,6 +253,11 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 return self._send_json({"evaluation": evaluate_policy(policy_id)})
             if path == "/api/events":
                 return self._send_json({"events": all_events()})
+            if path.startswith("/api/events/") and path.endswith("/impact"):
+                event_id = path[len("/api/events/") : -len("/impact")].strip("/")
+                if event_id not in get_book().events_by_id:
+                    return self._send_json({"error": f"Unknown event {event_id}"}, 404)
+                return self._send_json(event_impact_view(get_book(), event_id))
             if path == "/api/audit":
                 audit = timeline(query.get("client_id", [None])[0])
                 for field in ("origin", "actor", "object_type", "insight_id"):
@@ -326,6 +341,8 @@ class ClarityHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802
         path = unquote(urlparse(self.path).path)
         try:
+            if not self._authorized():
+                return self._send_json({"error": "Unauthorized"}, 401)
             if path == "/api/reset":
                 get_store().reset()
                 get_scenario_store().reset()
@@ -599,6 +616,25 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     client_id=client_id, draft=draft
                 )
                 return self._send_json({"status": "added", "entry": entry})
+            if path.startswith("/api/insights/") and path.endswith("/narrative"):
+                payload = self._read_json()
+                if payload.get("role", "rm") != "rm":
+                    raise PermissionError("Only the RM role can generate an AI insight preview.")
+                insight_id = path[len("/api/insights/") : -len("/narrative")]
+                client_id = "-".join(insight_id.split("-")[:2])
+                if client_id not in get_book().clients:
+                    return self._send_json({"error": f"Unknown client {client_id}"}, 400)
+                insight = next(
+                    (item for item in run_for_client(client_id, get_book()) if item.id == insight_id),
+                    None,
+                )
+                if insight is None:
+                    return self._send_json({"error": "Unknown insight"}, 404)
+                try:
+                    draft = draft_insight_narrative(insight)
+                except (RuntimeError, PermissionError) as exc:
+                    return self._send_json({"error": str(exc)}, 503)
+                return self._send_json({"insight_id": insight_id, **draft})
             if path.startswith("/api/insights/") and path.endswith("/decision"):
                 insight_id = path[len("/api/insights/") : -len("/decision")]
                 payload = self._read_json()
@@ -645,7 +681,7 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     _, feedback_readiness = _readiness(insight_id, payload)
                 # Resolve every decision against the current deterministic
                 # source payload, even where readiness is not required.
-                _decision_subject(client_id, insight_id)
+                decision_insight, _ = _decision_subject(client_id, insight_id)
                 decision = get_store().record(
                     insight_id=insight_id,
                     client_id=client_id,
@@ -668,6 +704,7 @@ class ClarityHandler(BaseHTTPRequestHandler):
                         saved_scenario["result"]["calculation_version"] if saved_scenario else None
                     ),
                     feedback=feedback or None,
+                    insight=decision_insight,
                 )
                 saved_feedback = None
                 if feedback:

@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import type { ActionOption, Insight, InsightStatus, RMFeedbackInput, SimulatedRole } from '../types'
+import type { ActionOption, Insight, InsightNarrativeDraft, InsightStatus, RMFeedbackInput, SimulatedRole } from '../types'
 import { CONFIDENCE_LABEL, SEVERITY_LABEL, titleCase, usd } from '../format'
 import { ActionReview } from './ActionReview'
+import { draftNarrative } from '../api'
 
 const STATUS_LABEL: Record<InsightStatus, string> = {
   new: 'New',
@@ -42,6 +43,9 @@ export function InsightCard({
 }) {
   const [showFacts, setShowFacts] = useState(false)
   const [reviewing, setReviewing] = useState(false)
+  const [aiDraft, setAiDraft] = useState<InsightNarrativeDraft | null>(null)
+  const [aiBusy, setAiBusy] = useState(false)
+  const [aiError, setAiError] = useState<string | null>(null)
   const chosen = options.find((option) => option.id === insight.selected_option_id)
   const terminal = ['client_ready', 'deferred', 'dismissed'].includes(insight.status)
 
@@ -108,11 +112,18 @@ export function InsightCard({
             )}
             {insight.selected_scenario_id && <span className="pill ghost">Scenario attached</span>}
             {insight.edited && <span className="pill ghost">RM edited</span>}
+            {insight.reopened && <span className="pill high">Reopened</span>}
           </div>
         </div>
       </div>
 
       <p className="insight-summary">{insight.summary}</p>
+
+      {insight.reopen_reason && (
+        <div className="nextstep" style={{ borderLeftColor: 'var(--high)' }}>
+          <strong>Why this returned.</strong> {insight.reopen_reason}
+        </div>
+      )}
 
       {insight.client_relevance && (
         <p className="insight-summary" style={{ paddingTop: 0, color: 'var(--muted)', fontSize: 13 }}>
@@ -140,6 +151,24 @@ export function InsightCard({
         )}
       </div>
 
+      {aiDraft?.narrative && (
+        <div className="nextstep" style={{ borderLeftColor: 'var(--accent)' }}>
+          <strong>Controlled AI preview — not saved.</strong> {aiDraft.narrative}
+          <div className="footnote" style={{ marginTop: 6 }}>
+            Provider: {aiDraft.provenance.provider} · model: {aiDraft.provenance.model} · {aiDraft.guardrails.length} checks passed
+          </div>
+        </div>
+      )}
+      {aiDraft && !aiDraft.can_use && (
+        <div className="banner">
+          <strong>AI output blocked.</strong> The preview introduced wording that did not pass the controlled checks.
+          {aiDraft.guardrails.filter((check) => check.status === 'block').map((check) => (
+            <div className="footnote" key={check.id}>{check.label}: {check.detail}</div>
+          ))}
+        </div>
+      )}
+      {aiError && <div className="footnote">AI draft unavailable: {aiError}</div>}
+
       {insight.rm_note && (
         <div className="nextstep" style={{ background: 'var(--surface-sunk)', borderLeftColor: 'var(--rule-strong)' }}>
           <strong>RM note.</strong> {insight.rm_note}
@@ -158,6 +187,25 @@ export function InsightCard({
         </button>
         <button className="btn" onClick={() => onEvidence(insight)}>
           Evidence ({insight.evidence.length})
+        </button>
+        <button
+          className="btn"
+          disabled={aiBusy || role !== 'rm'}
+          title={role === 'rm' ? 'Generate a guarded explanation from this computed insight' : 'Only the RM role can generate an AI preview'}
+          onClick={async () => {
+            setAiBusy(true)
+            setAiError(null)
+            try {
+              const result = await draftNarrative(insight.id, role)
+              setAiDraft(result)
+            } catch (error) {
+              setAiError(error instanceof Error ? error.message : 'Request failed')
+            } finally {
+              setAiBusy(false)
+            }
+          }}
+        >
+          {aiBusy ? 'Drafting…' : 'Generate controlled AI preview'}
         </button>
         <button
           className={`btn${reviewing ? '' : ' primary'}`}

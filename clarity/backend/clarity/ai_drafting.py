@@ -123,6 +123,16 @@ def _provider_rewrite(prompt: str) -> tuple[str, str, str]:
     return str(content).strip(), provider, model
 
 
+def rewrite_with_configured_provider(prompt: str) -> tuple[str, str, str]:
+    """Run a bounded text rewrite through the provider configured for Clarity.
+
+    Other controlled drafting surfaces use this entry point so one server-side
+    provider configuration powers the application without exposing credentials
+    to the browser.
+    """
+    return _provider_rewrite(prompt)
+
+
 def _target(package: dict[str, Any], key: str) -> tuple[dict[str, Any], bool]:
     current = current_version(package)
     for item in current["sections"]:

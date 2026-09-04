@@ -26,6 +26,9 @@ import type {
   AIDraftCandidate,
   AIDraftingProviderStatus,
   AIDraftStyle,
+  InsightNarrativeDraft,
+  EventImpactView,
+  EventSummary,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -77,6 +80,11 @@ export const priorityPolicyAction = (policyId: string, action: 'revise' | 'submi
   json<{ policy: PriorityPolicy; evaluation?: PriorityPolicyEvaluation }>(`/api/priority-policies/${policyId}/${action}`, { method: 'POST', body: JSON.stringify(input) })
 
 export const getClient = (clientId: string) => json<Dossier>(`/api/clients/${clientId}`)
+
+export const getEvents = () => json<{ events: EventSummary[] }>('/api/events')
+
+export const getEventImpact = (eventId: string) =>
+  json<EventImpactView>(`/api/events/${eventId}/impact`)
 
 export interface DecisionInput {
   clientId: string
@@ -315,5 +323,11 @@ export const addDraftToMeetingBrief = (clientId: string, draft: ClientAttributio
   json<{ brief: Record<string, unknown> }>('/api/meeting-brief/add-draft', {
     method: 'POST',
     body: JSON.stringify({ client_id: clientId, draft }),
+  })
+
+export const draftNarrative = (insightId: string, role: SimulatedRole) =>
+  json<InsightNarrativeDraft>(`/api/insights/${insightId}/narrative`, {
+    method: 'POST',
+    body: JSON.stringify({ role }),
   })
 

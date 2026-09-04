@@ -91,6 +91,8 @@ export interface Insight {
   edited?: boolean
   headline_original?: string
   suggested_next_step_original?: string
+  reopened?: boolean
+  reopen_reason?: string | null
 }
 
 export interface PriorityFactors {
@@ -241,6 +243,38 @@ export interface BookView {
   clients: BookRow[]
   data_warnings: string[]
   scoring: { formula: string; materiality: string; urgency: string; note: string; policy?: PriorityPolicy }
+}
+
+export interface EventSummary {
+  event_id: string
+  event_date: string
+  event_type: string
+  region: string
+  description: string
+  primary_transmission: string
+  severity: string
+}
+
+export interface EventImpactView {
+  event: EventSummary
+  themes: { key: string; name: string; description: string }[]
+  affected_clients: {
+    client_id: string
+    client_name: string
+    theme_key: string
+    theme_name: string
+    exposure_usd: number
+    exposure_pct: number
+    estimated_impact_usd: number | null
+    estimated_impact_pct: number | null
+    scenario_name: string | null
+    shock_pct: number | null
+    priority_score: number
+    priority_reasons: string[]
+    instrument_ids: string[]
+  }[]
+  method: string
+  limitations: string[]
 }
 
 export interface Position {
@@ -575,6 +609,17 @@ export interface AIDraftGuardrail {
   label: string
   status: 'pass' | 'block'
   detail: string
+}
+export interface InsightNarrativeDraft {
+  insight_id: string
+  narrative: string | null
+  can_use: boolean
+  guardrails: AIDraftGuardrail[]
+  provenance: {
+    provider: 'gemini' | 'openai_compatible'
+    model: string
+    prompt_version: string
+  }
 }
 export interface AIDraftCandidate {
   id: string
