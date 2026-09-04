@@ -56,9 +56,17 @@ The four criteria carry equal weight. Do not leave any of them as a claim in a p
 
 | Owner | Primary responsibility | Deliverable and interface |
 | --- | --- | --- |
-| Teammate 1 | **Task 1 — Client Context / intelligent portfolio explanations** | A reusable client dossier: objectives, tax domicile, mandate, notes, multi-portfolio roll-up, snapshot changes, and a plain-language `what changed / why` explanation with source evidence. |
-| Teammates 2 and 3 | **Task 2 — AI Wealth Intelligence Layer and UI/UX** | Deterministic signal checks and prioritisation, plus a polished shared visual system and screens. Suggested split: one owns data/risk rules and evidence payloads; the other owns the end-to-end UI, loading/error states, and demo polish. |
-| Project lead (you) | **Task 3 — RM Intelligence Workbench**, solution foundation, and client advisory action | Create the application skeleton and shared contracts; own book prioritisation, insight-review state, meeting brief, recommendation options, suitability guardrails, approval/rejection, and the final client-action screen. Integrate the other workstreams and maintain the demo narrative. |
+| Teammate 1 | **Task 1 — Client Context / intelligent portfolio explanations** | Own the client-context module: profile, objectives, tax domicile, mandate, RM notes, multi-portfolio roll-up, snapshot comparisons, and the grounded `what changed / why` explanation. Deliver a reusable `ClientContext` payload and evidence-linked explanation cards that Task 3 can display. |
+| Teammate 2 | **Task 2 — Solution foundation and intelligence engine** | Own the working application foundation: repository/app bootstrap, CSV/JSON loaders, normalised data model, shared `Insight`/evidence contracts, API or service layer, deterministic signal checks, priority-score calculation, and fixtures/tests. Publish stable sample payloads early so the other tracks are never blocked by unfinished analytics. |
+| Teammate 3 | **Task 2 — Shared UI/UX and platform integration** | Own the application shell and shared experience: routing/navigation, visual system, reusable cards/charts/evidence drawer, responsive/loading/error states, and integration of Task 1 and Task 2 payloads. Build the client-dossier and intelligence screens; keep the workbench action components reusable for Task 3. |
+| Project lead (you) | **Task 3 — RM Intelligence Workbench and client advisory action** | Own the RM decision workflow on top of the Task 2 foundation: the prioritised-book view (using the supplied priority score), insight selection/review state, meeting brief, action options, suitability checklist, RM edit/approve/dismiss controls, and the client-ready follow-up screen. Own end-to-end acceptance checks and the final demo narrative—not the underlying application foundation. |
+
+### Implementation hand-offs
+
+1. **Task 2 establishes the foundation first**: the runnable app, sample client data, `Insight` contract, and shared design primitives. This is the integration path for every team member.
+2. **Task 1 plugs client context into that contract**: its explanation output must carry the underlying date, portfolio/holding and event evidence, not only prose.
+3. **Task 3 consumes, rather than recreates, Task 1 and 2 outputs**: it presents the provided priority score and evidence in the RM workflow, then adds review and advisory-action state.
+4. **Task 2 remains the integration owner**: merge the work on the shared branch, resolve contract changes, and keep one working end-to-end vertical slice at all times. The project lead validates that the flow meets the story and rubric.
 
 Every feature should be usable through the same path: `priority card → client dossier → evidence → RM action`. Avoid isolated dashboards that cannot feed a decision.
 
