@@ -63,7 +63,7 @@ The four criteria carry equal weight. Do not leave any of them as a claim in a p
 
 ### Extra task — solution foundation and integration
 
-This is a small shared enablement task, not a fourth feature track. **Teammate 2 is the technical owner** because its data contracts and signal engine depend on it; Teammate 3 owns the UI shell contribution; Teammate 1 approves scope; you integrate the workbench once the contract is stable. Time-box it to the minimum needed to unblock parallel work:
+This is a shared enablement task, not a fourth feature track. **Teammate 2 is the technical owner** because its data contracts and signal engine depend on it; Teammate 3 owns the UI shell contribution; Teammate 1 approves scope; you integrate the workbench once the contract is stable. Keep it focused on the reusable capabilities needed to unblock parallel work, but do not trade away correctness, evidence provenance, accessibility, or testability:
 
 1. Runnable repository/app bootstrap, environment template, and one command to start the demo.
 2. CSV/JSON loaders, normalised client/portfolio/instrument data model, and three selected demo-client fixtures.
@@ -82,7 +82,7 @@ Every feature should be usable through the same path: `priority card → client 
 
 ## Suggested solution structure
 
-Keep the build small enough to finish. A single application with a data/analytics layer is preferable to distributed services.
+Start with a well-structured modular application rather than premature distributed services. Preserve clean boundaries so calculation, evidence, workflow, and language generation can be separated into governed services in a future bank deployment.
 
 ```text
 data/ or repository CSVs          Source-of-truth synthetic data
@@ -98,11 +98,13 @@ frontend/
 fixtures/                         Three demo-client payloads and test expectations
 ```
 
-Recommended approach for a weekend:
+Recommended product architecture:
 
 - Use **deterministic Python calculations** for money, allocations, LTV, liquidity, mandate and priority scoring; make them inspectable and testable.
 - Use an LLM only to turn already-computed facts into concise explanations or meeting-brief prose. Pass structured facts and citation IDs, never raw unrestricted portfolio data plus an open-ended prompt.
-- A lightweight React/Next frontend with a FastAPI or similar Python API is a good full-stack choice if the team is comfortable with it. A Streamlit prototype is acceptable if it enables a substantially better end-to-end demo. Do not introduce LangGraph, vector search, or multiple agents unless they solve a real demo need.
+- Use a typed React/Next.js frontend for the workbench and a FastAPI or equivalent Python analytics API. If deployed on Vercel, use the App Router/serverless layer as a UI-facing adapter; keep auditable financial calculations in deterministic, independently tested domain modules.
+- Use accessible shared components, responsive split-pane layouts, purposeful transitions, and compact charts. Visual polish must increase comprehension and confidence, not create a trading-terminal aesthetic.
+- Do not introduce LangGraph, vector search, multiple agents, or a relational database merely to appear sophisticated. Adopt them only when a validated product need requires orchestration, retrieval, concurrency, or persistence.
 - The organiser's optional accelerators are Groq (fast inference), LangChain/LangGraph, Chroma/Weaviate/Pinecone, Streamlit/Chainlit, Vercel/Railway, Tavily, and LlamaIndex. They are optional, not requirements.
 
 ## Shared contracts
@@ -114,15 +116,233 @@ Insight
   id, client_id, category, severity, priority_score, headline
   observed_facts[], client_relevance, suggested_next_step
   evidence[] {source_file, row_or_id, snapshot_date, field, value}
-  assumptions[], suitability_checks[], status (new | reviewed | dismissed | actioned)
+  assumptions[], suitability_checks[]
+  status (new | opened | under_review | rm_edited | escalated
+          | returned_for_review | rm_reviewed | client_ready | deferred | dismissed)
 
 Client briefing
   client profile, objectives, portfolio roll-up, RM notes
   selected insights, explanation, scenario, meeting questions
   action options[], RM decision, audit trail
+
+Action option
+  id, insight_id, action_type, client_outcome, summary
+  expected_impacts[], trade_offs[], assumptions[], blocked_by[]
+  required_specialists[], suitability_checks[], rm_decision
+
+Evidence
+  source_file, source_row_or_id, as_of_date, scope
+  field, raw_value, calculation_id, confidence, explanation
+
+Audit event
+  event_id, actor, action, timestamp, object_id
+  prior_state, new_state, reason, evidence_version
 ```
 
 Use stable `client_id`, `portfolio_id`, `instrument_id`, snapshot dates, and source IDs rather than display names as join keys. Keep computation outputs separate from AI wording so a judge can inspect the basis of each statement.
+
+## Task 3 product roadmap — RM Intelligence Workbench
+
+### Product objective
+
+Task 3 turns the outputs of Tasks 1 and 2 into a controlled RM operating workflow. At any point, Priscilla should be able to answer:
+
+1. **Who needs my attention first, and why now?**
+2. **What can I substantiate from the client, portfolio, mandate, cash-flow and event evidence?**
+3. **Which useful actions or conversations should I consider, and what are their trade-offs?**
+4. **What is still unknown, unsuitable, or awaiting specialist review?**
+5. **What did I decide, and what is the next accountable step?**
+
+The unit of value is a **better client conversation**, not a trade. A trade may eventually follow the bank's normal advisory and execution controls, but Task 3 never executes one.
+
+### Research synthesis and product decisions
+
+The ChatGPT, Google and Gemini research is aligned on an AI-augmented, human-controlled RM cockpit. Use the following combined decisions:
+
+| Research idea | Decision for Task 3 |
+| --- | --- |
+| Unified 360-degree client view | **Adopt.** Combine client objectives, life stage, risk, tax domicile, notes, household portfolios, liabilities, commitments and planned cash needs while preserving source and scope. |
+| Prioritised book / air-traffic controller | **Adopt.** Present an actionable queue with transparent drivers and hard overrides. Task 2A calculates factors; Task 3 explains and operationalises them. |
+| Human-in-the-loop next-best action | **Adopt and strengthen.** Offer contact, investigate, compare, escalate, defer or dismiss workflows. Require an RM decision and reason before client-ready status. |
+| Explainable rebalancing and option comparison | **Adopt carefully.** Show two or three constrained options, before/after impacts and trade-offs. Never manufacture a security recommendation or optimal timing. |
+| Life-event planning and what-if modelling | **Adopt in layers.** Begin with dated cash-flow and liquidity scenarios; add stochastic projections only when assumptions and validation are sufficient. |
+| Draft client email/WhatsApp/proposal | **Adopt as editable draft.** Generate only from structured evidence. Provide copy/export or a simulated hand-off; never auto-send. |
+| One-click trade execution or digital consent | **Reject for this product.** It weakens the RM-control and governance story and is unsupported by the challenge data. |
+| Automated tax-loss harvesting, wash-sale logic and tax-alpha claims | **Do not implement as advice.** The book spans jurisdictions and lacks complete tax data. Surface tax-sensitive facts/data gaps and route to a qualified specialist. |
+| Reinforcement learning, churn prediction, collaborative filtering, SHAP/LIME | **Future research only.** Twenty synthetic clients cannot train or validate these models. Transparent rules and evidence are more credible now. |
+| Client value/AUM/revenue as priority drivers | **Exclude by default.** Priority should reflect urgency and client outcomes, not who is most profitable. Any commercial factor must be separately labelled and governed. |
+| Live market/news retrieval and vector search | **Exclude from causal explanations.** `event_log.csv` remains authoritative. Retrieval may later support approved policy/knowledge documents, never override source controls. |
+| Streaming AI and command-centre visuals | **Use selectively.** Responsive generation and polished interactions are valuable, but the UI should feel calm, private-bank appropriate, and evidence-led. |
+
+### End-to-end information architecture
+
+```text
+Morning Book
+  -> client priority card
+  -> Client Action Canvas
+       -> evidence and context
+       -> scenarios and action options
+       -> suitability / uncertainty gates
+  -> Meeting Studio
+       -> agenda, questions, talking points, editable communication
+  -> RM Decision
+       -> select, edit, escalate, defer or dismiss
+  -> Follow-through
+       -> owner, due date, review state and audit trail
+```
+
+Use persistent navigation for **Book**, **Client**, **Actions**, **Meetings**, and **Audit**. The main interaction should be a responsive master-detail layout: a compact priority queue on the left and the selected client's workspace on the right. Full-page routes remain addressable and shareable inside the application.
+
+### Action taxonomy and workflow state
+
+Every proposed next step must be one of five controlled action types:
+
+| Action type | Purpose | Required output |
+| --- | --- | --- |
+| **Contact / prepare** | A time-sensitive exposure, cash need, life event or unanswered client question | Contact reason, urgency, meeting objective, questions and evidence pack |
+| **Investigate / verify** | Data is missing, stale, conflicting or too uncertain for advice | Data gap, requested evidence, accountable owner and no-action guardrail |
+| **Compare options** | A mandate, concentration, funding or goal tension has more than one reasonable response | Two or three options with impacts, trade-offs, assumptions and blocked checks |
+| **Escalate** | Tax, credit, compliance, product or wealth-planning expertise is required | Specialist, referral reason, assembled evidence and open questions |
+| **Defer / dismiss** | The issue is immaterial, accepted, already handled or not actionable | RM rationale, next review date and retained audit history |
+
+The canonical state machine is:
+
+```text
+new -> opened -> under_review
+under_review -> rm_edited -> rm_reviewed -> client_ready
+under_review -> rm_reviewed -> client_ready
+under_review -> escalated -> returned_for_review -> under_review
+under_review -> deferred
+under_review -> dismissed
+```
+
+`client_ready` means the brief has passed the workbench gates; it does not mean that advice was delivered or a transaction was authorised.
+
+### Roadmap stage 0 — Domain, contracts and workflow backbone
+
+Build the durable foundations Task 3 needs from the extra foundation task.
+
+- Finalise typed `ClientContext`, `Insight`, `ActionOption`, `Evidence`, `SuitabilityGate`, `MeetingBrief` and `AuditEvent` schemas.
+- Define household versus portfolio scope, `as_of_date`, base/reporting currency and source-version semantics.
+- Implement the workflow state machine and append-only audit-event model independently of the UI.
+- Create stable fixtures for Lau, Margarethe and Fong, including conflict, missing-data and specialist-escalation cases.
+- Establish feature flags/fallbacks so the workbench remains fully demonstrable when LLM generation or an upstream module is unavailable.
+
+**Exit criteria:** every Task 3 screen can render from versioned fixtures; invalid transitions fail; evidence and calculation versions survive every transition.
+
+### Roadmap stage 1 — Morning Book and transparent triage
+
+Create the RM's daily starting point, optimised for comprehension and action rather than alert volume.
+
+- Show no more than five highest-priority items above the fold, followed by the full filterable book.
+- Use priority bands such as **Immediate review**, **Prepare this week**, **Monitor**, and **Needs verification**.
+- Each card shows `why now`, the client outcome at risk, two or three contributing factors, confidence/freshness and one primary next step.
+- Support filters for category, urgency, booking centre, meeting/cash-need horizon, unresolved gate and workflow status.
+- Provide visible hard-override reasons for near/breached collateral thresholds, unfunded confirmed cash needs and critical suitability failures.
+- Never present a decimal score as truth. If a numeric score is exposed, show its factor breakdown and what would change the rank.
+
+**Exit criteria:** an RM can identify and defend the first call without opening another system; no ranking relies on an unsupported attribute or hidden LLM judgement.
+
+### Roadmap stage 2 — Client Action Canvas and evidence-first explanation
+
+Turn a selected priority item into a complete, progressive decision workspace.
+
+- Lead with the client's intended outcome and why action/review matters now.
+- Present observed facts separately from interpretations, RM-note context and generated wording.
+- Show household roll-up alongside portfolio/mandate scope; expose structured-product look-through and liquidity tiers where relevant.
+- Provide a consistent evidence drawer with source file, row/ID, date, raw value, calculation and confidence.
+- Surface stale valuations, note-data contradictions, missing tax lots and other imperfections as product states, not console errors.
+- Add a contextual timeline combining portfolio snapshots, controlled events, transactions, cash needs, commitments and RM notes.
+
+**Exit criteria:** every material number and causal statement is inspectable; the UI clearly distinguishes fact, calculation, assumption, client statement and AI draft.
+
+### Roadmap stage 3 — Scenario and Action Option Studio
+
+Help the RM explore choices without pretending there is one model-approved answer.
+
+- Offer a baseline plus two or three action options relevant to the insight: reserve liquidity, adjust exposure, change funding order, obtain documents, involve a specialist, or accept/monitor a deviation.
+- Compare before/after allocation, concentration, cash buffer, mandate position, lending value/LTV and goal coverage when the data supports them.
+- Show assumptions as editable inputs with clear units and dates; recalculate via deterministic Task 2 services.
+- Display trade-offs across client objective, risk, liquidity, tax uncertainty, cost and reversibility.
+- Allow scenario save/compare and retain the evidence/calculation version used.
+- For life events, build a dated cash-flow and funding timeline first. Add Monte Carlo or probability-of-goal outputs only with documented return/inflation models, reproducibility, sensitivity analysis and validation.
+
+**Exit criteria:** the RM can explain why options differ, inspect every assumption and choose no action; unavailable tax or product data blocks false precision.
+
+### Roadmap stage 4 — Suitability, uncertainty and specialist gates
+
+Make governance an active part of the experience rather than a disclaimer.
+
+Before an option can become client-ready, evaluate five gates:
+
+1. **Evidence:** every financial statement has a source/date/calculation; 2026 event claims use only `event_log.csv`.
+2. **Suitability:** mandate, risk profile, objectives, liquidity, service model, concentration and product knowledge/experience are passed or visibly unresolved.
+3. **Tax and planning:** tax domicile is used; missing tax lots/jurisdictional facts block tax conclusions; specialist referral is available.
+4. **Data and model:** stale, missing or conflicting data, calculation version, confidence and AI-draft status are visible.
+5. **Human decision:** RM selection/edit/defer/dismiss includes reason, timestamp, actor and evidence version.
+
+Design unresolved gates as useful next steps—request a document, confirm a preference, contact credit, or refer to tax/wealth planning—not as dead-end error messages.
+
+**Exit criteria:** the application cannot transition to `client_ready` while a mandatory gate is unresolved, and overrides require an authorised role plus a recorded rationale.
+
+### Roadmap stage 5 — Meeting Studio and client-ready communication
+
+Convert approved intelligence into a high-quality conversation package.
+
+- Generate an editable meeting objective, agenda, discovery questions, talking points, option summary, risk/caveat section and follow-up tasks.
+- Support tone/channel variants such as concise email, formal briefing, call notes or client-app copy, while keeping the same approved facts.
+- Give the RM fine-grained control: edit, regenerate only a selected section, compare draft versions, restore the original and record final changes.
+- Cite internal evidence in the RM view; translate it into plain language in the client view without exposing internal IDs unnecessarily.
+- Add a preflight preview showing audience, channel, approved facts, unresolved caveats and prohibited claims.
+- End with copy/export or simulated hand-off. Do not auto-send, collect digital consent or execute a trade from the prototype.
+
+**Exit criteria:** the final communication contains no uncited numerical claim, no unsupported causal language and no action beyond the RM's approved option.
+
+### Roadmap stage 6 — Collaboration, follow-through and audit
+
+Make the workbench useful after the meeting, not only during preparation.
+
+- Assign specialist referrals and follow-up tasks with owners, due dates, evidence and status.
+- Record meeting outcomes, client preference changes and requested documents without rewriting the historical insight.
+- Re-evaluate affected insights when new data arrives and show what changed between evidence versions.
+- Provide an audit timeline for source ingestion, calculation, AI draft, RM edits, gate decisions, referrals and final disposition.
+- Add role-based views for RM, specialist, compliance/audit and product operations, with least-privilege access.
+- Separate source-data logs, model-generation logs and user-decision logs so accountability remains clear.
+
+**Exit criteria:** another authorised person can reconstruct what the system knew, what it suggested, what the RM changed and why the final state was reached.
+
+### Roadmap stage 7 — Advanced intelligence after validation
+
+Only add advanced modelling when data volume, labels, governance and evaluation justify it.
+
+- Calibrate priority weights from RM feedback and observed false-positive/false-negative reviews while preserving visible rules and hard overrides.
+- Add approved-document retrieval for policy and product knowledge with citations, permission filters and document-version controls.
+- Explore predictive drift, engagement/churn or next-best-action models only with representative training data, bias review, out-of-sample evaluation and explainability testing.
+- Add stochastic goal planning, tax optimisation or portfolio optimisation only as specialist-governed modules with complete inputs and jurisdiction-specific rules.
+- Integrate bank systems through APIs and events while retaining the workbench contracts, idempotent actions and complete audit trail.
+
+**Exit criteria:** an advanced feature must outperform the deterministic baseline on defined measures, remain explainable to an RM, and pass model-risk, privacy, security and suitability review.
+
+### Three anchor journeys for product acceptance
+
+- **Lau (CL-0014):** proves transparent urgency, correlated exposure, collateral/liquidity scenario comparison, credit escalation and RM-controlled action selection.
+- **Margarethe (CL-0003):** proves human context, mandate/risk conflict, missing-tax-data blocking, sensitive meeting preparation and specialist referral.
+- **Fong Family Office (CL-0017):** proves household-versus-sleeve reasoning, commitments timeline, gated-liquidity treatment, multi-stakeholder planning and follow-through.
+
+Build every roadmap stage against all three journeys. A feature is not complete if it works only for the easiest client.
+
+### Task 3 quality measures
+
+Track product quality without inventing financial-performance claims:
+
+- **Decision readiness:** percentage of priority items with a clear next step, owner and due date.
+- **Traceability:** percentage of material facts with valid evidence and `as_of_date`; target 100%.
+- **RM control:** percentage of client-ready briefs explicitly reviewed or edited by an RM; target 100%.
+- **Gate integrity:** zero client-ready transitions with unresolved mandatory gates.
+- **Priority usefulness:** RM agreement with top-ranked items and false-alert/dismissal reasons.
+- **Preparation efficiency:** median time from opening a card to a reviewed meeting brief.
+- **Client relevance:** percentage of briefs that explicitly connect the issue to a stated objective, constraint or life event.
+- **Accessibility and resilience:** keyboard-complete core flow, readable charts/tables, deterministic fixture fallback and graceful AI/API failure states.
 
 ## Data and governance rules — non-negotiable
 
@@ -136,14 +356,15 @@ Use stable `client_id`, `portfolio_id`, `instrument_id`, snapshot dates, and sou
 - RM notes are useful but subjective. Show them as relationship context and flag contradictions with structured data; never present them as independently verified facts.
 - Recommendations are **options for RM review**, not instructions. Every action needs an explanation, suitability/mandate checks, uncertainty or missing-data disclosure, and RM approval/edit/dismiss controls.
 
-## Implementation sequence
+## Cross-team delivery sequence
 
-1. Read `clients.csv`, `rm_notes.json`, and `event_log.csv`; choose the three demo journeys after checking them against the calculations.
-2. Agree the `Insight` contract, date convention, formatting helpers, and a small shared design system before building separate views.
-3. Implement one vertical slice for a chosen client: source data → deterministic signal → evidence → dossier → RM action. Demo this internally before expanding.
-4. Add the book-priority view and the remaining two journeys. Favour clear ranking reasons over opaque AI scores.
-5. Add review/dismiss/edit states, a compact evidence drawer, empty/missing-data states, and a short architecture/governance slide.
-6. Rehearse a 3–5 minute journey. Confirm every number, event, and recommendation shown has a traceable source and an RM-control moment.
+1. Read `clients.csv`, `rm_notes.json`, and `event_log.csv`; validate the three anchor journeys against the source records and calculations.
+2. Establish the shared foundation, contracts, evidence rules, design primitives and fixture fallback.
+3. Complete Lau as the first vertical slice: source data → deterministic signal → evidence → client context → options/gates → RM decision → meeting brief.
+4. Generalise every layer for Margarethe and Fong; remove assumptions that only work for Lau.
+5. Expand breadth across the full book only after the three anchor journeys pass their acceptance criteria.
+6. Add governance, accessibility, failure recovery, audit reconstruction and role-based access as product capabilities, not presentation-only claims.
+7. Validate calculations and content independently, test the complete workflow, and rehearse a concise judge journey that exposes evidence and RM control.
 
 ## Definition of done
 
