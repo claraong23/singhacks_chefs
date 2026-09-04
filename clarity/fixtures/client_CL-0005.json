@@ -1,0 +1,1873 @@
+{
+  "as_of": "2026-08-26",
+  "client": {
+    "client_id": "CL-0005",
+    "client_name": "Aishah binti Rahman",
+    "age": 47.0,
+    "nationality": "Malaysia",
+    "country_of_residence": "Malaysia",
+    "tax_domicile": "Malaysia",
+    "booking_centre": "Singapore",
+    "base_currency": "SGD",
+    "wealth_band": "HNW",
+    "life_stage": "Peak earning years",
+    "source_of_wealth": "Entrepreneur - palm oil plantations and commercial property",
+    "risk_profile": "Sustainable Balanced",
+    "risk_tolerance_score": 5.0,
+    "investment_horizon_years": 20.0,
+    "liquidity_needs": "Low",
+    "objectives": "Align the portfolio with a stated sustainability policy adopted in 2024; diversify away from plantation assets; fund children's education in Australia",
+    "client_since": "2017-11-08",
+    "kyc_review_due": "2026-10-15",
+    "reporting_language": "English",
+    "rm_name": "Priscilla Ong",
+    "total_usd": 19400737.88
+  },
+  "portfolios": [
+    {
+      "portfolio_id": "PF-0007",
+      "portfolio_name": "Sustainable Balanced Mandate",
+      "mandate_code": "SUSBAL",
+      "mandate_name": "Sustainable Balanced",
+      "service_model": "Discretionary",
+      "base_currency": "SGD",
+      "benchmark": "JB Sustainable Balanced SGD Composite",
+      "inception_date": "2017-12-01",
+      "value_usd": 19400737.880000003,
+      "aum_series": [
+        {
+          "snapshot": "2025-12-31",
+          "label": "Year-end 2025",
+          "value_base": 24316037.0
+        },
+        {
+          "snapshot": "2026-02-27",
+          "label": "Pre-conflict",
+          "value_base": 24987178.0
+        },
+        {
+          "snapshot": "2026-03-31",
+          "label": "Post-Hormuz",
+          "value_base": 25783696.5
+        },
+        {
+          "snapshot": "2026-06-30",
+          "label": "Half-year",
+          "value_base": 25848628.5
+        },
+        {
+          "snapshot": "2026-08-26",
+          "label": "Today",
+          "value_base": 26229797.6
+        }
+      ],
+      "mandate_review": {
+        "portfolio_id": "PF-0007",
+        "client_id": "CL-0005",
+        "mandate_code": "SUSBAL",
+        "mandate_name": "Sustainable Balanced",
+        "service_model": "Discretionary",
+        "governed": true,
+        "base_currency": "SGD",
+        "total_base": 26229797.6,
+        "allocation_pct": {
+          "Equity": 67.74378464895207,
+          "Fixed Income": 26.537528448179863,
+          "Cash and Equivalents": 5.718686902868057
+        },
+        "band_breaches": [
+          {
+            "portfolio_id": "PF-0007",
+            "mandate_code": "SUSBAL",
+            "asset_class": "Equity",
+            "actual_pct": 67.74378464895207,
+            "min_pct": 30.0,
+            "target_pct": 40.0,
+            "max_pct": 55.0,
+            "direction": "above",
+            "breach_pp": 12.743784648952072,
+            "value_base": 17769057.6,
+            "base_currency": "SGD"
+          }
+        ],
+        "position_breaches": [],
+        "exclusion_breaches": [
+          {
+            "portfolio_id": "PF-0007",
+            "mandate_code": "SUSBAL",
+            "instrument_id": "SYN-EQ-0008",
+            "instrument_name": "Global Energy Majors Equity Fund",
+            "pct_of_portfolio": 11.128958158640156,
+            "value_base": 2919103.2,
+            "base_currency": "SGD",
+            "service_model": "Discretionary",
+            "mandate_notes": "Balanced allocation with binding exclusions: thermal coal, oil and gas exploration and production, controversial weapons, tobacco, and issuers with unresolved deforestation controversies."
+          },
+          {
+            "portfolio_id": "PF-0007",
+            "mandate_code": "SUSBAL",
+            "instrument_id": "SYN-ST-0105",
+            "instrument_name": "Sunrise Palm Resources Ltd",
+            "pct_of_portfolio": 10.167825313299407,
+            "value_base": 2667000.0,
+            "base_currency": "SGD",
+            "service_model": "Discretionary",
+            "mandate_notes": "Balanced allocation with binding exclusions: thermal coal, oil and gas exploration and production, controversial weapons, tobacco, and issuers with unresolved deforestation controversies."
+          }
+        ]
+      },
+      "bands": {
+        "Cash and Equivalents": {
+          "min_pct": 2.0,
+          "target_pct": 7.0,
+          "max_pct": 18.0
+        },
+        "Fixed Income": {
+          "min_pct": 25.0,
+          "target_pct": 35.0,
+          "max_pct": 50.0
+        },
+        "Equity": {
+          "min_pct": 30.0,
+          "target_pct": 40.0,
+          "max_pct": 55.0
+        },
+        "Alternatives": {
+          "min_pct": 0.0,
+          "target_pct": 10.0,
+          "max_pct": 20.0
+        },
+        "Commodities": {
+          "min_pct": 0.0,
+          "target_pct": 3.0,
+          "max_pct": 10.0
+        },
+        "Structured Products": {
+          "min_pct": 0.0,
+          "target_pct": 5.0,
+          "max_pct": 15.0
+        }
+      },
+      "mandate_notes": "Balanced allocation with binding exclusions: thermal coal, oil and gas exploration and production, controversial weapons, tobacco, and issuers with unresolved deforestation controversies."
+    }
+  ],
+  "wealth": {
+    "total_usd": 19400737.88,
+    "timeseries": [
+      {
+        "snapshot": "2025-12-31",
+        "label": "Year-end 2025",
+        "total_usd": 18849641.09,
+        "change_usd": null,
+        "change_pct": null
+      },
+      {
+        "snapshot": "2026-02-27",
+        "label": "Pre-conflict",
+        "total_usd": 19074181.68,
+        "change_usd": 224540.58999999985,
+        "change_pct": 1.1912194451231317
+      },
+      {
+        "snapshot": "2026-03-31",
+        "label": "Post-Hormuz",
+        "total_usd": 19313630.35,
+        "change_usd": 239448.6700000018,
+        "change_pct": 1.2553548771692407
+      },
+      {
+        "snapshot": "2026-06-30",
+        "label": "Half-year",
+        "total_usd": 19218311.16,
+        "change_usd": -95319.19000000134,
+        "change_pct": -0.4935332626369819
+      },
+      {
+        "snapshot": "2026-08-26",
+        "label": "Today",
+        "total_usd": 19400737.88,
+        "change_usd": 182426.7199999988,
+        "change_pct": 0.9492338763860393
+      }
+    ],
+    "by_asset_class": {
+      "Equity": 13142794.09,
+      "Fixed Income": 5148476.33,
+      "Cash and Equivalents": 1109467.46
+    },
+    "by_liquidity_tier": {
+      "Daily": 18291270.42,
+      "Monthly": 1109467.46
+    },
+    "by_currency": {
+      "USD": 11896300.0,
+      "SGD": 7504437.88
+    },
+    "by_region": {
+      "Global": 11896300.0,
+      "Singapore": 3825443.79,
+      "Southeast Asia": 3678994.09
+    },
+    "by_sector": {
+      "Diversified": 4562360.95,
+      "Sovereign": 2715976.33,
+      "Health Care": 2491500.0,
+      "Corporate": 2432500.0,
+      "Energy": 2159100.0,
+      "Consumer Staples": 1972633.14,
+      "Utilities": 1957200.0,
+      "Cash": 1109467.46
+    },
+    "positions": [
+      {
+        "instrument_id": "SYN-EQ-0001",
+        "instrument_name": "Global Developed Equity Index Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Diversified",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2856000.0,
+        "weight_pct": 14.721089567135579,
+        "lending_value_usd": 1856399.9999999998,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 975958.5798816568,
+        "unrealised_pnl_pct": 51.911546705190304,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0211",
+        "instrument_name": "Singapore Government Securities 2.75% due 2036",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Government Bond",
+        "sector": "Sovereign",
+        "region": "Singapore",
+        "currency": "SGD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2715976.33,
+        "weight_pct": 13.999345523862106,
+        "lending_value_usd": 2444378.698224852,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": -289940.82840236684,
+        "unrealised_pnl_pct": -9.645669291338582,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0006",
+        "instrument_name": "Global Healthcare Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Health Care",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2491500.0,
+        "weight_pct": 12.842295047800523,
+        "lending_value_usd": 1619475.0000000002,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 650960.0591715976,
+        "unrealised_pnl_pct": 35.36788551725801,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-FI-0203",
+        "instrument_name": "Global Investment Grade Corporate Bond Fund",
+        "asset_class": "Fixed Income",
+        "sub_asset_class": "Investment Grade Credit",
+        "sector": "Corporate",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2432500.0,
+        "weight_pct": 12.538182903381406,
+        "lending_value_usd": 1824375.0,
+        "advance_rate_pct": 75.0,
+        "unrealised_pnl_usd": -26801.03550295858,
+        "unrealised_pnl_pct": -1.089782629944586,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0008",
+        "instrument_name": "Global Energy Majors Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Energy",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 2159100.0,
+        "weight_pct": 11.12895815280197,
+        "lending_value_usd": 1403415.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 885606.6568047337,
+        "unrealised_pnl_pct": 69.54152226525949,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": true,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-ST-0105",
+        "instrument_name": "Sunrise Palm Resources Ltd",
+        "asset_class": "Equity",
+        "sub_asset_class": "Single Stock",
+        "sector": "Consumer Staples",
+        "region": "Southeast Asia",
+        "currency": "SGD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1972633.14,
+        "weight_pct": 10.167825328095201,
+        "lending_value_usd": 986316.5680473372,
+        "advance_rate_pct": 50.0,
+        "unrealised_pnl_usd": 491863.9053254438,
+        "unrealised_pnl_pct": 33.21678321678322,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": true,
+        "sustainability_excluded": true,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0009",
+        "instrument_name": "Global Listed Infrastructure Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Developed Market Equity",
+        "sector": "Utilities",
+        "region": "Global",
+        "currency": "USD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1957200.0,
+        "weight_pct": 10.088276085713499,
+        "lending_value_usd": 1272180.0,
+        "advance_rate_pct": 65.0,
+        "unrealised_pnl_usd": 455762.1301775148,
+        "unrealised_pnl_pct": 30.355044277083508,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-EQ-0023",
+        "instrument_name": "ASEAN Equity Fund",
+        "asset_class": "Equity",
+        "sub_asset_class": "Emerging Market Equity",
+        "sector": "Diversified",
+        "region": "Southeast Asia",
+        "currency": "SGD",
+        "liquidity_tier": "Daily",
+        "market_value_usd": 1706360.95,
+        "weight_pct": 8.795340468771903,
+        "lending_value_usd": 1023816.5680473372,
+        "advance_rate_pct": 60.0,
+        "unrealised_pnl_usd": 177514.7928994083,
+        "unrealised_pnl_pct": 11.611030478955009,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      },
+      {
+        "instrument_id": "SYN-CA-0602",
+        "instrument_name": "SGD Fixed Deposit 3M",
+        "asset_class": "Cash and Equivalents",
+        "sub_asset_class": "Deposit",
+        "sector": "Cash",
+        "region": "Singapore",
+        "currency": "SGD",
+        "liquidity_tier": "Monthly",
+        "market_value_usd": 1109467.46,
+        "weight_pct": 5.7186869224378185,
+        "lending_value_usd": 998520.7100591717,
+        "advance_rate_pct": 90.0,
+        "unrealised_pnl_usd": 0.0,
+        "unrealised_pnl_pct": 0.0,
+        "portfolio_ids": [
+          "PF-0007"
+        ],
+        "concentration_limit_applies": false,
+        "sustainability_excluded": false,
+        "underlying_reference": ""
+      }
+    ]
+  },
+  "income": {
+    "client_id": "CL-0005",
+    "quarters_observed": 2,
+    "gross_income_usd": 447757.42426035507,
+    "costs_usd": 81152.88461538462,
+    "net_income_usd": 366604.53964497044,
+    "annualised_gross_usd": 895514.8485207101,
+    "annualised_net_usd": 733209.0792899409,
+    "yield_pct": 4.615880354962614,
+    "by_instrument": {
+      "SYN-FI-0203": 118620.0,
+      "SYN-FI-0211": 85616.86390532544,
+      "SYN-EQ-0001": 49377.6,
+      "SYN-EQ-0006": 43740.0,
+      "SYN-EQ-0023": 42980.769230769234,
+      "SYN-EQ-0008": 38240.100000000006,
+      "SYN-EQ-0009": 34788.600000000006,
+      "SYN-CA-0602": 34393.491124260356
+    }
+  },
+  "explanation": {
+    "ytd": {
+      "client_id": "CL-0005",
+      "period": "ytd",
+      "primary_driver": "Energy and the Strait of Hormuz",
+      "fx_dominates": false,
+      "start": "2025-12-31",
+      "end": "2026-08-26",
+      "start_label": "Year-end 2025",
+      "end_label": "Today",
+      "change_usd": 551096.7899999991,
+      "change_pct": 2.923646065029661,
+      "price_effect_usd": 911775.1992472815,
+      "fx_effect_usd": -360678.40924728155,
+      "flow_effect_usd": 0.0,
+      "drivers": [
+        {
+          "theme_key": "energy_hormuz",
+          "theme_name": "Energy and the Strait of Hormuz",
+          "amount_usd": 452700.0,
+          "pct_of_start": 2.4016372398738337,
+          "market_moves": [
+            {
+              "series_id": "BRENT_USD_BBL",
+              "series_name": "Brent crude",
+              "unit": "USD/barrel",
+              "start_value": 69.0,
+              "end_value": 101.5,
+              "change": 32.5,
+              "change_pct": 47.10144927536233
+            },
+            {
+              "series_id": "TTF_GAS_EUR_MWH",
+              "series_name": "Dutch TTF natural gas front-month",
+              "unit": "EUR/MWh",
+              "start_value": 32.0,
+              "end_value": 68.0,
+              "change": 36.0,
+              "change_pct": 112.5
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-04",
+              "event_date": "2026-02-28",
+              "description": "United States and Israel commence military operations against Iran.",
+              "primary_transmission": "Energy, defence, airlines, EM credit, safe havens",
+              "severity": "Severe"
+            },
+            {
+              "event_id": "EVT-05",
+              "event_date": "2026-03-02",
+              "description": "Brent crude rises 10-13% to around USD 80-82 per barrel as tanker traffic in the Strait of Hormuz stalls and a major Saudi refinery shuts down.",
+              "primary_transmission": "Energy, transport, shipping",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-06",
+              "event_date": "2026-03-04",
+              "description": "Strait of Hormuz effectively closed. Brent surges past USD 120. QatarEnergy declares force majeure on all exports.",
+              "primary_transmission": "Energy, LNG, shipping, Gulf credit, airlines",
+              "severity": "Severe"
+            },
+            {
+              "event_id": "EVT-07",
+              "event_date": "2026-03-11",
+              "description": "IEA member countries agree to release 400 million barrels from emergency reserves.",
+              "primary_transmission": "Energy, oil-linked structured products",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-08",
+              "event_date": "2026-03-12",
+              "description": "IEA characterises the conflict as the largest supply disruption in the history of the global oil market, with roughly 7.5% of world supply affected.",
+              "primary_transmission": "Energy, inflation-sensitive assets",
+              "severity": "Severe"
+            },
+            {
+              "event_id": "EVT-10",
+              "event_date": "2026-05-04",
+              "description": "Brent crude peaks at approximately USD 114 per barrel.",
+              "primary_transmission": "Energy, transport",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-16",
+              "event_date": "2026-08-05",
+              "description": "United States reimposes a naval blockade following renewed Iranian attacks on commercial vessels. Energy risk premium re-widens.",
+              "primary_transmission": "Energy, shipping, insurance, Gulf exposure",
+              "severity": "Severe"
+            }
+          ]
+        },
+        {
+          "theme_key": "duration",
+          "theme_name": "Interest rate duration",
+          "amount_usd": -431678.70999999996,
+          "pct_of_start": -2.2901163366394894,
+          "market_moves": [
+            {
+              "series_id": "UST_10Y_PCT",
+              "series_name": "US Treasury 10-year yield",
+              "unit": "percent",
+              "start_value": 4.05,
+              "end_value": 4.66,
+              "change": 0.6100000000000003,
+              "change_pct": 15.061728395061746
+            },
+            {
+              "series_id": "UST_2Y_PCT",
+              "series_name": "US Treasury 2-year yield",
+              "unit": "percent",
+              "start_value": 3.68,
+              "end_value": 4.14,
+              "change": 0.4599999999999995,
+              "change_pct": 12.499999999999979
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-09",
+              "event_date": "2026-04-30",
+              "description": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+              "primary_transmission": "European fixed income, EUR assets",
+              "severity": "Medium"
+            },
+            {
+              "event_id": "EVT-12",
+              "event_date": "2026-06-17",
+              "description": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+              "primary_transmission": "Duration, rate-sensitive credit, USD",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-13",
+              "event_date": "2026-06-19",
+              "description": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+              "primary_transmission": "Long-duration fixed income",
+              "severity": "High"
+            },
+            {
+              "event_id": "EVT-15",
+              "event_date": "2026-07-29",
+              "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+              "primary_transmission": "Duration, growth equity valuations",
+              "severity": "High"
+            }
+          ]
+        },
+        {
+          "theme_key": "healthcare",
+          "theme_name": "Healthcare and pharmaceuticals",
+          "amount_usd": 147000.0,
+          "pct_of_start": 0.7798556975070765,
+          "market_moves": [],
+          "events": []
+        }
+      ],
+      "detractors": [
+        {
+          "instrument_id": "SYN-FI-0211",
+          "instrument_name": "Singapore Government Securities 2.75% due 2036",
+          "asset_class": "Fixed Income",
+          "currency": "SGD",
+          "start_value_usd": 3020155.04,
+          "end_value_usd": 2715976.33,
+          "price_effect_usd": -173643.41345397025,
+          "fx_effect_usd": -130535.29654602974,
+          "flow_effect_usd": 0.0,
+          "total_usd": -304178.70999999996,
+          "price_return_pct": -5.749486652977421,
+          "price_start": 97.4,
+          "price_end": 91.8
+        },
+        {
+          "instrument_id": "SYN-FI-0203",
+          "instrument_name": "Global Investment Grade Corporate Bond Fund",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 2560000.0,
+          "end_value_usd": 2432500.0,
+          "price_effect_usd": -127500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -127500.0,
+          "price_return_pct": -4.980468750000011,
+          "price_start": 102.4,
+          "price_end": 97.3
+        }
+      ],
+      "contributors": [
+        {
+          "instrument_id": "SYN-EQ-0008",
+          "instrument_name": "Global Energy Majors Equity Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1706400.0,
+          "end_value_usd": 2159100.0,
+          "price_effect_usd": 452700.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 452700.0,
+          "price_return_pct": 26.529535864978904,
+          "price_start": 189.6,
+          "price_end": 239.9
+        },
+        {
+          "instrument_id": "SYN-EQ-0001",
+          "instrument_name": "Global Developed Equity Index Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 2620800.0,
+          "end_value_usd": 2856000.0,
+          "price_effect_usd": 235200.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 235200.0,
+          "price_return_pct": 8.974358974358964,
+          "price_start": 218.4,
+          "price_end": 238.0
+        },
+        {
+          "instrument_id": "SYN-ST-0105",
+          "instrument_name": "Sunrise Palm Resources Ltd",
+          "asset_class": "Equity",
+          "currency": "SGD",
+          "start_value_usd": 1855813.95,
+          "end_value_usd": 1972633.14,
+          "price_effect_usd": 211627.9143704415,
+          "fx_effect_usd": -94808.72437044155,
+          "flow_effect_usd": 0.0,
+          "total_usd": 116819.18999999994,
+          "price_return_pct": 11.403508771929838,
+          "price_start": 3.42,
+          "price_end": 3.81
+        },
+        {
+          "instrument_id": "SYN-EQ-0006",
+          "instrument_name": "Global Healthcare Equity Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 2344500.0,
+          "end_value_usd": 2491500.0,
+          "price_effect_usd": 147000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 147000.0,
+          "price_return_pct": 6.269993602047341,
+          "price_start": 156.3,
+          "price_end": 166.1
+        },
+        {
+          "instrument_id": "SYN-EQ-0009",
+          "instrument_name": "Global Listed Infrastructure Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1853600.0,
+          "end_value_usd": 1957200.0,
+          "price_effect_usd": 103600.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 103600.0,
+          "price_return_pct": 5.58912386706949,
+          "price_start": 132.4,
+          "price_end": 139.8
+        }
+      ],
+      "narrative": [
+        "Between 2025-12-31 and 2026-08-26 the household moved up USD 551,097, or 2.9%, from USD 18,849,641 to USD 19,400,738.",
+        "Of that, +USD 911,775 came from market moves, -USD 360,678 from currency translation and +USD 0 from money paid in or taken out.",
+        "Energy and the Strait of Hormuz contributed +USD 452,700 (+2.4 points), as Brent crude moved from 69.0 to 101.5 USD/barrel. The event log records on 2026-02-28: United States and Israel commence military operations against Iran.",
+        "Interest rate duration contributed -USD 431,679 (-2.3 points), as US Treasury 10-year yield moved from 4.05 to 4.66 percent. The event log records on 2026-04-30: European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+        "Healthcare and pharmaceuticals contributed +USD 147,000 (+0.8 points)."
+      ],
+      "provenance": "deterministic"
+    },
+    "recent": {
+      "client_id": "CL-0005",
+      "period": "recent",
+      "primary_driver": "Energy and the Strait of Hormuz",
+      "fx_dominates": false,
+      "start": "2026-06-30",
+      "end": "2026-08-26",
+      "start_label": "Half-year",
+      "end_label": "Today",
+      "change_usd": 182426.7199999988,
+      "change_pct": 0.9492338763860393,
+      "price_effect_usd": 221483.27396933694,
+      "fx_effect_usd": -39056.55396933696,
+      "flow_effect_usd": 0.0,
+      "drivers": [
+        {
+          "theme_key": "energy_hormuz",
+          "theme_name": "Energy and the Strait of Hormuz",
+          "amount_usd": 94500.0,
+          "pct_of_start": 0.4917185449504398,
+          "market_moves": [
+            {
+              "series_id": "BRENT_USD_BBL",
+              "series_name": "Brent crude",
+              "unit": "USD/barrel",
+              "start_value": 96.0,
+              "end_value": 101.5,
+              "change": 5.5,
+              "change_pct": 5.729166666666674
+            },
+            {
+              "series_id": "TTF_GAS_EUR_MWH",
+              "series_name": "Dutch TTF natural gas front-month",
+              "unit": "EUR/MWh",
+              "start_value": 61.0,
+              "end_value": 68.0,
+              "change": 7.0,
+              "change_pct": 11.475409836065564
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-16",
+              "event_date": "2026-08-05",
+              "description": "United States reimposes a naval blockade following renewed Iranian attacks on commercial vessels. Energy risk premium re-widens.",
+              "primary_transmission": "Energy, shipping, insurance, Gulf exposure",
+              "severity": "Severe"
+            }
+          ]
+        },
+        {
+          "theme_key": "duration",
+          "theme_name": "Interest rate duration",
+          "amount_usd": -57927.02000000002,
+          "pct_of_start": -0.3014157670657676,
+          "market_moves": [
+            {
+              "series_id": "UST_10Y_PCT",
+              "series_name": "US Treasury 10-year yield",
+              "unit": "percent",
+              "start_value": 4.52,
+              "end_value": 4.66,
+              "change": 0.14000000000000057,
+              "change_pct": 3.0973451327433787
+            },
+            {
+              "series_id": "UST_2Y_PCT",
+              "series_name": "US Treasury 2-year yield",
+              "unit": "percent",
+              "start_value": 4.05,
+              "end_value": 4.14,
+              "change": 0.08999999999999986,
+              "change_pct": 2.2222222222222143
+            }
+          ],
+          "events": [
+            {
+              "event_id": "EVT-15",
+              "event_date": "2026-07-29",
+              "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+              "primary_transmission": "Duration, growth equity valuations",
+              "severity": "High"
+            }
+          ]
+        }
+      ],
+      "detractors": [
+        {
+          "instrument_id": "SYN-FI-0211",
+          "instrument_name": "Singapore Government Securities 2.75% due 2036",
+          "asset_class": "Fixed Income",
+          "currency": "SGD",
+          "start_value_usd": 2753903.35,
+          "end_value_usd": 2715976.33,
+          "price_effect_usd": -23791.82719737777,
+          "fx_effect_usd": -14135.192802622247,
+          "flow_effect_usd": 0.0,
+          "total_usd": -37927.02000000002,
+          "price_return_pct": -0.8639308855291516,
+          "price_start": 92.6,
+          "price_end": 91.8
+        },
+        {
+          "instrument_id": "SYN-FI-0203",
+          "instrument_name": "Global Investment Grade Corporate Bond Fund",
+          "asset_class": "Fixed Income",
+          "currency": "USD",
+          "start_value_usd": 2452500.0,
+          "end_value_usd": 2432500.0,
+          "price_effect_usd": -20000.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": -20000.0,
+          "price_return_pct": -0.8154943934760461,
+          "price_start": 98.1,
+          "price_end": 97.3
+        }
+      ],
+      "contributors": [
+        {
+          "instrument_id": "SYN-EQ-0008",
+          "instrument_name": "Global Energy Majors Equity Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 2064600.0,
+          "end_value_usd": 2159100.0,
+          "price_effect_usd": 94500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 94500.0,
+          "price_return_pct": 4.57715780296426,
+          "price_start": 229.4,
+          "price_end": 239.9
+        },
+        {
+          "instrument_id": "SYN-EQ-0001",
+          "instrument_name": "Global Developed Equity Index Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 2810400.0,
+          "end_value_usd": 2856000.0,
+          "price_effect_usd": 45600.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 45600.0,
+          "price_return_pct": 1.6225448334756587,
+          "price_start": 234.2,
+          "price_end": 238.0
+        },
+        {
+          "instrument_id": "SYN-ST-0105",
+          "instrument_name": "Sunrise Palm Resources Ltd",
+          "asset_class": "Equity",
+          "currency": "SGD",
+          "start_value_usd": 1946468.4,
+          "end_value_usd": 1972633.14,
+          "price_effect_usd": 36431.2321581137,
+          "fx_effect_usd": -10266.492158113708,
+          "flow_effect_usd": 0.0,
+          "total_usd": 26164.73999999999,
+          "price_return_pct": 1.8716577540106805,
+          "price_start": 3.74,
+          "price_end": 3.81
+        },
+        {
+          "instrument_id": "SYN-EQ-0009",
+          "instrument_name": "Global Listed Infrastructure Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 1920800.0,
+          "end_value_usd": 1957200.0,
+          "price_effect_usd": 36400.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 36400.0,
+          "price_return_pct": 1.8950437317784452,
+          "price_start": 137.2,
+          "price_end": 139.8
+        },
+        {
+          "instrument_id": "SYN-EQ-0006",
+          "instrument_name": "Global Healthcare Equity Fund",
+          "asset_class": "Equity",
+          "currency": "USD",
+          "start_value_usd": 2457000.0,
+          "end_value_usd": 2491500.0,
+          "price_effect_usd": 34500.0,
+          "fx_effect_usd": 0.0,
+          "flow_effect_usd": 0.0,
+          "total_usd": 34500.0,
+          "price_return_pct": 1.4041514041513992,
+          "price_start": 163.8,
+          "price_end": 166.1
+        }
+      ],
+      "narrative": [
+        "Between 2026-06-30 and 2026-08-26 the household moved up USD 182,427, or 0.9%, from USD 19,218,311 to USD 19,400,738.",
+        "Of that, +USD 221,483 came from market moves, -USD 39,057 from currency translation and +USD 0 from money paid in or taken out.",
+        "Energy and the Strait of Hormuz contributed +USD 94,500 (+0.5 points), as Brent crude moved from 96.0 to 101.5 USD/barrel. The event log records on 2026-08-05: United States reimposes a naval blockade following renewed Iranian attacks on commercial vessels. Energy risk premium re-widens.",
+        "Interest rate duration contributed -USD 57,927 (-0.3 points), as US Treasury 10-year yield moved from 4.52 to 4.66 percent. The event log records on 2026-07-29: Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts..."
+      ],
+      "provenance": "deterministic"
+    }
+  },
+  "exposures": {
+    "issuers": [
+      {
+        "key": "SUNRISE_PALM",
+        "name": "Sunrise Palm Resources Ltd",
+        "kind": "issuer",
+        "attributed_usd": 1972633.14,
+        "pct_of_household": 10.167825328095201,
+        "direct_usd": 1972633.14,
+        "looked_through_usd": 0.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-ST-0105",
+            "instrument_name": "Sunrise Palm Resources Ltd",
+            "wrapper": "Single Stock",
+            "market_value_usd": 1972633.14,
+            "attributed_usd": 1972633.14,
+            "basis_field": "instrument_name",
+            "basis_note": "Direct equity in the issuer.",
+            "portfolio_ids": [
+              "PF-0007"
+            ]
+          }
+        ],
+        "event_ids": []
+      }
+    ],
+    "themes": [
+      {
+        "key": "duration",
+        "name": "Interest rate duration",
+        "kind": "theme",
+        "attributed_usd": 5148476.33,
+        "pct_of_household": 26.53752842724351,
+        "direct_usd": 0,
+        "looked_through_usd": 5148476.33,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-FI-0211",
+            "instrument_name": "Singapore Government Securities 2.75% due 2036",
+            "wrapper": "Government Bond",
+            "market_value_usd": 2715976.33,
+            "attributed_usd": 2715976.33,
+            "basis_field": "asset_class",
+            "basis_note": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+            "portfolio_ids": [
+              "PF-0007"
+            ]
+          },
+          {
+            "instrument_id": "SYN-FI-0203",
+            "instrument_name": "Global Investment Grade Corporate Bond Fund",
+            "wrapper": "Investment Grade Credit",
+            "market_value_usd": 2432500.0,
+            "attributed_usd": 2432500.0,
+            "basis_field": "asset_class",
+            "basis_note": "Fixed income whose price is driven primarily by the level of yields rather than by credit. Perpetuals carry the longest effective duration.",
+            "portfolio_ids": [
+              "PF-0007"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-09",
+          "EVT-12",
+          "EVT-13",
+          "EVT-15"
+        ]
+      },
+      {
+        "key": "healthcare",
+        "name": "Healthcare and pharmaceuticals",
+        "kind": "theme",
+        "attributed_usd": 2491500.0,
+        "pct_of_household": 12.842295047800523,
+        "direct_usd": 0,
+        "looked_through_usd": 2491500.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-EQ-0006",
+            "instrument_name": "Global Healthcare Equity Fund",
+            "wrapper": "Developed Market Equity",
+            "market_value_usd": 2491500.0,
+            "attributed_usd": 2491500.0,
+            "basis_field": "asset_class",
+            "basis_note": "Healthcare revenue exposure, including single employer or family business holdings in the sector.",
+            "portfolio_ids": [
+              "PF-0007"
+            ]
+          }
+        ],
+        "event_ids": []
+      },
+      {
+        "key": "energy_hormuz",
+        "name": "Energy and the Strait of Hormuz",
+        "kind": "theme",
+        "attributed_usd": 2159100.0,
+        "pct_of_household": 11.12895815280197,
+        "direct_usd": 0,
+        "looked_through_usd": 2159100.0,
+        "hidden": false,
+        "legs": [
+          {
+            "instrument_id": "SYN-EQ-0008",
+            "instrument_name": "Global Energy Majors Equity Fund",
+            "wrapper": "Developed Market Equity",
+            "market_value_usd": 2159100.0,
+            "attributed_usd": 2159100.0,
+            "basis_field": "asset_class",
+            "basis_note": "Instruments whose value moves with the oil complex, freight rates and the Gulf risk premium. The transmission channels are named in event_log.csv.",
+            "portfolio_ids": [
+              "PF-0007"
+            ]
+          }
+        ],
+        "event_ids": [
+          "EVT-04",
+          "EVT-05",
+          "EVT-06",
+          "EVT-07",
+          "EVT-08",
+          "EVT-10",
+          "EVT-16"
+        ]
+      }
+    ],
+    "unresolved": []
+  },
+  "liquidity": {
+    "client_id": "CL-0005",
+    "snapshot": "2026-08-26",
+    "horizon_months": 18,
+    "horizon_end": "2028-02-26",
+    "total_usd": 19400737.88,
+    "by_tier": {
+      "Daily": 18291270.42,
+      "Weekly": 0.0,
+      "Monthly": 1109467.46,
+      "Quarterly Gate": 0.0,
+      "Illiquid": 0.0
+    },
+    "readily_realisable_usd": 18291270.42,
+    "encumbered_cap_usd": null,
+    "withdrawable_usd": 18291270.42,
+    "gated_usd": 0.0,
+    "illiquid_usd": 0.0,
+    "obligations": [
+      {
+        "id": "CN-006",
+        "source": "planned_cash_needs",
+        "description": "Children's university fees, Australia",
+        "currency": "SGD",
+        "amount_ccy": 180000.0,
+        "amount_usd": 133136.09467455623,
+        "occurrences": 2,
+        "total_usd": 266272.18934911245,
+        "due_from": "2026-09-01",
+        "due_to": "2031-09-01",
+        "certainty": "Confirmed",
+        "recurrence": "Annual"
+      }
+    ],
+    "obligations_confirmed_usd": 266272.18934911245,
+    "obligations_total_usd": 266272.18934911245,
+    "coverage_ratio": 68.693882244,
+    "shortfall_usd": 0.0,
+    "gated_positions": [],
+    "notes": []
+  },
+  "facilities": [],
+  "insights": [
+    {
+      "id": "CL-0005-exclusions-PF-0007",
+      "client_id": "CL-0005",
+      "category": "mandate",
+      "severity": "critical",
+      "headline": "21% of a mandate with binding exclusions is invested in excluded instruments",
+      "summary": "Sustainable Balanced carries binding exclusions, and 2 holding(s) are flagged sustainability_excluded in the instrument master. The portfolio is discretionary, so these were selected by the bank under a mandate that forbids them.",
+      "priority_score": 73.8,
+      "priority_reasons": [
+        "Severity critical (weight 1.00)",
+        "Affects 21.3% of household wealth",
+        "No dated deadline; scored as background risk",
+        "Discretionary mandate: the bank selected the positions"
+      ],
+      "observed_facts": [
+        {
+          "label": "Global Energy Majors Equity Fund",
+          "value": "11.1% (SGD 2,919,103)",
+          "numeric": 11.128958158640156,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Sunrise Palm Resources Ltd",
+          "value": "10.2% (SGD 2,667,000)",
+          "numeric": 10.167825313299407,
+          "unit": "%",
+          "trend": null
+        },
+        {
+          "label": "Mandate exclusions",
+          "value": "Balanced allocation with binding exclusions: thermal coal, oil and gas exploration and production, controversial weapons, tobacco, and issuers with unresolved deforestation controversies.",
+          "numeric": null,
+          "unit": null,
+          "trend": null
+        }
+      ],
+      "client_relevance": "A sustainability policy the client believes is being applied, and is not, is a trust problem before it is a portfolio problem.",
+      "suggested_next_step": "Confirm the exclusion list with compliance, then agree an exit path and a date for each position with the client.",
+      "evidence": [
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-EQ-0008",
+          "field": "sustainability_excluded",
+          "value": "Y",
+          "snapshot_date": null,
+          "note": "Global Energy Majors Equity Fund"
+        },
+        {
+          "source_file": "instruments.csv",
+          "row_or_id": "SYN-ST-0105",
+          "field": "sustainability_excluded",
+          "value": "Y",
+          "snapshot_date": null,
+          "note": "Sunrise Palm Resources Ltd"
+        },
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "SUSBAL",
+          "field": "mandate_notes",
+          "value": "Balanced allocation with binding exclusions: thermal coal, oil and gas exploration and production, controversial weapons, tobacco, and issuers with unresolved deforestation controversies.",
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "portfolios.csv",
+          "row_or_id": "PF-0007",
+          "field": "service_model",
+          "value": "Discretionary",
+          "snapshot_date": null,
+          "note": null
+        },
+        {
+          "source_file": "rm_notes.json",
+          "row_or_id": "N-008",
+          "field": "note",
+          "value": "Reviewed the sustainability policy the family adopted in 2024. Client believes the portfolio is fully aligned. She was not aware of the energy fund holding. The Sunrise Palm position is a family holding from before the policy and she considers it separate, though it sits in the same mandate.",
+          "snapshot_date": "2026-02-11",
+          "note": "RM note. Client statement, not independently verified."
+        }
+      ],
+      "assumptions": [],
+      "suitability_checks": [],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0007"
+      ],
+      "instrument_ids": [
+        "SYN-EQ-0008",
+        "SYN-ST-0105"
+      ],
+      "amount_usd": null,
+      "status": "new"
+    },
+    {
+      "id": "CL-0005-bands-PF-0007",
+      "client_id": "CL-0005",
+      "category": "mandate",
+      "severity": "high",
+      "headline": "Sustainable Balanced Mandate sits outside 1 of its Sustainable Balanced bands",
+      "summary": "The largest gap is Equity at 67.7% against a 30-55% band, 12.7 percentage points above the limit. Across all asset classes the portfolio is 12.7 percentage points away from its permitted ranges.",
+      "priority_score": 72.6,
+      "priority_reasons": [
+        "Severity high (weight 0.78)",
+        "Affects 100.0% of household wealth (USD 19,400,738)",
+        "No dated deadline; scored as background risk"
+      ],
+      "observed_facts": [
+        {
+          "label": "Equity",
+          "value": "67.7% vs band 30-55% (target 40%), 12.7pp above",
+          "numeric": 67.74378464895207,
+          "unit": "%",
+          "trend": "up"
+        }
+      ],
+      "client_relevance": "This is a discretionary portfolio. The bank selected these positions, so the breach is the bank's to explain.",
+      "suggested_next_step": "Agree a dated correction plan, or record a documented decision to stay outside the band.",
+      "evidence": [
+        {
+          "source_file": "mandates.csv",
+          "row_or_id": "SUSBAL/Equity",
+          "field": "min_pct/max_pct",
+          "value": "30.0-55.0",
+          "snapshot_date": null,
+          "note": "Actual 67.7% at 2026-08-26."
+        },
+        {
+          "source_file": "portfolios.csv",
+          "row_or_id": "PF-0007",
+          "field": "service_model",
+          "value": "Discretionary",
+          "snapshot_date": null,
+          "note": null
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "Weights are measured within the portfolio in its base currency, as the mandate is written.",
+          "basis": "mandates.csv bands apply per portfolio, not per household.",
+          "impact_if_wrong": null
+        }
+      ],
+      "suitability_checks": [
+        {
+          "check": "Breach is drift or client-directed",
+          "result": "not_assessed",
+          "detail": "No RM note in the file reads as an instruction or waiver for this portfolio, so the breach is treated as drift.",
+          "reference": "rm_notes.json"
+        }
+      ],
+      "confidence": "measured",
+      "open_questions": [],
+      "related_event_ids": [],
+      "portfolio_ids": [
+        "PF-0007"
+      ],
+      "instrument_ids": [],
+      "amount_usd": null,
+      "status": "new"
+    }
+  ],
+  "options": {
+    "CL-0005-exclusions-PF-0007": [
+      {
+        "id": "CL-0005-exclusions-PF-0007-opt-correct",
+        "label": "Correct to the mandate bands over a staged programme",
+        "rationale": "Bringing the portfolio inside its bands is the contractual position. Staging it avoids putting the whole correction through the market on one day, which matters most for the largest gaps.",
+        "mechanics": [
+          "Reduce Equity from 67.7% toward the 40% target (SGD 7,277,139 to trade)",
+          "Agree tranche sizes and dates, and record the end state"
+        ],
+        "trade_offs": [
+          "Executes into current prices rather than chosen ones",
+          "Crystallises gains or losses across several positions",
+          "Takes time, so the breach persists during the programme"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Sustainable Balanced, tolerance 5.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Align the portfolio with a stated sustainability policy adopted in 2024; diversify away from plantation assets; fund children's education in Australia",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Low.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Malaysia. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction",
+          "Investment committee note"
+        ],
+        "estimated_impact": "Brings 1 asset class(es) inside their bands.",
+        "evidence": [
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-EQ-0008",
+            "field": "sustainability_excluded",
+            "value": "Y",
+            "snapshot_date": null,
+            "note": "Global Energy Majors Equity Fund"
+          },
+          {
+            "source_file": "instruments.csv",
+            "row_or_id": "SYN-ST-0105",
+            "field": "sustainability_excluded",
+            "value": "Y",
+            "snapshot_date": null,
+            "note": "Sunrise Palm Resources Ltd"
+          },
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "SUSBAL",
+            "field": "mandate_notes",
+            "value": "Balanced allocation with binding exclusions: thermal coal, oil and gas exploration and production, controversial weapons, tobacco, and issuers with unresolved deforestation controversies.",
+            "snapshot_date": null,
+            "note": null
+          },
+          {
+            "source_file": "portfolios.csv",
+            "row_or_id": "PF-0007",
+            "field": "service_model",
+            "value": "Discretionary",
+            "snapshot_date": null,
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0005-exclusions-PF-0007-opt-document",
+        "label": "Document a client-directed exception with a review date",
+        "rationale": "Where the client has instructed the position and understands the consequence, the honest outcome is a recorded exception rather than a correction plan nobody intends to execute.",
+        "mechanics": [
+          "Record the client's instruction and confirmation in writing",
+          "Log the exception with a defined size limit and review date",
+          "Report the breach in the periodic mandate review"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside its bands",
+          "Requires the client to accept the position in writing",
+          "Does not remove the underlying risk"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Sustainable Balanced, tolerance 5.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Align the portfolio with a stated sustainability policy adopted in 2024; diversify away from plantation assets; fund children's education in Australia",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Low.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Written client instruction on file",
+            "result": "not_assessed",
+            "detail": "No instruction found in the RM notes for this breach.",
+            "reference": "rm_notes.json"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Compliance sign-off",
+          "Client confirmation in writing"
+        ],
+        "estimated_impact": "No portfolio change; the exception becomes visible and dated.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0005-exclusions-PF-0007-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if any band gap widens by more than 3 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio remains outside a contractual limit, which is reportable whether or not it is discussed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ],
+    "CL-0005-bands-PF-0007": [
+      {
+        "id": "CL-0005-bands-PF-0007-opt-correct",
+        "label": "Correct to the mandate bands over a staged programme",
+        "rationale": "Bringing the portfolio inside its bands is the contractual position. Staging it avoids putting the whole correction through the market on one day, which matters most for the largest gaps.",
+        "mechanics": [
+          "Reduce Equity from 67.7% toward the 40% target (SGD 7,277,139 to trade)",
+          "Agree tranche sizes and dates, and record the end state"
+        ],
+        "trade_offs": [
+          "Executes into current prices rather than chosen ones",
+          "Crystallises gains or losses across several positions",
+          "Takes time, so the breach persists during the programme"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Sustainable Balanced, tolerance 5.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Align the portfolio with a stated sustainability policy adopted in 2024; diversify away from plantation assets; fund children's education in Australia",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Low.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Tax consequences of a disposal",
+            "result": "not_assessed",
+            "detail": "Tax domicile is Malaysia. Clarity does not compute tax outcomes; route to wealth planning before executing.",
+            "reference": "clients.csv"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Client instruction",
+          "Investment committee note"
+        ],
+        "estimated_impact": "Brings 1 asset class(es) inside their bands.",
+        "evidence": [
+          {
+            "source_file": "mandates.csv",
+            "row_or_id": "SUSBAL/Equity",
+            "field": "min_pct/max_pct",
+            "value": "30.0-55.0",
+            "snapshot_date": null,
+            "note": "Actual 67.7% at 2026-08-26."
+          },
+          {
+            "source_file": "portfolios.csv",
+            "row_or_id": "PF-0007",
+            "field": "service_model",
+            "value": "Discretionary",
+            "snapshot_date": null,
+            "note": null
+          }
+        ]
+      },
+      {
+        "id": "CL-0005-bands-PF-0007-opt-document",
+        "label": "Document a client-directed exception with a review date",
+        "rationale": "Where the client has instructed the position and understands the consequence, the honest outcome is a recorded exception rather than a correction plan nobody intends to execute.",
+        "mechanics": [
+          "Record the client's instruction and confirmation in writing",
+          "Log the exception with a defined size limit and review date",
+          "Report the breach in the periodic mandate review"
+        ],
+        "trade_offs": [
+          "The portfolio stays outside its bands",
+          "Requires the client to accept the position in writing",
+          "Does not remove the underlying risk"
+        ],
+        "suitability_checks": [
+          {
+            "check": "Risk profile",
+            "result": "pass",
+            "detail": "Sustainable Balanced, tolerance 5.0/10, horizon 20.0 years.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Stated objectives",
+            "result": "pass",
+            "detail": "Align the portfolio with a stated sustainability policy adopted in 2024; diversify away from plantation assets; fund children's education in Australia",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Liquidity needs",
+            "result": "pass",
+            "detail": "Recorded as Low.",
+            "reference": "clients.csv"
+          },
+          {
+            "check": "Written client instruction on file",
+            "result": "not_assessed",
+            "detail": "No instruction found in the RM notes for this breach.",
+            "reference": "rm_notes.json"
+          }
+        ],
+        "requires": [
+          "RM approval",
+          "Compliance sign-off",
+          "Client confirmation in writing"
+        ],
+        "estimated_impact": "No portfolio change; the exception becomes visible and dated.",
+        "evidence": []
+      },
+      {
+        "id": "CL-0005-bands-PF-0007-opt-monitor",
+        "label": "Do nothing now, and monitor against a defined trigger",
+        "rationale": "Acting has costs and the client may reasonably prefer to wait. Recording the decision and its trigger turns inaction into a documented choice.",
+        "mechanics": [
+          "Set the trigger: Alert if any band gap widens by more than 3 percentage points.",
+          "Diarise a review date and record the rationale in the client file",
+          "Notify the client that no action is being taken and why"
+        ],
+        "trade_offs": [
+          "The portfolio remains outside a contractual limit, which is reportable whether or not it is discussed."
+        ],
+        "suitability_checks": [
+          {
+            "check": "Documented decision",
+            "result": "pass",
+            "detail": "Inaction is recorded with a trigger and a review date.",
+            "reference": null
+          }
+        ],
+        "requires": [
+          "RM approval"
+        ],
+        "estimated_impact": "No change to the portfolio.",
+        "evidence": []
+      }
+    ]
+  },
+  "brief": {
+    "client_id": "CL-0005",
+    "generated_at": "2026-09-04T10:41:46+00:00",
+    "as_of": "2026-08-26",
+    "purpose": "Review Aishah binti Rahman. 21% of a mandate with binding exclusions is invested in excluded instruments. Then: Sustainable Balanced Mandate sits outside 1 of its Sustainable Balanced bands.",
+    "talking_points": [
+      "Between 2025-12-31 and 2026-08-26 the household moved up USD 551,097, or 2.9%, from USD 18,849,641 to USD 19,400,738.",
+      "Of that, +USD 911,775 came from market moves, -USD 360,678 from currency translation and +USD 0 from money paid in or taken out.",
+      "21% of a mandate with binding exclusions is invested in excluded instruments. Sustainable Balanced carries binding exclusions, and 2 holding(s) are flagged sustainability_excluded in the instrument master. The portfolio is discretionary, so these were selected by the bank under a mandate that forbids them.",
+      "Sustainable Balanced Mandate sits outside 1 of its Sustainable Balanced bands. The largest gap is Equity at 67.7% against a 30-55% band, 12.7 percentage points above the limit. Across all asset classes the portfolio is 12.7 percentage points away from its permitted ranges."
+    ],
+    "questions_to_ask": [
+      "Are these still the objectives? Recorded as: Align the portfolio with a stated sustainability policy adopted in 2024; diversify away from plantation assets; fund children's education in Australia",
+      "Has anything changed in the client's circumstances? Life stage on file is \"Peak earning years\"."
+    ],
+    "relationship_context": [
+      "2026-02-11 (Meeting, N-008): Reviewed the sustainability policy the family adopted in 2024. Client believes the portfolio is fully aligned. She was not aware of the energy fund holding. The Sunrise Palm position is a family holding from before the policy and she considers it separate, though it sits in the same mandate."
+    ],
+    "contradictions": [
+      "The client believes the sustainability policy is being applied; the holdings file shows excluded instruments inside the mandate."
+    ],
+    "do_not_say": [
+      "Do not present any figure as investment advice. These are options for review.",
+      "Do not quote a tax outcome. Tax domicile drives the treatment and wealth planning owns the answer.",
+      "Do not describe a private markets or unlisted mark as current without saying when it was struck.",
+      "Do not present an RM note as an independently verified fact.",
+      "Do not promise a redemption date for a gated vehicle."
+    ],
+    "draft_follow_up": "Dear Aishah binti Rahman,\n\nThank you for your time today. A short summary of what we discussed and what happens next.\n\nWhere the portfolio stands. Between 2025-12-31 and 2026-08-26 the household moved up USD 551,097, or 2.9%, from USD 18,849,641 to USD 19,400,738. Of that, +USD 911,775 came from market moves, -USD 360,678 from currency translation and +USD 0 from money paid in or taken out.\n\nWhat we focused on. 21% of a mandate with binding exclusions is invested in excluded instruments. Sustainable Balanced carries binding exclusions, and 2 holding(s) are flagged sustainability_excluded in the instrument master. The portfolio is discretionary, so these were selected by the bank under a mandate that forbids them.\n\nWhat we agreed to look at. Confirm the exclusion list with compliance, then agree an exit path and a date for each position with the client.\n\nNothing in this note is a recommendation to buy or sell. Any action will be confirmed with you in writing before it is taken, and the figures above are as at 2026-08-26.\n\nKind regards,\nPriscilla Ong\nAsia desk - Singapore and Hong Kong booking centres",
+    "provenance": "deterministic"
+  },
+  "notes": [
+    {
+      "note_id": "N-008",
+      "note_date": "2026-02-11",
+      "channel": "Meeting",
+      "rm_name": "Priscilla Ong",
+      "note": "Reviewed the sustainability policy the family adopted in 2024. Client believes the portfolio is fully aligned. She was not aware of the energy fund holding. The Sunrise Palm position is a family holding from before the policy and she considers it separate, though it sits in the same mandate."
+    }
+  ],
+  "events": [
+    {
+      "event_id": "EVT-16",
+      "event_date": "2026-08-05",
+      "event_type": "Geopolitical",
+      "region": "Middle East",
+      "description": "United States reimposes a naval blockade following renewed Iranian attacks on commercial vessels. Energy risk premium re-widens.",
+      "primary_transmission": "Energy, shipping, insurance, Gulf exposure",
+      "severity": "Severe"
+    },
+    {
+      "event_id": "EVT-15",
+      "event_date": "2026-07-29",
+      "event_type": "Policy",
+      "region": "United States",
+      "description": "Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-year yield reaches 4.71% by month end. Market pricing shifts from cuts toward possible hikes.",
+      "primary_transmission": "Duration, growth equity valuations",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-13",
+      "event_date": "2026-06-19",
+      "event_type": "Market",
+      "region": "United States",
+      "description": "US 10-year Treasury yield rises to about 4.46%, near its highest level in more than a year.",
+      "primary_transmission": "Long-duration fixed income",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-12",
+      "event_date": "2026-06-17",
+      "event_type": "Policy",
+      "region": "United States",
+      "description": "Federal Reserve holds the target range at 3.50-3.75% at the first meeting under new Chair Kevin Warsh. Easing timeline pushed out.",
+      "primary_transmission": "Duration, rate-sensitive credit, USD",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-10",
+      "event_date": "2026-05-04",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "Brent crude peaks at approximately USD 114 per barrel.",
+      "primary_transmission": "Energy, transport",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-09",
+      "event_date": "2026-04-30",
+      "event_type": "Policy",
+      "region": "Europe",
+      "description": "European Central Bank and several other central banks raise policy rates in response to an energy-driven inflation impulse.",
+      "primary_transmission": "European fixed income, EUR assets",
+      "severity": "Medium"
+    },
+    {
+      "event_id": "EVT-08",
+      "event_date": "2026-03-12",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "IEA characterises the conflict as the largest supply disruption in the history of the global oil market, with roughly 7.5% of world supply affected.",
+      "primary_transmission": "Energy, inflation-sensitive assets",
+      "severity": "Severe"
+    },
+    {
+      "event_id": "EVT-07",
+      "event_date": "2026-03-11",
+      "event_type": "Policy",
+      "region": "Global",
+      "description": "IEA member countries agree to release 400 million barrels from emergency reserves.",
+      "primary_transmission": "Energy, oil-linked structured products",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-06",
+      "event_date": "2026-03-04",
+      "event_type": "Geopolitical",
+      "region": "Middle East",
+      "description": "Strait of Hormuz effectively closed. Brent surges past USD 120. QatarEnergy declares force majeure on all exports.",
+      "primary_transmission": "Energy, LNG, shipping, Gulf credit, airlines",
+      "severity": "Severe"
+    },
+    {
+      "event_id": "EVT-05",
+      "event_date": "2026-03-02",
+      "event_type": "Market",
+      "region": "Global",
+      "description": "Brent crude rises 10-13% to around USD 80-82 per barrel as tanker traffic in the Strait of Hormuz stalls and a major Saudi refinery shuts down.",
+      "primary_transmission": "Energy, transport, shipping",
+      "severity": "High"
+    },
+    {
+      "event_id": "EVT-04",
+      "event_date": "2026-02-28",
+      "event_type": "Geopolitical",
+      "region": "Middle East",
+      "description": "United States and Israel commence military operations against Iran.",
+      "primary_transmission": "Energy, defence, airlines, EM credit, safe havens",
+      "severity": "Severe"
+    }
+  ],
+  "market": {
+    "series": [
+      {
+        "series_id": "BRENT_USD_BBL",
+        "series_name": "Brent crude",
+        "category": "Commodity",
+        "unit": "USD/barrel",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 69.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 72.4
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 104.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 96.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 101.5
+          }
+        ]
+      },
+      {
+        "series_id": "GOLD_USD_OZ",
+        "series_name": "Gold spot",
+        "category": "Commodity",
+        "unit": "USD/troy oz",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4310.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 5050.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 5240.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4780.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4622.6
+          }
+        ]
+      },
+      {
+        "series_id": "UST_10Y_PCT",
+        "series_name": "US Treasury 10-year yield",
+        "category": "Rates",
+        "unit": "percent",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 4.05
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 3.95
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 4.35
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 4.52
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 4.66
+          }
+        ]
+      },
+      {
+        "series_id": "NASDAQ_COMP",
+        "series_name": "Nasdaq Composite Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 23150.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 24620.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 23880.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 25320.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 26010.0
+          }
+        ]
+      },
+      {
+        "series_id": "HSI",
+        "series_name": "Hang Seng Index",
+        "category": "Equity index",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 24800.0
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 25350.0
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 24100.0
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 24950.0
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25280.0
+          }
+        ]
+      },
+      {
+        "series_id": "VIX",
+        "series_name": "CBOE Volatility Index",
+        "category": "Volatility",
+        "unit": "points",
+        "points": [
+          {
+            "snapshot": "2025-12-31",
+            "value": 15.2
+          },
+          {
+            "snapshot": "2026-02-27",
+            "value": 17.8
+          },
+          {
+            "snapshot": "2026-03-31",
+            "value": 31.4
+          },
+          {
+            "snapshot": "2026-06-30",
+            "value": 22.6
+          },
+          {
+            "snapshot": "2026-08-26",
+            "value": 25.1
+          }
+        ]
+      }
+    ]
+  },
+  "audit": []
+}

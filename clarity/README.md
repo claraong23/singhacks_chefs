@@ -1,0 +1,247 @@
+# Clarity — the RM's morning intelligence brief
+
+SingHacks 2026, Julius Baer challenge. An RM-first wealth intelligence layer that
+turns a fragmented 20-client book into a defensible next action:
+
+```
+client and portfolio context → evidence-backed signal → RM review → client-ready action
+```
+
+Clarity does not trade, does not advise, and does not replace Priscilla Ong. It
+tells her who to call first, why, what to say, and what she would have to accept
+if she acted — and it makes her approve, edit or reject every one of those before
+anything reaches a client.
+
+---
+
+## Run it
+
+Two commands. No install step for the backend — it is standard library only.
+
+```bash
+# 1. the engine and API  (from clarity/backend)
+python -m clarity.api                    # http://127.0.0.1:8000
+
+# 2. the UI  (from clarity/frontend, first time only: npm install)
+npm run dev                              # http://127.0.0.1:5173
+```
+
+`npm run build` writes `frontend/dist`, which the API serves itself — so for the
+demo, one process on port 8000 is the whole product.
+
+No API keys, no external calls, no data leaves the machine.
+
+### Without a browser
+
+Every screen has a terminal equivalent, which is the fallback if the demo laptop
+misbehaves:
+
+```bash
+python -m clarity.cli book               # the ranked book
+python -m clarity.cli client CL-0014     # one full dossier
+python -m clarity.cli brief CL-0014      # the meeting brief and draft follow-up
+python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fixtures
+```
+
+### Tests
+
+```bash
+cd clarity/backend && python -m unittest discover -s tests -t .
+```
+
+30 tests. They check the things a judge would push on: that holdings reconcile to
+`portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
+direction follows each pair's quoting convention, that the attribution
+decomposition sums exactly to the change in value, that the single-position limit
+is only applied to instruments flagged `concentration_limit_applies`, that the
+loan-to-value repayment arithmetic actually lands on its target, and that no
+signal silently fails.
+
+---
+
+## What it does
+
+### 1. The book — who to call first
+
+Twenty clients ranked by a **published formula**, not by an opaque score:
+
+```
+priority = 0.45 × severity + 0.30 × materiality + 0.25 × urgency      (0–100)
+```
+
+Materiality is the share of *household* wealth affected, capped at 30%. Urgency
+is days to the driving date, banded. Every row shows the reasons behind its
+position, and the weights are stated so they can be argued with.
+
+### 2. The dossier — four questions in order
+
+| Tab | Question |
+|---|---|
+| **Why now** | The ranked findings, each with figures, evidence and reviewable options |
+| **What changed and why** | Attribution across the five snapshots, tied to `event_log.csv` |
+| **Exposure and mandate** | Look-through concentration, themes, mandate bands and limits |
+| **Liquidity and collateral** | What is actually sellable, what is pledged, and LTV through time |
+| **Meeting brief** | What to say, what to ask, what *not* to say, and a draft follow-up |
+
+### 3. The decision — the RM stays in charge
+
+Each finding carries two to four options. Every option states how it would work,
+what it costs, which suitability checks it clears, and what it depends on. The RM
+selects one and approves, marks the finding reviewed, or dismisses it — and can
+rewrite the next step in her own words. Every decision is written to an audit
+trail with actor, timestamp, the previous state and the engine's original wording.
+
+---
+
+## What it found
+
+These are the outputs, not the design intentions. Each was computed and is cited
+in the UI.
+
+| Client | Finding |
+|---|---|
+| **CL-0014 Lau Chi Ming** | Lombard facility at 69.41% LTV against a 70% trigger — **0.59 points of headroom**, and a 0.8% fall in collateral produces a margin call. He owes a confirmed HKD 60m by mid-2027 but can withdraw **USD 90,754** without breaching it. Golden Harbour Properties is 29.5% of his household across *three* wrappers — shares, a subordinated perpetual, and an accumulator that obliges further buying below strike — and Hong Kong property in total is 49%, which is also his business. |
+| **CL-0002 Ravi Chandrasekaran** | Facility breached its 75% trigger at the half-year and was **cured by the market, not by an action**. 68% of his wealth is an unlisted holding carried at a **September 2025 mark**, 330 days stale. |
+| **CL-0017 Fong Family Office** | Liquid in aggregate, but the **Alternatives Sleeve** that owes USD 15.8m of uncalled commitments holds USD 900k of cash. `planned_cash_needs` CN-016 restates the same USD 15.8m already in `commitments.csv`; counted once, and the duplication is reported. |
+| **CL-0003 Voss-Brenner** | Profiled Conservative after inheriting a portfolio that is 83% risk assets — 71% equity against a 30% ceiling — with EUR 3.4m of German inheritance tax confirmed due before year end. Her USD decline this year is mostly **currency translation**, not markets, and the UI says so rather than blaming a theme. |
+| **CL-0005 Aishah binti Rahman** | A **discretionary** Sustainable Balanced mandate with binding exclusions holds 21% in instruments flagged `sustainability_excluded`. The bank picked them. Her RM note says she believes the policy is being applied. |
+| **CL-0001 Hartono Wijaya Kusuma** | Facility breached its trigger at 78.5% in December and 75.7% in February, then fell to 58.9% with **no repayment at all** — the energy rally lifted the collateral. Resolved by the market, and it would return if the move reversed. |
+
+Three data artefacts are surfaced rather than worked around: the stale unlisted
+mark, HKD 2m of drawdown on CF-0002 that `transactions.csv` does not explain, and
+the commitments double count. A fourth is flagged as unverifiable: `SYN-SP-0506`
+references "three Asian banking majors" the dataset never names, so the issuers
+behind that note are reported as unknown instead of guessed.
+
+---
+
+## How it is built
+
+```
+clarity/
+  backend/clarity/
+    config.py          Dates, thresholds, conventions. Nothing inferred.
+    contracts.py       Insight, Evidence, ActionOption, MeetingBrief
+    loaders.py         CSV/JSON → normalised, indexed, coerced once
+    analytics/         Deterministic calculation, no narrative
+      valuation.py       household roll-up across every portfolio
+      lookthrough.py     issuer and theme exposure through wrappers
+      mandate.py         bands, single-position limits, exclusions
+      collateral.py      LTV through time, cure attribution, reconciliation
+      liquidity.py       obligations vs what can actually be sold
+      attribution.py     price / FX / flow decomposition
+      income.py          run-rate income and cost of the facility
+    signals/           One file per family of checks; each returns Insights
+    actions.py         Reviewable options, solved from the data
+    brief.py           The meeting brief
+    review.py          RM decisions and the audit trail
+    dossier.py         Assembly into stable JSON
+    api.py             Standard-library HTTP API
+    cli.py             Terminal demo and fixture export
+  frontend/            Vite + React + TypeScript, hand-written CSS, no UI kit
+  fixtures/            Frozen payloads for the demo clients
+  docs/                Method, assumptions, demo run sheet
+```
+
+**Why no pandas, FastAPI or charting library.** The dataset is 1,015 holdings
+rows. Standard library covers it, the analytics import cleanly into a notebook, a
+test, the API or a Streamlit fallback, and there is no install step to fail on a
+strange laptop the morning of a demo. Swapping `api.py` for FastAPI is mechanical
+— the payloads do not move, because `dossier.py` returns plain dictionaries.
+
+**Where AI sits.** Deliberately at the edge. Every number, ranking, breach and
+option in this repo is deterministic Python, and every narrative sentence is
+assembled from already-computed facts with a citation attached. Nothing is passed
+to a model as "here is a portfolio, what do you think". That is the difference
+between an explanation that survives a compliance review and one that merely
+sounds plausible — and it is the only way the evidence drawer can promise that
+each claim traces to a row.
+
+---
+
+## Contracts
+
+The interface between the four workstreams is `backend/clarity/contracts.py`,
+mirrored in `frontend/src/types.ts`. Change both together.
+
+```
+Insight        id, client_id, category, severity, priority_score, priority_reasons[]
+               headline, summary, observed_facts[], client_relevance, suggested_next_step
+               evidence[] {source_file, row_or_id, field, value, snapshot_date, note}
+               assumptions[], suitability_checks[], confidence, open_questions[]
+               related_event_ids[], portfolio_ids[], instrument_ids[], amount_usd, status
+
+ActionOption   id, label, rationale, mechanics[], trade_offs[]
+               suitability_checks[], requires[], estimated_impact, evidence[]
+
+MeetingBrief   purpose, talking_points[], questions_to_ask[], relationship_context[]
+               contradictions[], do_not_say[], draft_follow_up, provenance
+```
+
+Two rules hold everywhere: **no claim without a citation**, and **computed
+numbers never share a field with generated prose**.
+
+### Adding a signal
+
+```python
+from clarity.signals.base import SignalContext, priority, signal
+
+@signal("my_check")
+def my_check(ctx: SignalContext):
+    if not something_is_wrong(ctx):
+        return
+    score, reasons = priority(Severity.HIGH, materiality_pct=12.0, days_until=45)
+    yield Insight(id=f"{ctx.client_id}-my-check", ..., evidence=[...])
+```
+
+Register it by importing the module in `signals/__init__.py`. It appears in the
+book automatically, with no other change. A check that raises does not take down
+the book — it surfaces as a visible engine error against that client instead of
+silently dropping findings.
+
+### Where each workstream plugs in
+
+The seams are already cut, so four people can work without colliding.
+
+| Workstream | Owns | Touches |
+|---|---|---|
+| **Task 1 — Client context and explanations** | `analytics/attribution.py`, `signals/explain.py`, the *What changed and why* tab | Extend `THEMES` in `analytics/lookthrough.py` and `THEME_MARKET_SERIES` to explain a new driver |
+| **Task 2a — Risk rules and evidence** | `signals/risk.py`, `signals/governance.py`, `signals/planning.py`, `analytics/` | Add a `@signal`; it appears in the book with no other change |
+| **Task 2b — UI and design system** | `frontend/src/components/`, `frontend/src/styles.css` | Only `types.ts` couples you to the backend; `clarity/fixtures/*.json` lets you work with the API stopped |
+| **Task 3 — Workbench and action** | `actions.py`, `brief.py`, `review.py`, `dossier.py`, `api.py` | Owns the contracts and the demo narrative |
+
+## API
+
+| Route | |
+|---|---|
+| `GET /api/book` | The ranked book |
+| `GET /api/clients/<id>` | One full dossier |
+| `GET /api/events` | `event_log.csv`, normalised with stable ids |
+| `GET /api/meta` | Snapshots, categories, thresholds, load warnings |
+| `GET /api/audit` | The decision trail |
+| `POST /api/insights/<id>/decision` | `{status, rm_note, selected_option_id, edited_next_step}` |
+| `POST /api/reset` | Clear decisions (demo reset) |
+
+---
+
+## Conventions
+
+* The dataset's today is **2026-08-26**. Every ageing calculation is relative to
+  that, never to the machine clock.
+* Reporting currency is USD. FX direction is read off each series id, since
+  `market_context.csv` quotes in market convention.
+* Risk is measured at the **household** level across every portfolio, including
+  custody. Mandate compliance is measured **per portfolio**, and custody accounts
+  are excluded from it entirely.
+* Loan-to-value uses **lending value**, never market value.
+* `event_log.csv` is the only source for 2026 events.
+* `tax_domicile`, not residence, drives tax-aware reasoning — and no tax figure is
+  ever computed.
+
+Assumptions that could reasonably be made differently are listed in
+[`docs/METHOD.md`](docs/METHOD.md) and attached to the individual insights that
+depend on them.
+
+---
+
+*Synthetic dataset. Not investment advice. Not for any use outside the hackathon.*

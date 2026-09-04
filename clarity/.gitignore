@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Runtime state (RM decisions and audit trail; regenerated on demand)
+state/
+
+# Editors
+.DS_Store
+.vscode/
+.idea/
