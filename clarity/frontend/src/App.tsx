@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getBook, getClient, recordDecision } from './api'
-import type { BookView, Dossier, Insight, InsightStatus } from './types'
+import type { BookView, Dossier, Insight, InsightStatus, SavedScenario } from './types'
 import { BookWorkbench } from './components/BookWorkbench'
 import { ClientDossier } from './components/ClientDossier'
 import { shortDate } from './format'
@@ -47,6 +47,7 @@ export default function App() {
         rmNote: string
         selectedOptionId: string | null
         editedNextStep: string | null
+        selectedScenarioId?: string | null
       },
     ) => {
       setBusy(true)
@@ -58,6 +59,7 @@ export default function App() {
           rmNote: input.rmNote,
           selectedOptionId: input.selectedOptionId,
           editedNextStep: input.editedNextStep,
+          selectedScenarioId: input.selectedScenarioId,
         })
         const [nextDossier] = await Promise.all([getClient(insight.client_id), loadBook()])
         setDossier(nextDossier)
@@ -68,6 +70,19 @@ export default function App() {
       }
     },
     [loadBook],
+  )
+
+  const attachScenario = useCallback(
+    async (insight: Insight, scenario: SavedScenario) => {
+      await decide(insight, {
+        status: 'rm_edited',
+        rmNote: '',
+        selectedOptionId: scenario.result.option_id,
+        editedNextStep: null,
+        selectedScenarioId: scenario.id,
+      })
+    },
+    [decide],
   )
 
   return (
@@ -112,6 +127,7 @@ export default function App() {
             dossier={dossier}
             busy={busy}
             onDecide={decide}
+            onAttachScenario={attachScenario}
             onBack={() => {
               setClientId(null)
               setDossier(null)

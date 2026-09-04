@@ -14,10 +14,14 @@ Routes:
     GET  /api/meta
     GET  /api/book
     GET  /api/clients/<client_id>
+    GET  /api/clients/<client_id>/scenario-templates
+    GET  /api/clients/<client_id>/scenarios
     GET  /api/events
     GET  /api/audit
     POST /api/insights/<insight_id>/readiness
     POST /api/insights/<insight_id>/decision
+    POST /api/clients/<client_id>/scenarios/evaluate
+    POST /api/clients/<client_id>/scenarios
     POST /api/reset
 Anything else is served from ../frontend/dist if it has been built, so the
 whole product runs from one process.
@@ -39,6 +43,8 @@ from .dossier import all_events, book_view, client_dossier
 from .gates import evaluate_readiness
 from .loaders import get_book
 from .review import InvalidTransitionError, VALID_STATUSES, get_store
+from .scenario_store import get_scenario_store
+from .scenarios import evaluate_scenario, templates_for_client
 from .signals.base import SignalContext, run_for_client
 
 FRONTEND_DIST = config.REPO_ROOT / "clarity" / "frontend" / "dist"
@@ -102,6 +108,22 @@ def _readiness(insight_id: str, payload: dict):
     return client_id, readiness
 
 
+def _saved_scenario(payload: dict, client_id: str, insight_id: str) -> dict | None:
+    scenario_id = payload.get("selected_scenario_id")
+    if not scenario_id:
+        return None
+    scenario = get_scenario_store().get(scenario_id)
+    if scenario is None:
+        raise ValueError(f"Unknown saved scenario {scenario_id}")
+    result = scenario.get("result", {})
+    if result.get("client_id") != client_id or result.get("insight_id") != insight_id:
+        raise ValueError("Saved scenario does not belong to this client finding.")
+    selected_option_id = payload.get("selected_option_id")
+    if selected_option_id and result.get("option_id") != selected_option_id:
+        raise ValueError("Saved scenario does not match the selected action option.")
+    return scenario
+
+
 class ClarityHandler(BaseHTTPRequestHandler):
     server_version = "Clarity/0.1"
 
@@ -157,6 +179,16 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 return self._send_json(
                     {"audit": [e.to_dict() for e in get_store().audit()]}
                 )
+            if path.startswith("/api/clients/") and path.endswith("/scenario-templates"):
+                client_id = path[len("/api/clients/") : -len("/scenario-templates")]
+                return self._send_json(
+                    {"templates": [item.to_dict() for item in templates_for_client(client_id)]}
+                )
+            if path.startswith("/api/clients/") and path.endswith("/scenarios"):
+                client_id = path[len("/api/clients/") : -len("/scenarios")]
+                if client_id not in get_book().clients:
+                    return self._send_json({"error": f"Unknown client {client_id}"}, 404)
+                return self._send_json({"scenarios": get_scenario_store().list_for_client(client_id)})
             if path.startswith("/api/clients/"):
                 client_id = path.split("/api/clients/", 1)[1].strip("/")
                 if client_id not in get_book().clients:
@@ -174,7 +206,35 @@ class ClarityHandler(BaseHTTPRequestHandler):
         try:
             if path == "/api/reset":
                 get_store().reset()
+                get_scenario_store().reset()
                 return self._send_json({"status": "reset"})
+            if path.startswith("/api/clients/") and path.endswith("/scenarios/evaluate"):
+                client_id = path[len("/api/clients/") : -len("/scenarios/evaluate")]
+                payload = self._read_json()
+                result = evaluate_scenario(
+                    client_id=client_id,
+                    template_id=payload.get("template_id", ""),
+                    insight_id=payload.get("insight_id", ""),
+                    option_id=payload.get("option_id", ""),
+                    inputs=payload.get("inputs"),
+                )
+                return self._send_json({"scenario": result.to_dict()})
+            if path.startswith("/api/clients/") and path.endswith("/scenarios"):
+                client_id = path[len("/api/clients/") : -len("/scenarios")]
+                payload = self._read_json()
+                result = evaluate_scenario(
+                    client_id=client_id,
+                    template_id=payload.get("template_id", ""),
+                    insight_id=payload.get("insight_id", ""),
+                    option_id=payload.get("option_id", ""),
+                    inputs=payload.get("inputs"),
+                )
+                scenario = get_scenario_store().save(
+                    name=payload.get("name", ""),
+                    result=result.to_dict(),
+                    saved_by=payload.get("actor") or "RM-SG-014",
+                )
+                return self._send_json({"scenario": scenario}, 201)
             if path.startswith("/api/insights/") and path.endswith("/readiness"):
                 insight_id = path[len("/api/insights/") : -len("/readiness")]
                 payload = self._read_json()
@@ -190,6 +250,7 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     )
                 client_id = _client_id_for(insight_id, payload)
                 actor = payload.get("actor") or "RM-SG-014"
+                saved_scenario = _saved_scenario(payload, client_id, insight_id)
                 readiness = None
                 if status == "client_ready":
                     client_id, readiness = _readiness(insight_id, payload)
@@ -200,7 +261,15 @@ class ClarityHandler(BaseHTTPRequestHandler):
                             target_status=status,
                             actor=actor,
                             gate_results=[gate.to_dict() for gate in readiness.gates],
-                            evidence_version=readiness.evidence_version,
+                            evidence_version=(
+                                f"{readiness.evidence_version}:{saved_scenario['result']['calculation_version']}"
+                                if saved_scenario
+                                else readiness.evidence_version
+                            ),
+                            selected_scenario_id=saved_scenario["id"] if saved_scenario else None,
+                            scenario_calculation_version=(
+                                saved_scenario["result"]["calculation_version"] if saved_scenario else None
+                            ),
                         )
                         return self._send_json(
                             {
@@ -224,7 +293,15 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     gate_results=[gate.to_dict() for gate in readiness.gates]
                     if readiness
                     else None,
-                    evidence_version=readiness.evidence_version if readiness else None,
+                    evidence_version=(
+                        f"{readiness.evidence_version}:{saved_scenario['result']['calculation_version']}"
+                        if readiness and saved_scenario
+                        else readiness.evidence_version if readiness else None
+                    ),
+                    selected_scenario_id=saved_scenario["id"] if saved_scenario else None,
+                    scenario_calculation_version=(
+                        saved_scenario["result"]["calculation_version"] if saved_scenario else None
+                    ),
                 )
                 return self._send_json({"decision": decision.to_dict()})
             return self._send_json({"error": "Not found"}, 404)

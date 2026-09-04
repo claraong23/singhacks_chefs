@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-30 tests. They check the things a judge would push on: that holdings reconcile to
+48 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
@@ -81,6 +81,7 @@ position, and the weights are stated so they can be argued with.
 | **What changed and why** | Attribution across the five snapshots, tied to `event_log.csv` |
 | **Exposure and mandate** | Look-through concentration, themes, mandate bands and limits |
 | **Liquidity and collateral** | What is actually sellable, what is pledged, and LTV through time |
+| **Scenario Studio** | Evidence-backed baseline-versus-option comparison for Lau, Margarethe, and Fong; current-state arithmetic only |
 | **Meeting brief** | What to say, what to ask, what *not* to say, and a draft follow-up |
 
 ### 3. The decision — the RM stays in charge
@@ -90,6 +91,10 @@ what it costs, which suitability checks it clears, and what it depends on. The R
 selects one and approves, marks the finding reviewed, or dismisses it — and can
 rewrite the next step in her own words. Every decision is written to an audit
 trail with actor, timestamp, the previous state and the engine's original wording.
+Before anything can become client-ready, evidence, suitability, tax/planning,
+data/model quality, and RM rationale must all pass. Saved Scenario Studio
+comparisons retain their bounded inputs and calculation version; they cannot
+bypass a decision gate or execute a transaction.
 
 ---
 
@@ -133,6 +138,8 @@ clarity/
       income.py          run-rate income and cost of the facility
     signals/           One file per family of checks; each returns Insights
     actions.py         Reviewable options, solved from the data
+    scenarios.py       Bounded current-state comparisons for the anchor journeys
+    scenario_store.py  Saved-scenario JSON adapter
     brief.py           The meeting brief
     review.py          RM decisions and the audit trail
     dossier.py         Assembly into stable JSON
@@ -173,6 +180,10 @@ Insight        id, client_id, category, severity, priority_score, priority_reaso
 
 ActionOption   id, label, rationale, mechanics[], trade_offs[]
                suitability_checks[], requires[], estimated_impact, evidence[]
+
+ScenarioResult template_id, client_id, insight_id, option_id, inputs{}
+               metrics[] {baseline, scenario, unit, available}, assumptions[]
+               evidence[], blocked_checks[], calculation_version
 
 MeetingBrief   purpose, talking_points[], questions_to_ask[], relationship_context[]
                contradictions[], do_not_say[], draft_follow_up, provenance
@@ -219,6 +230,10 @@ The seams are already cut, so four people can work without colliding.
 | `GET /api/events` | `event_log.csv`, normalised with stable ids |
 | `GET /api/meta` | Snapshots, categories, thresholds, load warnings |
 | `GET /api/audit` | The decision trail |
+| `GET /api/clients/<id>/scenario-templates` | Supported bounded comparisons for an anchor client |
+| `GET /api/clients/<id>/scenarios` | Saved RM scenario comparisons |
+| `POST /api/clients/<id>/scenarios/evaluate` | Evaluate `{template_id, insight_id, option_id, inputs}` |
+| `POST /api/clients/<id>/scenarios` | Re-evaluate and save a named comparison |
 | `POST /api/insights/<id>/decision` | `{status, rm_note, selected_option_id, edited_next_step}` |
 | `POST /api/reset` | Clear decisions (demo reset) |
 

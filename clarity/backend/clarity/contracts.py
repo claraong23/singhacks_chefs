@@ -271,6 +271,118 @@ class ActionOption:
         }
 
 
+# ---------------------------------------------------------------------------
+# Scenario studio
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class ScenarioInput:
+    """A bounded lever the RM may adjust in a deterministic scenario."""
+
+    key: str
+    label: str
+    unit: str
+    minimum: float
+    maximum: float
+    step: float
+    default: float
+    help_text: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class ScenarioTemplate:
+    """A supported current-state comparison for one anchor-client finding."""
+
+    id: str
+    client_id: str
+    insight_id: str
+    title: str
+    description: str
+    inputs: list[ScenarioInput]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "client_id": self.client_id,
+            "insight_id": self.insight_id,
+            "title": self.title,
+            "description": self.description,
+            "inputs": [item.to_dict() for item in self.inputs],
+        }
+
+
+@dataclass(frozen=True)
+class ScenarioMetric:
+    """One before/after measurement, or an explicit data limitation."""
+
+    key: str
+    label: str
+    baseline: float | None
+    scenario: float | None
+    unit: str
+    available: bool = True
+    detail: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
+
+
+@dataclass(frozen=True)
+class ScenarioResult:
+    template_id: str
+    client_id: str
+    insight_id: str
+    option_id: str
+    title: str
+    as_of_date: str
+    inputs: dict[str, float]
+    assumptions: list[Assumption]
+    metrics: list[ScenarioMetric]
+    evidence: list[Evidence]
+    blocked_checks: list[str]
+    calculation_version: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "template_id": self.template_id,
+            "client_id": self.client_id,
+            "insight_id": self.insight_id,
+            "option_id": self.option_id,
+            "title": self.title,
+            "as_of_date": self.as_of_date,
+            "inputs": dict(self.inputs),
+            "assumptions": [item.to_dict() for item in self.assumptions],
+            "metrics": [item.to_dict() for item in self.metrics],
+            "evidence": [item.to_dict() for item in self.evidence],
+            "blocked_checks": list(self.blocked_checks),
+            "calculation_version": self.calculation_version,
+        }
+
+
+@dataclass(frozen=True)
+class SavedScenario:
+    """A persisted RM comparison; saving it never changes workflow status."""
+
+    id: str
+    name: str
+    saved_by: str
+    saved_at: str
+    result: ScenarioResult
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "saved_by": self.saved_by,
+            "saved_at": self.saved_at,
+            "result": self.result.to_dict(),
+        }
+
+
 @dataclass
 class MeetingBrief:
     """What Priscilla walks into the meeting with."""

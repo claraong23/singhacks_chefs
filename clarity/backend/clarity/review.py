@@ -78,6 +78,8 @@ class Decision:
     edited_headline: str | None = None
     edited_next_step: str | None = None
     evidence_version: str | None = None
+    selected_scenario_id: str | None = None
+    scenario_calculation_version: str | None = None
     decided_by: str | None = None
     decided_at: str | None = None
 
@@ -189,6 +191,8 @@ class ReviewStore:
         edited_next_step: str | None = None,
         gate_results: list[dict[str, Any]] | None = None,
         evidence_version: str | None = None,
+        selected_scenario_id: str | None = None,
+        scenario_calculation_version: str | None = None,
     ) -> Decision:
         _require_reason(status, rm_note)
         with self._lock:
@@ -212,6 +216,12 @@ class ReviewStore:
                 evidence_version=evidence_version
                 if evidence_version is not None
                 else (previous.evidence_version if previous else None),
+                selected_scenario_id=selected_scenario_id
+                if selected_scenario_id is not None
+                else (previous.selected_scenario_id if previous else None),
+                scenario_calculation_version=scenario_calculation_version
+                if scenario_calculation_version is not None
+                else (previous.scenario_calculation_version if previous else None),
                 decided_by=actor,
                 decided_at=_now(),
             )
@@ -232,6 +242,8 @@ class ReviewStore:
                         "edited_next_step": edited_next_step,
                         "gates": gate_results or [],
                         "evidence_version": evidence_version,
+                        "selected_scenario_id": selected_scenario_id,
+                        "scenario_calculation_version": scenario_calculation_version,
                     },
                 )
             )
@@ -247,6 +259,8 @@ class ReviewStore:
         actor: str,
         gate_results: list[dict[str, Any]],
         evidence_version: str,
+        selected_scenario_id: str | None = None,
+        scenario_calculation_version: str | None = None,
     ) -> None:
         with self._lock:
             previous = self._decisions.get(insight_id)
@@ -262,6 +276,8 @@ class ReviewStore:
                         "to": target_status,
                         "gates": gate_results,
                         "evidence_version": evidence_version,
+                        "selected_scenario_id": selected_scenario_id,
+                        "scenario_calculation_version": scenario_calculation_version,
                     },
                 )
             )

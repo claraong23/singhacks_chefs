@@ -83,6 +83,8 @@ export interface Insight {
   status: InsightStatus
   rm_note?: string
   selected_option_id?: string | null
+  selected_scenario_id?: string | null
+  scenario_calculation_version?: string | null
   decided_by?: string | null
   decided_at?: string | null
   edited?: boolean
@@ -100,6 +102,59 @@ export interface ActionOption {
   requires: string[]
   estimated_impact: string | null
   evidence: Evidence[]
+}
+
+export interface ScenarioInput {
+  key: string
+  label: string
+  unit: string
+  minimum: number
+  maximum: number
+  step: number
+  default: number
+  help_text: string
+}
+
+export interface ScenarioTemplate {
+  id: string
+  client_id: string
+  insight_id: string
+  title: string
+  description: string
+  inputs: ScenarioInput[]
+}
+
+export interface ScenarioMetric {
+  key: string
+  label: string
+  baseline: number | null
+  scenario: number | null
+  unit: string
+  available: boolean
+  detail: string
+}
+
+export interface ScenarioResult {
+  template_id: string
+  client_id: string
+  insight_id: string
+  option_id: string
+  title: string
+  as_of_date: string
+  inputs: Record<string, number>
+  assumptions: Assumption[]
+  metrics: ScenarioMetric[]
+  evidence: Evidence[]
+  blocked_checks: string[]
+  calculation_version: string
+}
+
+export interface SavedScenario {
+  id: string
+  name: string
+  saved_by: string
+  saved_at: string
+  result: ScenarioResult
 }
 
 export interface BookRow {

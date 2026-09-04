@@ -40,6 +40,8 @@ def _apply_decisions(
             payload["status"] = decision.status
             payload["rm_note"] = decision.rm_note
             payload["selected_option_id"] = decision.selected_option_id
+            payload["selected_scenario_id"] = decision.selected_scenario_id
+            payload["scenario_calculation_version"] = decision.scenario_calculation_version
             payload["decided_by"] = decision.decided_by
             payload["decided_at"] = decision.decided_at
             if decision.edited_headline:

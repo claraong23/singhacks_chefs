@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import type { Dossier, Insight, InsightStatus } from '../types'
+import type { Dossier, Insight, InsightStatus, SavedScenario } from '../types'
 import {
   money,
   pct,
@@ -14,14 +14,16 @@ import { BandChart, DivergingBars, DonutList, LtvChart, TierBar, ValueLine } fro
 import { InsightCard } from './InsightCard'
 import { EvidenceDrawer } from './EvidenceDrawer'
 import { MeetingBriefPanel } from './MeetingBrief'
+import { ScenarioStudio } from './ScenarioStudio'
 
-type Tab = 'why' | 'changed' | 'risk' | 'liquidity' | 'brief'
+type Tab = 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief'
 
 const TABS: { key: Tab; label: string; hint: string }[] = [
   { key: 'why', label: 'Why now', hint: 'Ranked findings and the decision' },
   { key: 'changed', label: 'What changed and why', hint: 'Attribution against the event log' },
   { key: 'risk', label: 'Exposure and mandate', hint: 'Look-through, concentration, bands' },
   { key: 'liquidity', label: 'Liquidity and collateral', hint: 'What is sellable, and what is pledged' },
+  { key: 'scenario', label: 'Scenario Studio', hint: 'Compare constrained current-state options' },
   { key: 'brief', label: 'Meeting brief', hint: 'What to say, ask, and send' },
 ]
 
@@ -29,6 +31,7 @@ export function ClientDossier({
   dossier,
   busy,
   onDecide,
+  onAttachScenario,
   onBack,
 }: {
   dossier: Dossier
@@ -42,6 +45,7 @@ export function ClientDossier({
       editedNextStep: string | null
     },
   ) => Promise<void>
+  onAttachScenario: (insight: Insight, scenario: SavedScenario) => Promise<void>
   onBack: () => void
 }) {
   const [tab, setTab] = useState<Tab>('why')
@@ -202,6 +206,10 @@ export function ClientDossier({
             </div>
           )}
         </div>
+      )}
+
+      {tab === 'scenario' && (
+        <ScenarioStudio dossier={dossier} busy={busy} onAttach={onAttachScenario} />
       )}
 
       {tab === 'changed' && <WhatChanged dossier={dossier} />}

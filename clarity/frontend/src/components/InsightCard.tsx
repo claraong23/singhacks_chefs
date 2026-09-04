@@ -78,6 +78,7 @@ export function InsightCard({
             {insight.status !== 'new' && (
               <span className="pill accent">{STATUS_LABEL[insight.status]}</span>
             )}
+            {insight.selected_scenario_id && <span className="pill ghost">Scenario attached</span>}
             {insight.edited && <span className="pill ghost">RM edited</span>}
           </div>
         </div>

@@ -354,6 +354,38 @@ textarea.rmnote {
   width: 100%; min-height: 66px; border: 1px solid var(--rule-strong); border-radius: var(--radius);
   padding: 9px 11px; font-family: var(--sans); font-size: 12.5px; resize: vertical;
 }
+
+.select, .input, .scenario-inputs input[type="number"] {
+  width: 100%;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  padding: 8px 10px;
+}
+
+.input { width: min(260px, 100%); }
+
+.select:focus, .input:focus, .scenario-inputs input:focus {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 1px;
+}
+
+.scenario-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.scenario-inputs .fact {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--rule);
+  background: var(--surface-sunk);
+}
 textarea.rmnote:focus, .draft:focus { outline: 2px solid var(--accent-bright); outline-offset: -1px; }
 
 .banner {
