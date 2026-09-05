@@ -17,11 +17,12 @@ const COUNT = CLUSTERS * PER_CLUSTER + CORE_POINTS
 const RING_RADIUS = 3.5
 const SCATTER = new THREE.Vector3(2.7, 1.5, 2.7) // half-extents: 5.4 x 3.0 x 5.4
 
-// Auto-loop, in seconds.
-const HOLD_SCATTERED = 1.1
-const RESOLVE = 2.7
-const HOLD_RESOLVED = 3.2
-const RETURN = 1.9
+// Auto-loop, in seconds. The holds are short on purpose — the morph is the
+// interesting part, and a long settled pause just reads as a stalled page.
+const HOLD_SCATTERED = 0.6
+const RESOLVE = 2.5
+const HOLD_RESOLVED = 1.5
+const RETURN = 1.5
 const LOOP = HOLD_SCATTERED + RESOLVE + HOLD_RESOLVED + RETURN
 
 const COLD = new THREE.Color('#59677e')
@@ -97,7 +98,9 @@ void main() {
   float falloff = smoothstep(0.5, 0.0, r);
 
   vec3 col = mix(uCold, uBone, uProgress);
-  float alpha = falloff * (0.52 + 0.36 * vD);
+  // Kept low on purpose: 280 additive points land in each cluster, so anything
+  // higher saturates to flat white and pulls the eye off the headline.
+  float alpha = falloff * (0.50 + 0.20 * vD);
 
   if (vKind > 0.5) {
     // The action core only exists once it has resolved.
@@ -203,7 +206,7 @@ export function HeroField() {
       uPixelRatio: { value: dpr },
       // Small and bright: the reference reads as fine silver speckle, not blobs.
       uSize: { value: 0.82 },
-      uDim: { value: 1.0 },
+      uDim: { value: 0.38 },
       uCold: { value: COLD },
       uBone: { value: BONE },
       uBrass: { value: BRASS },
@@ -350,12 +353,13 @@ export function HeroField() {
       uniforms.uTime.value = reduced ? 0 : elapsed
       // Kept to a whisper: 05 has no visible spokes, and they would otherwise
       // cut straight through the headline.
-      spokeMaterial.opacity = Math.pow(progress, 4) * 0.2
+      spokeMaterial.opacity = Math.pow(progress, 4) * 0.14
       // The bloom arrives with the core, and breathes very slightly once lit.
       bloomMaterial.opacity =
-        Math.pow(progress, 3) * 0.95 * (reduced ? 1 : 1 + Math.sin(elapsed * 0.7) * 0.06)
+        Math.pow(progress, 3) * 0.62 * (reduced ? 1 : 1 + Math.sin(elapsed * 0.7) * 0.06)
 
       if (!reduced) {
+        // Slow constant spin, plus whatever a drag has added, coasting to a stop.
         group.rotation.z += 0.0006 + velocity
         velocity *= 0.94
       }

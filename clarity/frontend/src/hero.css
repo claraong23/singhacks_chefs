@@ -199,9 +199,10 @@
   z-index: 2;
   max-width: 780px;
   margin: 0 auto;
-  /* Sets the copy down the page far enough that a near-circular ring can close
-     above it without disappearing behind the nav. */
-  padding: clamp(96px, 20vh, 200px) 48px 80px;
+  /* Centres the copy block in the viewport: 50vh puts the middle of the screen
+     under it, then back off half the block's height (~167px) and the 60px nav.
+     The floor keeps it sane on short windows. */
+  padding: max(96px, calc(50vh - 230px)) 48px 80px;
   text-align: center;
 }
 
@@ -290,7 +291,7 @@
   gap: 1px;
   /* Enough clear air that the strip reads as its own section, and the ring
      around the copy has room to finish before it starts. */
-  margin-top: 216px;
+  margin-top: 288px;
   margin-bottom: 100px;
   border: 1px solid var(--h-border);
   border-radius: 12px;
@@ -326,13 +327,13 @@
   text-align: left;
 }
 
-/* §3.4 — ALL CAPS mono section header, textMuted, never text or textSub. */
+/* §3.4 — ALL CAPS mono section header, textMuted, never text or textSub.
+   Left-aligned so it sits flush with the left edge of the first pillar card. */
 .hero-eyebrow {
   margin-bottom: 32px;
   font-family: var(--h-mono);
-  font-size: 9px;
+  font-size: 13px;
   letter-spacing: 0.09em;
-  text-align: center;
   color: var(--h-text-muted);
 }
 
@@ -406,7 +407,7 @@
 
   .hero-stats {
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 110px;
+    margin-top: 150px;
     margin-bottom: 72px;
   }
 
