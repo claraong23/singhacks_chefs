@@ -14,6 +14,9 @@ vi.mock('../api', () => ({
   preflightMeetingPackage: vi.fn(), regenerateMeetingSection: vi.fn(),
   restoreMeetingVersion: vi.fn(), saveMeetingSection: vi.fn(),
   applyAIMeetingDraft: vi.fn(), generateAIMeetingDraft: vi.fn(), getAIDraftingStatus: vi.fn(),
+  getMeetingDrafts: vi.fn().mockResolvedValue({ drafts: [] }),
+  updateMeetingDraft: vi.fn(),
+  deleteMeetingDraft: vi.fn(),
 }))
 
 const insight = {

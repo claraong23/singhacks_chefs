@@ -47,17 +47,54 @@ export function ExplanationDrawer({
           {loading || !explanation ? (
             <div className="loading">Retrieving event evidence and transmission path…</div>
           ) : (
-            <div className="stack" style={{ gap: 18 }}>
-              {/* Section 1: What Changed Deterministically */}
-              <div className="card">
+            <div className="stack" style={{ gap: 16 }}>
+              {/* Section 1: Portfolio Impact */}
+              <div className="card" style={{ borderLeft: '4px solid var(--accent)' }}>
                 <div className="card-head" style={{ padding: '10px 14px' }}>
-                  <h3 style={{ fontSize: 13 }}>1. What Changed (Deterministic Attribution)</h3>
+                  <h3 style={{ fontSize: 13, color: 'var(--accent)' }}>
+                    1. Portfolio Impact ({explanation.start} → {explanation.end})
+                  </h3>
+                </div>
+                <div className="card-body" style={{ padding: '12px 14px' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--ink)' }}>
+                      {explanation.portfolio_impact?.contribution_text ||
+                        `${signedUsd(explanation.what_changed.value_change_usd)} contribution`}
+                    </span>
+                  </div>
+                  {explanation.portfolio_impact && (
+                    <div className="meta" style={{ fontSize: 12, color: 'var(--ink-soft)' }}>
+                      Overall portfolio shifted from {usd(explanation.portfolio_impact.portfolio_start_usd)} to{' '}
+                      {usd(explanation.portfolio_impact.portfolio_end_usd)} ({signedUsd(explanation.portfolio_impact.portfolio_change_usd)}, {signedPct(explanation.portfolio_impact.portfolio_change_pct)}).
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Section 2: What Changed in the Holding */}
+              <div className="card">
+                <div
+                  className="card-head"
+                  style={{
+                    padding: '10px 14px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <h3 style={{ fontSize: 13 }}>2. What Changed in the Holding</h3>
+                  <span
+                    className="pill accent"
+                    style={{ fontSize: 10, textTransform: 'uppercase' }}
+                  >
+                    {explanation.movement_type || explanation.what_changed.movement_type || 'price-led'}
+                  </span>
                 </div>
                 <div className="card-body" style={{ padding: '12px 14px' }}>
                   <div
                     style={{
                       display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
                       gap: 12,
                       marginBottom: 12,
                     }}
@@ -67,15 +104,15 @@ export function ExplanationDrawer({
                         className={`v ${
                           explanation.what_changed.value_change_usd >= 0 ? 'pos' : 'neg'
                         }`}
-                        style={{ fontSize: 19 }}
+                        style={{ fontSize: 18 }}
                       >
                         {signedUsd(explanation.what_changed.value_change_usd)}
                       </span>
-                      <span className="k">Value Delta (USD)</span>
+                      <span className="k">Holding Value Delta</span>
                     </div>
 
                     <div className="stat">
-                      <span className="v" style={{ fontSize: 19 }}>
+                      <span className="v" style={{ fontSize: 18 }}>
                         {explanation.what_changed.price_return_pct !== null
                           ? signedPct(explanation.what_changed.price_return_pct)
                           : '—'}
@@ -84,7 +121,7 @@ export function ExplanationDrawer({
                     </div>
 
                     <div className="stat">
-                      <span className="v" style={{ fontSize: 19 }}>
+                      <span className="v" style={{ fontSize: 18 }}>
                         {explanation.what_changed.weight_change_pct >= 0 ? '+' : '−'}
                         {Math.abs(explanation.what_changed.weight_change_pct).toFixed(2)} pp
                       </span>
@@ -136,18 +173,17 @@ export function ExplanationDrawer({
                       style={{ marginTop: 12, marginBottom: 0, fontSize: 12 }}
                     >
                       ⏳ <strong>Valuation Lag:</strong> This is an illiquid / private markets
-                      holding. The valuation reflects lagged reporting rather than real-time price
-                      discovery.
+                      holding. The valuation reflects lagged reporting rather than real-time price discovery.
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* Section 2: Authoritative Event Evidence */}
+              {/* Section 3: Market/Geopolitical Evidence */}
               <div className="card">
                 <div className="card-head" style={{ padding: '10px 14px' }}>
                   <h3 style={{ fontSize: 13 }}>
-                    2. Authoritative Event Evidence (<code>event_log.csv</code>)
+                    3. Market & Geopolitical Evidence (<code>event_log.csv</code>)
                   </h3>
                   <span className="sub">
                     {explanation.event_evidence.length} linked event
@@ -156,9 +192,22 @@ export function ExplanationDrawer({
                 </div>
                 <div className="card-body" style={{ padding: '12px 14px' }}>
                   {explanation.event_evidence.length === 0 ? (
-                    <div className="muted" style={{ fontSize: 12.5 }}>
-                      No direct macro or geopolitical event matched this sector and region during the
-                      period. The move reflects standard market fluctuation or single-stock dynamics.
+                    <div
+                      style={{
+                        padding: '10px 12px',
+                        background: 'var(--surface-sunk)',
+                        borderRadius: 'var(--radius)',
+                        border: '1px dashed var(--rule)',
+                        fontSize: 12.5,
+                        color: 'var(--ink-soft)',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                        <span className="pill" style={{ background: 'var(--surface)', fontSize: 10 }}>
+                          No verified linkage
+                        </span>
+                      </div>
+                      No direct macro or geopolitical shock in <code>event_log.csv</code> matches this sector and region during this window. Movement reflects general asset-class momentum or security-specific dynamics.
                     </div>
                   ) : (
                     explanation.event_evidence.map((ev) => (
@@ -191,59 +240,41 @@ export function ExplanationDrawer({
                             [{ev.event_id}] · {ev.event_date}
                           </span>
                           <span
-                            className={`pill ${
-                              ev.severity === 'high' || ev.severity === 'critical'
-                                ? 'critical'
-                                : 'accent'
-                            }`}
-                            style={{ fontSize: 10, padding: '1px 5px' }}
+                            className="pill accent"
+                            style={{ fontSize: 10, padding: '1px 6px' }}
                           >
-                            {ev.severity.toUpperCase()}
+                            {ev.confidence || (ev.severity === 'critical' ? 'Direct evidence' : 'Qualified market context')}
                           </span>
                         </div>
                         <div style={{ fontSize: 12.5, fontWeight: 600, marginBottom: 4 }}>
                           {ev.description}
                         </div>
                         <div className="muted" style={{ fontSize: 11.5, marginBottom: 4 }}>
-                          <strong>Primary Transmission:</strong> {ev.primary_transmission}
+                          <strong>Transmission:</strong> {ev.primary_transmission}
                         </div>
-                        <div
-                          style={{
-                            fontSize: 11.5,
-                            color: 'var(--ink-soft)',
-                            borderTop: '1px dashed var(--rule-strong)',
-                            paddingTop: 4,
-                            marginTop: 4,
-                          }}
-                        >
-                          💡 <em>Relevance: {ev.rationale}</em>
-                        </div>
+                        {ev.rationale && (
+                          <div
+                            style={{
+                              fontSize: 11.5,
+                              color: 'var(--ink-soft)',
+                              borderTop: '1px dashed var(--rule-strong)',
+                              paddingTop: 4,
+                              marginTop: 4,
+                            }}
+                          >
+                            💡 <em>Relevance: {ev.rationale}</em>
+                          </div>
+                        )}
                       </div>
                     ))
                   )}
                 </div>
               </div>
 
-              {/* Section 3: Why It Matters to This Client */}
+              {/* Section 4: Causal Explanation & Transmission */}
               <div className="card">
                 <div className="card-head" style={{ padding: '10px 14px' }}>
-                  <h3 style={{ fontSize: 13 }}>3. Why It Matters to This Client</h3>
-                </div>
-                <div className="card-body" style={{ padding: '12px 14px' }}>
-                  <ul className="brieflist">
-                    {explanation.why_it_matters.map((point, index) => (
-                      <li key={index} style={{ fontSize: 12.5 }}>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Section 4: Transmission Mechanisms */}
-              <div className="card">
-                <div className="card-head" style={{ padding: '10px 14px' }}>
-                  <h3 style={{ fontSize: 13 }}>4. Transmission Mechanism & Causal Chain</h3>
+                  <h3 style={{ fontSize: 13 }}>4. Causal Explanation & Transmission Path</h3>
                 </div>
                 <div className="card-body" style={{ padding: '12px 14px' }}>
                   <ol style={{ margin: 0, paddingLeft: 18 }}>
@@ -263,27 +294,67 @@ export function ExplanationDrawer({
                 </div>
               </div>
 
-              {/* Section 5: Uncertainties & Data Caveats */}
-              {explanation.uncertainties.length > 0 && (
-                <div className="card" style={{ borderLeft: '3px solid var(--high)' }}>
-                  <div className="card-head" style={{ padding: '10px 14px' }}>
-                    <h3 style={{ fontSize: 13, color: 'var(--high)' }}>
-                      5. Model Assumptions & Data Caveats
-                    </h3>
-                  </div>
-                  <div className="card-body" style={{ padding: '12px 14px' }}>
-                    <ul className="brieflist">
-                      {explanation.uncertainties.map((u, index) => (
-                        <li key={index} style={{ fontSize: 12, color: 'var(--ink-soft)' }}>
-                          {u}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+              {/* Section 5: Why It Matters to This Client */}
+              <div className="card">
+                <div className="card-head" style={{ padding: '10px 14px' }}>
+                  <h3 style={{ fontSize: 13 }}>5. Why It Matters to This Client</h3>
                 </div>
-              )}
+                <div className="card-body" style={{ padding: '12px 14px' }}>
+                  <ul className="brieflist">
+                    {explanation.why_it_matters.map((point, index) => (
+                      <li key={index} style={{ fontSize: 12.5 }}>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
 
-              {/* Action Callout */}
+              {/* Section 6: Data Limitations (What Data Can & Cannot Prove) */}
+              <div className="card" style={{ borderLeft: '3px solid var(--high)' }}>
+                <div className="card-head" style={{ padding: '10px 14px' }}>
+                  <h3 style={{ fontSize: 13, color: 'var(--high)' }}>
+                    6. Data Boundaries & Limitations
+                  </h3>
+                </div>
+                <div className="card-body" style={{ padding: '12px 14px' }}>
+                  <ul className="brieflist">
+                    {(explanation.limitations || [
+                      'Data reflects point-in-time snapshot records; intraday order execution prices and market peaks/troughs are not observed.',
+                      'The authoritative event_log.csv records external macroeconomic and geopolitical events; company-specific micro announcements may not have separate log entries.',
+                    ]).map((limit, index) => (
+                      <li key={index} style={{ fontSize: 12, color: 'var(--ink-soft)' }}>
+                        {limit}
+                      </li>
+                    ))}
+                    {explanation.uncertainties.map((u, index) => (
+                      <li key={`u-${index}`} style={{ fontSize: 12, color: 'var(--ink-soft)' }}>
+                        ⚠️ {u}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Section 7: Neutral Conclusion */}
+              <div
+                style={{
+                  padding: '12px 16px',
+                  background: 'var(--surface-sunk)',
+                  borderRadius: 'var(--radius)',
+                  border: '1px solid var(--rule-strong)',
+                }}
+              >
+                <div className="eyebrow" style={{ fontSize: 10.5, color: 'var(--muted)', marginBottom: 4 }}>
+                  7. Conclusion (Single-Sentence Neutral Summary)
+                </div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', lineHeight: 1.45 }}>
+                  {explanation.conclusion ||
+                    `${explanation.instrument_name} moved by ${signedUsd(explanation.what_changed.value_change_usd)}, shifting weight from ${pct(explanation.what_changed.start_weight_pct)} to ${pct(explanation.what_changed.end_weight_pct)}.`}
+                </div>
+              </div>
+
+              {/* Section 8: Prepare Client Attribution (Placed directly below conclusion) */}
               <div
                 style={{
                   padding: '14px 16px',
@@ -298,11 +369,10 @@ export function ExplanationDrawer({
               >
                 <div>
                   <strong style={{ fontSize: 13, color: 'var(--accent)' }}>
-                    Translate into Client Language
+                    Prepare Client Attribution
                   </strong>
                   <div className="muted" style={{ fontSize: 11.5 }}>
-                    Convert these technical findings into 3 empathetic talking points for Priscilla's
-                    conversation.
+                    Generate 3 plain-English, empathetic talking points for Priscilla's client discussion.
                   </div>
                 </div>
                 <button

@@ -17,14 +17,7 @@ const STATUS_LABEL: Record<InsightStatus, string> = {
   dismissed: 'Dismissed',
 }
 
-export function InsightCard({
-  insight,
-  options,
-  busy,
-  onEvidence,
-  onDecide,
-  role,
-}: {
+interface InsightCardProps {
   insight: Insight
   options: ActionOption[]
   busy: boolean
@@ -40,8 +33,21 @@ export function InsightCard({
     },
   ) => Promise<void>
   role: SimulatedRole
-}) {
-  const [showFacts, setShowFacts] = useState(false)
+  onNavigateTab?: (tab: 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief' | 'follow') => void
+  onPrepareAttribution?: (insight: Insight) => void
+}
+
+export function InsightCard({
+  insight,
+  options,
+  busy,
+  onEvidence,
+  onDecide,
+  role,
+  onNavigateTab,
+  onPrepareAttribution,
+}: InsightCardProps) {
+  const [showFacts, setShowFacts] = useState(true)
   const [reviewing, setReviewing] = useState(false)
   const [aiDraft, setAiDraft] = useState<InsightNarrativeDraft | null>(null)
   const [aiBusy, setAiBusy] = useState(false)
@@ -65,8 +71,12 @@ export function InsightCard({
     setReviewing(true)
   }
 
+  // Filter event evidence from event_log.csv
+  const eventEvidence = insight.evidence.filter((e) => e.source_file.includes('event_log'))
+
   return (
     <article className={`insight ${insight.severity}${insight.status === 'dismissed' ? ' dismissed' : ''}`}>
+      {/* CARD HEADER */}
       <div className="insight-head">
         <div
           className="score"
@@ -101,7 +111,7 @@ export function InsightCard({
           <div className="meta">
             <span className={`pill ${insight.severity}`}>{SEVERITY_LABEL[insight.severity]}</span>
             <span className="tag">{titleCase(insight.category)}</span>
-            <span className="tag" title="How much of this rests on measurement rather than a client statement">
+            <span className="tag" title="How much of this rests on measurement rather than an unverified assumption">
               {CONFIDENCE_LABEL[insight.confidence]}
             </span>
             {insight.amount_usd !== null && (
@@ -117,36 +127,210 @@ export function InsightCard({
         </div>
       </div>
 
-      <p className="insight-summary">{insight.summary}</p>
-
-      {insight.reopen_reason && (
-        <div className="nextstep" style={{ borderLeftColor: 'var(--high)' }}>
-          <strong>Why this returned.</strong> {insight.reopen_reason}
+      {/* SECTION 1: WHY THIS WAS SURFACED (TRIGGER & PROBLEM STATEMENT) */}
+      <div
+        style={{
+          background: 'var(--surface-sunk)',
+          borderLeft: '4px solid var(--accent)',
+          borderRadius: 'var(--radius)',
+          padding: '12px 16px',
+          margin: '12px 0',
+        }}
+      >
+        <div
+          className="eyebrow"
+          style={{
+            color: 'var(--accent)',
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: '0.05em',
+            marginBottom: 4,
+          }}
+        >
+          🎯 WHY THIS WAS SURFACED · PROBLEM & CLIENT IMPACT
         </div>
-      )}
-
-      {insight.client_relevance && (
-        <p className="insight-summary" style={{ paddingTop: 0, color: 'var(--muted)', fontSize: 13 }}>
-          {insight.client_relevance}
+        <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.5, color: 'var(--ink)' }}>
+          {insight.summary}
         </p>
-      )}
+        {insight.priority_reasons && insight.priority_reasons.length > 0 && (
+          <div style={{ fontSize: 11.5, color: 'var(--ink-soft)', marginTop: 6, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <span className="muted">Priority drivers:</span>
+            {insight.priority_reasons.map((r, i) => (
+              <span key={i} style={{ background: 'var(--surface)', padding: '1px 6px', borderRadius: 3, border: '1px solid var(--rule)' }}>
+                {r}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
 
-      {showFacts && insight.observed_facts.length > 0 && (
-        <div className="facts">
-          {insight.observed_facts.map((fact, index) => (
-            <div className="fact" key={`${fact.label}-${index}`}>
-              <div className="k">{fact.label}</div>
-              <div className="v">{fact.value}</div>
+      {/* SECTION 2: VERIFIED PORTFOLIO FACTS */}
+      {insight.observed_facts.length > 0 && (
+        <div style={{ marginBottom: 12 }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 6,
+            }}
+          >
+            <span className="eyebrow" style={{ fontSize: 11, color: 'var(--muted)' }}>
+              📊 VERIFIED PORTFOLIO FACTS ({insight.observed_facts.length})
+            </span>
+            <button
+              type="button"
+              className="btn quiet"
+              style={{ fontSize: 10.5, padding: '1px 6px' }}
+              onClick={() => setShowFacts((v) => !v)}
+            >
+              {showFacts ? 'Collapse figures' : 'Expand figures'}
+            </button>
+          </div>
+
+          {showFacts && (
+            <div className="facts" style={{ marginTop: 2 }}>
+              {insight.observed_facts.map((fact, index) => (
+                <div className="fact" key={`${fact.label}-${index}`}>
+                  <div className="k">{fact.label}</div>
+                  <div className="v">{fact.value}</div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       )}
 
-      <div className="nextstep">
-        <strong>Suggested next step.</strong> {insight.suggested_next_step}
+      {/* SECTION 3: VERIFIED MARKET EVIDENCE (event_log.csv) */}
+      <div style={{ marginBottom: 12 }}>
+        <div className="eyebrow" style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 6 }}>
+          📰 VERIFIED MARKET EVIDENCE (<code>event_log.csv</code>)
+        </div>
+        {eventEvidence.length > 0 ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {eventEvidence.map((ev, idx) => (
+              <div
+                key={idx}
+                style={{
+                  background: 'var(--surface-sunk)',
+                  padding: '8px 12px',
+                  borderRadius: 'var(--radius)',
+                  fontSize: 12,
+                  border: '1px solid var(--rule)',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
+                  <strong>[{ev.row_or_id}] · {ev.snapshot_date}</strong>
+                  <span className="pill accent" style={{ fontSize: 9.5 }}>
+                    Direct Evidence
+                  </span>
+                </div>
+                <div style={{ color: 'var(--ink-soft)' }}>
+                  {ev.note || String(ev.value ?? '')}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            style={{
+              padding: '8px 12px',
+              background: 'var(--surface-sunk)',
+              borderRadius: 'var(--radius)',
+              fontSize: 12,
+              color: 'var(--ink-soft)',
+              border: '1px dashed var(--rule)',
+            }}
+          >
+            🔍 <em>No direct geopolitical shock cited in <code>event_log.csv</code> for this window. Move reflects internal asset allocation, contract terms, or broader market conditions without an isolated recorded external shock.</em>
+          </div>
+        )}
+      </div>
+
+      {/* SECTION 4: CLIENT-SPECIFIC IMPLICATION */}
+      {insight.client_relevance && (
+        <div
+          style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--rule)',
+            borderRadius: 'var(--radius)',
+            padding: '10px 14px',
+            marginBottom: 12,
+          }}
+        >
+          <div className="eyebrow" style={{ fontSize: 11, color: 'var(--accent)', marginBottom: 4 }}>
+            👤 CLIENT-SPECIFIC IMPLICATION
+          </div>
+          <div style={{ fontSize: 13, color: 'var(--ink)', lineHeight: 1.5 }}>
+            {insight.client_relevance}
+          </div>
+        </div>
+      )}
+
+      {/* SECTION 5: CROSS-LINKS TO RELEVANT DOSSIER TABS */}
+      {onNavigateTab && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            flexWrap: 'wrap',
+            margin: '10px 0 14px',
+          }}
+        >
+          <span className="muted" style={{ fontSize: 11.5 }}>Jump to deep-dive:</span>
+          <button
+            type="button"
+            className="chip"
+            style={{ fontSize: 11, padding: '3px 10px' }}
+            onClick={() => onNavigateTab('risk')}
+          >
+            📊 View in Portfolio Exposure
+          </button>
+          <button
+            type="button"
+            className="chip"
+            style={{ fontSize: 11, padding: '3px 10px' }}
+            onClick={() => onNavigateTab('liquidity')}
+          >
+            💧 View in Liquidity & Collateral
+          </button>
+          <button
+            type="button"
+            className="chip"
+            style={{ fontSize: 11, padding: '3px 10px' }}
+            onClick={() => onNavigateTab('changed')}
+          >
+            📈 View in What Changed
+          </button>
+        </div>
+      )}
+
+      {/* SECTION 6: WHAT THE RM NEEDS TO CHECK NEXT (INVESTIGATION QUESTIONS) */}
+      <div
+        className="nextstep"
+        style={{
+          borderLeftColor: 'var(--high, #e65100)',
+          background: 'var(--surface-sunk)',
+          marginBottom: 14,
+        }}
+      >
+        <div style={{ fontWeight: 700, fontSize: 12.5, color: 'var(--ink)', marginBottom: 4 }}>
+          🔍 Things for RM to Investigate & Verify (High Agency Checklist)
+        </div>
+        <p style={{ margin: '0 0 6px', fontSize: 12.5, color: 'var(--ink-soft)' }}>
+          {insight.suggested_next_step}
+        </p>
+        {insight.open_questions && insight.open_questions.length > 0 && (
+          <ul style={{ margin: '4px 0 0', paddingLeft: 18, fontSize: 12, color: 'var(--ink-soft)' }}>
+            {insight.open_questions.map((q, idx) => (
+              <li key={idx} style={{ marginBottom: 3 }}>{q}</li>
+            ))}
+          </ul>
+        )}
         {insight.suggested_next_step_original && (
           <div className="footnote" style={{ marginTop: 6 }}>
-            Engine wording, replaced by the RM: “{insight.suggested_next_step_original}”
+            Engine wording, updated by RM: “{insight.suggested_next_step_original}”
           </div>
         )}
       </div>
@@ -181,10 +365,18 @@ export function InsightCard({
         </div>
       )}
 
-      <div className="insight-foot">
-        <button className="btn" onClick={() => setShowFacts((value) => !value)}>
-          {showFacts ? 'Hide figures' : `Figures (${insight.observed_facts.length})`}
-        </button>
+      {/* FOOTER ACTION BUTTONS */}
+      <div className="insight-foot" style={{ flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+        {onPrepareAttribution && (
+          <button
+            type="button"
+            className="btn primary"
+            onClick={() => onPrepareAttribution(insight)}
+            title="Generate client-ready conversation talking points for this finding"
+          >
+            ✨ Prepare Client Attribution
+          </button>
+        )}
         <button className="btn" onClick={() => onEvidence(insight)}>
           Evidence ({insight.evidence.length})
         </button>
@@ -205,16 +397,16 @@ export function InsightCard({
             }
           }}
         >
-          {aiBusy ? 'Drafting…' : 'Generate controlled AI preview'}
+          {aiBusy ? 'Drafting…' : 'Controlled AI preview'}
         </button>
         <button
           className={`btn${reviewing ? '' : ' primary'}`}
           onClick={() => void toggleReview()}
         >
-          {reviewing ? 'Close review' : terminal ? 'View controlled outcome' : `Review options (${options.length})`}
+          {reviewing ? 'Close review' : terminal ? 'View controlled outcome' : `Formulate plan (${options.length})`}
         </button>
         <span className="footnote" style={{ marginLeft: 'auto' }}>
-          Options for RM review. Nothing is executed by the system.
+          RM retains sole decision authority. No trades executed automatically.
         </span>
       </div>
 

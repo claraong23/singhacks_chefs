@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import type {
+  ClientAttributionDraft,
   ClientNote,
   Dossier,
   Insight,
@@ -18,6 +19,7 @@ import {
   usd,
   usdExact,
 } from '../format'
+import { getClientAttribution } from '../api'
 import { BandChart, DonutList, LtvChart, TierBar } from './charts'
 import { InsightCard } from './InsightCard'
 import { EvidenceDrawer } from './EvidenceDrawer'
@@ -26,6 +28,7 @@ import { ScenarioStudio } from './ScenarioStudio'
 import { ClientHeader } from './ClientHeader'
 import { WhatChangedTab } from './WhatChangedTab'
 import { FollowThroughPanel } from './FollowThrough'
+import { ClientAttributionModal } from './ClientAttributionModal'
 
 type Tab = 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief' | 'follow'
 
@@ -80,6 +83,8 @@ export function ClientDossier({
 
   const [evidenceFor, setEvidenceFor] = useState<Insight | null>(null)
   const [showDismissed, setShowDismissed] = useState(false)
+  const [insightDraft, setInsightDraft] = useState<ClientAttributionDraft | null>(null)
+  const [loadingInsightDraft, setLoadingInsightDraft] = useState(false)
 
   const insights = localDossier.insights.filter(
     (insight) => showDismissed || insight.status !== 'dismissed',
@@ -91,6 +96,45 @@ export function ClientDossier({
     const params = new URLSearchParams(window.location.search)
     params.set('tab', nextTab)
     window.history.replaceState(null, '', `?${params.toString()}`)
+  }
+
+  const handlePrepareAttributionFromInsight = async (insight: Insight) => {
+    const clientId = String(localDossier.client.client_id)
+    if (insight.instrument_ids && insight.instrument_ids.length > 0) {
+      setLoadingInsightDraft(true)
+      try {
+        const res = await getClientAttribution({
+          clientId,
+          instrumentId: insight.instrument_ids[0],
+          from: '2025-12-31',
+          to: '2026-08-26',
+        })
+        setInsightDraft(res.draft)
+        return
+      } catch (err) {
+        console.warn('Could not fetch holding attribution, falling back to synthesized insight attribution:', err)
+      } finally {
+        setLoadingInsightDraft(false)
+      }
+    }
+
+    // Synthesize client-centric talking points directly from verified insight facts
+    const syntheticDraft: ClientAttributionDraft = {
+      client_id: clientId,
+      instrument_id: insight.id,
+      instrument_name: insight.headline,
+      headline: `Discussion on ${insight.headline}`,
+      what_happened_bullet: insight.observed_facts.join('; ') || 'Identified portfolio exposure requiring review.',
+      why_it_matters_bullet: insight.client_relevance || 'Impacting client allocation mandate or liquidity horizon.',
+      next_steps_bullet: insight.suggested_next_step || 'Review suitable options and confirm client instructions.',
+      confidence: 'High (Deterministic Dossier Signal)',
+      source_chips: (insight.evidence || []).map((e) => `${e.source_file}:${e.row_or_id}`),
+      limitations: (insight.assumptions || []).map((a) => a.statement),
+      language_disclaimer:
+        'Synthesized from verified portfolio signals and client parameters. Review and adapt before sharing with client.',
+      created_at: new Date().toISOString(),
+    }
+    setInsightDraft(syntheticDraft)
   }
 
   const handleNoteAdded = (newNote: ClientNote) => {
@@ -148,6 +192,8 @@ export function ClientDossier({
               role={role}
               onEvidence={setEvidenceFor}
               onDecide={onDecide}
+              onNavigateTab={handleTabChange}
+              onPrepareAttribution={handlePrepareAttributionFromInsight}
             />
           ))}
           {insights.length === 0 && (
@@ -233,6 +279,17 @@ export function ClientDossier({
 
       {evidenceFor && (
         <EvidenceDrawer insight={evidenceFor} onClose={() => setEvidenceFor(null)} />
+      )}
+      {insightDraft && (
+        <ClientAttributionModal
+          draft={insightDraft}
+          loading={loadingInsightDraft}
+          onClose={() => setInsightDraft(null)}
+          onDraftAdded={() => {
+            setInsightDraft(null)
+            handleTabChange('brief')
+          }}
+        />
       )}
     </div>
   )

@@ -4,10 +4,11 @@ import type {
   Dossier,
   HoldingChange,
   HoldingExplanation,
+  PortfolioAttribution,
 } from '../types'
 import { getHoldingChanges, explainHolding, getClientAttribution } from '../api'
 import { DivergingBars, ValueLine } from './charts'
-import { signedUsd } from '../format'
+import { signedUsd, signedPct, shortDate, usd } from '../format'
 import { PeriodSelector } from './PeriodSelector'
 import { PortfolioScopeControl } from './PortfolioScopeControl'
 import { MeaningfulChangesTable } from './MeaningfulChangesTable'
@@ -43,6 +44,7 @@ export function WhatChangedTab({
   const [portfolio, setPortfolio] = useState(initialPortfolio)
 
   const [changes, setChanges] = useState<HoldingChange[]>([])
+  const [attribution, setAttribution] = useState<PortfolioAttribution | null>(null)
   const [loadingChanges, setLoadingChanges] = useState(false)
 
   // Drawer state
@@ -67,6 +69,7 @@ export function WhatChangedTab({
           portfolio: p,
         })
         setChanges(res.changes || [])
+        setAttribution(res.attribution || null)
       } catch (err) {
         console.error('Failed to load holding changes:', err)
       } finally {
@@ -158,6 +161,231 @@ export function WhatChangedTab({
         selectedPortfolio={portfolio}
         onChange={handlePortfolioChange}
       />
+
+      {/* Portfolio-Level Summary Card */}
+      {attribution && (
+        <div className="card" style={{ borderLeft: '4px solid var(--accent, #1a4f78)' }}>
+          <div className="card-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div className="eyebrow" style={{ color: 'var(--ink-muted)', fontSize: 11, letterSpacing: '0.06em' }}>
+                PORTFOLIO MOVEMENT & PERFORMANCE ATTRIBUTION
+              </div>
+              <h2 style={{ margin: '4px 0 0', fontSize: 17 }}>
+                {portfolio === 'all'
+                  ? 'Household Portfolio Roll-Up'
+                  : dossier.portfolios.find((p) => p.portfolio_id === portfolio)?.portfolio_name || `Portfolio ${portfolio}`}
+              </h2>
+            </div>
+            <span className="sub" style={{ fontSize: 12.5, fontWeight: 500 }}>
+              {shortDate(from)} → {shortDate(to)}
+            </span>
+          </div>
+          <div className="card-body">
+            {/* Top metrics bar */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+                gap: 14,
+                marginBottom: 16,
+                padding: '12px 16px',
+                background: 'var(--surface-sunk, #f5f6f8)',
+                borderRadius: 'var(--radius, 6px)',
+              }}
+            >
+              <div>
+                <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Starting Value
+                </div>
+                <div style={{ fontSize: 16, fontWeight: 600, marginTop: 2 }}>{usd(attribution.start_value_usd)}</div>
+              </div>
+              <div>
+                <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Ending Value
+                </div>
+                <div style={{ fontSize: 16, fontWeight: 600, marginTop: 2 }}>{usd(attribution.end_value_usd)}</div>
+              </div>
+              <div>
+                <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Total Net Movement
+                </div>
+                <div
+                  className={attribution.change_usd >= 0 ? 'pos' : 'neg'}
+                  style={{ fontSize: 16, fontWeight: 700, marginTop: 2 }}
+                >
+                  {signedUsd(attribution.change_usd)} ({signedPct(attribution.change_pct)})
+                </div>
+              </div>
+              <div>
+                <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Price Return Effect
+                </div>
+                <div
+                  className={attribution.price_effect_usd >= 0 ? 'pos' : 'neg'}
+                  style={{ fontSize: 15, fontWeight: 600, marginTop: 2 }}
+                >
+                  {signedUsd(attribution.price_effect_usd)}
+                </div>
+              </div>
+              <div>
+                <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Currency (FX) Effect
+                </div>
+                <div
+                  className={attribution.fx_effect_usd >= 0 ? 'pos' : 'neg'}
+                  style={{ fontSize: 15, fontWeight: 600, marginTop: 2 }}
+                >
+                  {signedUsd(attribution.fx_effect_usd)}
+                </div>
+              </div>
+            </div>
+
+            {/* Top 3 Positive Contributors & Top 3 Negative Detractors */}
+            <div className="grid2" style={{ gap: 16, marginBottom: 16 }}>
+              {/* Top 3 Contributors */}
+              <div
+                style={{
+                  background: 'var(--surface, #fff)',
+                  border: '1px solid var(--rule, #e5e7eb)',
+                  borderRadius: 'var(--radius, 6px)',
+                  padding: 12,
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                  <span style={{ color: 'var(--positive, #10b981)', fontWeight: 700 }}>▲</span>
+                  <strong style={{ fontSize: 12.5, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Top Positive Contributors (Price Effect)
+                  </strong>
+                </div>
+                {attribution.market_contributors && attribution.market_contributors.length > 0 ? (
+                  <div className="stack" style={{ gap: 8 }}>
+                    {attribution.market_contributors.slice(0, 3).map((item) => (
+                      <div
+                        key={item.instrument_id}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          fontSize: 12.5,
+                          borderBottom: '1px solid var(--rule, #e5e7eb)',
+                          paddingBottom: 6,
+                        }}
+                      >
+                        <div>
+                          <div style={{ fontWeight: 600 }}>{item.instrument_name}</div>
+                          <div className="muted" style={{ fontSize: 11 }}>
+                            {item.asset_class} · {item.currency}
+                          </div>
+                        </div>
+                        <div style={{ textAlign: 'right' }}>
+                          <div className="pos" style={{ fontWeight: 700 }}>
+                            {signedUsd(item.price_effect_usd)}
+                          </div>
+                          {item.price_return_pct !== null && item.price_return_pct !== undefined && (
+                            <div className="muted" style={{ fontSize: 11 }}>
+                              ({signedPct(item.price_return_pct)})
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="muted small" style={{ margin: '4px 0' }}>
+                    No positive contributors recorded during this window.
+                  </p>
+                )}
+              </div>
+
+              {/* Top 3 Detractors */}
+              <div
+                style={{
+                  background: 'var(--surface, #fff)',
+                  border: '1px solid var(--rule, #e5e7eb)',
+                  borderRadius: 'var(--radius, 6px)',
+                  padding: 12,
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                  <span style={{ color: 'var(--negative, #ef4444)', fontWeight: 700 }}>▼</span>
+                  <strong style={{ fontSize: 12.5, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Top Negative Detractors (Price Effect)
+                  </strong>
+                </div>
+                {attribution.market_detractors && attribution.market_detractors.length > 0 ? (
+                  <div className="stack" style={{ gap: 8 }}>
+                    {attribution.market_detractors.slice(0, 3).map((item) => (
+                      <div
+                        key={item.instrument_id}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          fontSize: 12.5,
+                          borderBottom: '1px solid var(--rule, #e5e7eb)',
+                          paddingBottom: 6,
+                        }}
+                      >
+                        <div>
+                          <div style={{ fontWeight: 600 }}>{item.instrument_name}</div>
+                          <div className="muted" style={{ fontSize: 11 }}>
+                            {item.asset_class} · {item.currency}
+                          </div>
+                        </div>
+                        <div style={{ textAlign: 'right' }}>
+                          <div className="neg" style={{ fontWeight: 700 }}>
+                            {signedUsd(item.price_effect_usd)}
+                          </div>
+                          {item.price_return_pct !== null && item.price_return_pct !== undefined && (
+                            <div className="muted" style={{ fontSize: 11 }}>
+                              ({signedPct(item.price_return_pct)})
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="muted small" style={{ margin: '4px 0' }}>
+                    No negative detractors recorded during this window.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* 1-Sentence Significance Takeaway */}
+            <div
+              style={{
+                padding: '10px 14px',
+                background: 'var(--surface-sunk, #f5f6f8)',
+                borderRadius: 'var(--radius, 6px)',
+                fontSize: 13,
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 8,
+              }}
+            >
+              <span style={{ fontSize: 16, lineHeight: 1 }}>💡</span>
+              <div>
+                <strong>Takeaway for RM:</strong>{' '}
+                {Math.abs(attribution.change_usd) < 10000
+                  ? `Portfolio value remained stable with net change of ${signedUsd(attribution.change_usd)} (${signedPct(attribution.change_pct)}), as offsetting asset class movements balanced overall valuation.`
+                  : attribution.change_usd < 0
+                  ? `Portfolio contracted by ${signedUsd(attribution.change_usd)} (${signedPct(attribution.change_pct)}), driven predominantly by ${
+                      Math.abs(attribution.fx_effect_usd) > Math.abs(attribution.price_effect_usd)
+                        ? `currency headwinds (${signedUsd(attribution.fx_effect_usd)}) outstripping asset price effects`
+                        : `price compression (${signedUsd(attribution.price_effect_usd)}) across core market exposures`
+                    }${attribution.market_detractors?.[0] ? `, led by weakness in ${attribution.market_detractors[0].instrument_name}` : ''}.`
+                  : `Portfolio expanded by ${signedUsd(attribution.change_usd)} (${signedPct(attribution.change_pct)}), supported primarily by ${
+                      attribution.price_effect_usd > attribution.fx_effect_usd
+                        ? `favourable market price movement (${signedUsd(attribution.price_effect_usd)})`
+                        : `currency appreciation (${signedUsd(attribution.fx_effect_usd)})`
+                    }${attribution.market_contributors?.[0] ? `, driven by gains in ${attribution.market_contributors[0].instrument_name}` : ''}.`}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Meaningful Changes Table */}
       <MeaningfulChangesTable
