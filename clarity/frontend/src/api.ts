@@ -29,6 +29,10 @@ import type {
   InsightNarrativeDraft,
   EventImpactView,
   EventSummary,
+  IntegrationCapabilities,
+  IntegrationView,
+  InboundIntegrationEvent,
+  OutboundWorkOrder,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -196,6 +200,20 @@ export const applyAIMeetingDraft = (packageId: string, draftId: string, rational
 
 export const getFollowThrough = (role: SimulatedRole, clientId?: string) =>
   json<FollowThroughView>(`/api/follow-through?role=${role}${clientId ? `&client_id=${clientId}` : ''}`)
+
+export const getIntegrationCapabilities = () => json<IntegrationCapabilities>('/api/integrations/capabilities')
+export const getIntegrations = (role: SimulatedRole, clientId?: string) =>
+  json<IntegrationView>(`/api/integrations?role=${role}${clientId ? `&client_id=${clientId}` : ''}`)
+export const receiveInboundIntegration = (input: Record<string, unknown>) =>
+  json<{ event: InboundIntegrationEvent; replayed: boolean }>('/api/integrations/inbound', { method: 'POST', body: JSON.stringify(input) })
+export const dispositionInboundIntegration = (id: string, action: 'accept' | 'reject', role: SimulatedRole, rationale: string) =>
+  json<{ event: InboundIntegrationEvent; replayed?: boolean }>(`/api/integrations/inbound/${id}/${action}`, { method: 'POST', body: JSON.stringify({ role, rationale }) })
+export const prepareWorkOrder = (input: Record<string, unknown>) =>
+  json<{ work_order: OutboundWorkOrder; replayed: boolean }>('/api/integrations/work-orders', { method: 'POST', body: JSON.stringify(input) })
+export const dispatchWorkOrder = (id: string, role: SimulatedRole) =>
+  json<{ work_order: OutboundWorkOrder; replayed: boolean }>(`/api/integrations/work-orders/${id}/dispatch`, { method: 'POST', body: JSON.stringify({ role }) })
+export const acknowledgeWorkOrder = (id: string, role: SimulatedRole) =>
+  json<{ work_order: OutboundWorkOrder }>(`/api/integrations/work-orders/${id}/acknowledge`, { method: 'POST', body: JSON.stringify({ role }) })
 
 export const getAudit = (filters: Record<string, string> = {}) =>
   json<{ audit: AuditTimelineEvent[] }>(`/api/audit?${new URLSearchParams(filters).toString()}`)

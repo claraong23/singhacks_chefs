@@ -8,6 +8,7 @@ from .followthrough_store import get_followthrough_store
 from .calibration_store import get_calibration_store
 from .knowledge_store import get_knowledge_repository
 from .ai_drafting import get_ai_draft_audit_store
+from .integration_store import get_integration_store
 from .loaders import get_book
 from .meeting_store import get_meeting_store
 from .review import get_store
@@ -42,4 +43,5 @@ def timeline(client_id: str | None = None) -> list[dict[str, Any]]:
     events.extend(get_calibration_store().audit(client_id))
     events.extend(get_knowledge_repository().audit(client_id))
     events.extend(get_ai_draft_audit_store().audit(client_id))
+    events.extend(get_integration_store().audit(client_id))
     return sorted(events, key=lambda item: item["timestamp"], reverse=True)

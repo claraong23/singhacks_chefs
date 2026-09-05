@@ -677,6 +677,67 @@ export interface AuditTimelineEvent {
   detail: Record<string, unknown>
 }
 
+export interface ModelReadinessMetadata {
+  feature_schema_version: string
+  training_eligible: false
+  reasons: string[]
+}
+
+export interface InboundIntegrationEvent {
+  id: string
+  source_system: string
+  external_event_id: string
+  schema_version: string
+  client_id: string
+  affected_insight_ids: string[]
+  source_ref: string
+  summary: string
+  occurred_at: string
+  received_at: string
+  payload_digest: string
+  validation_state: 'validated'
+  operations_disposition: 'accepted' | 'rejected' | null
+  evidence_update_id: string | null
+  reevaluation_id: string | null
+  history: { timestamp: string; actor: string; action: string; reason?: string }[]
+}
+
+export interface OutboundWorkOrder {
+  id: string
+  idempotency_key: string
+  destination: 'crm' | 'specialist_queue'
+  work_record_type: 'task' | 'referral' | 'meeting_package' | 'client_ready_finding'
+  work_record_id: string
+  work_record_version: string
+  client_id: string
+  insight_id: string | null
+  meeting_package_id: string | null
+  owner_role: string
+  evidence_refs: string[]
+  status: 'prepared' | 'dispatched' | 'acknowledged'
+  external_reference: string | null
+  created_at: string
+  created_by: string
+}
+
+export interface IntegrationCapabilities {
+  source_systems: string[]
+  destinations: ('crm' | 'specialist_queue')[]
+  feature_schema_version: string
+  local_simulation: true
+  model_readiness: ModelReadinessMetadata
+}
+
+export interface IntegrationView {
+  inbound: InboundIntegrationEvent[]
+  work_orders: OutboundWorkOrder[]
+  capabilities: IntegrationCapabilities
+}
+
+export interface IntegrationAuditEvent extends AuditTimelineEvent {
+  detail: AuditTimelineEvent['detail'] & { model_readiness?: ModelReadinessMetadata }
+}
+
 export type KnowledgeDocumentStatus = 'draft' | 'submitted' | 'approved' | 'rejected' | 'superseded'
 export interface KnowledgeDocumentVersion {
   version: number

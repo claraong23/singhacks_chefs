@@ -67,6 +67,7 @@ from .followthrough import (
 from .followthrough_store import get_followthrough_store
 from .knowledge_store import get_knowledge_repository
 from .ai_drafting import get_ai_drafting_service
+from .integration_store import get_integration_store
 from .signals.base import SignalContext, run_for_client
 from .signals.holding_explain import explain_holding
 
@@ -139,6 +140,32 @@ def _follow_links(payload: dict) -> str:
         if not package or package["client_id"] != client_id or (insight_id and package["insight_id"] != insight_id):
             raise ValueError("Meeting package link does not belong to this client/finding.")
     return client_id
+
+
+def _integration_work_link(payload: dict) -> dict:
+    """Resolve a stable local work-record link without contacting an external system."""
+    client_id = required_text(payload, "client_id")
+    if client_id not in get_book().clients:
+        raise KeyError(f"Unknown client {client_id}")
+    kind, record_id = required_text(payload, "work_record_type"), required_text(payload, "work_record_id")
+    if kind in {"task", "referral"}:
+        collection = "tasks" if kind == "task" else "referrals"
+        record = get_followthrough_store().data[collection].get(record_id)
+        if not record or record.get("client_id") != client_id:
+            raise ValueError("The linked follow-through record does not belong to this client.")
+        return {"work_record_version": str(len(record.get("history", []))), "insight_id": record.get("insight_id"), "meeting_package_id": record.get("meeting_package_id"), "evidence_refs": record.get("evidence_refs") or []}
+    if kind == "meeting_package":
+        package = get_meeting_store().get(record_id)
+        if not package or package.get("client_id") != client_id:
+            raise ValueError("The linked meeting package does not belong to this client.")
+        evidence = [f"{item.get('source_file')}:{item.get('row_or_id')}" for item in package.get("source", {}).get("evidence", [])]
+        return {"work_record_version": str(package["current_version"]), "insight_id": package["insight_id"], "meeting_package_id": package["id"], "evidence_refs": evidence}
+    if kind == "client_ready_finding":
+        insight, _ = _decision_subject(client_id, record_id)
+        if get_store().status_of(record_id) != "client_ready":
+            raise ValueError("Only a client-ready finding can be handed off as a work order.")
+        return {"work_record_version": str(len(get_store().audit(client_id, limit=1000))), "insight_id": insight.id, "meeting_package_id": None, "evidence_refs": [f"{item.source_file}:{item.row_or_id}" for item in insight.evidence]}
+    raise ValueError("Unknown work_record_type.")
 
 
 def _readiness(insight_id: str, payload: dict):
@@ -233,6 +260,11 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 return self._send_json({"active_policy": store.active(), "policies": store.list(), "templates": TEMPLATES})
             if path == "/api/ai-drafting/status":
                 return self._send_json(get_ai_drafting_service().status())
+            if path == "/api/integrations/capabilities":
+                return self._send_json(get_integration_store().capabilities())
+            if path == "/api/integrations":
+                role = query.get("role", ["rm"])[0]
+                return self._send_json(get_integration_store().list(role, query.get("client_id", [None])[0]))
             if path == "/api/knowledge-documents":
                 role = query.get("role", ["rm"])[0]
                 return self._send_json({"documents": get_knowledge_repository().list(role)})
@@ -351,7 +383,54 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 get_calibration_store().reset()
                 get_knowledge_repository().reset()
                 get_ai_drafting_service().reset()
+                get_integration_store().reset()
                 return self._send_json({"status": "reset"})
+            if path == "/api/integrations/inbound":
+                payload = self._read_json(); role = payload.get("role") or "operations"
+                client_id = _follow_links({"client_id": payload.get("client_id"), "insight_id": (payload.get("affected_insight_ids") or [None])[0]})
+                for insight_id in payload.get("affected_insight_ids") or []:
+                    _decision_subject(client_id, insight_id)
+                event, replayed = get_integration_store().receive(payload, role)
+                return self._send_json({"event": event, "replayed": replayed}, 200 if replayed else 201)
+            if path.startswith("/api/integrations/inbound/"):
+                remainder = path[len("/api/integrations/inbound/") :].strip("/")
+                event_id, _, action = remainder.partition("/")
+                if action not in {"accept", "reject"}:
+                    return self._send_json({"error": "Unknown inbound integration action."}, 404)
+                payload = self._read_json(); role = payload.get("role") or "operations"
+                if role != "operations":
+                    raise PermissionError("Only Product Operations can accept or reject inbound integration events.")
+                integration = get_integration_store(); event = integration.data["inbound"].get(event_id)
+                if event is None:
+                    return self._send_json({"error": "Unknown inbound integration event."}, 404)
+                rationale = payload.get("rationale", "")
+                if not isinstance(rationale, str) or not rationale.strip():
+                    raise ValueError("An Operations rationale is required.")
+                if event.get("operations_disposition") is not None:
+                    if event["operations_disposition"] == ("accepted" if action == "accept" else "rejected"):
+                        return self._send_json({"event": event, "replayed": True})
+                    return self._send_json({"error": "Inbound event already has an Operations disposition."}, 409)
+                if action == "reject":
+                    return self._send_json({"event": integration.disposition(event_id, accepted=False, rationale=rationale, role=role)})
+                update_payload = {"client_id": event["client_id"], "source_type": "document", "source_ref": event["source_ref"], "summary": event["summary"], "received_at": event["occurred_at"], "affected_insight_ids": event["affected_insight_ids"]}
+                update = get_followthrough_store().create("evidence_updates", evidence_record(update_payload, follow_actor(role)), origin="source_data", actor=follow_actor(role))
+                reeval = get_followthrough_store().create("reevaluations", {"kind": "reevaluation", "client_id": event["client_id"], "evidence_update_id": update["id"], "affected_insight_ids": update["affected_insight_ids"], "owner_role": "operations", "status": "queued"}, origin="source_data", actor=follow_actor(role))
+                saved = integration.disposition(event_id, accepted=True, rationale=rationale, role=role, evidence_update_id=update["id"], reevaluation_id=reeval["id"])
+                return self._send_json({"event": saved, "evidence_update": update, "reevaluation": reeval})
+            if path == "/api/integrations/work-orders":
+                payload = self._read_json(); role = payload.get("role") or "rm"
+                order, replayed = get_integration_store().prepare_work_order({**payload, **_integration_work_link(payload)}, role)
+                return self._send_json({"work_order": order, "replayed": replayed}, 200 if replayed else 201)
+            if path.startswith("/api/integrations/work-orders/"):
+                remainder = path[len("/api/integrations/work-orders/") :].strip("/")
+                order_id, _, action = remainder.partition("/")
+                payload = self._read_json(); role = payload.get("role") or "rm"; integration = get_integration_store()
+                if action == "dispatch":
+                    order, replayed = integration.dispatch(order_id, role)
+                    return self._send_json({"work_order": order, "replayed": replayed})
+                if action == "acknowledge":
+                    return self._send_json({"work_order": integration.acknowledge(order_id, role)})
+                return self._send_json({"error": "Unknown work-order action."}, 404)
             if path == "/api/knowledge-documents":
                 payload = self._read_json(); role = payload.get("role", "operations")
                 return self._send_json({"document": get_knowledge_repository().create(payload, role)}, 201)

@@ -9,6 +9,7 @@ import { AuditConsole } from './components/AuditConsole'
 import { CalibrationLab } from './components/CalibrationLab'
 import { KnowledgeLibrary } from './components/KnowledgeReference'
 import { HeroPage } from './components/HeroPage'
+import { IntegrationSandbox } from './components/IntegrationSandbox'
 import { shortDate } from './format'
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [role, setRole] = useState<SimulatedRole>('rm')
-  const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit' | 'calibration' | 'knowledge'>('book')
+  const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit' | 'calibration' | 'knowledge' | 'integrations'>('book')
   // A ?client= deep link goes straight to the dossier and skips the landing page.
   const [showHero, setShowHero] = useState(
     () => !new URLSearchParams(window.location.search).get('client'),
@@ -159,6 +160,7 @@ export default function App() {
         <button aria-current={view === 'book'} onClick={() => setView('book')}>Book</button>
         <button aria-current={view === 'client'} disabled={!dossier} onClick={() => dossier && setView('client')}>Client</button>
         <button aria-current={view === 'follow'} onClick={() => setView('follow')}>Follow-through</button>
+        <button aria-current={view === 'integrations'} onClick={() => setView('integrations')}>Integration Sandbox</button>
         <button aria-current={view === 'calibration'} onClick={() => setView('calibration')}>Calibration Lab</button>
         <button aria-current={view === 'knowledge'} onClick={() => setView('knowledge')}>Knowledge</button>
         <button aria-current={view === 'audit'} onClick={() => setView('audit')}>Audit</button>
@@ -180,6 +182,7 @@ export default function App() {
         {book && view === 'book' && <BookWorkbench book={book} onOpenClient={openClient} />}
 
         {view === 'follow' && <FollowThroughBoard role={role} onOpenClient={openClient} />}
+        {book && view === 'integrations' && <IntegrationSandbox role={role} book={book} />}
         {view === 'calibration' && <CalibrationLab role={role} onActivePolicyChanged={() => void loadBook()} />}
         {view === 'knowledge' && <KnowledgeLibrary role={role} />}
         {view === 'audit' && <AuditConsole role={role} />}

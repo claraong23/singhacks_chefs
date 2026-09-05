@@ -49,7 +49,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-90 backend tests. They check the things a judge would push on: that holdings reconcile to
+95 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
@@ -185,6 +185,28 @@ The Meeting Studio flag does not enable the older Task 1 attribution experiment;
 that separate path remains deterministic unless its own
 `CLARITY_ATTRIBUTION_AI_ENABLED=true` flag is deliberately set.
 
+### 9. Integration Sandbox — replayable operating-loop boundary
+
+The global **Integration Sandbox** demonstrates a governed connection boundary
+without connecting to a bank system. Product Operations can validate a synthetic
+inbound event, then accept or reject it with a rationale. Acceptance creates the
+same append-only evidence update and re-evaluation request used by Follow-through;
+it never changes raw CSVs or historical insight, scenario, decision, or meeting
+snapshots. Replaying the same source-system/event ID returns the original event.
+
+An RM can prepare and simulate-dispatch a CRM or specialist-queue work order from
+an existing task, referral, meeting package, or client-ready finding. A simulated
+external reference is recorded locally only; no CRM call, client message, trade,
+or execution occurs. Assigned specialists may acknowledge only their own queue
+work. The unified audit timeline preserves source/schema lineage, replay keys,
+Operations disposition, downstream links, and dispatch/acknowledgement history.
+
+Integration audit events also carry a fixed deterministic feature-schema version
+and `training_eligible: false`. That is model-readiness metadata, not a model:
+the synthetic 20-client book has neither representative outcomes nor completed
+bias and out-of-sample evaluation, so it does not alter signals, rankings, or
+decisions.
+
 ---
 
 ## What it found
@@ -236,6 +258,7 @@ clarity/
     followthrough_store.py Local tasks, referrals, outcomes and source-update adapter
     knowledge_store.py Local approved-reference lifecycle and lexical retrieval adapter
     ai_drafting.py    Optional provider adapters, ephemeral draft preview and audit metadata
+    integration_store.py Local inbound-event and outbound-work-order adapter
     audit.py           Unified origin-labelled audit reconstruction
     brief.py           Legacy deterministic brief used by the terminal fallback
     review.py          RM decisions, changed-alert reopening and audit trail

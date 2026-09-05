@@ -921,3 +921,56 @@ class ClientAttributionDraft:
     def to_dict(self) -> dict[str, Any]:
         return dataclasses.asdict(self)
 
+
+# ---------------------------------------------------------------------------
+# Governed integration sandbox
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class InboundIntegrationEvent:
+    id: str
+    source_system: str
+    external_event_id: str
+    schema_version: str
+    client_id: str
+    source_ref: str
+    occurred_at: str
+    received_at: str
+    payload_digest: str
+    validation_state: str
+    operations_disposition: str | None = None
+
+
+@dataclass(frozen=True)
+class OutboundWorkOrder:
+    id: str
+    idempotency_key: str
+    destination: str
+    work_record_type: str
+    work_record_id: str
+    owner_role: str
+    status: str
+    evidence_refs: list[str] = field(default_factory=list)
+    external_reference: str | None = None
+
+
+@dataclass(frozen=True)
+class IntegrationAuditEvent:
+    id: str
+    actor: str
+    origin: str
+    object_id: str
+    action: str
+    timestamp: str
+    prior_status: str | None = None
+    new_status: str | None = None
+    feature_schema_version: str = "deterministic-priority-factors-v1"
+
+
+@dataclass(frozen=True)
+class ModelReadinessMetadata:
+    feature_schema_version: str
+    training_eligible: bool
+    reasons: list[str]
+
