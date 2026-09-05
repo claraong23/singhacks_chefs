@@ -139,7 +139,9 @@ export function InsightCard({
       {insight.client_relevance && (
         <div
           style={{
-            margin: '12px 0',
+            // Matches the 70px / 18px inset the summary, next step and footer
+            // all use, so the card has one left edge rather than three.
+            margin: '12px 18px 12px 70px',
             padding: '10px 14px',
             background: 'var(--surface-sunk, #f5f7fa)',
             borderLeft: '3px solid var(--accent, #1a4f78)',
