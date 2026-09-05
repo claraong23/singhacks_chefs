@@ -23,12 +23,12 @@ export function BookWorkbench({
 
   const openEventMode = async () => {
     setEventMode(true)
-    if (events.length > 0) return
+    if ((events?.length ?? 0) > 0) return
     setEventBusy(true)
     setEventError(null)
     try {
       const result = await getEvents()
-      const newest = [...result.events].reverse()
+      const newest = [...(result?.events ?? [])].reverse()
       setEvents(newest)
       if (newest[0]) setEventImpact(await getEventImpact(newest[0].event_id))
     } catch (error) {
@@ -167,7 +167,7 @@ export function BookWorkbench({
         </div>
       </div>
 
-      {book.data_warnings.length > 0 && (
+      {(book.data_warnings?.length ?? 0) > 0 && (
         <div className="banner">
           <strong>Data notice.</strong> {book.data_warnings.length} referential warning(s)
           found on load: {book.data_warnings.slice(0, 2).join('; ')}
@@ -191,24 +191,24 @@ export function BookWorkbench({
               <label>
                 <span className="k">Select a dated event</span>
                 <select
-                  value={eventImpact?.event.event_id ?? ''}
+                  value={eventImpact?.event?.event_id ?? ''}
                   disabled={eventBusy}
                   onChange={(event) => void chooseEvent(event.target.value)}
                   style={{ display: 'block', width: '100%', marginTop: 7, padding: 9 }}
                 >
-                  {events.map((event) => <option key={event.event_id} value={event.event_id}>{shortDate(event.event_date)} · {event.description}</option>)}
+                  {(events ?? []).map((event) => <option key={event.event_id} value={event.event_id}>{shortDate(event.event_date)} · {event.description}</option>)}
                 </select>
               </label>
               {eventError && <div className="banner" style={{ marginTop: 12 }}>{eventError}</div>}
               {eventBusy && <p className="muted">Mapping the event to current holdings…</p>}
               {eventImpact && !eventBusy && (
                 <>
-                  <p><strong>{eventImpact.event.description}</strong></p>
-                  <p className="muted">Transmission: {eventImpact.event.primary_transmission}. Mapped themes: {eventImpact.themes.map((theme) => theme.name).join(', ') || 'none'}.</p>
+                  <p><strong>{eventImpact.event?.description}</strong></p>
+                  <p className="muted">Transmission: {eventImpact.event?.primary_transmission}. Mapped themes: {(eventImpact.themes ?? []).map((theme) => theme.name).join(', ') || 'none'}.</p>
                   <table className="postable">
                     <thead><tr><th>Priority</th><th>Client</th><th>Mapped exposure</th><th>Estimated impact</th><th></th></tr></thead>
                     <tbody>
-                      {eventImpact.affected_clients.map((item) => (
+                      {(eventImpact.affected_clients ?? []).map((item) => (
                         <tr key={`${item.client_id}-${item.theme_key}`}>
                           <td>{item.priority_score.toFixed(0)}</td>
                           <td><strong>{item.client_name}</strong><div className="footnote">{item.theme_name}</div></td>
@@ -217,17 +217,17 @@ export function BookWorkbench({
                           <td><button className="btn" onClick={() => onOpenClient(item.client_id)}>Open client</button></td>
                         </tr>
                       ))}
-                      {eventImpact.affected_clients.length === 0 && <tr><td colSpan={5} className="muted">No current holding maps to this event.</td></tr>}
+                      {(eventImpact.affected_clients?.length ?? 0) === 0 && <tr><td colSpan={5} className="muted">No current holding maps to this event.</td></tr>}
                     </tbody>
                   </table>
-                  {eventImpact.scenario_comparisons.length >= 2 && (
+                  {(eventImpact.scenario_comparisons?.length ?? 0) >= 2 && (
                     <div style={{ marginTop: 18 }}>
                       <div className="card-head" style={{ paddingLeft: 0, paddingRight: 0 }}>
                         <h2>What if conditions de-escalate or worsen?</h2>
                         <span className="sub">Side-by-side sensitivity, not a forecast</span>
                       </div>
                       <div className="grid2">
-                        {eventImpact.scenario_comparisons.map((scenario) => (
+                        {(eventImpact.scenario_comparisons ?? []).map((scenario) => (
                           <div className="card" key={scenario.key} style={{ background: 'var(--surface-sunk)' }}>
                             <div className="card-head">
                               <h3>{scenario.name}</h3>
@@ -240,7 +240,7 @@ export function BookWorkbench({
                               <table className="postable">
                                 <thead><tr><th>Client</th><th>Exposure</th><th>Estimated impact</th></tr></thead>
                                 <tbody>
-                                  {scenario.affected_clients.map((item) => (
+                                  {(scenario.affected_clients ?? []).map((item) => (
                                     <tr key={`${scenario.key}-${item.client_id}`}>
                                       <td><button className="btn quiet" onClick={() => onOpenClient(item.client_id)}>{item.client_name}</button></td>
                                       <td>{usd(item.exposure_usd)}<div className="footnote">{pct(item.exposure_pct)} of household</div></td>
@@ -258,7 +258,7 @@ export function BookWorkbench({
                       </div>
                     </div>
                   )}
-                  <p className="footnote"><strong>Method.</strong> {eventImpact.method}. {eventImpact.limitations.join(' ')}</p>
+                  <p className="footnote"><strong>Method.</strong> {eventImpact.method}. {(eventImpact.limitations ?? []).join(' ')}</p>
                 </>
               )}
             </div>
