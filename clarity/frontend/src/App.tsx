@@ -10,6 +10,7 @@ import { CalibrationLab } from './components/CalibrationLab'
 import { KnowledgeLibrary } from './components/KnowledgeReference'
 import { HeroPage } from './components/HeroPage'
 import { IntegrationSandbox } from './components/IntegrationSandbox'
+import { ClarityMark } from './components/ClarityMark'
 import { shortDate, usd } from './format'
 
 export default function App() {
@@ -228,18 +229,19 @@ export default function App() {
   return (
     <div className={`shell${panelOpen ? "" : " collapsed"}`}>
       <aside className="rail" aria-label="Sections">
-        <span className="mark" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
-            <path
-              d="M3 10L6 6.5L8.5 8.5L11.5 4.5"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
-            <circle cx="11.5" cy="4.5" r="1.5" fill="currentColor" />
-          </svg>
-        </span>
+        <button
+          className="mark"
+          aria-label="Back to the Clarity home page"
+          title="Back to home"
+          onClick={() => {
+            // Drop the deep link so a reload lands on the hero too; the open
+            // client is kept, so reopening the workbench returns you to it.
+            window.history.replaceState(null, '', window.location.pathname)
+            setShowHero(true)
+          }}
+        >
+          <ClarityMark size={21} />
+        </button>
         {NAV.map((item) => (
           <button
             key={item.id}

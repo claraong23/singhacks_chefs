@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import { ClarityMark } from './ClarityMark'
 import '../hero.css'
 
 // three.js is ~470 kB and only the landing page needs it, so it loads as its
@@ -61,16 +62,7 @@ export function HeroPage({ onEnter, clientCount }: { onEnter: () => void; client
       <nav className="hero-nav">
         <div className="hero-brand">
           <span className="hero-mark">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path
-                d="M3 10L6 6.5L8.5 8.5L11.5 4.5"
-                stroke="white"
-                strokeWidth="1.6"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-              />
-              <circle cx="11.5" cy="4.5" r="1.5" fill="white" />
-            </svg>
+            <ClarityMark size={19} />
           </span>
           <span className="hero-wordmark">Clarity</span>
         </div>

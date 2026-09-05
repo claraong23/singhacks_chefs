@@ -24,9 +24,9 @@
   --faint: #808fa6;
 
   /* §2.3 — borders organise, they don't box things in. */
-  --rule: rgba(150, 172, 205, 0.16);
+  --rule: rgba(160, 182, 216, 0.22);
   --rule-strong: rgba(96, 165, 250, 0.3);
-  --rule-soft: rgba(150, 172, 205, 0.1);
+  --rule-soft: rgba(160, 182, 216, 0.13);
 
   /* §2.5 — semantic only, never decorative. */
   --accent: #2563eb;
@@ -113,11 +113,13 @@ a { color: var(--accent-bright); }
 
 .rail .mark {
   display: flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px; margin-bottom: 10px;
-  border-radius: 10px; flex-shrink: 0;
+  width: 34px; height: 34px; margin-bottom: 10px; padding: 0;
+  border: 0; border-radius: 10px; flex-shrink: 0;
   background: #fff;
   color: #2a3cae;
+  transition: all 0.12s;
 }
+.rail .mark:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35); }
 
 .rail button {
   display: flex; align-items: center; justify-content: center;
@@ -381,28 +383,28 @@ a { color: var(--accent-bright); }
 }
 .filters .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-.booktable { width: 100%; border-collapse: collapse; background: var(--surface); }
+.booktable { width: 100%; border-collapse: collapse; background: #1f2739; }
 .booktable th {
   text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em;
   color: var(--accent-bright); font-weight: 500; padding: 11px 14px;
   font-family: var(--mono);
   border-bottom: 1px solid var(--rule-strong); white-space: nowrap;
 }
-.booktable td { padding: 13px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.booktable td { padding: 14px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--ink); }
 .booktable tr.row { cursor: pointer; }
-.booktable tr.row:nth-of-type(even) { background: rgba(255, 255, 255, 0.022); }
-.booktable tr.row:hover { background: var(--accent-wash); }
+.booktable tr.row:nth-of-type(odd) { background: rgba(255, 255, 255, 0.055); }
+.booktable tr.row:hover, .booktable tr.row:nth-of-type(odd):hover { background: rgba(61, 85, 220, 0.22); }
 .booktable tr.row:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: -2px; }
 
 .rankcell { display: flex; align-items: baseline; gap: 10px; }
-.rankcell .n { font-family: var(--serif); font-size: 19px; color: var(--faint); min-width: 22px; }
+.rankcell .n { font-family: var(--serif); font-size: 19px; color: var(--muted); min-width: 22px; }
 
 .clientcell .nm { font-weight: 600; }
-.clientcell .meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.clientcell .meta { font-size: 11.5px; color: #9fb0c8; margin-top: 3px; }
 
 .headlinecell { max-width: 460px; }
-.headlinecell .h { line-height: 1.4; }
-.headlinecell .why { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+.headlinecell .h { line-height: 1.4; font-weight: 500; color: var(--ink); }
+.headlinecell .why { font-size: 11.5px; color: #9fb0c8; line-height: 1.5; margin-top: 6px; }
 
 .scorebar { display: flex; align-items: center; gap: 9px; }
 .scorebar .track {
