@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import type { ActionOption, Insight, InsightStatus, RMFeedbackInput, SimulatedRole } from '../types'
-import { CONFIDENCE_LABEL, SEVERITY_LABEL, formatHeadline, titleCase, usd } from '../format'
+import {
+  CONFIDENCE_LABEL,
+  SEVERITY_LABEL,
+  formatClientRelevance,
+  formatHeadline,
+  formatProblemSummary,
+  titleCase,
+  usd,
+} from '../format'
 import { ActionReview } from './ActionReview'
 
 const STATUS_LABEL: Record<InsightStatus, string> = {
@@ -120,7 +128,7 @@ export function InsightCard({
         </div>
       </div>
 
-      <p className="insight-summary">{insight.summary}</p>
+      <p className="insight-summary">{formatProblemSummary(insight.summary, insight)}</p>
 
       {insight.reopen_reason && (
         <div className="nextstep" style={{ borderLeftColor: 'var(--high)' }}>
@@ -129,9 +137,36 @@ export function InsightCard({
       )}
 
       {insight.client_relevance && (
-        <p className="insight-summary" style={{ paddingTop: 0, color: 'var(--muted)', fontSize: 13 }}>
-          {insight.client_relevance}
-        </p>
+        <div
+          style={{
+            margin: '12px 0',
+            padding: '10px 14px',
+            background: 'var(--surface-sunk, #f5f7fa)',
+            borderLeft: '3px solid var(--accent, #1a4f78)',
+            borderRadius: 'var(--radius, 4px)',
+            fontSize: 13,
+            lineHeight: 1.55,
+            color: 'var(--ink, #1f2937)',
+          }}
+        >
+          <div
+            style={{
+              fontSize: 10.5,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: 'var(--accent, #1a4f78)',
+              marginBottom: 4,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 5,
+            }}
+          >
+            <span>👤</span>
+            <span>Client &amp; Situation Context</span>
+          </div>
+          <div>{formatClientRelevance(insight.client_relevance, insight)}</div>
+        </div>
       )}
 
       {/* Figures panel when expanded */}

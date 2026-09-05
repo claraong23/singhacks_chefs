@@ -153,9 +153,13 @@ def collateral_headroom(ctx: SignalContext) -> Iterable[Insight]:
             priority_reasons=reasons,
             observed_facts=facts,
             client_relevance=(
-                f"The pledged account is {pf.get('portfolio_name', facility.portfolio_id)}. "
-                f"Any sale and withdrawal from it reduces lending value while the drawn "
-                f"balance stays put, so it raises loan-to-value rather than lowering it."
+                f"Client & Situation Context: For {ctx.client.get('client_name')}"
+                + (f" ({ctx.client.get('source_of_wealth')})" if ctx.client.get('source_of_wealth') else "")
+                + f", credit facility {facility.facility_id} is secured by {pf.get('portfolio_name', facility.portfolio_id)} "
+                f"with {facility.currency} {current.drawn:,.0f} drawn. Current LTV is {current.ltv_pct:.2f}% against a "
+                f"{facility.margin_call_ltv_pct:.0f}% margin trigger (headroom is just {facility.headroom_pp:.2f} percentage points). "
+                f"Withdrawing or selling assets from the pledged account reduces collateral lending value and increases the loan ratio, "
+                f"directly restricting the client from using this portfolio to fund upcoming cash commitments."
             ),
             suggested_next_step=(
                 "Agree a collateral plan before the next client-driven withdrawal: "
@@ -550,6 +554,66 @@ def liquidity_cover(ctx: SignalContext) -> Iterable[Insight]:
             )
         )
 
+    coverage_pct = (lq.coverage_ratio * 100) if lq.coverage_ratio is not None else 0.0
+    primary_ob = lq.obligations[0] if lq.obligations else None
+    ob_desc = (
+        f"{primary_ob.description} ({primary_ob.currency} {primary_ob.amount_ccy:,.0f} - {primary_ob.certainty})"
+        if primary_ob
+        else f"obligations totaling USD {lq.obligations_total_usd:,.0f}"
+    )
+
+    summary_parts = [
+        f"Severe liquidity shortfall of USD {lq.shortfall_usd:,.0f}: "
+        f"The client has only USD {lq.withdrawable_usd:,.0f} in unencumbered, withdrawable cash against "
+        f"USD {lq.obligations_total_usd:,.0f} in obligations falling due inside the planning horizon "
+        f"(coverage is just {coverage_pct:.1f}%, primarily driven by {ob_desc})."
+    ]
+    if lq.encumbered_cap_usd:
+        summary_parts.append(
+            f"While holding USD {lq.encumbered_cap_usd:,.0f} in readily realisable liquid securities, "
+            f"these are fully pledged as collateral backing the active credit facility and cannot be withdrawn or sold "
+            f"without triggering an immediate loan margin-call breach."
+        )
+    if lq.illiquid_usd:
+        summary_parts.append(
+            f"The remaining USD {lq.illiquid_usd:,.0f} of wealth is locked in illiquid real estate and private investments "
+            f"that cannot be liquidated quickly."
+        )
+    if lq.gated_usd:
+        summary_parts.append(
+            f"USD {lq.gated_usd:,.0f} sits behind redemption gates that cannot guarantee fixed-date settlement."
+        )
+
+    client_name = ctx.client.get("client_name", "The client")
+    wealth_source = ctx.client.get("source_of_wealth", "")
+    relevance_parts = [
+        f"Client & Situation Context: {client_name}"
+        + (f" ({wealth_source})" if wealth_source else "")
+        + " faces a concrete funding deadline rather than a market performance problem."
+    ]
+    if primary_ob:
+        relevance_parts.append(
+            f"The impending commitment is {primary_ob.description} for {primary_ob.currency} {primary_ob.amount_ccy:,.0f} "
+            f"(approx. USD {primary_ob.total_usd:,.0f}, status: {primary_ob.certainty.lower()})."
+        )
+    if lq.encumbered_cap_usd and ctx.facilities:
+        fac = ctx.facilities[0]
+        relevance_parts.append(
+            f"Because the liquid portfolio is pledged to credit facility {fac.facility_id} "
+            f"(operating with narrow headroom at {fac.current.ltv_pct:.2f}% LTV against a {fac.margin_call_ltv_pct:.0f}% trigger), "
+            f"selling assets from the pledged account reduces collateral value and accelerates a margin call. "
+            f"The RM must discuss options—such as staging contributions, pledging alternative unencumbered collateral, or adjusting facility terms—well before the payment deadline."
+        )
+    elif lq.encumbered_cap_usd:
+        relevance_parts.append(
+            "Because the liquid portfolio is pledged as collateral, attempting to withdraw funds directly will trigger a loan covenant breach. "
+            "A structured funding strategy must be agreed before the deadline approaches."
+        )
+    else:
+        relevance_parts.append(
+            "Funding options narrow as the deadline approaches, requiring proactive planning to avoid selling assets into unfavorable market conditions."
+        )
+
     yield Insight(
         id=f"{ctx.client_id}-liquidity-cover",
         client_id=ctx.client_id,
@@ -559,28 +623,11 @@ def liquidity_cover(ctx: SignalContext) -> Iterable[Insight]:
             f"Known obligations of USD {lq.obligations_total_usd:,.0f} against "
             f"USD {lq.withdrawable_usd:,.0f} the client can actually withdraw"
         ),
-        summary=(
-            f"Coverage is {lq.coverage_ratio:.2f}x. "
-            + " ".join(lq.notes)
-            + (
-                f" USD {lq.illiquid_usd:,.0f} of the household is illiquid."
-                if lq.illiquid_usd
-                else ""
-            )
-            + (
-                f" USD {lq.gated_usd:,.0f} sits behind a redemption gate."
-                if lq.gated_usd
-                else ""
-            )
-        ),
+        summary=" ".join(summary_parts),
         priority_score=score,
         priority_reasons=reasons,
         observed_facts=facts,
-        client_relevance=(
-            "The gap is a funding question, not a performance question. It has to be "
-            "solved before the obligation falls due, and the options narrow as the "
-            "date approaches."
-        ),
+        client_relevance=" ".join(relevance_parts),
         suggested_next_step=(
             "Produce a dated liquidity map: what is sellable, by when, and what it "
             "costs to raise the shortfall each way."
