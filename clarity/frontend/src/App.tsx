@@ -158,7 +158,6 @@ export default function App() {
 
       <nav className="tabs" aria-label="Application navigation">
         <button aria-current={view === 'book'} onClick={() => setView('book')}>Book</button>
-        <button aria-current={view === 'client'} disabled={!dossier} onClick={() => dossier && setView('client')}>Client</button>
         <button aria-current={view === 'follow'} onClick={() => setView('follow')}>Follow-through</button>
         <button aria-current={view === 'integrations'} onClick={() => setView('integrations')}>Integration Sandbox</button>
         <button aria-current={view === 'calibration'} onClick={() => setView('calibration')}>Calibration Lab</button>
