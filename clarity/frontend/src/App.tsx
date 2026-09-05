@@ -145,7 +145,7 @@ export default function App() {
   )
 
   if (showHero) {
-    return <HeroPage onEnter={() => setShowHero(false)} clientCount={book?.totals.clients} />
+    return <HeroPage onEnter={() => setShowHero(false)} clientCount={book?.totals?.clients} />
   }
 
   return (
@@ -156,10 +156,10 @@ export default function App() {
         </div>
         <div className="topbar-meta">
           <label className="k">Simulated role<select className="select" value={role} onChange={(event) => setRole(event.target.value as SimulatedRole)}><option value="rm">RM</option><option value="credit">Credit specialist</option><option value="wealth_planning">Wealth planning</option><option value="investment">Investment specialist</option><option value="compliance_audit">Compliance / audit</option><option value="operations">Product operations</option></select></label>
-          {health?.persistence.write_access_required && <button className="btn quiet" onClick={toggleWrites}>{writesUnlocked ? 'Lock writes' : 'Unlock writes'}</button>}
+          {health?.persistence?.write_access_required && <button className="btn quiet" onClick={toggleWrites}>{writesUnlocked ? 'Lock writes' : 'Unlock writes'}</button>}
           <div>
             <div className="k">Relationship manager</div>
-            <div>{book?.rm.rm_name ?? '—'}</div>
+            <div>{book?.rm?.rm_name ?? '—'}</div>
           </div>
           <div>
             <div className="k">Desk</div>

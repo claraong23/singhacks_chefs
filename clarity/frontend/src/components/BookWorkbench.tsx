@@ -52,19 +52,19 @@ export function BookWorkbench({
 
   const categories = useMemo(() => {
     const counts = new Map<string, number>()
-    for (const row of book.clients) {
-      for (const [key, value] of Object.entries(row.categories)) {
+    for (const row of book.clients ?? []) {
+      for (const [key, value] of Object.entries(row.categories ?? {})) {
         counts.set(key, (counts.get(key) ?? 0) + value)
       }
     }
     return [...counts.entries()].sort((a, b) => b[1] - a[1])
   }, [book])
 
-  const rows = book.clients.filter((row) => {
+  const rows = (book.clients ?? []).filter((row) => {
     if (centre !== 'all' && row.booking_centre !== centre) return false
     if (filter === 'all') return true
-    if (filter === 'critical') return row.severity_counts.critical > 0
-    return Boolean(row.categories[filter])
+    if (filter === 'critical') return (row.severity_counts?.critical ?? 0) > 0
+    return Boolean(row.categories?.[filter])
   })
 
   const [showTooltip, setShowTooltip] = useState(false)
@@ -160,7 +160,7 @@ export function BookWorkbench({
           </div>
           <div className="stat">
             <span className="v">
-              {(book.totals.decisions.rm_reviewed ?? 0) + (book.totals.decisions.client_ready ?? 0)}
+              {((book.totals?.decisions?.rm_reviewed ?? 0) + (book.totals?.decisions?.client_ready ?? 0))}
             </span>
             <span className="k">Reviewed by you</span>
           </div>
@@ -385,7 +385,7 @@ export function BookWorkbench({
                   ) : (
                     <>
                       <div className="h">{formatHeadline(row.top_headline)}</div>
-                      <div className="why">{row.why_now.join(' · ')}</div>
+                      <div className="why">{(row.why_now ?? []).join(' · ')}</div>
                     </>
                   )}
                 </td>
@@ -422,12 +422,12 @@ export function BookWorkbench({
       </div>}
 
       <div className="footnote" style={{ maxWidth: '80ch' }}>
-        <strong>How the ranking works.</strong> {book.scoring.formula}. Materiality is the{' '}
-        {book.scoring.materiality}; urgency is {book.scoring.urgency}. {book.scoring.note}{' '}
+        <strong>How the ranking works.</strong> {book.scoring?.formula ?? ''}. Materiality is the{' '}
+        {book.scoring?.materiality ?? ''}; urgency is {book.scoring?.urgency ?? ''}. {book.scoring?.note ?? ''}{' '}
         Dismissed findings drop out of the count but stay in the audit trail. Figures are
         as at {book.as_of}; percentages are of household wealth, aggregated across every
         portfolio a client holds including custody accounts. Coverage today:{' '}
-        {pct((rows.length / book.clients.length) * 100, 0)} of the book shown.
+        {pct(book.clients?.length ? (rows.length / book.clients.length) * 100 : 0, 0)} of the book shown.
       </div>
     </div>
   )
