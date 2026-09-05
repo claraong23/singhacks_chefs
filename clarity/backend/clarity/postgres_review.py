@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import hashlib
+import threading
+from time import monotonic
 from typing import Any
 
 from . import config
@@ -32,6 +34,10 @@ class PostgresReviewStore:
             ) from exc
         self._psycopg = psycopg
         self.database_url = database_url
+        self._cache_lock = threading.RLock()
+        self._decision_cache: dict[str, Decision] = {}
+        self._decision_cache_at = 0.0
+        self._decision_cache_ttl_seconds = 2.0
         self._ensure_schema()
 
     def _connect(self):
@@ -60,6 +66,27 @@ class PostgresReviewStore:
     def _decode(value: Any) -> dict[str, Any]:
         return json.loads(value) if isinstance(value, str) else dict(value)
 
+    def _decisions(self) -> dict[str, Decision]:
+        """Load the small decision set once per request burst.
+
+        The Morning Book asks for each insight's effective status more than once.
+        Fetching a new pooled PostgreSQL connection for every lookup can exceed a
+        serverless function's execution limit, so reads share a short-lived bulk
+        snapshot. Writes update or invalidate the snapshot immediately.
+        """
+        with self._cache_lock:
+            now = monotonic()
+            if now - self._decision_cache_at < self._decision_cache_ttl_seconds:
+                return self._decision_cache
+            with self._connect() as connection, connection.cursor() as cursor:
+                cursor.execute("SELECT insight_id, decision FROM clarity_decisions")
+                self._decision_cache = {
+                    str(insight_id): Decision(**self._decode(payload))
+                    for insight_id, payload in cursor.fetchall()
+                }
+            self._decision_cache_at = now
+            return self._decision_cache
+
     def _insert_audit(self, cursor, entry: AuditEntry) -> None:
         cursor.execute(
             "INSERT INTO clarity_audit (timestamp, actor, action, insight_id, client_id, detail) "
@@ -74,10 +101,7 @@ class PostgresReviewStore:
         )
 
     def get(self, insight_id: str) -> Decision | None:
-        with self._connect() as connection, connection.cursor() as cursor:
-            cursor.execute("SELECT decision FROM clarity_decisions WHERE insight_id = %s", (insight_id,))
-            row = cursor.fetchone()
-        return Decision(**self._decode(row[0])) if row else None
+        return self._decisions().get(insight_id)
 
     def status_of(self, insight_id: str) -> str:
         decision = self.get(insight_id)
@@ -100,9 +124,7 @@ class PostgresReviewStore:
         return "dismissed", None
 
     def for_client(self, client_id: str) -> list[Decision]:
-        with self._connect() as connection, connection.cursor() as cursor:
-            cursor.execute("SELECT decision FROM clarity_decisions WHERE client_id = %s", (client_id,))
-            return [Decision(**self._decode(row[0])) for row in cursor.fetchall()]
+        return [decision for decision in self._decisions().values() if decision.client_id == client_id]
 
     def audit(self, client_id: str | None = None, limit: int = 100) -> list[AuditEntry]:
         sql = "SELECT timestamp, actor, action, insight_id, client_id, detail FROM clarity_audit"
@@ -118,10 +140,8 @@ class PostgresReviewStore:
 
     def counts(self) -> dict[str, int]:
         out = {status: 0 for status in VALID_STATUSES}
-        with self._connect() as connection, connection.cursor() as cursor:
-            cursor.execute("SELECT decision->>'status', COUNT(*) FROM clarity_decisions GROUP BY decision->>'status'")
-            for status, count in cursor.fetchall():
-                out[status] = count
+        for decision in self._decisions().values():
+            out[decision.status] += 1
         return out
 
     def record(
@@ -166,6 +186,9 @@ class PostgresReviewStore:
                 (insight_id, client_id, json.dumps(decision.to_dict())),
             )
             self._insert_audit(cursor, AuditEntry(decision.decided_at or _now(), actor, f"status:{status}", insight_id, client_id, detail))
+        with self._cache_lock:
+            self._decision_cache[insight_id] = decision
+            self._decision_cache_at = monotonic()
         return decision
 
     def reset_decision(self, insight_id: str, actor: str = "RM-SG-014") -> None:
@@ -175,6 +198,9 @@ class PostgresReviewStore:
         with self._connect() as connection, connection.cursor() as cursor:
             cursor.execute("DELETE FROM clarity_decisions WHERE insight_id = %s", (insight_id,))
             self._insert_audit(cursor, AuditEntry(_now(), actor, "decision:reset", insight_id, previous.client_id, {"prior_status": previous.status, "prior_note": previous.rm_note}))
+        with self._cache_lock:
+            self._decision_cache.pop(insight_id, None)
+            self._decision_cache_at = monotonic()
 
     def record_blocked_transition(self, *, insight_id: str, client_id: str, target_status: str, actor: str, gate_results: list[dict[str, Any]], evidence_version: str, selected_scenario_id: str | None = None, scenario_calculation_version: str | None = None) -> None:
         previous = self.get(insight_id)
@@ -204,3 +230,6 @@ class PostgresReviewStore:
         with self._connect() as connection, connection.cursor() as cursor:
             cursor.execute("DELETE FROM clarity_audit")
             cursor.execute("DELETE FROM clarity_decisions")
+        with self._cache_lock:
+            self._decision_cache.clear()
+            self._decision_cache_at = monotonic()
