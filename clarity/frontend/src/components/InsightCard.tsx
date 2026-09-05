@@ -69,6 +69,17 @@ export function InsightCard({
   onPrepareAttribution,
 }: InsightCardProps) {
   const [showFacts, setShowFacts] = useState(false)
+  // Context is supporting depth, not the finding. Cards stay short by default
+  // and the background expands on demand.
+  const [showContext, setShowContext] = useState(false)
+
+  // A long summary leads with its claim and hands the elaboration to the
+  // context block. Cutting on a sentence boundary rather than a line keeps it
+  // readable: no word is ever sliced in half.
+  const summaryFull = formatProblemSummary(insight.summary, insight)
+  const summaryLead = summaryFull.match(/^.+?[.!?](?=\s+[A-Z"“])/)?.[0]
+  const summaryShown =
+    showContext || !summaryLead || summaryFull.length <= 220 ? summaryFull : `${summaryLead}…`
   const [reviewing, setReviewing] = useState(false)
   const chosen = options.find((option) => option.id === insight.selected_option_id)
   const terminal = ['client_ready', 'deferred', 'dismissed'].includes(insight.status)
@@ -142,7 +153,7 @@ export function InsightCard({
         </div>
       </div>
 
-      <p className="insight-summary">{formatProblemSummary(insight.summary, insight)}</p>
+      <p className="insight-summary">{summaryShown}</p>
 
       {insight.reopen_reason && (
         <div className="nextstep" style={{ borderLeftColor: 'var(--high)' }}>
@@ -150,15 +161,15 @@ export function InsightCard({
         </div>
       )}
 
-      {insight.client_relevance && (() => {
+      {showContext && insight.client_relevance && (() => {
         const points = formatClientRelevance(insight.client_relevance, insight)
         if (points.length === 0) return null
         return (
           <div
             style={{
-              // Matches the 70px / 18px inset the summary, next step and footer
+              // Matches the 89px / 18px inset the summary, next step and footer
               // all use, so the card has one left edge rather than three.
-              margin: '12px 18px 12px 70px',
+              margin: '12px 18px 12px 89px',
               padding: '10px 14px',
               background: 'var(--surface-sunk, #f5f7fa)',
               borderLeft: '3px solid var(--accent, #1a4f78)',
@@ -230,6 +241,15 @@ export function InsightCard({
 
       {/* FOOTER ACTION BUTTONS */}
       <div className="insight-foot" style={{ flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+        {insight.client_relevance && (
+          <button
+            className="btn"
+            aria-expanded={showContext}
+            onClick={() => setShowContext((v) => !v)}
+          >
+            {showContext ? 'Less context' : 'Context'}
+          </button>
+        )}
         <button className="btn" onClick={() => setShowFacts((v) => !v)}>
           {showFacts ? 'Hide figures' : `Figures (${insight.observed_facts.length})`}
         </button>

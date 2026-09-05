@@ -424,22 +424,11 @@ export function WhatChangedTab({
         <div className="card-body">
           <ValueLine points={dossier.wealth.timeseries} />
           <hr className="rule" />
-          {ytd.narrative.map((sentence, index) => (
-            <p
-              key={index}
-              style={{
-                margin: index === 0 ? '0 0 10px' : '0 0 10px',
-                fontSize: 13.5,
-              }}
-            >
-              {sentence}
-            </p>
-          ))}
-          <div className="footnote">
-            Assembled from computed attribution, market_context.csv levels and event_log.csv
-            entries. No language model wrote this paragraph, and every clause has a source row behind
-            it.
-          </div>
+          <ul className="brieflist" style={{ fontSize: 13.5 }}>
+            {ytd.narrative.map((sentence, index) => (
+              <li key={index}>{sentence}</li>
+            ))}
+          </ul>
         </div>
       </div>
 
