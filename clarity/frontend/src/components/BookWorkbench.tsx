@@ -15,6 +15,11 @@ export function BookWorkbench({
 }) {
   const [filter, setFilter] = useState<string>('all')
   const [centre, setCentre] = useState<string>('all')
+  // Rows carry the flag alone by default so twenty clients scan as a list;
+  // the scoring rationale expands from the column header.
+  const [showReasons, setShowReasons] = useState(false)
+  // Thirteen categories wrap to two rows; the long tail hides behind "More".
+  const [allCategories, setAllCategories] = useState(false)
   const [eventMode, setEventMode] = useState(false)
   const [events, setEvents] = useState<EventSummary[]>([])
   const [eventImpact, setEventImpact] = useState<EventImpactView | null>(null)
@@ -74,7 +79,6 @@ export function BookWorkbench({
     <div>
       <div className="book-head">
         <div>
-          <div className="eyebrow">Morning brief · {shortDate(book.as_of)}</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <h1 style={{ margin: 0 }}>Who to call first</h1>
             <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -113,7 +117,7 @@ export function BookWorkbench({
                     top: '100%',
                     left: 0,
                     marginTop: 8,
-                    width: 360,
+                    width: 400,
                     padding: '12px 14px',
                     background: 'var(--surface, #ffffff)',
                     border: '1px solid var(--rule, #e2e8f0)',
@@ -140,6 +144,14 @@ export function BookWorkbench({
                   </ul>
                   <div style={{ fontSize: 11, color: 'var(--muted)', borderTop: '1px solid var(--rule)', paddingTop: 5 }}>
                     <strong>Hard overrides:</strong> Imminent Lombard margin calls, unhedged confirmed cash liabilities, and active mandate breaches force top ranking regardless of portfolio size.
+                  </div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', borderTop: '1px solid var(--rule)', marginTop: 6, paddingTop: 5 }}>
+                    <strong>Reading these figures:</strong> {book.scoring?.note ?? ''} Dismissed
+                    findings drop out of the count but stay in the audit trail. Figures are as at{' '}
+                    {book.as_of}; percentages are of household wealth, aggregated across every
+                    portfolio a client holds including custody accounts. Coverage today:{' '}
+                    {pct(book.clients?.length ? (rows.length / book.clients.length) * 100 : 0, 0)}{' '}
+                    of the book shown.
                   </div>
                 </div>
               )}
@@ -273,26 +285,64 @@ export function BookWorkbench({
         <button className="chip" aria-pressed={filter === 'critical'} onClick={() => setFilter('critical')}>
           Critical only
         </button>
-        {categories.map(([key, count]) => (
-          <button key={key} className="chip" aria-pressed={filter === key} onClick={() => setFilter(key)}>
-            {titleCase(key)} <span style={{ opacity: 0.6 }}>{count}</span>
+        {categories
+          .filter(([key], index) => allCategories || index < 6 || filter === key)
+          .map(([key, count]) => (
+            <button key={key} className="chip" aria-pressed={filter === key} onClick={() => setFilter(key)}>
+              {titleCase(key)} <span className="n">{count}</span>
+            </button>
+          ))}
+        {categories.length > 6 && (
+          <button
+            className="chip quiet"
+            aria-expanded={allCategories}
+            onClick={() => setAllCategories((open) => !open)}
+          >
+            {allCategories ? 'Fewer' : `${categories.length - 6} more`}
           </button>
-        ))}
-        <span style={{ width: 16 }} />
-        {['all', 'Singapore', 'Hong Kong'].map((value) => (
-          <button key={value} className="chip" aria-pressed={centre === value} onClick={() => setCentre(value)}>
-            {value === 'all' ? 'Both desks' : value}
-          </button>
-        ))}
+        )}
+        <label className="deskpick">
+          <span className="k">Desk</span>
+          <select
+            className="select"
+            value={centre}
+            onChange={(event) => setCentre(event.target.value)}
+          >
+            <option value="all">Both desks</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Hong Kong">Hong Kong</option>
+          </select>
+        </label>
       </div>}
 
       {!eventMode && <div className="card" style={{ overflow: 'hidden' }}>
-        <table className="booktable">
+        <table className={`booktable${showReasons ? "" : " compact"}`}>
           <thead>
             <tr>
-              <th style={{ width: 210 }}>Client</th>
+              <th style={{ width: 288 }}>Client</th>
               <th style={{ width: 130 }}>Priority Score</th>
-              <th>Flags to Address</th>
+              <th>
+                Flags to Address
+                <button
+                  className="colToggle"
+                  aria-pressed={showReasons}
+                  aria-label={
+                    showReasons ? 'Hide the scoring rationale' : 'Show the scoring rationale'
+                  }
+                  title={showReasons ? 'Hide why' : 'Show why'}
+                  onClick={() => setShowReasons((open) => !open)}
+                >
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path
+                      d="M2.5 4.5L6 8l3.5-3.5"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </th>
               <th style={{ width: 120, textAlign: 'right' }}>Wealth</th>
               <th style={{ width: 96 }}>Findings</th>
             </tr>
@@ -421,14 +471,6 @@ export function BookWorkbench({
         </table>
       </div>}
 
-      <div className="footnote" style={{ maxWidth: '80ch' }}>
-        <strong>How the ranking works.</strong> {book.scoring?.formula ?? ''}. Materiality is the{' '}
-        {book.scoring?.materiality ?? ''}; urgency is {book.scoring?.urgency ?? ''}. {book.scoring?.note ?? ''}{' '}
-        Dismissed findings drop out of the count but stay in the audit trail. Figures are
-        as at {book.as_of}; percentages are of household wealth, aggregated across every
-        portfolio a client holds including custody accounts. Coverage today:{' '}
-        {pct(book.clients?.length ? (rows.length / book.clients.length) * 100 : 0, 0)} of the book shown.
-      </div>
     </div>
   )
 }

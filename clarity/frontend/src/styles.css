@@ -376,7 +376,23 @@ a { color: var(--accent-bright); }
   min-width: 108px;
 }
 
-.filters { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+.filters { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+
+/* Secondary chips — desk scope, the "more" disclosure — read quieter than the
+   category filters they sit beside. */
+.filters .chip.quiet { color: var(--muted); border-color: var(--rule-soft); background: transparent; }
+.filters .chip.quiet:hover { color: var(--ink); border-color: var(--rule); }
+.filters .chip .n { color: var(--faint); margin-left: 3px; font-family: var(--mono); font-size: 11px; }
+.filters .chip[aria-pressed="true"] .n { color: rgba(255, 255, 255, 0.72); }
+
+/* Desk scope sits at the end of the row, immediately above the table it
+   filters, as one control rather than three chips. */
+.deskpick { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.deskpick .k {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--faint);
+}
+.deskpick .select { min-width: 132px; }
 .filters .chip {
   border: 1px solid var(--rule); background: var(--surface);
   border-radius: 100px; padding: 4px 12px; font-size: 12px; color: var(--ink-soft);
@@ -405,6 +421,23 @@ a { color: var(--accent-bright); }
 .headlinecell { max-width: 460px; }
 .headlinecell .h { line-height: 1.4; font-weight: 500; color: var(--ink); }
 .headlinecell .why { font-size: 11.5px; color: #9fb0c8; line-height: 1.5; margin-top: 6px; }
+
+/* Compact is the default: the flag alone, so the book scans top to bottom.
+   The rationale is expanded from the column header it belongs to. */
+.booktable.compact .headlinecell .why { display: none; }
+.booktable.compact td { padding-top: 11px; padding-bottom: 11px; }
+
+.booktable th .colToggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 17px; height: 17px; margin-left: 7px; padding: 0;
+  vertical-align: -3px;
+  border: 1px solid var(--rule); border-radius: 5px;
+  background: transparent; color: var(--accent-bright);
+  transition: all 0.14s;
+}
+.booktable th .colToggle:hover { border-color: var(--accent-bright); background: var(--accent-wash); }
+.booktable th .colToggle[aria-pressed="true"] svg { transform: rotate(180deg); }
+.booktable th .colToggle svg { transition: transform 0.14s; }
 
 .scorebar { display: flex; align-items: center; gap: 9px; }
 .scorebar .track {
