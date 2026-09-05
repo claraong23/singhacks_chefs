@@ -50,6 +50,39 @@ the frontend, committed, or stored beyond the session. The visible role switcher
 is still a demo permission model, not real sign-in. Hosted reset is disabled
 unless `CLARITY_ALLOW_DEMO_RESET=true` is explicitly configured.
 
+### Hosted validation runbook
+
+Use a separate disposable PostgreSQL database for integration testing; never
+point `CLARITY_TEST_DATABASE_URL` at the demo database. From `clarity/backend`:
+
+```powershell
+$env:CLARITY_TEST_DATABASE_URL = "postgresql://...isolated-test-db..."
+python -m unittest tests.test_postgres_state
+```
+
+For Vercel, add `DATABASE_URL`, `CLARITY_API_TOKEN`, and
+`CLARITY_ALLOW_DEMO_RESET=false` to both the intended deployment environment
+and its preview environment. Deploy through the connected Vercel project, then
+run the non-mutating deployed checks:
+
+```powershell
+$env:CLARITY_DEPLOY_URL = "https://your-deployment.vercel.app"
+$env:CLARITY_API_TOKEN = "your-shared-demo-token"
+python -m unittest tests.test_deployed_smoke
+```
+
+The optional persistence mutation check creates one clearly labelled synthetic
+integration event, so enable it only against a disposable hosted database:
+
+```powershell
+$env:CLARITY_DEPLOY_MUTATION_CHECK = "true"
+python -m unittest tests.test_deployed_smoke
+```
+
+Before the judge demo, verify `/api/health` reports `postgresql`, the Knowledge
+Library shows five approved synthetic guides, the active policy is
+`baseline-v1`, unauthorised writes return `401`, and `/api/reset` returns `403`.
+
 ### Without a browser
 
 Every screen has a terminal equivalent, which is the fallback if the demo laptop
@@ -68,7 +101,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-100 backend tests. They check the things a judge would push on: that holdings reconcile to
+104 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit
