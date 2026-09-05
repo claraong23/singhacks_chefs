@@ -1291,7 +1291,7 @@
           "trend": null
         }
       ],
-      "client_relevance": "The pledged account is Advisory Balanced Portfolio. Any sale and withdrawal from it reduces lending value while the drawn balance stays put, so it raises loan-to-value rather than lowering it.",
+      "client_relevance": "Client & Situation Context: For Lau Chi Ming (property development background), credit facility CF-0002 is secured by the Advisory Balanced Portfolio with HKD 58m drawn. With current LTV at 69.41% vs a 70% margin-call trigger, headroom is just 0.59 percentage points (a mere 0.8% fall in collateral value triggers a call). Any sale or withdrawal from this account removes collateral value while leaving debt intact, which immediately breaches the facility trigger. This directly restricts his ability to fund upcoming cash calls (like the HKD 60m Mid-Levels redevelopment contribution) from this portfolio.",
       "suggested_next_step": "Agree a collateral plan before the next client-driven withdrawal: either reduce drawn, add eligible collateral, or accept a smaller withdrawal than the client expects.",
       "evidence": [
         {
@@ -1379,7 +1379,7 @@
       "category": "liquidity",
       "severity": "critical",
       "headline": "Known obligations of USD 7,682,458 against USD 90,754 the client can actually withdraw",
-      "summary": "Coverage is 0.01x. USD 19,346,360 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger. USD 7,051,857 of the household is illiquid.",
+      "summary": "Severe liquidity shortfall of USD 7,591,705: Lau Chi Ming has only USD 90,754 in unencumbered, withdrawable cash against USD 7,682,458 in obligations due inside the planning horizon (coverage is just 1.2%, primarily driven by Mid-Levels redevelopment equity contribution: HKD 60,000,000 - Confirmed). While holding USD 19,346,360 in liquid securities, these are fully pledged as collateral backing credit facility CF-0002 and cannot be withdrawn or sold without triggering an immediate loan margin-call breach. The remaining USD 7,051,857 of wealth is locked in illiquid physical real estate.",
       "priority_score": 94.0,
       "priority_reasons": [
         "Severity critical (weight 1.00)",
@@ -1437,7 +1437,7 @@
           "trend": null
         }
       ],
-      "client_relevance": "The gap is a funding question, not a performance question. It has to be solved before the obligation falls due, and the options narrow as the date approaches.",
+      "client_relevance": "Client & Situation Context: Lau Chi Ming (entrepreneur in Hong Kong property development) faces a confirmed HKD 60,000,000 (USD 7.68m) Mid-Levels redevelopment equity contribution due between 2026-11-01 and 2027-06-30. Because his liquid holdings are pledged as collateral to Lombard facility CF-0002 (operating with only a 0.59% buffer before a margin call trigger) and his primary wealth is in illiquid property, he cannot simply withdraw funds. Selling from the pledged account removes collateral value faster than debt reduction, which paradoxically accelerates a margin call. Proactive RM planning—such as staging developer equity contributions, pledging alternative unencumbered collateral, or restructuring facility limits—is required before the payment date.",
       "suggested_next_step": "Produce a dated liquidity map: what is sellable, by when, and what it costs to raise the shortfall each way.",
       "evidence": [
         {
@@ -3882,7 +3882,7 @@
       "Between 2025-12-31 and 2026-08-26 the household moved down USD 1,692,845, or 6.0%, from USD 28,181,815 to USD 26,488,971.",
       "Of that, -USD 4,860,706 came from market moves, -USD 33,162 from currency translation and +USD 3,201,024 from money paid in or taken out.",
       "Lombard facility 0.59pp from a margin call. CF-0002 sits at 69.41% loan-to-value against a 70% trigger. A 0.8% fall in collateral value is enough to produce a margin call.",
-      "Known obligations of USD 7,682,458 against USD 90,754 the client can actually withdraw. Coverage is 0.01x. USD 19,346,360 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger. USD 7,051,857 of the household is illiquid.",
+      "Known obligations of USD 7,682,458 against USD 90,754 the client can actually withdraw. Severe liquidity shortfall of USD 7,591,705: The client has only USD 90,754 in unencumbered, withdrawable cash against USD 7,682,458 in obligations falling due inside the planning horizon (coverage is just 1.2%, primarily driven by Mid-Levels redevelopment equity contribution (HKD 60,000,000 - Confirmed)). While holding USD 19,346,360 in readily realisable liquid securities, these are fully pledged as collateral backing the active credit facility and cannot be withdrawn or sold without triggering an immediate loan margin-call breach. The remaining USD 7,051,857 of wealth is locked in illiquid real estate and private investments that cannot be liquidated quickly.",
       "49% of the household moves with Hong Kong property. USD 12,987,385 across 4 positions responds to the same driver. This is a structural exposure rather than an event-driven one.",
       "29% of household wealth sits with Golden Harbour Properties Ltd, across 3 line items. Golden Harbour Properties Ltd appears as Accumulator, Single Stock, Subordinated Perpetual. Each line looks moderate on its own; together they are USD 7,801,726, or 29.5% of everything the client holds. A single credit or price event on this issuer hits all of them at once."
     ],

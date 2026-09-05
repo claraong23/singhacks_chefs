@@ -1358,7 +1358,7 @@
       "category": "liquidity",
       "severity": "critical",
       "headline": "Known obligations of USD 6,200,000 against USD 152,143 the client can actually withdraw",
-      "summary": "Coverage is 0.02x. USD 13,055,057 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger. USD 33,492,000 of the household is illiquid.",
+      "summary": "Severe liquidity shortfall of USD 6,047,857: Alexander Chen has only USD 152,143 in unencumbered withdrawable cash against USD 6,200,000 in upcoming cash commitments inside the planning horizon (coverage is just 2.5%, driven by estimated secondary share sale tax of USD 4,200,000 and trust funding of USD 2,000,000). While holding USD 13,055,057 in daily/weekly liquid tech securities, these are fully pledged as collateral to credit facility CF-0001 (operating at 73.71% LTV vs 75% trigger) and cannot be withdrawn without producing an immediate margin call. The remaining USD 33,492,000 of wealth is illiquid private assets.",
       "priority_score": 78.3,
       "priority_reasons": [
         "Severity critical (weight 1.00)",
@@ -1423,7 +1423,7 @@
           "trend": null
         }
       ],
-      "client_relevance": "The gap is a funding question, not a performance question. It has to be solved before the obligation falls due, and the options narrow as the date approaches.",
+      "client_relevance": "Client & Situation Context: Alexander Chen (enterprise software founder) has USD 6.2m in upcoming cash needs (USD 4.2m estimated tax on share sales and USD 2.0m trust funding). Because USD 13.1m of his liquid assets are pledged to facility CF-0001 (running tight at 73.71% LTV vs 75% trigger) and USD 33.5m is illiquid private stock, free withdrawable cash is only USD 152k (2.5% coverage). Withdrawing pledged assets will breach credit covenants. A pre-funding or staged liquidity plan must be agreed before the share transaction completes.",
       "suggested_next_step": "Produce a dated liquidity map: what is sellable, by when, and what it costs to raise the shortfall each way.",
       "evidence": [
         {
@@ -2743,7 +2743,7 @@
       "Of that, +USD 1,402,700 came from market moves, +USD 0 from currency translation and +USD 1,500,000 from money paid in or taken out.",
       "Lombard facility 1.29pp from a margin call. CF-0001 sits at 73.71% loan-to-value against a 75% trigger. A 1.7% fall in collateral value is enough to produce a margin call. The trigger was already breached at 2026-06-30. The breach at 2026-06-30 was cured by 2026-08-26 without any repayment: the drawn balance was unchanged and lending value rose by 225,160 USD as the collateral appreciated. The exposure was resolved by the market, not by an action, and would return if the move reversed.",
       "89% of the household moves with US technology and AI capital expenditure. USD 41,357,000 across 5 positions responds to the same driver. The dataset records 1 events on this theme in 2026.",
-      "Known obligations of USD 6,200,000 against USD 152,143 the client can actually withdraw. Coverage is 0.02x. USD 13,055,057 of readily realisable value is pledged as collateral and cannot be withdrawn without breaching a facility trigger. USD 33,492,000 of the household is illiquid.",
+      "Known obligations of USD 6,200,000 against USD 152,143 the client can actually withdraw. Severe liquidity shortfall of USD 6,047,857: The client has only USD 152,143 in unencumbered, withdrawable cash against USD 6,200,000 in obligations falling due inside the planning horizon (coverage is just 2.5%, driven by tax and commitment payments). While holding USD 13,055,057 in readily realisable liquid securities, these are pledged to the active Lombard facility and cannot be withdrawn without a margin-call breach. The remaining USD 33,492,000 of wealth is illiquid private assets.",
       "USD 31,920,000 (68% of the household) is carried at a mark up to 330 days old. These positions have a valuation_date earlier than the snapshot they appear in. Quarterly-reported private marks lagging a quarter is normal and not an error, but the reported wealth figure is only as current as its oldest input, and any percentage of the household computed against it inherits the lag."
     ],
     "questions_to_ask": [
