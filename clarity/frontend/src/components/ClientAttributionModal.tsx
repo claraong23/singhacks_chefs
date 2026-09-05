@@ -9,6 +9,13 @@ interface ClientAttributionModalProps {
   onDraftAdded?: () => void
 }
 
+function cleanNarrative(text: string | null | undefined, fallback: string): string {
+  if (!text || text.includes('[object Object]')) {
+    return fallback
+  }
+  return text
+}
+
 export function ClientAttributionModal({
   draft,
   loading,
@@ -21,12 +28,17 @@ export function ClientAttributionModal({
 
   if (!draft && !loading) return null
 
+  const whatHappenedText = cleanNarrative(
+    draft?.what_happened_bullet,
+    'Identified portfolio exposure requiring review and verification.',
+  )
+
   const handleCopy = () => {
     if (!draft) return
     const text = `${draft.headline}
 
 1. What Happened:
-${draft.what_happened_bullet}
+${whatHappenedText}
 
 2. Why It Matters For You:
 ${draft.why_it_matters_bullet}
@@ -159,7 +171,7 @@ ${draft.language_disclaimer ? `Note: ${draft.language_disclaimer}` : ''}`
                       </span>
                     </div>
                     <p style={{ margin: 0, fontSize: 13, lineHeight: 1.55 }}>
-                      {draft.what_happened_bullet}
+                      {whatHappenedText}
                     </p>
                   </div>
 
