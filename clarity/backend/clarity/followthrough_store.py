@@ -10,6 +10,7 @@ from typing import Any
 from uuid import uuid4
 
 from . import config
+from .postgres_state import PostgresState
 
 PATH = config.REPO_ROOT / "clarity" / "state" / "follow_through.json"
 WORK_STATUSES = ("open", "in_progress", "waiting", "completed", "cancelled")
@@ -130,11 +131,23 @@ class FollowThroughStore:
             self._save()
 
 
+class PostgresFollowThroughStore(FollowThroughStore):
+    def __init__(self, database_url: str) -> None:
+        self._pg = PostgresState(database_url, "follow_through", {"tasks": {}, "referrals": {}, "outcomes": {}, "evidence_updates": {}, "reevaluations": {}, "audit": []})
+        super().__init__(PATH)
+
+    def _load(self) -> None:
+        self.data.update({key: self._pg.payload.get(key, self.data[key]) for key in self.data})
+
+    def _save(self) -> None:
+        self._pg.save(self.data)
+
+
 _STORE: FollowThroughStore | None = None
 
 
 def get_followthrough_store() -> FollowThroughStore:
     global _STORE
     if _STORE is None:
-        _STORE = FollowThroughStore()
+        _STORE = PostgresFollowThroughStore(config.DATABASE_URL) if config.DATABASE_URL else FollowThroughStore()
     return _STORE

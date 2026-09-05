@@ -19,6 +19,8 @@ DATA_DIR = Path(os.environ.get("CLARITY_DATA_DIR", REPO_ROOT))
 FIXTURES_DIR = REPO_ROOT / "clarity" / "fixtures"
 DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
 API_TOKEN = os.environ.get("CLARITY_API_TOKEN", "").strip()
+HOSTED_MODE = bool(os.environ.get("VERCEL"))
+ALLOW_DEMO_RESET = os.environ.get("CLARITY_ALLOW_DEMO_RESET", "").strip().lower() in {"1", "true", "yes"}
 
 # ---------------------------------------------------------------------------
 # Time

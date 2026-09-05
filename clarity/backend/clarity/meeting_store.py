@@ -14,6 +14,7 @@ from typing import Any, Protocol
 from uuid import uuid4
 
 from . import config
+from .postgres_state import PostgresState
 
 STATE_DIR = config.REPO_ROOT / "clarity" / "state"
 MEETINGS_PATH = STATE_DIR / "meetings.json"
@@ -107,6 +108,18 @@ class MeetingStore:
             self._save()
 
 
+class PostgresMeetingStore(MeetingStore):
+    def __init__(self, database_url: str) -> None:
+        self._pg = PostgresState(database_url, "meeting_packages", {"packages": {}})
+        super().__init__(MEETINGS_PATH)
+
+    def _load(self) -> None:
+        self._packages = {str(key): value for key, value in self._pg.payload.get("packages", {}).items()}
+
+    def _save(self) -> None:
+        self._pg.save({"packages": self._packages})
+
+
 def new_id() -> str:
     return str(uuid4())
 
@@ -117,5 +130,5 @@ _STORE: MeetingStore | None = None
 def get_meeting_store() -> MeetingStore:
     global _STORE
     if _STORE is None:
-        _STORE = MeetingStore()
+        _STORE = PostgresMeetingStore(config.DATABASE_URL) if config.DATABASE_URL else MeetingStore()
     return _STORE

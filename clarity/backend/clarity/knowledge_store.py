@@ -11,6 +11,7 @@ from typing import Any
 from uuid import uuid4
 
 from . import config
+from .postgres_state import PostgresState
 
 PATH = config.REPO_ROOT / "clarity" / "state" / "knowledge.json"
 SEED_PATH = config.REPO_ROOT / "clarity" / "fixtures" / "knowledge_documents.json"
@@ -233,6 +234,18 @@ class KnowledgeRepository:
             self._seed()
 
 
+class PostgresKnowledgeRepository(KnowledgeRepository):
+    def __init__(self, database_url: str) -> None:
+        self._pg = PostgresState(database_url, "knowledge", {"documents": {}, "audit": []})
+        super().__init__(PATH)
+
+    def _load(self) -> None:
+        self.data.update({key: self._pg.payload.get(key, self.data[key]) for key in self.data})
+
+    def _save(self) -> None:
+        self._pg.save(self.data)
+
+
 def _excerpt(body: str, terms: list[str]) -> str:
     lowered = body.lower()
     first = next((lowered.find(term) for term in terms if lowered.find(term) >= 0), 0)
@@ -246,5 +259,5 @@ _STORE: KnowledgeRepository | None = None
 def get_knowledge_repository() -> KnowledgeRepository:
     global _STORE
     if _STORE is None:
-        _STORE = KnowledgeRepository()
+        _STORE = PostgresKnowledgeRepository(config.DATABASE_URL) if config.DATABASE_URL else KnowledgeRepository()
     return _STORE

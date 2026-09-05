@@ -26,6 +26,7 @@ from . import config
 from .contracts import AIDraftCandidate, AIDraftGuardrail, AIDraftProvenance, AIDraftingProviderStatus
 from .meeting import CHANNELS, SECTION_TITLES, current_version, preflight, update_section
 from .meeting_store import get_meeting_store
+from .postgres_state import PostgresState
 
 PROMPT_VERSION = "meeting-rewrite-v1"
 EXPIRY_MINUTES = 15
@@ -216,6 +217,18 @@ class AIDraftAuditStore:
             self._save()
 
 
+class PostgresAIDraftAuditStore(AIDraftAuditStore):
+    """Durable metadata only; draft candidates remain process-local and expire."""
+
+    def __init__(self, database_url: str) -> None:
+        self._pg = PostgresState(database_url, "ai_draft_audit", {"events": []})
+        self.path, self.lock = STATE_PATH, threading.Lock()
+        self.events = list(self._pg.payload.get("events", []))
+
+    def _save(self) -> None:
+        self._pg.save({"events": self.events})
+
+
 class AIDraftingService:
     def __init__(self, audit_store: AIDraftAuditStore | None = None, preflight_runner=None) -> None:
         self.audit = audit_store or get_ai_draft_audit_store()
@@ -293,7 +306,7 @@ _SERVICE: AIDraftingService | None = None
 def get_ai_draft_audit_store() -> AIDraftAuditStore:
     global _AUDIT_STORE
     if _AUDIT_STORE is None:
-        _AUDIT_STORE = AIDraftAuditStore()
+        _AUDIT_STORE = PostgresAIDraftAuditStore(config.DATABASE_URL) if config.DATABASE_URL else AIDraftAuditStore()
     return _AUDIT_STORE
 
 

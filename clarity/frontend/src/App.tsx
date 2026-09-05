@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getBook, getClient, recordDecision, resetDecision } from './api'
-import type { BookView, Dossier, Insight, InsightStatus, RMFeedbackInput, SavedScenario } from './types'
+import { clearWriteToken, getBook, getClient, getHealth, hasWriteToken, recordDecision, resetDecision, setWriteToken } from './api'
+import type { BookView, Dossier, HealthStatus, Insight, InsightStatus, RMFeedbackInput, SavedScenario } from './types'
 import type { SimulatedRole } from './types'
 import { BookWorkbench } from './components/BookWorkbench'
 import { ClientDossier } from './components/ClientDossier'
@@ -19,6 +19,8 @@ export default function App() {
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [role, setRole] = useState<SimulatedRole>('rm')
+  const [health, setHealth] = useState<HealthStatus | null>(null)
+  const [writesUnlocked, setWritesUnlocked] = useState(hasWriteToken)
   const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit' | 'calibration' | 'knowledge' | 'integrations'>('book')
   // A ?client= deep link goes straight to the dossier and skips the landing page.
   const [showHero, setShowHero] = useState(
@@ -36,6 +38,19 @@ export default function App() {
   useEffect(() => {
     void loadBook()
   }, [loadBook])
+
+  useEffect(() => {
+    void getHealth().then(setHealth).catch(() => undefined)
+    const sync = () => setWritesUnlocked(hasWriteToken())
+    window.addEventListener('clarity-write-access', sync)
+    return () => window.removeEventListener('clarity-write-access', sync)
+  }, [])
+
+  const toggleWrites = () => {
+    if (writesUnlocked) return clearWriteToken()
+    const token = window.prompt('Enter the shared demo write token for this browser session.')
+    if (token) setWriteToken(token)
+  }
 
   const openClient = useCallback(async (id: string) => {
     setBusy(true)
@@ -141,6 +156,7 @@ export default function App() {
         </div>
         <div className="topbar-meta">
           <label className="k">Simulated role<select className="select" value={role} onChange={(event) => setRole(event.target.value as SimulatedRole)}><option value="rm">RM</option><option value="credit">Credit specialist</option><option value="wealth_planning">Wealth planning</option><option value="investment">Investment specialist</option><option value="compliance_audit">Compliance / audit</option><option value="operations">Product operations</option></select></label>
+          {health?.persistence.write_access_required && <button className="btn quiet" onClick={toggleWrites}>{writesUnlocked ? 'Lock writes' : 'Unlock writes'}</button>}
           <div>
             <div className="k">Relationship manager</div>
             <div>{book?.rm.rm_name ?? '—'}</div>

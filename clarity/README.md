@@ -31,6 +31,22 @@ demo, one process on port 8000 is the whole product.
 
 No API keys, no external calls, no data leaves the machine.
 
+### Durable hosted mode
+
+Local mode is the default: all mutable Task 3 workflow records use JSON files
+under `clarity/state`. To deploy durable state on Vercel, set `DATABASE_URL` and
+`CLARITY_API_TOKEN` in the deployment environment. With a database configured,
+decisions, saved scenarios, meeting packages, follow-through, calibration,
+knowledge lifecycle, integration records, and AI audit metadata use versioned
+PostgreSQL state; the source CSVs remain read-only and AI previews still expire
+in memory after 15 minutes.
+
+Hosted reads remain public. The UI prompts an RM to enter the shared demo token
+to unlock POST actions for that browser session; the token is never bundled into
+the frontend, committed, or stored beyond the session. The visible role switcher
+is still a demo permission model, not real sign-in. Hosted reset is disabled
+unless `CLARITY_ALLOW_DEMO_RESET=true` is explicitly configured.
+
 ### Without a browser
 
 Every screen has a terminal equivalent, which is the fallback if the demo laptop
@@ -49,7 +65,7 @@ python -m clarity.cli fixtures           # freeze JSON payloads into clarity/fix
 cd clarity/backend && python -m unittest discover -s tests -t .
 ```
 
-95 backend tests. They check the things a judge would push on: that holdings reconcile to
+100 backend tests. They check the things a judge would push on: that holdings reconcile to
 `portfolios.aum_<date>` at all five snapshots for all 24 portfolios, that the FX
 direction follows each pair's quoting convention, that the attribution
 decomposition sums exactly to the change in value, that the single-position limit

@@ -753,6 +753,20 @@ export interface IntegrationAuditEvent extends AuditTimelineEvent {
   detail: AuditTimelineEvent['detail'] & { model_readiness?: ModelReadinessMetadata }
 }
 
+export interface PersistenceStatus {
+  storage: 'local_json' | 'postgresql'
+  schema_version: string | null
+  hosted: boolean
+  write_access_required: boolean
+  seed_status: string
+}
+
+export interface HealthStatus {
+  status: 'ok'
+  as_of: string
+  persistence: PersistenceStatus
+}
+
 export type KnowledgeDocumentStatus = 'draft' | 'submitted' | 'approved' | 'rejected' | 'superseded'
 export interface KnowledgeDocumentVersion {
   version: number

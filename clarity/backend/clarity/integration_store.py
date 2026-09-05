@@ -12,6 +12,7 @@ from uuid import uuid4
 
 from . import config
 from .followthrough_store import ACTORS, SPECIALIST_ROLES
+from .postgres_state import PostgresState
 
 PATH = config.REPO_ROOT / "clarity" / "state" / "integrations.json"
 FEATURE_SCHEMA_VERSION = "deterministic-priority-factors-v1"
@@ -280,11 +281,23 @@ class IntegrationStore:
             self._save()
 
 
+class PostgresIntegrationStore(IntegrationStore):
+    def __init__(self, database_url: str) -> None:
+        self._pg = PostgresState(database_url, "integrations", {"inbound": {}, "work_orders": {}, "audit": []})
+        super().__init__(PATH)
+
+    def _load(self) -> None:
+        self.data.update({key: self._pg.payload.get(key, self.data[key]) for key in self.data})
+
+    def _save(self) -> None:
+        self._pg.save(self.data)
+
+
 _STORE: IntegrationStore | None = None
 
 
 def get_integration_store() -> IntegrationStore:
     global _STORE
     if _STORE is None:
-        _STORE = IntegrationStore()
+        _STORE = PostgresIntegrationStore(config.DATABASE_URL) if config.DATABASE_URL else IntegrationStore()
     return _STORE

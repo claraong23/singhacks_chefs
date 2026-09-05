@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Protocol
 
+from . import config
+from .postgres_state import PostgresState
 from .review import STATE_DIR
 
 SCENARIOS_PATH = STATE_DIR / "scenarios.json"
@@ -83,11 +85,23 @@ class ScenarioStore:
             self._save()
 
 
+class PostgresScenarioStore(ScenarioStore):
+    def __init__(self, database_url: str) -> None:
+        self._pg = PostgresState(database_url, "scenarios", {"scenarios": {}})
+        super().__init__(SCENARIOS_PATH)
+
+    def _load(self) -> None:
+        self._scenarios = {str(key): value for key, value in self._pg.payload.get("scenarios", {}).items()}
+
+    def _save(self) -> None:
+        self._pg.save({"scenarios": self._scenarios})
+
+
 _STORE: ScenarioStore | None = None
 
 
 def get_scenario_store() -> ScenarioStore:
     global _STORE
     if _STORE is None:
-        _STORE = ScenarioStore()
+        _STORE = PostgresScenarioStore(config.DATABASE_URL) if config.DATABASE_URL else ScenarioStore()
     return _STORE

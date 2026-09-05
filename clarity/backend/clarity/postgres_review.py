@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from typing import Any
 
 from . import config
@@ -48,6 +49,12 @@ class PostgresReviewStore:
                 "action TEXT NOT NULL, insight_id TEXT NOT NULL, client_id TEXT NOT NULL, "
                 "detail JSONB NOT NULL DEFAULT '{}'::jsonb)"
             )
+            cursor.execute(
+                "CREATE TABLE IF NOT EXISTS clarity_workflow_audit ("
+                "event_id TEXT PRIMARY KEY, namespace TEXT NOT NULL, timestamp TEXT NOT NULL, origin TEXT NOT NULL, "
+                "object_type TEXT NOT NULL, object_id TEXT NOT NULL, action TEXT NOT NULL, actor TEXT NOT NULL, "
+                "client_id TEXT, insight_id TEXT, detail JSONB NOT NULL)"
+            )
 
     @staticmethod
     def _decode(value: Any) -> dict[str, Any]:
@@ -58,6 +65,12 @@ class PostgresReviewStore:
             "INSERT INTO clarity_audit (timestamp, actor, action, insight_id, client_id, detail) "
             "VALUES (%s,%s,%s,%s,%s,%s::jsonb)",
             (entry.timestamp, entry.actor, entry.action, entry.insight_id, entry.client_id, json.dumps(entry.detail)),
+        )
+        event_id = hashlib.sha256(f"{entry.timestamp}|{entry.actor}|{entry.action}|{entry.insight_id}".encode()).hexdigest()
+        cursor.execute(
+            "INSERT INTO clarity_workflow_audit (event_id, namespace, timestamp, origin, object_type, object_id, action, actor, client_id, insight_id, detail) "
+            "VALUES (%s,'review',%s,'user_decision','decision',%s,%s,%s,%s,%s,%s::jsonb) ON CONFLICT (event_id) DO NOTHING",
+            (event_id, entry.timestamp, entry.insight_id, entry.action, entry.actor, entry.client_id, entry.insight_id, json.dumps(entry.detail)),
         )
 
     def get(self, insight_id: str) -> Decision | None:

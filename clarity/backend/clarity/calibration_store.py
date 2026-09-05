@@ -10,6 +10,7 @@ from typing import Any
 from uuid import uuid4
 
 from . import config
+from .postgres_state import PostgresState
 
 PATH = config.REPO_ROOT / "clarity" / "state" / "priority_calibration.json"
 BASELINE = {
@@ -173,11 +174,26 @@ class CalibrationStore:
             self._save()
 
 
+class PostgresCalibrationStore(CalibrationStore):
+    def __init__(self, database_url: str) -> None:
+        self._pg = PostgresState(database_url, "priority_calibration", {"policies": {}, "feedback": {}, "audit": []})
+        super().__init__(PATH)
+        if not self.data["policies"]:
+            self.data["policies"][BASELINE["id"]] = {**BASELINE, "history": list(BASELINE["activation_history"])}
+            self._save()
+
+    def _load(self) -> None:
+        self.data.update({key: self._pg.payload.get(key, self.data[key]) for key in self.data})
+
+    def _save(self) -> None:
+        self._pg.save(self.data)
+
+
 _STORE: CalibrationStore | None = None
 
 
 def get_calibration_store() -> CalibrationStore:
     global _STORE
     if _STORE is None:
-        _STORE = CalibrationStore()
+        _STORE = PostgresCalibrationStore(config.DATABASE_URL) if config.DATABASE_URL else CalibrationStore()
     return _STORE

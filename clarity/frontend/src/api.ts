@@ -33,16 +33,33 @@ import type {
   IntegrationView,
   InboundIntegrationEvent,
   OutboundWorkOrder,
+  HealthStatus,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
+const WRITE_TOKEN_KEY = 'clarity_write_token'
+
+export const hasWriteToken = () => Boolean(sessionStorage.getItem(WRITE_TOKEN_KEY))
+export const setWriteToken = (token: string) => {
+  if (token.trim()) sessionStorage.setItem(WRITE_TOKEN_KEY, token.trim())
+  else sessionStorage.removeItem(WRITE_TOKEN_KEY)
+  window.dispatchEvent(new Event('clarity-write-access'))
+}
+export const clearWriteToken = () => setWriteToken('')
 
 async function json<T>(path: string, init?: RequestInit): Promise<T> {
+  const headers = new Headers(init?.headers)
+  headers.set('Content-Type', 'application/json')
+  if ((init?.method ?? 'GET').toUpperCase() !== 'GET') {
+    const token = sessionStorage.getItem(WRITE_TOKEN_KEY)
+    if (token) headers.set('Authorization', `Bearer ${token}`)
+  }
   const response = await fetch(`${BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
     ...init,
+    headers,
   })
   if (!response.ok) {
+    if (response.status === 401) clearWriteToken()
     const body = await response.text()
     throw new Error(`${response.status} ${response.statusText}: ${body.slice(0, 200)}`)
   }
@@ -50,6 +67,7 @@ async function json<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const getBook = () => json<BookView>('/api/book')
+export const getHealth = () => json<HealthStatus>('/api/health')
 
 export const getKnowledgeDocuments = (role: SimulatedRole) =>
   json<{ documents: KnowledgeDocument[] }>(`/api/knowledge-documents?role=${role}`)

@@ -38,6 +38,7 @@ import hmac
 import json
 import mimetypes
 import traceback
+from contextlib import nullcontext
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlparse
@@ -68,6 +69,7 @@ from .followthrough_store import get_followthrough_store
 from .knowledge_store import get_knowledge_repository
 from .ai_drafting import get_ai_drafting_service
 from .integration_store import get_integration_store
+from .postgres_state import PostgresState, StateConflictError, SCHEMA_VERSION
 from .signals.base import SignalContext, run_for_client
 from .signals.holding_explain import explain_holding
 
@@ -104,6 +106,13 @@ def _meta() -> dict:
             "liquidity_cover_warn": config.LIQUIDITY_COVER_WARN,
         },
         "data_warnings": book.warnings,
+        "persistence": {
+            "storage": "postgresql" if config.DATABASE_URL else "local_json",
+            "schema_version": SCHEMA_VERSION if config.DATABASE_URL else None,
+            "hosted": config.HOSTED_MODE,
+            "write_access_required": bool(config.API_TOKEN),
+            "seed_status": "fresh_workflow_state" if config.DATABASE_URL else "local_demo_state",
+        },
     }
 
 
@@ -250,7 +259,7 @@ class ClarityHandler(BaseHTTPRequestHandler):
         query = parse_qs(parsed.query)
         try:
             if path == "/api/health":
-                return self._send_json({"status": "ok", "as_of": config.AS_OF})
+                return self._send_json({"status": "ok", "as_of": config.AS_OF, "persistence": _meta()["persistence"]})
             if path == "/api/meta":
                 return self._send_json(_meta())
             if path == "/api/book":
@@ -376,6 +385,8 @@ class ClarityHandler(BaseHTTPRequestHandler):
             if not self._authorized():
                 return self._send_json({"error": "Unauthorized"}, 401)
             if path == "/api/reset":
+                if config.HOSTED_MODE and not config.ALLOW_DEMO_RESET:
+                    return self._send_json({"error": "Hosted reset is disabled. Deploy fresh workflow state instead."}, 403)
                 get_store().reset()
                 get_scenario_store().reset()
                 get_meeting_store().reset()
@@ -413,9 +424,13 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 if action == "reject":
                     return self._send_json({"event": integration.disposition(event_id, accepted=False, rationale=rationale, role=role)})
                 update_payload = {"client_id": event["client_id"], "source_type": "document", "source_ref": event["source_ref"], "summary": event["summary"], "received_at": event["occurred_at"], "affected_insight_ids": event["affected_insight_ids"]}
-                update = get_followthrough_store().create("evidence_updates", evidence_record(update_payload, follow_actor(role)), origin="source_data", actor=follow_actor(role))
-                reeval = get_followthrough_store().create("reevaluations", {"kind": "reevaluation", "client_id": event["client_id"], "evidence_update_id": update["id"], "affected_insight_ids": update["affected_insight_ids"], "owner_role": "operations", "status": "queued"}, origin="source_data", actor=follow_actor(role))
-                saved = integration.disposition(event_id, accepted=True, rationale=rationale, role=role, evidence_update_id=update["id"], reevaluation_id=reeval["id"])
+                follow = get_followthrough_store()
+                postgres_states = [getattr(integration, "_pg", None), getattr(follow, "_pg", None)]
+                atomic = PostgresState.transaction(*postgres_states) if all(postgres_states) else nullcontext()
+                with atomic:
+                    update = follow.create("evidence_updates", evidence_record(update_payload, follow_actor(role)), origin="source_data", actor=follow_actor(role))
+                    reeval = follow.create("reevaluations", {"kind": "reevaluation", "client_id": event["client_id"], "evidence_update_id": update["id"], "affected_insight_ids": update["affected_insight_ids"], "owner_role": "operations", "status": "queued"}, origin="source_data", actor=follow_actor(role))
+                    saved = integration.disposition(event_id, accepted=True, rationale=rationale, role=role, evidence_update_id=update["id"], reevaluation_id=reeval["id"])
                 return self._send_json({"event": saved, "evidence_update": update, "reevaluation": reeval})
             if path == "/api/integrations/work-orders":
                 payload = self._read_json(); role = payload.get("role") or "rm"
@@ -811,6 +826,8 @@ class ClarityHandler(BaseHTTPRequestHandler):
         except KeyError as exc:
             return self._send_json({"error": str(exc)}, 404)
         except InvalidTransitionError as exc:
+            return self._send_json({"error": str(exc)}, 409)
+        except StateConflictError as exc:
             return self._send_json({"error": str(exc)}, 409)
         except ValueError as exc:
             return self._send_json({"error": str(exc)}, 400)
