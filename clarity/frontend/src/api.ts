@@ -34,6 +34,7 @@ import type {
   InboundIntegrationEvent,
   OutboundWorkOrder,
   HealthStatus,
+  PortfolioAttribution,
 } from './types'
 
 const BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -288,9 +289,12 @@ export const getHoldingChanges = (
   if (params?.to) query.set('to', params.to)
   if (params?.portfolio && params.portfolio !== 'all') query.set('portfolio', params.portfolio)
   const qs = query.toString()
-  return json<{ changes: HoldingChange[]; period: { start: string; end: string }; portfolio_id: string | null }>(
-    `/api/clients/${clientId}/changes${qs ? `?${qs}` : ''}`,
-  )
+  return json<{
+    changes: HoldingChange[]
+    period: { start: string; end: string }
+    portfolio_id: string | null
+    attribution?: PortfolioAttribution
+  }>(`/api/clients/${clientId}/changes${qs ? `?${qs}` : ''}`)
 }
 
 export const explainHolding = (payload: {
@@ -356,9 +360,31 @@ export const proposeObjectiveUpdate = (
   })
 
 export const addDraftToMeetingBrief = (clientId: string, draft: ClientAttributionDraft) =>
-  json<{ brief: Record<string, unknown> }>('/api/meeting-brief/add-draft', {
+  json<{ brief: Record<string, unknown>; draft: ClientAttributionDraft }>('/api/meeting-brief/add-draft', {
     method: 'POST',
     body: JSON.stringify({ client_id: clientId, draft }),
+  })
+
+export const getMeetingDrafts = (clientId: string) =>
+  json<{ drafts: ClientAttributionDraft[] }>(`/api/clients/${clientId}/meeting-drafts`)
+
+export const updateMeetingDraft = (
+  clientId: string,
+  draftId: string,
+  draft: Partial<ClientAttributionDraft>,
+) =>
+  json<{ draft: ClientAttributionDraft }>(
+    `/api/clients/${clientId}/meeting-drafts/${draftId}/update`,
+    {
+      method: 'POST',
+      body: JSON.stringify({ draft }),
+    },
+  )
+
+export const deleteMeetingDraft = (clientId: string, draftId: string) =>
+  json<{ ok: boolean }>(`/api/clients/${clientId}/meeting-drafts/${draftId}/delete`, {
+    method: 'POST',
+    body: JSON.stringify({}),
   })
 
 export const draftNarrative = (insightId: string, role: SimulatedRole) =>

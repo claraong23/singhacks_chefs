@@ -57,6 +57,32 @@ def explain_holding(
     wt_delta = round(wt1 - wt0, 2)
     p_ret = round(((p1 / p0) - 1.0) * 100, 2) if p0 and p1 and p0 > 0 else None
 
+    # Movement classification (price-led, trade-led, combination)
+    qty_diff = abs(q1 - q0)
+    if qty_diff < 1e-5:
+        movement_type = "price-led"
+    elif p_ret is None or abs(p_ret) < 0.05:
+        movement_type = "trade-led"
+    else:
+        movement_type = "combination"
+
+    portfolio_delta = round(total_end - total_start, 2)
+    portfolio_change_pct = round((portfolio_delta / total_start * 100), 2) if total_start > 0 else 0.0
+    val_sign = "-" if val_delta < 0 else "+"
+    pf_sign = "-" if portfolio_delta < 0 else "+"
+    contribution_text = f"{val_sign}USD {abs(val_delta):,.0f} of portfolio's {pf_sign}USD {abs(portfolio_delta):,.0f} movement"
+
+    portfolio_impact = {
+        "start_snapshot": start,
+        "end_snapshot": end,
+        "portfolio_start_usd": round(total_start, 2),
+        "portfolio_end_usd": round(total_end, 2),
+        "portfolio_change_usd": portfolio_delta,
+        "portfolio_change_pct": portfolio_change_pct,
+        "holding_change_usd": round(val_delta, 2),
+        "contribution_text": contribution_text,
+    }
+
     what_changed = {
         "start_snapshot": start,
         "end_snapshot": end,
@@ -74,6 +100,7 @@ def explain_holding(
         "weight_change_pct": wt_delta,
         "currency": currency,
         "liquidity_tier": liquidity_tier,
+        "movement_type": movement_type,
     }
 
     # Find relevant events in event_log.csv occurring within [start, end]
@@ -97,7 +124,13 @@ def explain_holding(
         e_trans = event.get("primary_transmission", "").lower()
         e_desc = event.get("description", "").lower()
         matched_kw = [kw for kw in keywords if kw in e_trans or kw in e_desc]
-        if matched_kw or (asset_class == "Commodities" and "gold" in e_trans and "gold" in name.lower()):
+        is_gold_match = (asset_class == "Commodities" and "gold" in e_trans and "gold" in name.lower())
+        if matched_kw or is_gold_match:
+            # Determine confidence label
+            direct_keys = {name.lower(), underlying.lower(), sector.lower()}
+            is_direct = any(kw in direct_keys for kw in matched_kw) or is_gold_match
+            confidence_label = "Direct evidence" if is_direct else "Qualified market context"
+
             matching_events.append({
                 "event_id": event.get("event_id", f"EVT-{e_date}"),
                 "event_date": e_date,
@@ -106,9 +139,10 @@ def explain_holding(
                 "description": event.get("description", ""),
                 "primary_transmission": event.get("primary_transmission", ""),
                 "severity": event.get("severity", ""),
+                "confidence": confidence_label,
             })
             transmissions.append(
-                f"{e_date} ({event.get('severity')}): {event.get('description')} "
+                f"{e_date} [{confidence_label}] ({event.get('severity')}): {event.get('description')} "
                 f"[Transmission: {event.get('primary_transmission')}]"
             )
             source_evidence.append(
@@ -118,7 +152,7 @@ def explain_holding(
                     field="primary_transmission",
                     value=event.get("primary_transmission", ""),
                     snapshot_date=e_date,
-                    note=f"Event cited: {event.get('description')}",
+                    note=f"Event cited ({confidence_label}): {event.get('description')}",
                 )
             )
 
@@ -224,6 +258,29 @@ def explain_holding(
             f"Structured product look-through depends on underlying basket: {underlying}. Payout may be nonlinear or subject to knock-in barrier risk."
         )
 
+    # Data limitations (what data can and cannot prove)
+    limitations: list[str] = [
+        "Data reflects point-in-time snapshot records; intraday order execution prices and market peaks/troughs are not observed.",
+        "The authoritative event_log.csv captures recorded macro, geopolitical, and policy events; company-specific micro announcements may not have separate log entries.",
+    ]
+    if liquidity_tier in ("Illiquid", "Quarterly Gate"):
+        limitations.append(
+            f"As a {liquidity_tier} holding, valuation marks reflect lagged manager reporting rather than continuous mark-to-market pricing."
+        )
+    if underlying:
+        limitations.append(
+            f"Payoff is non-linear and dependent on underlying references ({underlying}). Linear attribution cannot capture knock-in barrier dynamics."
+        )
+
+    # Neutral, factual conclusion (single sentence)
+    ret_str = f" ({p_ret:+.1f}%)" if p_ret is not None else ""
+    flow_str = f" with {abs(q1 - q0):,.0f} units traded" if qty_diff >= 1e-5 else " without trading activity"
+    driver_str = "market price movements" if movement_type == "price-led" else ("client trading flow" if movement_type == "trade-led" else "a combination of price move and position adjustments")
+    conclusion = (
+        f"{name} {'declined' if val_delta < 0 else ('gained' if val_delta > 0 else 'remained unchanged')} "
+        f"by USD {abs(val_delta):,.0f}{ret_str}{flow_str}, driven by {driver_str} and shifting portfolio weight from {wt0:.1f}% to {wt1:.1f}%."
+    )
+
     return HoldingExplanation(
         client_id=client_id,
         instrument_id=instrument_id,
@@ -240,4 +297,8 @@ def explain_holding(
         why_it_matters=why_it_matters,
         uncertainties=uncertainties,
         source_evidence=source_evidence,
+        portfolio_impact=portfolio_impact,
+        movement_type=movement_type,
+        limitations=limitations,
+        conclusion=conclusion,
     )

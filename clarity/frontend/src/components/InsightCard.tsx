@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import type { ActionOption, Insight, InsightNarrativeDraft, InsightStatus, RMFeedbackInput, SimulatedRole } from '../types'
-import { CONFIDENCE_LABEL, SEVERITY_LABEL, titleCase, usd } from '../format'
+import type { ActionOption, Insight, InsightStatus, RMFeedbackInput, SimulatedRole } from '../types'
+import { CONFIDENCE_LABEL, SEVERITY_LABEL, formatHeadline, titleCase, usd } from '../format'
 import { ActionReview } from './ActionReview'
-import { draftNarrative } from '../api'
 
 const STATUS_LABEL: Record<InsightStatus, string> = {
   new: 'New',
@@ -17,14 +16,7 @@ const STATUS_LABEL: Record<InsightStatus, string> = {
   dismissed: 'Dismissed',
 }
 
-export function InsightCard({
-  insight,
-  options,
-  busy,
-  onEvidence,
-  onDecide,
-  role,
-}: {
+interface InsightCardProps {
   insight: Insight
   options: ActionOption[]
   busy: boolean
@@ -40,12 +32,22 @@ export function InsightCard({
     },
   ) => Promise<void>
   role: SimulatedRole
-}) {
+  onNavigateTab?: (tab: 'why' | 'changed' | 'risk' | 'liquidity' | 'scenario' | 'brief' | 'follow') => void
+  onPrepareAttribution?: (insight: Insight) => void
+}
+
+export function InsightCard({
+  insight,
+  options,
+  busy,
+  onEvidence,
+  onDecide,
+  role,
+  onNavigateTab: _onNavigateTab,
+  onPrepareAttribution,
+}: InsightCardProps) {
   const [showFacts, setShowFacts] = useState(false)
   const [reviewing, setReviewing] = useState(false)
-  const [aiDraft, setAiDraft] = useState<InsightNarrativeDraft | null>(null)
-  const [aiBusy, setAiBusy] = useState(false)
-  const [aiError, setAiError] = useState<string | null>(null)
   const chosen = options.find((option) => option.id === insight.selected_option_id)
   const terminal = ['client_ready', 'deferred', 'dismissed'].includes(insight.status)
 
@@ -67,6 +69,7 @@ export function InsightCard({
 
   return (
     <article className={`insight ${insight.severity}${insight.status === 'dismissed' ? ' dismissed' : ''}`}>
+      {/* CARD HEADER */}
       <div className="insight-head">
         <div
           className="score"
@@ -97,11 +100,11 @@ export function InsightCard({
           <span style={{ fontSize: 9.5, color: 'var(--faint)', lineHeight: 1 }}>/ 100</span>
         </div>
         <div style={{ flex: 1 }}>
-          <h3>{insight.headline}</h3>
+          <h3>{formatHeadline(insight.headline)}</h3>
           <div className="meta">
             <span className={`pill ${insight.severity}`}>{SEVERITY_LABEL[insight.severity]}</span>
             <span className="tag">{titleCase(insight.category)}</span>
-            <span className="tag" title="How much of this rests on measurement rather than a client statement">
+            <span className="tag" title="How much of this rests on measurement rather than an unverified assumption">
               {CONFIDENCE_LABEL[insight.confidence]}
             </span>
             {insight.amount_usd !== null && (
@@ -131,8 +134,9 @@ export function InsightCard({
         </p>
       )}
 
+      {/* Figures panel when expanded */}
       {showFacts && insight.observed_facts.length > 0 && (
-        <div className="facts">
+        <div className="facts" style={{ margin: '12px 0' }}>
           {insight.observed_facts.map((fact, index) => (
             <div className="fact" key={`${fact.label}-${index}`}>
               <div className="k">{fact.label}</div>
@@ -143,31 +147,13 @@ export function InsightCard({
       )}
 
       <div className="nextstep">
-        <strong>Suggested next step.</strong> {insight.suggested_next_step}
+        <strong>Next step.</strong> {insight.suggested_next_step}
         {insight.suggested_next_step_original && (
           <div className="footnote" style={{ marginTop: 6 }}>
-            Engine wording, replaced by the RM: “{insight.suggested_next_step_original}”
+            Engine wording, updated by RM: “{insight.suggested_next_step_original}”
           </div>
         )}
       </div>
-
-      {aiDraft?.narrative && (
-        <div className="nextstep" style={{ borderLeftColor: 'var(--accent)' }}>
-          <strong>Controlled AI preview — not saved.</strong> {aiDraft.narrative}
-          <div className="footnote" style={{ marginTop: 6 }}>
-            Provider: {aiDraft.provenance.provider} · model: {aiDraft.provenance.model} · {aiDraft.guardrails.length} checks passed
-          </div>
-        </div>
-      )}
-      {aiDraft && !aiDraft.can_use && (
-        <div className="banner">
-          <strong>AI output blocked.</strong> The preview introduced wording that did not pass the controlled checks.
-          {aiDraft.guardrails.filter((check) => check.status === 'block').map((check) => (
-            <div className="footnote" key={check.id}>{check.label}: {check.detail}</div>
-          ))}
-        </div>
-      )}
-      {aiError && <div className="footnote">AI draft unavailable: {aiError}</div>}
 
       {insight.rm_note && (
         <div className="nextstep" style={{ background: 'var(--surface-sunk)', borderLeftColor: 'var(--rule-strong)' }}>
@@ -181,40 +167,32 @@ export function InsightCard({
         </div>
       )}
 
-      <div className="insight-foot">
-        <button className="btn" onClick={() => setShowFacts((value) => !value)}>
+      {/* FOOTER ACTION BUTTONS */}
+      <div className="insight-foot" style={{ flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+        <button className="btn" onClick={() => setShowFacts((v) => !v)}>
           {showFacts ? 'Hide figures' : `Figures (${insight.observed_facts.length})`}
         </button>
         <button className="btn" onClick={() => onEvidence(insight)}>
           Evidence ({insight.evidence.length})
         </button>
-        <button
-          className="btn"
-          disabled={aiBusy || role !== 'rm'}
-          title={role === 'rm' ? 'Generate a guarded explanation from this computed insight' : 'Only the RM role can generate an AI preview'}
-          onClick={async () => {
-            setAiBusy(true)
-            setAiError(null)
-            try {
-              const result = await draftNarrative(insight.id, role)
-              setAiDraft(result)
-            } catch (error) {
-              setAiError(error instanceof Error ? error.message : 'Request failed')
-            } finally {
-              setAiBusy(false)
-            }
-          }}
-        >
-          {aiBusy ? 'Drafting…' : 'Generate controlled AI preview'}
-        </button>
+        {onPrepareAttribution && (
+          <button
+            type="button"
+            className="btn"
+            onClick={() => onPrepareAttribution(insight)}
+            title="Generate client-ready conversation talking points for this finding"
+          >
+            ✨ Prepare Client Attribution
+          </button>
+        )}
         <button
           className={`btn${reviewing ? '' : ' primary'}`}
           onClick={() => void toggleReview()}
         >
-          {reviewing ? 'Close review' : terminal ? 'View controlled outcome' : `Review options (${options.length})`}
+          {reviewing ? 'Close review' : terminal ? 'View controlled outcome' : `Formulate plan (${options.length})`}
         </button>
         <span className="footnote" style={{ marginLeft: 'auto' }}>
-          Options for RM review. Nothing is executed by the system.
+          RM retains sole decision authority. No trades executed automatically.
         </span>
       </div>
 

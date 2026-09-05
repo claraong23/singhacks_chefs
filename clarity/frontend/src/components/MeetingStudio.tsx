@@ -1,15 +1,26 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   createMeetingPackage,
+  deleteMeetingDraft,
+  getMeetingDrafts,
   getMeetingPackages,
   handoffMeetingPackage,
   preflightMeetingPackage,
   regenerateMeetingSection,
   restoreMeetingVersion,
   saveMeetingSection,
+  updateMeetingDraft,
 } from '../api'
 import { shortDate } from '../format'
-import type { CommunicationChannel, Dossier, Insight, InsightStatus, MeetingPackage, SimulatedRole } from '../types'
+import type {
+  ClientAttributionDraft,
+  CommunicationChannel,
+  Dossier,
+  Insight,
+  InsightStatus,
+  MeetingPackage,
+  SimulatedRole,
+} from '../types'
 import { KnowledgeReferencePanel } from './KnowledgeReference'
 import { AIMeetingDrafting } from './AIMeetingDrafting'
 
@@ -278,6 +289,338 @@ function SavedPlanCard({ insight, busy, onDecide, onReset }: SavedPlanCardProps)
   )
 }
 
+interface SavedAttributionDraftCardProps {
+  draft: ClientAttributionDraft
+  clientId: string
+  onUpdate: (updatedDraft: ClientAttributionDraft) => void
+  onDelete: (draftId: string) => void
+}
+
+function SavedAttributionDraftCard({
+  draft,
+  clientId,
+  onUpdate,
+  onDelete,
+}: SavedAttributionDraftCardProps) {
+  const [isEditing, setIsEditing] = useState(false)
+  const [headline, setHeadline] = useState(draft.headline)
+  const [whatHappened, setWhatHappened] = useState(draft.what_happened_bullet)
+  const [whyItMatters, setWhyItMatters] = useState(draft.why_it_matters_bullet)
+  const [nextSteps, setNextSteps] = useState(draft.next_steps_bullet)
+  const [isSaving, setIsSaving] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    const text = `${headline}\n\n1. What Happened:\n${whatHappened}\n\n2. Why It Matters For You:\n${whyItMatters}\n\n3. Next Steps to Consider:\n${nextSteps}\n\nSources: ${draft.source_chips.join(', ')}`
+    void navigator.clipboard.writeText(text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleSave = async () => {
+    if (!draft.id) return
+    setIsSaving(true)
+    try {
+      const res = await updateMeetingDraft(clientId, draft.id, {
+        headline,
+        what_happened_bullet: whatHappened,
+        why_it_matters_bullet: whyItMatters,
+        next_steps_bullet: nextSteps,
+      })
+      onUpdate(res.draft)
+      setIsEditing(false)
+    } catch (err) {
+      alert(`Could not save draft updates: ${String(err)}`)
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  const handleDelete = async () => {
+    if (!draft.id) return
+    if (
+      !window.confirm(
+        `Remove discussion draft for "${draft.instrument_name}" from meeting brief?`,
+      )
+    )
+      return
+    try {
+      await deleteMeetingDraft(clientId, draft.id)
+      onDelete(draft.id)
+    } catch (err) {
+      alert(`Could not delete draft: ${String(err)}`)
+    }
+  }
+
+  return (
+    <div
+      className="card"
+      style={{
+        borderLeft: '4px solid var(--accent, #1a4f78)',
+        background: 'var(--surface)',
+      }}
+    >
+      <div
+        className="card-head"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+        }}
+      >
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span className="pill accent" style={{ fontSize: 10.5 }}>
+              {draft.confidence}
+            </span>
+            <span className="muted" style={{ fontSize: 11 }}>
+              Added {shortDate(draft.created_at)}
+            </span>
+          </div>
+          <h3 style={{ margin: '6px 0 0', fontSize: 15 }}>{draft.instrument_name}</h3>
+        </div>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <button
+            className="btn quiet"
+            style={{ fontSize: 11, padding: '3px 8px' }}
+            onClick={handleCopy}
+          >
+            {copied ? '✓ Copied' : '📋 Copy'}
+          </button>
+          <button
+            className="btn quiet"
+            style={{ fontSize: 11, padding: '3px 8px' }}
+            onClick={() => setIsEditing(!isEditing)}
+          >
+            {isEditing ? 'Cancel' : '✏️ Edit'}
+          </button>
+          <button
+            className="btn quiet"
+            style={{
+              fontSize: 11,
+              padding: '3px 8px',
+              color: 'var(--negative, #ef4444)',
+            }}
+            onClick={() => void handleDelete()}
+          >
+            🗑️ Delete
+          </button>
+        </div>
+      </div>
+      <div className="card-body">
+        {isEditing ? (
+          <div className="stack" style={{ gap: 10 }}>
+            <div>
+              <label
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: 'var(--muted)',
+                  display: 'block',
+                  marginBottom: 2,
+                }}
+              >
+                Discussion Headline
+              </label>
+              <input
+                className="input"
+                value={headline}
+                onChange={(e) => setHeadline(e.target.value)}
+                style={{ width: '100%', fontSize: 13 }}
+              />
+            </div>
+            <div>
+              <label
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: 'var(--muted)',
+                  display: 'block',
+                  marginBottom: 2,
+                }}
+              >
+                1. What Happened
+              </label>
+              <textarea
+                className="input"
+                rows={2}
+                value={whatHappened}
+                onChange={(e) => setWhatHappened(e.target.value)}
+                style={{ width: '100%', fontSize: 12.5 }}
+              />
+            </div>
+            <div>
+              <label
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: 'var(--muted)',
+                  display: 'block',
+                  marginBottom: 2,
+                }}
+              >
+                2. Why It Matters For You
+              </label>
+              <textarea
+                className="input"
+                rows={2}
+                value={whyItMatters}
+                onChange={(e) => setWhyItMatters(e.target.value)}
+                style={{ width: '100%', fontSize: 12.5 }}
+              />
+            </div>
+            <div>
+              <label
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: 'var(--muted)',
+                  display: 'block',
+                  marginBottom: 2,
+                }}
+              >
+                3. Next Steps to Consider
+              </label>
+              <textarea
+                className="input"
+                rows={2}
+                value={nextSteps}
+                onChange={(e) => setNextSteps(e.target.value)}
+                style={{ width: '100%', fontSize: 12.5 }}
+              />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: 8,
+                marginTop: 4,
+              }}
+            >
+              <button
+                className="btn primary"
+                style={{ fontSize: 12, padding: '4px 12px' }}
+                disabled={isSaving}
+                onClick={() => void handleSave()}
+              >
+                {isSaving ? 'Saving…' : 'Save Changes'}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="stack" style={{ gap: 10 }}>
+            <div
+              style={{
+                padding: '8px 12px',
+                background: 'var(--surface-sunk)',
+                borderRadius: 'var(--radius)',
+                fontStyle: 'italic',
+                fontSize: 13,
+                color: 'var(--ink)',
+              }}
+            >
+              "{headline}"
+            </div>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: 12,
+                fontSize: 12.5,
+              }}
+            >
+              <div
+                style={{
+                  background: 'var(--surface-sunk)',
+                  padding: 10,
+                  borderRadius: 'var(--radius)',
+                }}
+              >
+                <strong
+                  style={{
+                    display: 'block',
+                    color: 'var(--ink-muted)',
+                    fontSize: 11,
+                    textTransform: 'uppercase',
+                    marginBottom: 4,
+                  }}
+                >
+                  1. What Happened
+                </strong>
+                <div>{whatHappened}</div>
+              </div>
+              <div
+                style={{
+                  background: 'var(--surface-sunk)',
+                  padding: 10,
+                  borderRadius: 'var(--radius)',
+                }}
+              >
+                <strong
+                  style={{
+                    display: 'block',
+                    color: 'var(--ink-muted)',
+                    fontSize: 11,
+                    textTransform: 'uppercase',
+                    marginBottom: 4,
+                  }}
+                >
+                  2. Why It Matters
+                </strong>
+                <div>{whyItMatters}</div>
+              </div>
+              <div
+                style={{
+                  background: 'var(--surface-sunk)',
+                  padding: 10,
+                  borderRadius: 'var(--radius)',
+                }}
+              >
+                <strong
+                  style={{
+                    display: 'block',
+                    color: 'var(--ink-muted)',
+                    fontSize: 11,
+                    textTransform: 'uppercase',
+                    marginBottom: 4,
+                  }}
+                >
+                  3. Next Steps
+                </strong>
+                <div>{nextSteps}</div>
+              </div>
+            </div>
+            {draft.source_chips && draft.source_chips.length > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 6,
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  marginTop: 4,
+                }}
+              >
+                <span className="muted" style={{ fontSize: 10.5 }}>
+                  Grounding Sources:
+                </span>
+                {draft.source_chips.map((chip, idx) => (
+                  <span
+                    key={idx}
+                    className="pill"
+                    style={{ fontSize: 10, background: 'var(--surface-sunk)' }}
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export function MeetingStudio({
   dossier,
   onDecide,
@@ -307,6 +650,24 @@ export function MeetingStudio({
   const [message, setMessage] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [planTargetId, setPlanTargetId] = useState<string>('')
+  const [attributionDrafts, setAttributionDrafts] = useState<ClientAttributionDraft[]>([])
+  const [loadingDrafts, setLoadingDrafts] = useState(false)
+
+  const loadAttributionDrafts = useCallback(async () => {
+    setLoadingDrafts(true)
+    try {
+      const res = await getMeetingDrafts(clientId)
+      setAttributionDrafts(res.drafts || [])
+    } catch (err) {
+      console.error('Failed to load meeting attribution drafts:', err)
+    } finally {
+      setLoadingDrafts(false)
+    }
+  }, [clientId])
+
+  useEffect(() => {
+    void loadAttributionDrafts()
+  }, [loadAttributionDrafts])
 
   // Saved action plans formulated by RM
   const savedInsights = useMemo(() => {
@@ -467,7 +828,75 @@ export function MeetingStudio({
 
   return (
     <div className="stack" style={{ gap: 20 }}>
-      {/* SECTION 1: RM Meeting Agenda & Action Directives */}
+      {/* SECTION 1: Client Discussion Points & Attribution Drafts */}
+      <div className="card">
+        <div
+          className="card-head"
+          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}
+        >
+          <div>
+            <h2>🗣️ Client Discussion Points & Attribution Drafts</h2>
+            <span className="sub" style={{ display: 'block', marginTop: 3 }}>
+              Verified client-centric talking points drafted from portfolio movements and flags
+            </span>
+          </div>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <button
+              className="btn quiet"
+              style={{ fontSize: 11, padding: '2px 8px' }}
+              onClick={() => void loadAttributionDrafts()}
+              disabled={loadingDrafts}
+            >
+              🔄 Refresh
+            </button>
+            <span className="pill accent" style={{ fontSize: 11 }}>
+              {attributionDrafts.length} {attributionDrafts.length === 1 ? 'Draft' : 'Drafts'}
+            </span>
+          </div>
+        </div>
+
+        <div className="card-body">
+          {attributionDrafts.length === 0 ? (
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '20px 16px',
+                background: 'var(--surface-sunk)',
+                borderRadius: 'var(--radius)',
+                border: '1px dashed var(--rule)',
+              }}
+            >
+              <div style={{ fontSize: 24, marginBottom: 6 }}>💬</div>
+              <h3 style={{ fontSize: 14, margin: '0 0 4px', fontWeight: 600 }}>
+                No Client Discussion Drafts Added Yet
+              </h3>
+              <p className="muted" style={{ maxWidth: 480, margin: '0 auto', fontSize: 12.5 }}>
+                Click <strong>"Prepare Client Attribution"</strong> on any portfolio change (in <em>What changed and why</em>) or flag (in <em>Flags to address</em>) to save grounded 3-point client talking points directly into this meeting brief.
+              </p>
+            </div>
+          ) : (
+            <div className="stack" style={{ gap: 12 }}>
+              {attributionDrafts.map((d) => (
+                <SavedAttributionDraftCard
+                  key={d.id || d.instrument_id}
+                  draft={d}
+                  clientId={clientId}
+                  onUpdate={(updated) => {
+                    setAttributionDrafts((prev) =>
+                      prev.map((item) => (item.id === updated.id ? updated : item)),
+                    )
+                  }}
+                  onDelete={(deletedId) => {
+                    setAttributionDrafts((prev) => prev.filter((item) => item.id !== deletedId))
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* SECTION 2: RM Meeting Agenda & Action Directives */}
       <div className="card">
         <div
           className="card-head"

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { BookView, Severity } from '../types'
-import { pct, shortDate, titleCase, usd } from '../format'
+import { formatHeadline, pct, shortDate, titleCase, usd } from '../format'
 import type { EventImpactView, EventSummary } from '../types'
 import { getEventImpact, getEvents } from '../api'
 
@@ -67,19 +67,87 @@ export function BookWorkbench({
     return Boolean(row.categories[filter])
   })
 
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [expandedFlags, setExpandedFlags] = useState<Record<string, boolean>>({})
+
   return (
     <div>
       <div className="book-head">
         <div>
           <div className="eyebrow">Morning brief · {shortDate(book.as_of)}</div>
-          <h1>Who to call first</h1>
-          <p>
-            {book.totals.clients} clients, {usd(book.totals.aum_usd)} under advice.{' '}
-            {book.totals.insights} open findings, of which {book.totals.critical} are
-            critical. Ranked by a published formula, not by an opaque score — open any
-            client to see the reasons behind their position.
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <h1 style={{ margin: 0 }}>Who to call first</h1>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <button
+                type="button"
+                aria-label="How priorities are ranked"
+                aria-expanded={showTooltip}
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+                onFocus={() => setShowTooltip(true)}
+                onBlur={() => setShowTooltip(false)}
+                onClick={() => setShowTooltip((v) => !v)}
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: '50%',
+                  border: '1px solid var(--rule-strong, #ccc)',
+                  background: 'var(--surface-sunk, #f5f7fa)',
+                  color: 'var(--accent, #002b49)',
+                  fontWeight: 700,
+                  fontSize: 12,
+                  cursor: 'help',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: 0,
+                }}
+              >
+                ?
+              </button>
+              {showTooltip && (
+                <div
+                  role="tooltip"
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    marginTop: 8,
+                    width: 360,
+                    padding: '12px 14px',
+                    background: 'var(--surface, #ffffff)',
+                    border: '1px solid var(--rule, #e2e8f0)',
+                    borderRadius: 'var(--radius, 6px)',
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.18)',
+                    zIndex: 999,
+                    fontSize: 12,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 5, color: 'var(--accent)' }}>
+                    How Priorities Are Ranked
+                  </div>
+                  <p style={{ margin: '0 0 6px', color: 'var(--ink)' }}>
+                    Priority scores (0–100) are computed deterministically using the bank's active policy:
+                  </p>
+                  <div style={{ background: 'var(--surface-sunk)', padding: '5px 8px', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: 11, marginBottom: 6, border: '1px solid var(--rule)' }}>
+                    Score = 45% Severity + 30% Materiality + 25% Urgency
+                  </div>
+                  <ul style={{ margin: '0 0 6px', paddingLeft: 16, color: 'var(--ink-soft)' }}>
+                    <li><strong>Severity (45%):</strong> Critical (1.00), High (0.78), Medium (0.52), Low (0.30).</li>
+                    <li><strong>Materiality (30%):</strong> Ratio of affected capital to total household wealth.</li>
+                    <li><strong>Urgency (25%):</strong> Time pressure (e.g., margin call &lt; 30d = 1.0, 90d = 0.8, &gt; 1yr = 0.2).</li>
+                  </ul>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', borderTop: '1px solid var(--rule)', paddingTop: 5 }}>
+                    <strong>Hard overrides:</strong> Imminent Lombard margin calls, unhedged confirmed cash liabilities, and active mandate breaches force top ranking regardless of portfolio size.
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <p style={{ marginTop: 5, color: 'var(--ink-soft)', fontSize: 13.5 }}>
+            {book.totals.clients} clients · {usd(book.totals.aum_usd)} under advice · {book.totals.insights} open findings ({book.totals.critical} critical)
           </p>
-          {book.scoring.policy && <p className="footnote" style={{ marginBottom: 0 }}>Active priority policy: <strong>{book.scoring.policy.name}</strong> · severity {Math.round(book.scoring.policy.weights.severity * 100)}%, materiality {Math.round(book.scoring.policy.weights.materiality * 100)}%, urgency {Math.round(book.scoring.policy.weights.urgency * 100)}%.</p>}
         </div>
         <div className="kpis">
           <div className="stat">
@@ -269,13 +337,57 @@ export function BookWorkbench({
                       />
                     </span>
                   </div>
-                  <div className="meta" style={{ fontSize: 11, color: 'var(--muted)', marginTop: 4 }}>
-                    {titleCase(row.top_category ?? '')}
+                  <div className="meta" style={{ fontSize: 11, color: 'var(--ink-soft)', marginTop: 4, lineHeight: 1.35 }}>
+                    {row.priority_explanation || titleCase(row.top_category ?? '')}
                   </div>
                 </td>
                 <td className="headlinecell">
-                  <div className="h">{row.top_headline}</div>
-                  <div className="why">{row.why_now.join(' · ')}</div>
+                  {row.flags && row.flags.length > 0 ? (
+                    <div className="flags-list" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      {(expandedFlags[row.client_id] ? row.flags : row.flags.slice(0, 2)).map((flag, idx) => (
+                        <div key={flag.id || idx} style={{ display: 'flex', alignItems: 'baseline', gap: 6, fontSize: 12.5 }}>
+                          <span
+                            className={`pill ${flag.severity}`}
+                            style={{ fontSize: 9, padding: '1px 5px', textTransform: 'uppercase', flexShrink: 0 }}
+                          >
+                            {flag.severity}
+                          </span>
+                          <span style={{ fontWeight: idx === 0 ? 600 : 400, color: 'var(--ink)' }}>
+                            {formatHeadline(flag.headline)}
+                          </span>
+                        </div>
+                      ))}
+                      {row.flags.length > 2 && (
+                        <button
+                          type="button"
+                          className="btn quiet"
+                          style={{
+                            fontSize: 11,
+                            padding: '2px 6px',
+                            alignSelf: 'flex-start',
+                            color: 'var(--accent)',
+                            marginTop: 2,
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setExpandedFlags((prev) => ({
+                              ...prev,
+                              [row.client_id]: !prev[row.client_id],
+                            }))
+                          }}
+                        >
+                          {expandedFlags[row.client_id]
+                            ? '▲ Show fewer'
+                            : `… (+${row.flags.length - 2} more ${row.flags.length - 2 === 1 ? 'flag' : 'flags'})`}
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <>
+                      <div className="h">{formatHeadline(row.top_headline)}</div>
+                      <div className="why">{row.why_now.join(' · ')}</div>
+                    </>
+                  )}
                 </td>
                 <td style={{ textAlign: 'right' }}>
                   <div>{usd(row.total_usd)}</div>

@@ -55,6 +55,7 @@ from .gates import evaluate_readiness
 from .loaders import get_book
 from .meeting import create_package, preflight, regenerate_section, restore_version, update_section
 from .meeting_store import get_meeting_store, new_id, now as meeting_now
+from .meeting_draft_store import get_meeting_draft_store
 from .review import InvalidTransitionError, VALID_STATUSES, get_store
 from .scenario_store import get_scenario_store
 from .scenarios import evaluate_scenario, templates_for_client
@@ -335,6 +336,11 @@ class ClarityHandler(BaseHTTPRequestHandler):
                 if client_id not in get_book().clients:
                     return self._send_json({"error": f"Unknown client {client_id}"}, 404)
                 return self._send_json({"packages": get_meeting_store().list_for_client(client_id)})
+            if path.startswith("/api/clients/") and path.endswith("/meeting-drafts"):
+                client_id = path[len("/api/clients/") : -len("/meeting-drafts")]
+                if client_id not in get_book().clients:
+                    return self._send_json({"error": f"Unknown client {client_id}"}, 404)
+                return self._send_json({"drafts": get_meeting_draft_store().list_for_client(client_id)})
             if path.startswith("/api/meeting-packages/"):
                 package_id = path[len("/api/meeting-packages/") :].strip("/")
                 package = get_meeting_store().get(package_id)
@@ -706,10 +712,24 @@ class ClarityHandler(BaseHTTPRequestHandler):
                     return self._send_json(
                         {"error": "client_id and draft are required"}, 400
                     )
-                entry = get_store().add_draft_to_meeting_brief(
+                entry = get_meeting_draft_store().save(
                     client_id=client_id, draft=draft
                 )
-                return self._send_json({"status": "added", "entry": entry})
+                return self._send_json({"status": "added", "draft": entry, "entry": entry, "brief": {"status": "saved"}}, 201)
+            if path.startswith("/api/clients/") and "/meeting-drafts/" in path and path.endswith("/update"):
+                parts = path[len("/api/clients/") : -len("/update")].split("/meeting-drafts/")
+                client_id, draft_id = parts[0], parts[1]
+                payload = self._read_json()
+                draft = payload.get("draft") or payload
+                entry = get_meeting_draft_store().update(client_id, draft_id, draft)
+                if not entry:
+                    return self._send_json({"error": "Draft not found"}, 404)
+                return self._send_json({"draft": entry})
+            if path.startswith("/api/clients/") and "/meeting-drafts/" in path and path.endswith("/delete"):
+                parts = path[len("/api/clients/") : -len("/delete")].split("/meeting-drafts/")
+                client_id, draft_id = parts[0], parts[1]
+                deleted = get_meeting_draft_store().delete(client_id, draft_id)
+                return self._send_json({"ok": deleted})
             if path.startswith("/api/insights/") and path.endswith("/narrative"):
                 payload = self._read_json()
                 if payload.get("role", "rm") != "rm":
@@ -831,6 +851,38 @@ class ClarityHandler(BaseHTTPRequestHandler):
             return self._send_json({"error": str(exc)}, 409)
         except ValueError as exc:
             return self._send_json({"error": str(exc)}, 400)
+        except Exception as exc:
+            traceback.print_exc()
+            return self._send_json({"error": str(exc)}, 500)
+
+    def do_PUT(self) -> None:  # noqa: N802
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path)
+        try:
+            if path.startswith("/api/clients/") and "/meeting-drafts/" in path:
+                parts = path[len("/api/clients/") :].split("/meeting-drafts/")
+                client_id, draft_id = parts[0], parts[1]
+                payload = self._read_json()
+                draft = payload.get("draft") or payload
+                entry = get_meeting_draft_store().update(client_id, draft_id, draft)
+                if not entry:
+                    return self._send_json({"error": "Draft not found"}, 404)
+                return self._send_json({"draft": entry})
+            return self._send_json({"error": "Not found"}, 404)
+        except Exception as exc:
+            traceback.print_exc()
+            return self._send_json({"error": str(exc)}, 500)
+
+    def do_DELETE(self) -> None:  # noqa: N802
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path)
+        try:
+            if path.startswith("/api/clients/") and "/meeting-drafts/" in path:
+                parts = path[len("/api/clients/") :].split("/meeting-drafts/")
+                client_id, draft_id = parts[0], parts[1]
+                deleted = get_meeting_draft_store().delete(client_id, draft_id)
+                return self._send_json({"ok": deleted})
+            return self._send_json({"error": "Not found"}, 404)
         except Exception as exc:
             traceback.print_exc()
             return self._send_json({"error": str(exc)}, 500)

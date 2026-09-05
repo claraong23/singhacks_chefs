@@ -96,6 +96,27 @@ def book_view(book: DataBook | None = None, store: ReviewStore | None = None) ->
             if store.effective_status(i)[0] in ("rm_reviewed", "client_ready")
         )
 
+        # Construct explicit, human-readable priority explanation
+        if top:
+            cat_label = top.category.value.replace("_", " ").title()
+            reasons_text = " · ".join(r for r in top.priority_reasons if not r.startswith("Severity "))
+            priority_explanation = f"{cat_label}: {reasons_text}" if reasons_text else f"{cat_label}: {top.severity.value.title()} severity"
+        else:
+            priority_explanation = "No active flags"
+
+        flags = [
+            {
+                "id": i.id,
+                "category": i.category.value,
+                "severity": i.severity.value,
+                "headline": i.headline,
+                "priority_score": round(i.priority_score, 1),
+                "reasons": i.priority_reasons,
+                "amount_usd": i.amount_usd,
+            }
+            for i in live
+        ]
+
         rows.append(
             {
                 "client_id": client_id,
@@ -107,10 +128,12 @@ def book_view(book: DataBook | None = None, store: ReviewStore | None = None) ->
                 "life_stage": client.get("life_stage"),
                 "total_usd": view.total_usd,
                 "priority_score": top.priority_score if top else 0.0,
+                "priority_explanation": priority_explanation,
                 "top_headline": top.headline if top else "Nothing outstanding",
                 "top_category": top.category.value if top else None,
                 "top_severity": top.severity.value if top else "info",
                 "why_now": top.priority_reasons if top else [],
+                "flags": flags,
                 "insight_count": len(live),
                 "severity_counts": severities,
                 "categories": categories,

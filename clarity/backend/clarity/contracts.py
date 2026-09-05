@@ -882,6 +882,10 @@ class HoldingExplanation:
     why_it_matters: list[str]
     uncertainties: list[str]
     source_evidence: list[Evidence] = field(default_factory=list)
+    portfolio_impact: dict[str, Any] = field(default_factory=dict)
+    movement_type: str = "price-led"
+    limitations: list[str] = field(default_factory=list)
+    conclusion: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -900,6 +904,10 @@ class HoldingExplanation:
             "why_it_matters": self.why_it_matters,
             "uncertainties": self.uncertainties,
             "source_evidence": [e.to_dict() for e in self.source_evidence],
+            "portfolio_impact": self.portfolio_impact,
+            "movement_type": self.movement_type,
+            "limitations": self.limitations,
+            "conclusion": self.conclusion,
         }
 
 
@@ -917,6 +925,7 @@ class ClientAttributionDraft:
     limitations: list[str]
     language_disclaimer: str | None = None
     created_at: str = ""
+    id: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return dataclasses.asdict(self)

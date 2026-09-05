@@ -206,6 +206,16 @@ export interface SavedScenario {
   result: ScenarioResult
 }
 
+export interface BookFlag {
+  id: string
+  category: string
+  severity: Severity
+  headline: string
+  priority_score: number
+  reasons?: string[]
+  amount_usd?: number | null
+}
+
 export interface BookRow {
   rank: number
   client_id: string
@@ -217,10 +227,12 @@ export interface BookRow {
   life_stage: string
   total_usd: number
   priority_score: number
+  priority_explanation?: string
   top_headline: string
   top_category: string | null
   top_severity: Severity
   why_now: string[]
+  flags?: BookFlag[]
   insight_count: number
   severity_counts: Record<Severity, number>
   categories: Record<string, number>
@@ -899,6 +911,17 @@ export interface HoldingChange {
   liquidity_tier: string
 }
 
+export interface PortfolioImpact {
+  start_snapshot: string
+  end_snapshot: string
+  portfolio_start_usd: number
+  portfolio_end_usd: number
+  portfolio_change_usd: number
+  portfolio_change_pct: number
+  holding_change_usd: number
+  contribution_text: string
+}
+
 export interface HoldingExplanation {
   client_id: string
   instrument_id: string
@@ -924,6 +947,7 @@ export interface HoldingExplanation {
     weight_change_pct: number
     currency: string
     valuation_lag: boolean
+    movement_type?: 'price-led' | 'trade-led' | 'combination'
   }
   event_evidence: {
     event_id: string
@@ -933,16 +957,22 @@ export interface HoldingExplanation {
     description: string
     primary_transmission: string
     severity: string
-    correlation_score: number
-    rationale: string
+    correlation_score?: number
+    rationale?: string
+    confidence?: string
   }[]
   transmission_mechanisms: string[]
   why_it_matters: string[]
   uncertainties: string[]
   source_evidence: Evidence[]
+  portfolio_impact?: PortfolioImpact
+  movement_type?: 'price-led' | 'trade-led' | 'combination'
+  limitations?: string[]
+  conclusion?: string
 }
 
 export interface ClientAttributionDraft {
+  id?: string
   client_id: string
   instrument_id: string
   instrument_name: string
@@ -955,6 +985,24 @@ export interface ClientAttributionDraft {
   limitations: string[]
   language_disclaimer: string | null
   created_at: string
+}
+
+export interface PortfolioAttribution {
+  client_id: string
+  start: string
+  end: string
+  start_label?: string
+  end_label?: string
+  start_value_usd: number
+  end_value_usd: number
+  change_usd: number
+  change_pct: number | null
+  price_effect_usd: number
+  fx_effect_usd: number
+  flow_effect_usd: number
+  market_contributors: Contribution[]
+  market_detractors: Contribution[]
+  contributions: Contribution[]
 }
 
 export interface ClientNote {
@@ -976,4 +1024,3 @@ export interface ProposedObjective {
   rationale: string
   status: 'pending_governance_review' | 'approved' | 'rejected'
 }
-
