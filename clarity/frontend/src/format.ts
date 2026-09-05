@@ -145,8 +145,8 @@ export function formatProblemSummary(
 export function formatClientRelevance(
   relevance: string | null | undefined,
   insight?: any,
-): string {
-  if (!relevance) return ''
+): string[] {
+  if (!relevance) return []
 
   // Enrich generic "The gap is a funding question, not a performance question..."
   if (
@@ -155,31 +155,26 @@ export function formatClientRelevance(
   ) {
     const clientId = insight?.client_id
     if (clientId === 'CL-0014') {
-      return (
-        'Lau Chi Ming (entrepreneur in Hong Kong property development) faces a confirmed ' +
-        'HKD 60,000,000 (USD 7.68m) Mid-Levels redevelopment equity contribution due between 2026-11-01 and 2027-06-30. ' +
-        'Because his liquid holdings are pledged as collateral to Lombard facility CF-0002 (currently operating with only ' +
-        'a 0.59% buffer before a margin call trigger) and his primary wealth is in illiquid property, he cannot simply ' +
-        'withdraw funds. Selling from the pledged account removes collateral value faster than debt reduction, which paradoxically ' +
-        'accelerates a margin call. Proactive RM planning—such as staging developer equity contributions, pledging alternative ' +
-        'unencumbered collateral, or restructuring facility limits—is required before the payment date.'
-      )
+      return [
+        'Lau Chi Ming (Hong Kong property developer) faces a confirmed HKD 60,000,000 (USD 7.68m) Mid-Levels redevelopment equity contribution due between 2026-11-01 and 2027-06-30.',
+        'His liquid holdings are pledged to Lombard facility CF-0002 (operating with only a 0.59% buffer before a margin call trigger) while primary wealth is in illiquid property, preventing standard cash withdrawals.',
+        'Selling from the pledged account removes collateral value faster than debt reduction, which paradoxically accelerates a margin call.',
+        'Proactive RM planning—such as staging developer equity contributions, pledging alternative unencumbered collateral, or restructuring facility limits—is required before the payment date.',
+      ]
     }
     if (clientId === 'CL-0002') {
-      return (
-        'Alexander Chen (enterprise software founder) has USD 6.2m in upcoming cash needs, including an estimated ' +
-        'USD 4.2m tax liability conditional on a secondary share sale and USD 2.0m for family trust establishment. ' +
-        'Because USD 13.1m of his liquid assets are pledged to facility CF-0001 (running tight at 73.71% LTV vs 75% trigger) ' +
-        'and USD 33.5m is illiquid private stock, free withdrawable cash is only USD 152k (2.5% coverage). ' +
-        'Withdrawing pledged assets will breach credit covenants. A pre-funding or staged liquidity plan must be agreed ' +
-        'before the share transaction completes.'
-      )
+      return [
+        'Alexander Chen (enterprise software founder) has USD 6.2m in upcoming cash needs, including an estimated USD 4.2m tax liability conditional on a secondary share sale and USD 2.0m for family trust establishment.',
+        'Because USD 13.1m of his liquid assets are pledged to facility CF-0001 (running tight at 73.71% LTV vs 75% trigger) and USD 33.5m is illiquid private stock, free withdrawable cash is only USD 152k (2.5% coverage).',
+        'Withdrawing pledged assets will breach credit covenants rather than funding obligations safely.',
+        'A structured pre-funding or staged liquidity release plan must be agreed before the secondary transaction completes.',
+      ]
     }
-    return (
-      'The client faces firm upcoming cash commitments. Because available liquid portfolios are pledged as credit collateral ' +
-      'or locked in restricted tiers, attempting to withdraw capital directly reduces lending value and triggers loan covenant breaches. ' +
-      'A structured funding strategy must be agreed with the client well before the payment deadline.'
-    )
+    return [
+      'The client faces firm upcoming cash commitments inside the planning horizon.',
+      'Because available liquid portfolios are pledged as credit collateral or locked in restricted tiers, attempting to withdraw capital directly reduces lending value and triggers loan covenant breaches.',
+      'A structured funding strategy must be agreed with the client well before the payment deadline.',
+    ]
   }
 
   // Enrich generic collateral relevance statements
@@ -189,20 +184,26 @@ export function formatClientRelevance(
   ) {
     const clientId = insight?.client_id
     if (clientId === 'CL-0014') {
-      return (
-        'For Lau Chi Ming (property development background), credit facility CF-0002 is secured by the Advisory Balanced Portfolio with HKD 58m drawn. ' +
-        'With current LTV at 69.41% vs a 70% margin-call trigger, headroom is just 0.59 percentage points (a mere 0.8% fall in collateral value triggers a call). ' +
-        'Any sale or withdrawal from this account removes collateral value while leaving debt intact, which immediately breaches the facility trigger. ' +
-        'This directly restricts his ability to fund upcoming cash calls (like the HKD 60m Mid-Levels redevelopment contribution) from this portfolio.'
-      )
+      return [
+        'For Lau Chi Ming (property development background), credit facility CF-0002 is secured by the Advisory Balanced Portfolio with HKD 58m drawn.',
+        'With current LTV at 69.41% vs a 70% margin-call trigger, headroom is just 0.59 percentage points (a mere 0.8% fall in collateral value triggers a call).',
+        'Any sale or withdrawal from this account removes collateral value while leaving debt intact, which immediately breaches the facility trigger.',
+        'This directly restricts his ability to fund upcoming cash calls (like the HKD 60m Mid-Levels redevelopment contribution) from this portfolio.',
+      ]
     }
     if (clientId === 'CL-0002') {
-      return (
-        'For Alexander Chen, facility CF-0001 has USD 9.6m drawn against collateral, operating at 73.71% LTV against a 75% trigger. ' +
-        'Headroom is narrow (a 1.7% collateral drop triggers a call). Withdrawing or selling assets removes collateral lending value and raises the loan ratio, ' +
-        'restricting unencumbered withdrawals for planned tax and trust allocations.'
-      )
+      return [
+        'For Alexander Chen, credit facility CF-0001 has USD 9.6m drawn against pledged collateral in the Advisory Growth Portfolio.',
+        'Operating at 73.71% LTV against a 75% trigger, headroom is narrow (a 1.7% collateral drop triggers a call).',
+        'Withdrawing or selling assets removes collateral lending value while debt stays fixed, which raises the loan ratio.',
+        'This directly restricts unencumbered withdrawals for planned tax and family trust allocations.',
+      ]
     }
+    return [
+      'The credit facility is secured against liquid portfolio holdings with active margin triggers.',
+      'Any sale and withdrawal from the pledged account reduces lending value while the drawn balance stays put, raising loan-to-value rather than lowering it.',
+      'A collateral plan must be agreed before any client-driven withdrawals to prevent covenant breaches.',
+    ]
   }
 
   // Enrich generic mandate relevance
@@ -210,22 +211,76 @@ export function formatClientRelevance(
     relevance.includes('This is a advisory portfolio. Positions are client-directed')
   ) {
     if (insight?.client_id === 'CL-0003') {
-      return (
-        'Margarethe Voss-Brenner inherited this portfolio and has an explicit Conservative preference (risk profile 2/10), ' +
-        'yet the mandate has drifted to 71.5% equity (41.5pp above ceiling). She also faces a confirmed EUR 3.4m inheritance tax liability in 2026. ' +
-        'Because this is an advisory portfolio, trades cannot be executed unilaterally—the RM must present a de-risking plan that protects capital and sets aside tax reserves.'
-      )
+      return [
+        'Margarethe Voss-Brenner inherited this portfolio and has an explicit Conservative preference (risk profile 2/10), yet the mandate has drifted to 71.5% equity (41.5 pp above ceiling).',
+        'She faces a confirmed EUR 3.4m inheritance tax liability falling due in 2026.',
+        'Because this is an advisory portfolio, trades cannot be executed unilaterally—positions require client review and instruction.',
+        'The RM must present a phased de-risking plan that locks in gains, protects capital, and sets aside EUR 3.4m in liquid tax reserves.',
+      ]
     }
+    return [
+      'This is an advisory portfolio where positions are client-directed; trades cannot be executed without client instruction.',
+      'Asset allocation has drifted beyond approved mandate limits and requires proactive alignment.',
+      'The RM should present a rebalancing proposal to restore conformity with the client mandate.',
+    ]
   }
 
   // Enrich private commitment calls
   if (relevance.includes("Capital calls arrive at the manager's discretion")) {
-    return (
-      'For Fong Enterprises Family Office, USD 15.8m in uncalled private market commitments will be drawn at the fund manager\'s discretion across 2026 Q4 to 2028 Q2. ' +
-      'Because the alternatives sleeve only holds USD 900k in liquid cash and USD 3.6m is gated, meeting calls from other core portfolios requires an explicit ' +
-      'investment committee mandate and cross-portfolio liquidity staging.'
-    )
+    if (insight?.client_id === 'CL-0017') {
+      return [
+        'For Fong Enterprises Family Office, USD 15.8m in uncalled private market commitments will be drawn at the fund manager\'s discretion across 2026 Q4 to 2028 Q2.',
+        'The alternatives sleeve only holds USD 900k in liquid cash, while USD 3.6m in private credit is gated.',
+        'Meeting calls from other core portfolios requires an explicit Investment Committee mandate and cross-portfolio liquidity staging.',
+        'The RM must provide a multi-year cash-flow schedule mapping each call to designated funding accounts.',
+      ]
+    }
+    return [
+      'Capital calls arrive at the manager\'s discretion and are contractually binding obligations.',
+      'A sleeve that has to sell its remaining liquid assets to meet one call stops being able to meet subsequent draws.',
+      'Liquidity must be mapped across accounts and dates to prevent forced secondary liquidations.',
+    ]
   }
 
-  return relevance
+  // Gated assets
+  if (relevance.includes('contribute nothing to borrowing capacity')) {
+    return [
+      'These gated positions cannot be redeemed on demand due to fund redemption lockups.',
+      'With an advance rate of zero, they contribute nothing to borrowing capacity and cannot bridge cash needs.',
+      'The RM should confirm current gate terms with the manager and treat the position as unavailable until cash is received.',
+    ]
+  }
+
+  // Thematic / business concentration
+  if (relevance.includes('operating business is not in the portfolio view')) {
+    return [
+      'Total household risk is higher than the portfolio alone suggests, because the client\'s operating business is concentrated in the same theme.',
+      'A downturn in this sector impacts both operating company earnings and investment portfolio values simultaneously.',
+      'The RM should review total combined exposure with the client and agree on an appropriate portfolio sector ceiling.',
+    ]
+  }
+
+  // Currency translation risk
+  if (relevance.includes('translation risk the client may not see')) {
+    const baseCurr = insight?.client_base_currency || 'base currency'
+    return [
+      `Base currency is ${baseCurr}, so foreign currency obligations introduce translation risk not readily apparent on standard valuation statements.`,
+      'Adverse currency movements directly increase the domestic cash required to fund foreign commitments.',
+      'The RM should evaluate whether to pre-fund the obligation in its local currency or put in place currency hedges.',
+    ]
+  }
+
+  // General fallback: split by newlines/bullets or sentences
+  const lines = relevance
+    .split(/\r?\n/)
+    .map((s) => s.trim().replace(/^[\u2022\u25E6\u2043\u2219\*\-]\s*/, ''))
+    .filter(Boolean)
+  if (lines.length > 1) return lines
+
+  const sentences = relevance.match(/[^.!?]+[.!?]+(\s+|$)/g)
+  if (sentences && sentences.length > 1) {
+    return sentences.map((s) => s.trim()).filter(Boolean)
+  }
+
+  return [relevance.trim()]
 }

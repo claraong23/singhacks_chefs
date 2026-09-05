@@ -24,6 +24,20 @@ const STATUS_LABEL: Record<InsightStatus, string> = {
   dismissed: 'Dismissed',
 }
 
+function renderMarkdownInline(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={i} style={{ color: 'var(--ink, #1f2937)', fontWeight: 600 }}>
+          {part.slice(2, -2)}
+        </strong>
+      )
+    }
+    return part
+  })
+}
+
 interface InsightCardProps {
   insight: Insight
   options: ActionOption[]
@@ -136,40 +150,58 @@ export function InsightCard({
         </div>
       )}
 
-      {insight.client_relevance && (
-        <div
-          style={{
-            // Matches the 70px / 18px inset the summary, next step and footer
-            // all use, so the card has one left edge rather than three.
-            margin: '12px 18px 12px 70px',
-            padding: '10px 14px',
-            background: 'var(--surface-sunk, #f5f7fa)',
-            borderLeft: '3px solid var(--accent, #1a4f78)',
-            borderRadius: 'var(--radius, 4px)',
-            fontSize: 13,
-            lineHeight: 1.55,
-            color: 'var(--ink, #1f2937)',
-          }}
-        >
+      {insight.client_relevance && (() => {
+        const points = formatClientRelevance(insight.client_relevance, insight)
+        if (points.length === 0) return null
+        return (
           <div
             style={{
-              fontSize: 10.5,
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              color: 'var(--accent, #1a4f78)',
-              marginBottom: 4,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 5,
+              // Matches the 70px / 18px inset the summary, next step and footer
+              // all use, so the card has one left edge rather than three.
+              margin: '12px 18px 12px 70px',
+              padding: '10px 14px',
+              background: 'var(--surface-sunk, #f5f7fa)',
+              borderLeft: '3px solid var(--accent, #1a4f78)',
+              borderRadius: 'var(--radius, 4px)',
+              fontSize: 13,
+              lineHeight: 1.55,
+              color: 'var(--ink, #1f2937)',
             }}
           >
-            <span>👤</span>
-            <span>Client &amp; Situation Context</span>
+            <div
+              style={{
+                fontSize: 10.5,
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                color: 'var(--accent, #1a4f78)',
+                marginBottom: 6,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+              }}
+            >
+              <span>👤</span>
+              <span>Client &amp; Situation Context</span>
+            </div>
+            <ul
+              style={{
+                margin: 0,
+                paddingLeft: 18,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6,
+              }}
+            >
+              {points.map((point, index) => (
+                <li key={index} style={{ lineHeight: 1.5, color: 'var(--ink, #1f2937)' }}>
+                  {renderMarkdownInline(point)}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div>{formatClientRelevance(insight.client_relevance, insight)}</div>
-        </div>
-      )}
+        )
+      })()}
 
       {/* Figures panel when expanded */}
       {showFacts && insight.observed_facts.length > 0 && (
