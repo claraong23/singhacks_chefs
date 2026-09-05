@@ -136,7 +136,7 @@ export function InsightCard({
 
       {/* Figures panel when expanded */}
       {showFacts && insight.observed_facts.length > 0 && (
-        <div className="facts" style={{ margin: '12px 0' }}>
+        <div className="facts" style={{ marginTop: 12, marginBottom: 12 }}>
           {insight.observed_facts.map((fact, index) => (
             <div className="fact" key={`${fact.label}-${index}`}>
               <div className="k">{fact.label}</div>

@@ -10,7 +10,7 @@ import { CalibrationLab } from './components/CalibrationLab'
 import { KnowledgeLibrary } from './components/KnowledgeReference'
 import { HeroPage } from './components/HeroPage'
 import { IntegrationSandbox } from './components/IntegrationSandbox'
-import { shortDate } from './format'
+import { shortDate, usd } from './format'
 
 export default function App() {
   const [book, setBook] = useState<BookView | null>(null)
@@ -148,8 +148,167 @@ export default function App() {
     return <HeroPage onEnter={() => setShowHero(false)} clientCount={book?.totals?.clients} />
   }
 
+  // §7 — hand-drawn monoweight icons, no icon library.
+  const NAV: { id: typeof view; label: string; icon: JSX.Element }[] = [
+    {
+      id: 'book',
+      label: 'Book',
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3">
+          <rect x="2.5" y="2.5" width="11" height="11" rx="1.5" />
+          <path d="M5 6h6M5 8.5h6M5 11h3.5" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      id: 'follow',
+      label: 'Follow-through',
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3">
+          <circle cx="8" cy="8" r="5.75" />
+          <path d="M5.6 8.1l1.7 1.7 3.2-3.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+    {
+      id: 'integrations',
+      label: 'Integration Sandbox',
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3">
+          <path d="M8 2l4.5 1.9v3.4c0 2.8-1.9 5.2-4.5 6.2-2.6-1-4.5-3.4-4.5-6.2V3.9L8 2z" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+    {
+      id: 'calibration',
+      label: 'Calibration Lab',
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3">
+          <path d="M2.5 5h11M2.5 11h11" strokeLinecap="round" />
+          <circle cx="6" cy="5" r="1.6" />
+          <circle cx="10.5" cy="11" r="1.6" />
+        </svg>
+      ),
+    },
+    {
+      id: 'knowledge',
+      label: 'Knowledge',
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3">
+          <path d="M3.5 2.5h6L12.5 5.5v8h-9z" strokeLinejoin="round" />
+          <path d="M6 8h4M6 10.5h4" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      id: 'audit',
+      label: 'Audit',
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3">
+          <circle cx="8" cy="8" r="5.75" />
+          <path d="M8 4.9V8l2.1 1.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+  ]
+
+  // The panel groups the same ranked rows the book view shows, by the severity
+  // the engine already assigned — no new taxonomy.
+  const BANDS: { key: string; label: string }[] = [
+    { key: 'critical', label: 'Critical' },
+    { key: 'high', label: 'High' },
+    { key: 'medium', label: 'Medium' },
+    { key: 'low', label: 'Low' },
+    { key: 'info', label: 'Info' },
+  ]
+
   return (
     <div className="shell">
+      <aside className="rail" aria-label="Sections">
+        <span className="mark" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
+            <path
+              d="M3 10L6 6.5L8.5 8.5L11.5 4.5"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+            <circle cx="11.5" cy="4.5" r="1.5" fill="currentColor" />
+          </svg>
+        </span>
+        {NAV.map((item) => (
+          <button
+            key={item.id}
+            aria-current={view === item.id}
+            aria-label={item.label}
+            title={item.label}
+            onClick={() => setView(item.id)}
+          >
+            {item.icon}
+          </button>
+        ))}
+        <span className="spacer" />
+        <span className="who" title={book?.rm.rm_name ?? 'Relationship manager'}>
+          {(book?.rm.rm_name ?? 'RM')
+            .split(' ')
+            .map((part) => part[0])
+            .slice(0, 2)
+            .join('')}
+        </span>
+      </aside>
+
+      <aside className="bookpanel" aria-label="Client book">
+        <div className="head">
+          <h2>Morning Book</h2>
+          <div className="meta">
+            {book ? shortDate(book.as_of) : '—'} · {book?.rm.rm_name ?? '—'}
+          </div>
+        </div>
+        <div className="list">
+          {BANDS.map((band) => {
+            const rows = (book?.clients ?? []).filter((row) => row.top_severity === band.key)
+            if (!rows.length) return null
+            return (
+              <div key={band.key}>
+                <div className="band">
+                  {band.label} · {rows.length}
+                </div>
+                {rows.map((row) => (
+                  <button
+                    key={row.client_id}
+                    className="row"
+                    aria-current={clientId === row.client_id}
+                    onClick={() => void openClient(row.client_id)}
+                  >
+                    <span className="top">
+                      <span className="nm">{row.client_name}</span>
+                      <span className="aum">{usd(row.total_usd)}</span>
+                    </span>
+                    <span className="why">{row.top_headline}</span>
+                  </button>
+                ))}
+              </div>
+            )
+          })}
+        </div>
+        <div className="foot">
+          <div className="critical">
+            <div className="v">{book?.totals.critical ?? '—'}</div>
+            <div className="k">Critical</div>
+          </div>
+          <div className="high">
+            <div className="v">{book?.totals.high ?? '—'}</div>
+            <div className="k">High</div>
+          </div>
+          <div className="rest">
+            <div className="v">{book?.totals.insights ?? '—'}</div>
+            <div className="k">Open</div>
+          </div>
+        </div>
+      </aside>
+
+      <div className="workspace">
       <header className="topbar">
         <div className="wordmark">
           Clarity<span>RM wealth intelligence</span>
@@ -171,15 +330,6 @@ export default function App() {
           </div>
         </div>
       </header>
-
-      <nav className="tabs" aria-label="Application navigation">
-        <button aria-current={view === 'book'} onClick={() => setView('book')}>Book</button>
-        <button aria-current={view === 'follow'} onClick={() => setView('follow')}>Follow-through</button>
-        <button aria-current={view === 'integrations'} onClick={() => setView('integrations')}>Integration Sandbox</button>
-        <button aria-current={view === 'calibration'} onClick={() => setView('calibration')}>Calibration Lab</button>
-        <button aria-current={view === 'knowledge'} onClick={() => setView('knowledge')}>Knowledge</button>
-        <button aria-current={view === 'audit'} onClick={() => setView('audit')}>Audit</button>
-      </nav>
 
       <main className="page">
         {error && (
@@ -220,6 +370,7 @@ export default function App() {
           />
         )}
       </main>
+      </div>
     </div>
   )
 }
