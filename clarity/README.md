@@ -19,7 +19,10 @@ anything reaches a client.
 Two commands. No install step for the backend — it is standard library only.
 
 ```bash
-# 1. the engine and API  (from clarity/backend)
+# 1. the engine and API (from the repository root)
+python run_backend.py                    # http://127.0.0.1:8000
+
+# Equivalent package command (from clarity/backend)
 python -m clarity.api                    # http://127.0.0.1:8000
 
 # 2. the UI  (from clarity/frontend, first time only: npm install)
