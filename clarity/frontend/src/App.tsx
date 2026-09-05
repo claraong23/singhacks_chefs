@@ -22,6 +22,9 @@ export default function App() {
   const [health, setHealth] = useState<HealthStatus | null>(null)
   const [writesUnlocked, setWritesUnlocked] = useState(hasWriteToken)
   const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit' | 'calibration' | 'knowledge' | 'integrations'>('book')
+  // Collapsing the book panel gives the dossier the full width, for working
+  // one client at a time.
+  const [panelOpen, setPanelOpen] = useState(true)
   // A ?client= deep link goes straight to the dossier and skips the landing page.
   const [showHero, setShowHero] = useState(
     () => !new URLSearchParams(window.location.search).get('client'),
@@ -223,7 +226,7 @@ export default function App() {
   ]
 
   return (
-    <div className="shell">
+    <div className={`shell${panelOpen ? "" : " collapsed"}`}>
       <aside className="rail" aria-label="Sections">
         <span className="mark" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
@@ -258,12 +261,26 @@ export default function App() {
         </span>
       </aside>
 
+      {panelOpen && (
       <aside className="bookpanel" aria-label="Client book">
         <div className="head">
-          <h2>Morning Book</h2>
-          <div className="meta">
-            {book ? shortDate(book.as_of) : '—'} · {book?.rm.rm_name ?? '—'}
+          <div>
+            <h2>Morning Book</h2>
+            <div className="meta">
+              {book ? shortDate(book.as_of) : '—'} · {book?.rm.rm_name ?? '—'}
+            </div>
           </div>
+          <button
+            className="collapse"
+            aria-label="Hide the client book"
+            aria-expanded={true}
+            title="Hide the client book"
+            onClick={() => setPanelOpen(false)}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
+              <path d="M8.5 3.5L5 7l3.5 3.5M12 3.5L8.5 7l3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </div>
         <div className="list">
           {BANDS.map((band) => {
@@ -307,9 +324,23 @@ export default function App() {
           </div>
         </div>
       </aside>
+      )}
 
       <div className="workspace">
       <header className="topbar">
+        {!panelOpen && (
+          <button
+            className="panel-reopen"
+            aria-label="Show the client book"
+            aria-expanded={false}
+            title="Show the client book"
+            onClick={() => setPanelOpen(true)}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
+              <path d="M5.5 3.5L9 7l-3.5 3.5M2 3.5L5.5 7 2 10.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        )}
         <div className="wordmark">
           Clarity<span>RM wealth intelligence</span>
         </div>
