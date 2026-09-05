@@ -271,13 +271,13 @@ export default function App() {
             if (!rows.length) return null
             return (
               <div key={band.key}>
-                <div className="band">
+                <div className={`band ${band.key}`}>
                   {band.label} · {rows.length}
                 </div>
                 {rows.map((row) => (
                   <button
                     key={row.client_id}
-                    className="row"
+                    className={`row ${row.top_severity}`}
                     aria-current={clientId === row.client_id}
                     onClick={() => void openClient(row.client_id)}
                   >

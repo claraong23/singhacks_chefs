@@ -12,7 +12,7 @@
 
 :root {
   /* §2.1–2.2 — ground and surfaces. Surfaces are never opaque. */
-  --paper: #141b26;
+  --paper: #0a0f1a;
   --surface: rgba(43, 55, 78, 0.97);
   --surface-sunk: rgba(31, 41, 60, 0.96);
   --surface-hover: rgba(55, 70, 98, 0.98);
@@ -21,7 +21,7 @@
   --ink: #dce4f0;
   --ink-soft: #b4c1d4;
   --muted: #93a2b8;
-  --faint: #6d7d94;
+  --faint: #808fa6;
 
   /* §2.3 — borders organise, they don't box things in. */
   --rule: rgba(150, 172, 205, 0.16);
@@ -63,9 +63,9 @@ html, body, #root { height: 100%; }
 body {
   margin: 0;
   background:
-    radial-gradient(ellipse 50% 40% at 6% 2%, rgba(112, 96, 220, 0.14) 0%, transparent 66%),
-    radial-gradient(ellipse 44% 38% at 96% 6%, rgba(56, 132, 220, 0.12) 0%, transparent 62%),
-    radial-gradient(ellipse 52% 46% at 82% 96%, rgba(20, 160, 165, 0.1) 0%, transparent 66%),
+    radial-gradient(ellipse 58% 44% at 50% 0%, rgba(66, 92, 224, 0.2) 0%, transparent 68%),
+    radial-gradient(ellipse 44% 40% at 4% 22%, rgba(96, 78, 210, 0.12) 0%, transparent 64%),
+    radial-gradient(ellipse 50% 44% at 92% 88%, rgba(30, 120, 190, 0.1) 0%, transparent 66%),
     var(--paper);
   background-attachment: fixed;
   color: var(--ink);
@@ -100,7 +100,8 @@ a { color: var(--accent-bright); }
   height: 100vh;
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   padding: 12px 0 16px;
-  background: linear-gradient(180deg, rgba(26, 25, 48, 0.97) 0%, rgba(17, 23, 36, 0.98) 100%);
+  background: linear-gradient(180deg, #3d55dc 0%, #2a3cae 100%);
+  border-right: 0;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-right: 1px solid var(--rule);
@@ -109,31 +110,32 @@ a { color: var(--accent-bright); }
 .rail .mark {
   display: flex; align-items: center; justify-content: center;
   width: 34px; height: 34px; margin-bottom: 10px;
-  border-radius: 9px; flex-shrink: 0;
-  background: linear-gradient(135deg, var(--accent), var(--teal));
-  color: #fff;
+  border-radius: 10px; flex-shrink: 0;
+  background: #fff;
+  color: #2a3cae;
 }
 
 .rail button {
   display: flex; align-items: center; justify-content: center;
   width: 38px; height: 38px;
-  border: 0; border-radius: 9px;
+  border: 0; border-radius: 10px;
   background: transparent;
-  color: var(--faint);
+  color: rgba(255, 255, 255, 0.66);
   transition: all 0.12s;
 }
-.rail button:hover { color: var(--ink-soft); background: rgba(37, 99, 235, 0.08); }
-.rail button[aria-current="true"] { background: rgba(37, 99, 235, 0.18); color: var(--accent-bright); }
+.rail button:hover { color: #fff; background: rgba(255, 255, 255, 0.14); }
+/* The active section reverses out to white, the way the reference marks it. */
+.rail button[aria-current="true"] { background: #fff; color: #2a3cae; }
 
 .rail .spacer { margin-top: auto; }
 
 .rail .who {
   display: flex; align-items: center; justify-content: center;
   width: 32px; height: 32px; border-radius: 50%;
-  border: 1px solid var(--rule-strong);
-  background: var(--surface-sunk);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em;
-  color: var(--muted);
+  color: #fff;
 }
 
 /* ---------------------------------------------------------- the book panel */
@@ -144,7 +146,7 @@ a { color: var(--accent-bright); }
   display: flex; flex-direction: column;
   background:
     radial-gradient(ellipse 120% 30% at 50% 0%, rgba(104, 92, 200, 0.16) 0%, transparent 70%),
-    rgba(24, 30, 47, 0.97);
+    rgba(12, 17, 29, 0.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-right: 1px solid var(--rule);
@@ -160,10 +162,20 @@ a { color: var(--accent-bright); }
 .bookpanel .list { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 14px; }
 
 .bookpanel .band {
-  padding: 16px 20px 8px;
-  font-family: var(--mono); font-size: 9px; letter-spacing: 0.09em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+  padding: 18px 20px 9px;
+  font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--faint);
 }
+.bookpanel .band::before {
+  content: ""; width: 14px; height: 2px; border-radius: 1px;
+  background: currentColor; flex-shrink: 0;
+}
+.bookpanel .band.critical { color: var(--critical); }
+.bookpanel .band.high { color: var(--high); }
+.bookpanel .band.medium { color: var(--medium); }
+.bookpanel .band.low { color: var(--low); }
 
 /* §5.9 — a left border accent carries selection, not colour alone. */
 .bookpanel .row {
@@ -174,17 +186,30 @@ a { color: var(--accent-bright); }
   transition: all 0.12s;
 }
 .bookpanel .row:hover { background: rgba(18, 30, 62, 0.5); }
-.bookpanel .row[aria-current="true"] { background: var(--accent-wash); border-left-color: var(--accent-bright); }
+.bookpanel .row[aria-current="true"] { background: rgba(255, 255, 255, 0.07); border-left-color: var(--accent-bright); }
+.bookpanel .row.critical[aria-current="true"] { border-left-color: var(--critical); }
+.bookpanel .row.high[aria-current="true"] { border-left-color: var(--high); }
+.bookpanel .row[aria-current="true"] .nm { color: #fff; }
 
 .bookpanel .row .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; min-width: 0; }
+.bookpanel .row .nm::before {
+  content: ""; display: inline-block;
+  width: 5px; height: 5px; border-radius: 50%;
+  margin-right: 8px; vertical-align: 1px;
+  background: var(--faint);
+}
+.bookpanel .row.critical .nm::before { background: var(--critical); }
+.bookpanel .row.high .nm::before { background: var(--high); }
+.bookpanel .row.medium .nm::before { background: var(--medium); }
+.bookpanel .row.low .nm::before { background: var(--low); }
 .bookpanel .row .nm {
   font-size: 13px; color: var(--ink); min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.bookpanel .row .aum { font-family: var(--mono); font-size: 10.5px; color: var(--faint); white-space: nowrap; }
+.bookpanel .row .aum { font-family: var(--mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
 .bookpanel .row .why {
   display: block;
-  margin-top: 2px; font-size: 11.5px; color: var(--faint);
+  margin-top: 3px; margin-left: 13px; font-size: 11.5px; color: var(--muted);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
@@ -204,10 +229,9 @@ a { color: var(--accent-bright); }
 .workspace {
   display: flex; flex-direction: column; min-width: 0;
   background:
-    radial-gradient(ellipse 80% 46% at 12% 0%, rgba(88, 118, 224, 0.12) 0%, transparent 64%),
-    radial-gradient(ellipse 60% 40% at 92% 30%, rgba(24, 150, 170, 0.08) 0%, transparent 62%),
-    radial-gradient(ellipse 70% 44% at 60% 100%, rgba(150, 104, 170, 0.08) 0%, transparent 66%),
-    #1d2634;
+    radial-gradient(ellipse 66% 40% at 50% -4%, rgba(74, 102, 232, 0.16) 0%, transparent 66%),
+    radial-gradient(ellipse 56% 40% at 96% 84%, rgba(38, 128, 196, 0.08) 0%, transparent 64%),
+    #0e1524;
 }
 
 /* §9 — thin, blue-tinted, and only visible on hover. */
@@ -222,7 +246,7 @@ a { color: var(--accent-bright); }
   position: sticky; top: 0; z-index: 40;
   display: flex; align-items: center; gap: 20px;
   padding: 0 28px; height: 60px;
-  background: rgba(31, 38, 56, 0.97);
+  background: rgba(12, 17, 29, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--rule);
@@ -258,7 +282,9 @@ a { color: var(--accent-bright); }
 /* ------------------------------------------------------------------ atoms */
 
 .card {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 20px 48px -34px rgba(56, 84, 220, 0.6);
   background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
@@ -281,7 +307,7 @@ a { color: var(--accent-bright); }
 
 .stat { display: flex; flex-direction: column; gap: 3px; }
 .stat .v { font-family: var(--serif); font-size: 25px; line-height: 1.1; }
-.stat .k { font-size: 11px; color: var(--muted); }
+.stat .k { font-size: 10px; font-family: var(--mono); letter-spacing: 0.05em; color: var(--muted); }
 
 .pill {
   display: inline-flex; align-items: center; gap: 6px;
@@ -319,7 +345,14 @@ a { color: var(--accent-bright); }
 .book-head h1 { font-family: var(--serif); font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
 .book-head p { margin: 6px 0 0; color: var(--muted); max-width: 62ch; }
 
-.kpis { display: flex; gap: 30px; }
+.kpis { display: flex; gap: 10px; }
+.kpis .stat {
+  padding: 11px 18px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--surface-sunk);
+  min-width: 108px;
+}
 
 .filters { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
 .filters .chip {
@@ -331,11 +364,13 @@ a { color: var(--accent-bright); }
 .booktable { width: 100%; border-collapse: collapse; background: var(--surface); }
 .booktable th {
   text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--faint); font-weight: 600; padding: 10px 14px;
+  color: var(--accent-bright); font-weight: 500; padding: 11px 14px;
+  font-family: var(--mono);
   border-bottom: 1px solid var(--rule-strong); white-space: nowrap;
 }
 .booktable td { padding: 13px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .booktable tr.row { cursor: pointer; }
+.booktable tr.row:nth-of-type(even) { background: rgba(255, 255, 255, 0.022); }
 .booktable tr.row:hover { background: var(--accent-wash); }
 .booktable tr.row:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: -2px; }
 
@@ -391,7 +426,9 @@ a { color: var(--accent-bright); }
 
 .insight {
   background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 20px 48px -34px rgba(56, 84, 220, 0.55);
   border-left: 3px solid var(--rule-strong);
 }
 .insight.critical { border-left-color: var(--critical); }
