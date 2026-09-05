@@ -1,4 +1,9 @@
+import { lazy, Suspense } from 'react'
 import '../hero.css'
+
+// three.js is ~470 kB and only the landing page needs it, so it loads as its
+// own chunk rather than riding along in the workbench bundle.
+const HeroField = lazy(() => import('./HeroField').then((m) => ({ default: m.HeroField })))
 
 /** The landing page. Dark, per DESIGN.md; the workbench behind it keeps its
  *  own light system, so everything here is scoped to `.hero-page`. */
@@ -75,38 +80,48 @@ export function HeroPage({ onEnter, clientCount }: { onEnter: () => void; client
       </nav>
 
       <div className="hero-body">
-        <h1 className="hero-headline">
-          From client book
-          <br />
-          <em>to best conversation.</em>
-        </h1>
+        {/* The ring is centred on this block and scrolls away with it. */}
+        <div className="hero-lede">
+          <div className="hero-field-wrap" aria-hidden="true">
+            <Suspense fallback={null}>
+              <HeroField />
+            </Suspense>
+            <div className="hero-scrim" />
+          </div>
 
-        <p className="hero-sub">
-          Clarity turns a fragmented twenty-client book into a defensible next action, with
-          every insight sourced, every gate checked, and every step controlled by the RM.
-        </p>
+          <h1 className="hero-headline">
+            From client book
+            <br />
+            <em>to best conversation.</em>
+          </h1>
 
-        <div className="hero-ctas">
-          <button className="hero-cta-primary" onClick={onEnter}>
-            Open Morning Book
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path
-                d="M3 7h8M8 4l3 3-3 3"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <button
-            className="hero-cta-secondary"
-            onClick={() =>
-              document.getElementById('hero-how-it-works')?.scrollIntoView({ behavior: 'smooth' })
-            }
-          >
-            Watch demo
-          </button>
+          <p className="hero-sub">
+            Clarity turns a fragmented twenty-client book into a defensible next action, with
+            every insight sourced, every gate checked, and every step controlled by the RM.
+          </p>
+
+          <div className="hero-ctas">
+            <button className="hero-cta-primary" onClick={onEnter}>
+              Open Morning Book
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M3 7h8M8 4l3 3-3 3"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              className="hero-cta-secondary"
+              onClick={() =>
+                document.getElementById('hero-how-it-works')?.scrollIntoView({ behavior: 'smooth' })
+              }
+            >
+              Watch demo
+            </button>
+          </div>
         </div>
 
         <div className="hero-stats">

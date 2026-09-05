@@ -27,17 +27,22 @@
   --h-body: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --h-mono: 'JetBrains Mono', 'Courier New', monospace;
 
+  /* Palette for the WebGL field: cold slate, bone, and one brass accent. */
+  --h-cold: #59677e;
+  --h-bone: #e7dfd2;
+  --h-brass: #b98a3c;
+
   position: fixed;
   inset: 0;
   overflow-y: auto;
+  /* The field is 100vw inside a 780px column; without this the vertical
+     scrollbar's width leaks out as a horizontal one. */
+  overflow-x: hidden;
   z-index: 50;
 
-  /* §2.1 — dark navy ground with a top-left blue glow and a faint teal
-     counterweight bottom-right. The glow is what stops it reading as flat. */
-  background:
-    radial-gradient(ellipse 55% 45% at 12% 0%, rgba(37, 99, 235, 0.13) 0%, transparent 70%),
-    radial-gradient(ellipse 30% 40% at 90% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 60%),
-    #070e1c;
+  /* The ground the particle field is composited over. Kept mostly at the
+     darkest stop so the brass bloom is the only warmth on screen. */
+  background: radial-gradient(ellipse 85% 62% at 50% 42%, #16202b 0%, #0b1015 34%, #060a0e 78%);
   color: var(--h-text);
   font-family: var(--h-body);
   font-size: 14px;
@@ -49,6 +54,82 @@
 .hero-page *::before,
 .hero-page *::after {
   box-sizing: border-box;
+}
+
+/* ── WebGL field ─────────────────────────────────────────────────────────── */
+
+/* The lede is the anchor: the field is centred on it and scrolls with it, so
+   the headline block sits in the middle of the ring. */
+.hero-lede {
+  position: relative;
+}
+
+.hero-lede > h1,
+.hero-lede > p,
+.hero-lede > div:not(.hero-field-wrap) {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-field-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  /* The ring is sized off the canvas height, since the camera's field of view
+     is vertical. This is what sets how far it reaches around the copy. */
+  height: clamp(560px, 97vh, 1020px);
+  z-index: 0;
+}
+
+.hero-field {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-field canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Dragging rotates the field; the copy above it stays selectable. */
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.hero-field canvas:active {
+  cursor: grabbing;
+}
+
+.hero-field-fallback {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-family: var(--h-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--h-text-muted);
+}
+
+/* The animation is decoration; the words are the point. This scrim buys the
+   headline its contrast back — heaviest directly behind the type, and again
+   at the foot of the page where the cards sit. */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Sized to the text lines, not to the ring: it has to darken the ground the
+     copy sits on without swallowing the clusters just outside it. */
+  background: radial-gradient(
+    ellipse 23% 26% at 50% 50%,
+    rgba(6, 10, 14, 0.82) 0%,
+    rgba(6, 10, 14, 0.46) 56%,
+    rgba(6, 10, 14, 0) 100%
+  );
 }
 
 /* ── Top nav (§4.2, 60px sticky) ─────────────────────────────────────────── */
@@ -63,7 +144,7 @@
   height: 60px;
   padding: 0 48px;
   border-bottom: 1px solid var(--h-border);
-  background: rgba(7, 14, 28, 0.7);
+  background: rgba(6, 10, 14, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -114,9 +195,13 @@
 /* ── Body (§4.2 — single column, 780px, centred) ─────────────────────────── */
 
 .hero-body {
+  position: relative;
+  z-index: 2;
   max-width: 780px;
   margin: 0 auto;
-  padding: 100px 48px 80px;
+  /* Sets the copy down the page far enough that a near-circular ring can close
+     above it without disappearing behind the nav. */
+  padding: clamp(96px, 20vh, 200px) 48px 80px;
   text-align: center;
 }
 
@@ -151,7 +236,9 @@
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 72px;
+  /* The gap below the lede lives on .hero-stats, so it can't collapse through
+     .hero-lede and change depending on what the last child is. */
+  margin-bottom: 0;
 }
 
 .hero-cta-primary,
@@ -201,6 +288,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
+  /* Enough clear air that the strip reads as its own section, and the ring
+     around the copy has room to finish before it starts. */
+  margin-top: 216px;
   margin-bottom: 100px;
   border: 1px solid var(--h-border);
   border-radius: 12px;
@@ -316,6 +406,7 @@
 
   .hero-stats {
     grid-template-columns: repeat(2, 1fr);
+    margin-top: 110px;
     margin-bottom: 72px;
   }
 
