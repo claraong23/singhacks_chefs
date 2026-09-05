@@ -387,9 +387,6 @@ export function BookWorkbench({
                       />
                     </span>
                   </div>
-                  <div className="meta" style={{ fontSize: 11, color: 'var(--ink-soft)', marginTop: 4, lineHeight: 1.35 }}>
-                    {row.priority_explanation || titleCase(row.top_category ?? '')}
-                  </div>
                 </td>
                 <td className="headlinecell">
                   {row.flags && row.flags.length > 0 ? (
