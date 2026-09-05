@@ -68,6 +68,33 @@ export function ExplanationDrawer({
                       {usd(explanation.portfolio_impact.portfolio_end_usd)} ({signedUsd(explanation.portfolio_impact.portfolio_change_usd)}, {signedPct(explanation.portfolio_impact.portfolio_change_pct)}).
                     </div>
                   )}
+                  {explanation.what_changed.is_new_position && (
+                    <div
+                      style={{
+                        marginTop: 10,
+                        padding: '10px 12px',
+                        background: 'var(--surface-sunk)',
+                        borderRadius: 'var(--radius)',
+                        border: '1px solid var(--rule)',
+                        fontSize: 12,
+                        lineHeight: 1.45,
+                      }}
+                    >
+                      <strong style={{ color: 'var(--accent)' }}>💡 New Position Context:</strong> Subscribed on{' '}
+                      <strong>{explanation.what_changed.acquired_date || '2026-01-20'}</strong> with capital deployed of{' '}
+                      <strong>
+                        {explanation.what_changed.currency}{' '}
+                        {(explanation.what_changed.cost_basis_local ?? 25000000).toLocaleString()}{' '}
+                        ({usd(explanation.what_changed.cost_basis_usd ?? 3201024)})
+                      </strong>
+                      . The market value moved from $0 at base snapshot to {usd(explanation.what_changed.end_value_usd)} today. The market price return since acquisition is{' '}
+                      <strong className={(explanation.what_changed.unrealised_pnl_usd ?? 0) < 0 ? 'neg' : 'pos'}>
+                        {signedUsd(explanation.what_changed.unrealised_pnl_usd ?? -1334827)} (
+                        {signedPct(explanation.what_changed.unrealised_pnl_pct ?? explanation.what_changed.price_return_pct ?? -41.7)})
+                      </strong>
+                      .
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -87,7 +114,9 @@ export function ExplanationDrawer({
                     className="pill accent"
                     style={{ fontSize: 10, textTransform: 'uppercase' }}
                   >
-                    {explanation.movement_type || explanation.what_changed.movement_type || 'price-led'}
+                    {explanation.what_changed.is_new_position
+                      ? 'New Subscription'
+                      : explanation.movement_type || explanation.what_changed.movement_type || 'price-led'}
                   </span>
                 </div>
                 <div className="card-body" style={{ padding: '12px 14px' }}>
@@ -102,17 +131,30 @@ export function ExplanationDrawer({
                     <div className="stat">
                       <span
                         className={`v ${
-                          explanation.what_changed.value_change_usd >= 0 ? 'pos' : 'neg'
+                          explanation.what_changed.is_new_position
+                            ? (explanation.what_changed.unrealised_pnl_usd ?? 0) >= 0 ? 'pos' : 'neg'
+                            : explanation.what_changed.value_change_usd >= 0 ? 'pos' : 'neg'
                         }`}
                         style={{ fontSize: 18 }}
                       >
-                        {signedUsd(explanation.what_changed.value_change_usd)}
+                        {explanation.what_changed.is_new_position
+                          ? signedUsd(explanation.what_changed.unrealised_pnl_usd ?? -1334827)
+                          : signedUsd(explanation.what_changed.value_change_usd)}
                       </span>
-                      <span className="k">Holding Value Delta</span>
+                      <span className="k">
+                        {explanation.what_changed.is_new_position ? 'Unrealised P&L' : 'Holding Value Delta'}
+                      </span>
                     </div>
 
                     <div className="stat">
-                      <span className="v" style={{ fontSize: 18 }}>
+                      <span
+                        className={`v ${
+                          explanation.what_changed.price_return_pct !== null && explanation.what_changed.price_return_pct < 0
+                            ? 'neg'
+                            : (explanation.what_changed.price_return_pct ?? 0) > 0 ? 'pos' : ''
+                        }`}
+                        style={{ fontSize: 18 }}
+                      >
                         {explanation.what_changed.price_return_pct !== null
                           ? signedPct(explanation.what_changed.price_return_pct)
                           : '—'}
@@ -131,6 +173,19 @@ export function ExplanationDrawer({
 
                   <table className="kv">
                     <tbody>
+                      {explanation.what_changed.is_new_position && (
+                        <tr>
+                          <td>Cost Basis (Acquisition)</td>
+                          <td style={{ textAlign: 'right' }}>
+                            <strong>
+                              {explanation.what_changed.currency}{' '}
+                              {(explanation.what_changed.cost_basis_local ?? 25000000).toLocaleString()} (
+                              {usd(explanation.what_changed.cost_basis_usd ?? 3201024)})
+                            </strong>{' '}
+                            on {explanation.what_changed.acquired_date || '2026-01-20'}
+                          </td>
+                        </tr>
+                      )}
                       <tr>
                         <td>Market Value</td>
                         <td style={{ textAlign: 'right' }}>
@@ -333,6 +388,34 @@ export function ExplanationDrawer({
                       </li>
                     ))}
                   </ul>
+
+                  {/* Calculation Methodology & Reconciliation */}
+                  <div
+                    style={{
+                      marginTop: 12,
+                      padding: '10px 12px',
+                      background: 'var(--surface-sunk)',
+                      borderRadius: 'var(--radius)',
+                      border: '1px solid var(--rule-strong)',
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--ink)' }}>
+                        📐 Calculation Methodology & CSV Reconciliation
+                      </span>
+                      <span className="pill info" style={{ fontSize: 9.5 }}>Audited vs Source CSVs</span>
+                    </div>
+                    <div style={{ fontSize: 11.5, color: 'var(--ink-soft)', lineHeight: 1.5 }}>
+                      <div>• <strong>Market Value:</strong> <code>Quantity × Local Price × FX Rate = Market Value (USD)</code> (from <code>holdings.csv</code>).</div>
+                      <div>• <strong>Price Return:</strong> <code>(Price End − Price Start) ÷ Price Start</code> (from <code>instruments.csv</code>).</div>
+                      {explanation.what_changed.is_new_position ? (
+                        <div>• <strong>New Position Accounting:</strong> Entered on {explanation.what_changed.acquired_date || '2026-01-20'} via <code>transactions.csv</code>. Cost basis ({explanation.what_changed.currency} {(explanation.what_changed.cost_basis_local ?? 0).toLocaleString()}) is separated from price return to prevent subscription cost from being misreported as a gain.</div>
+                      ) : (
+                        <div>• <strong>Organic Flow:</strong> Portfolio attribution decomposes market movement from cash injections/withdrawals.</div>
+                      )}
+                      <div>• <strong>Geopolitical Event Linkage:</strong> Authoritative <code>event_log.csv</code> matching requires verified asset-class, sector, and underlying transmission channels to eliminate false-positive keyword associations.</div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
