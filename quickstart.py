@@ -14,7 +14,7 @@ import os
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(os.path.dirname(HERE), "data")
+DATA = HERE
 
 
 def load(name):

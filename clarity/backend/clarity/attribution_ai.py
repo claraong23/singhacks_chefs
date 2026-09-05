@@ -35,14 +35,24 @@ def _deterministic_attribution(
     rep_lang = client.get("reporting_language", "English")
     base_ccy = client.get("base_currency", "USD")
 
-    direction = "gained" if delta_usd >= 0 else "declined"
+    is_new = wc.get("is_new_position", False)
+    cost_usd = wc.get("cost_basis_usd", 0.0) or 0.0
+    unrealised_pnl = wc.get("unrealised_pnl_usd", 0.0) or 0.0
     ret_str = f" ({p_ret:+0.1f}%)" if p_ret is not None else ""
 
     # Headline
-    headline = (
-        f"Your holding in {name} {direction} by USD {abs(delta_usd):,.0f}{ret_str} "
-        f"between {explanation.start} and {explanation.end}."
-    )
+    if is_new:
+        pnl_desc = "an unrealised loss" if unrealised_pnl < 0 else "an unrealised gain"
+        headline = (
+            f"You entered a new position in {name} on {wc.get('acquired_date', '2026-01-20')} "
+            f"(USD {cost_usd:,.0f} deployed), recording {pnl_desc} of USD {abs(unrealised_pnl):,.0f}{ret_str} to close at USD {wc.get('end_value_usd', 0.0):,.0f}."
+        )
+    else:
+        direction = "gained" if delta_usd >= 0 else "declined"
+        headline = (
+            f"Your holding in {name} {direction} by USD {abs(delta_usd):,.0f}{ret_str} "
+            f"between {explanation.start} and {explanation.end}."
+        )
 
     # Bullet 1: What happened (in plain language)
     if explanation.event_evidence:
@@ -73,10 +83,11 @@ def _deterministic_attribution(
         why_it_matters = f"This aligns with your {risk} strategy and investment horizon, but requires ongoing monitoring as market conditions evolve."
 
     # Bullet 3: What to discuss next
-    if delta_usd < 0:
+    is_loss = (unrealised_pnl < 0) if is_new else (delta_usd < 0 or (p_ret is not None and p_ret < 0))
+    if is_loss:
         next_steps = (
-            f"Discuss whether to maintain the position, rebalance towards more resilient asset classes, "
-            f"or earmark capital from liquid holdings to safeguard upcoming financial commitments."
+            f"Discuss whether to maintain the position, review downside barrier and knock-in risks, "
+            f"or earmark alternative capital from unencumbered holdings to safeguard upcoming financial commitments."
         )
     else:
         next_steps = (
@@ -85,6 +96,8 @@ def _deterministic_attribution(
         )
 
     sources = ["holdings.csv"]
+    if is_new:
+        sources.append("transactions.csv")
     if explanation.event_evidence:
         sources.append(f"event_log.csv ({explanation.event_evidence[0].get('event_date')})")
     if "Concentration breach" in " ".join(explanation.why_it_matters):

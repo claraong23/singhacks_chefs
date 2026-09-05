@@ -100,21 +100,55 @@ clarity/frontend/
   styles.css                      Hand-written private-bank design system
   types.ts                        TypeScript mirror of backend contracts
 clarity/fixtures/                 Frozen payloads for demo and offline frontend work
-clarity/state/                    Local development review/audit state (runtime only)
+clarity/state/                    Local persisted review/audit state (runtime only)
+run_backend.py                    Root-level local API launcher
+api/index.py                      Vercel Python Function entrypoint
 ```
 
-### Recommended Vercel-first product stack
+### Selected current product stack
 
-- **Frontend:** Vite 5, React 18 and TypeScript 5, deployed as a static application on Vercel. Preserve the purpose-specific components and hand-written CSS; do not migrate to Next.js, Tailwind, shadcn/ui, or another design system while this product already has a coherent one.
+- **Frontend:** Vite 5, React 18 and TypeScript 5. The interface is built from purpose-specific components and hand-written CSS; do not migrate to Next.js, Tailwind, shadcn/ui, or another design system while this product already has a coherent one.
 - **Visualisation:** lightweight, accessible inline SVG charts in `frontend/src/components/charts.tsx`. Do not add a charting dependency unless a required chart cannot be represented and tested clearly with the current primitives.
-- **Frontend-to-backend integration:** browser `fetch`, typed request/response contracts, and TypeScript types in `frontend/src/types.ts` that mirror `backend/clarity/contracts.py`. Keep the Vite proxy for local development; use `/api/*` routes in the deployed application. Contract changes must update both sides together.
-- **Backend and analytics:** retain the dependency-free Python domain engine—CSV/JSON loaders, deterministic analytics, signals, evidence and action-option builders. Replace the long-running local `ThreadingHTTPServer` only at the hosting boundary with Vercel Python Function handlers; do not rewrite the domain layer or add FastAPI without a concrete capability need.
-- **Database:** use managed PostgreSQL for deployed workflow state: RM decisions, meeting briefs, action options, audit events, assignments and version history. The existing JSON review store remains the local/offline-demo adapter; never write production state to a Vercel function filesystem.
-- **Source data:** package the synthetic CSV/JSON data as read-only build inputs for the prototype. Any future live ingestion must use approved controlled pipelines and preserve source/version provenance.
-- **AI (optional):** keep AI disabled by default and preserve deterministic templates as the fallback. When enabled, call an approved LLM provider from a server-side Python function using environment-managed credentials. The adapter receives only approved structured facts, evidence IDs, permitted wording instructions and a JSON schema; it may draft editable explanation/meeting prose only. It may not calculate, rank, approve, send, retrieve uncontrolled market facts, or execute actions.
-- **Hosting:** Vercel serves the Vite build and Python `/api/*` Functions; PostgreSQL supplies durable state. Keep the frontend, functions and database in compatible regions, configure secrets only through Vercel environment variables, and use preview deployments with synthetic fixtures.
-- **Local runtime:** `npm run build` plus `python -m clarity.api` remains the single-process, no-network demo fallback on port 8000. It must remain functional even when hosting, database or AI services are unavailable.
-- **Testing:** Python `unittest` verifies calculations and signal integrity; TypeScript compilation plus Vite build verifies the frontend. Add React component tests, API-contract tests and browser end-to-end tests for the persisted workflow before treating a hosted build as production-like.
+- **Frontend-to-backend integration:** browser `fetch`, a Vite development proxy from port 5173 to port 8000, and TypeScript types in `frontend/src/types.ts` that mirror `backend/clarity/contracts.py`. Contract changes must update both sides together.
+- **Backend and analytics:** dependency-free Python standard library, including CSV/JSON loaders, deterministic analytics and `ThreadingHTTPServer`. Do not replace it with FastAPI or pandas unless a concrete capability—not framework preference—requires it.
+- **Workflow persistence:** local mode uses JSON adapters under `clarity/state`; setting `DATABASE_URL` selects the shared versioned PostgreSQL adapter for review decisions, scenarios, meeting packages, follow-through, calibration, knowledge, integrations and AI audit metadata. Hosted PostgreSQL failures fail closed for writes and never silently fall back to JSON.
+- **AI and external services:** deterministic wording remains the default. Optional server-side Gemini and OpenAI-compatible adapters can draft only a selected Meeting Studio surface; they cannot calculate, rank, approve, send, retrieve uncontrolled facts or execute actions. Provider keys stay in environment variables.
+- **Runtime and delivery:** from the repository root use `python run_backend.py`; after `npm run build`, the API serves `frontend/dist` on port 8000. For hot reload, run the backend on port 8000 and Vite on port 5173. `api/index.py` is the Vercel function boundary, and `vercel.json` rewrites `/api/*` to it.
+- **Hosted write control:** when `CLARITY_API_TOKEN` is configured, every POST requires `Authorization: Bearer <token>`. The UI stores the token only in browser `sessionStorage`; the role switcher remains a simulated demo permission model, not authentication. Hosted reset is disabled unless explicitly enabled.
+- **Testing:** the current baseline is 104 backend tests and 24 frontend tests/build. PostgreSQL and deployed smoke tests are opt-in through `CLARITY_TEST_DATABASE_URL` and `CLARITY_DEPLOY_URL`; use isolated databases because the persistence tests reset workflow namespaces.
+
+### Current implementation status and teammate handoff
+
+The repository now contains the full Task 3 workflow, not only the original RM
+decision screen:
+
+- **Decision gates:** `new → opened → under_review → rm_edited/rm_reviewed → client_ready`, with controlled escalation, return, defer and dismiss paths. Client-ready requires evidence, suitability, tax/planning, data/model and human-decision gates plus RM rationale.
+- **Scenario Studio:** bounded, deterministic Lau, Margarethe and Fong comparisons. Results retain inputs, assumptions, evidence and calculation version; they are arithmetic, not forecasts or recommendations.
+- **Meeting Studio:** immutable package versions, four communication channels, preflight, evidence/caveat checks, simulated hand-off and optional guarded AI previews.
+- **Follow-through and Audit:** tasks, referrals, meeting outcomes, evidence updates, re-evaluation requests, role-scoped views and unified source/system/user audit chronology.
+- **Calibration Lab:** transparent priority-policy candidates and RM feedback; Compliance/Audit activation requires final feedback coverage for Lau, Margarethe and Fong.
+- **Knowledge Library:** five approved synthetic internal guides with deterministic lexical search and citations. It never indexes raw client files and never injects references into decisions or client copy.
+- **Integration Sandbox:** local inbound event validation/acceptance, evidence-update/re-evaluation creation, idempotent CRM/specialist work orders and model-readiness metadata with `training_eligible: false`.
+- **Durable deployment layer:** local JSON remains the offline fallback; PostgreSQL is selected by `DATABASE_URL`, with advisory-locked schema bootstrap, optimistic revisions, append-only audit mirroring and fresh hosted seed state.
+
+The canonical local demo is:
+
+```text
+Book → Client dossier → Evidence/context → Scenario or options
+→ Decision gates → RM rationale → Client-ready
+→ Meeting Studio → Follow-through/Audit
+```
+
+The three acceptance journeys are Lau (`CL-0014`), Margarethe (`CL-0003`)
+and Fong (`CL-0017`). A feature is not demo-ready until it preserves evidence,
+gate state, audit lineage and RM control for all three.
+
+For local work, keep `DATABASE_URL` blank and use `python run_backend.py`.
+For hosted validation, configure `DATABASE_URL`, `CLARITY_API_TOKEN` and
+`CLARITY_ALLOW_DEMO_RESET=false` in Vercel; follow the hosted validation
+runbook in `clarity/README.md`. Never commit database URLs, API tokens or AI
+provider keys. Do not use a local JSON reset or a test database as the demo
+database.
 
 ## Shared contracts
 

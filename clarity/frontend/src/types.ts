@@ -947,7 +947,13 @@ export interface HoldingExplanation {
     weight_change_pct: number
     currency: string
     valuation_lag: boolean
-    movement_type?: 'price-led' | 'trade-led' | 'combination'
+    movement_type?: 'price-led' | 'trade-led' | 'combination' | 'new-position'
+    is_new_position?: boolean
+    cost_basis_local?: number | null
+    cost_basis_usd?: number | null
+    unrealised_pnl_usd?: number | null
+    unrealised_pnl_pct?: number | null
+    acquired_date?: string | null
   }
   event_evidence: {
     event_id: string

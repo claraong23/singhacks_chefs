@@ -8,7 +8,7 @@
 
 > ## ⚠️ All data in this repository is synthetic
 >
-> Every client, portfolio, holding, transaction and relationship-manager note in `data/` was
+> Every client, portfolio, holding, transaction and relationship-manager note in the repository
 > **generated for this hackathon**. No real client data is present. No instrument identifier
 > corresponds to a real security, and all company and individual names are invented.
 >
@@ -16,6 +16,43 @@
 > that portfolio behaviour is explainable against events that actually happened.
 >
 > Treat the files as you would real client data anyway. That habit is part of the exercise.
+
+---
+
+## Current implementation handoff
+
+The challenge brief below describes the problem and dataset. The working
+product is `Clarity` under [`clarity/`](clarity/). The implementation source of
+truth is [`clarity/README.md`](clarity/README.md); it contains the current API,
+Task 3 workflow, persistence modes, hosted validation runbook, tests and demo
+instructions.
+
+Run the local demo from this repository root:
+
+```powershell
+python run_backend.py
+```
+
+Open `http://127.0.0.1:8000`. For Vite hot reload, run `npm install` and
+`npm run dev` from `clarity/frontend` while the backend remains on port 8000.
+Leave `DATABASE_URL` empty for the offline JSON demo. PostgreSQL, Vercel and an
+AI provider are optional deployment integrations, not prerequisites for the
+demo.
+
+Task 3 is implemented as the RM-controlled workflow over Task 1 context and
+Task 2 signals: decision gates, Scenario Studio, Meeting Studio,
+follow-through/audit, Calibration Lab, Knowledge Library, Integration Sandbox,
+optional guarded AI drafting and selectable PostgreSQL persistence. The judge
+path is:
+
+```text
+Book → Client → Evidence/context → Scenario or options
+→ Client-ready checks → RM decision → Meeting Studio → Follow-through/Audit
+```
+
+Use Lau (`CL-0014`), Margarethe (`CL-0003`) and Fong (`CL-0017`) as the three
+acceptance journeys. The RM remains accountable; nothing sends advice,
+collects consent, creates a trade or executes an action.
 
 ---
 
@@ -119,8 +156,9 @@ Turn insight into client-ready actions, with the Relationship Manager in control
 
 ## 📊 The Dataset
 
-Everything is in [`data/`](data/). Field-by-field definitions are in
-[`docs/DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md).
+Everything is in the repository root. Field-by-field definitions are in
+[`DATA_DICTIONARY.md`](DATA_DICTIONARY.md). The runnable implementation is in
+[`clarity/`](clarity/).
 
 ### The scenario
 
@@ -177,21 +215,21 @@ review and one that merely sounds plausible.
 
 ### Quickstart
 
-Download **`singhacks-jb-wealth-intelligence.zip`** from the challenge page and unzip it. No git
-required.
+If you are starting from the challenge archive, unzip it first. In this
+repository clone, no additional download is required.
 
 ```bash
 unzip singhacks-jb-wealth-intelligence.zip
 cd singhacks-jb-wealth-intelligence
 
 pip install -r requirements.txt
-python starter/quickstart.py
+python quickstart.py
 ```
 
 On Windows, right-click the zip and choose *Extract All*, then open a terminal in the extracted
 folder and run the two commands above.
 
-`starter/quickstart.py` loads every file and prints the book, the event timeline, the market table
+`quickstart.py` loads every file and prints the book, the event timeline, the market table
 and one worked client. It deliberately computes nothing clever — it exists so you can see the shape
 of the data in 30 seconds.
 
