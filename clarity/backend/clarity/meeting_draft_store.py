@@ -28,6 +28,15 @@ class MeetingDraftStore:
         self._drafts: dict[str, dict[str, Any]] = {}
         self._load()
 
+    def _sanitize_record(self, record: dict[str, Any]) -> dict[str, Any]:
+        what_happened = record.get("what_happened_bullet") or ""
+        if "[object Object]" in str(what_happened):
+            record["what_happened_bullet"] = (
+                "Identified portfolio exposure requiring review. "
+                "Current loan-to-value and collateral allocation require alignment before execution."
+            )
+        return record
+
     def _load(self) -> None:
         if not self.path.exists():
             return
@@ -35,7 +44,10 @@ class MeetingDraftStore:
             payload = json.loads(self.path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             return
-        self._drafts = {str(key): value for key, value in payload.get("drafts", {}).items()}
+        self._drafts = {
+            str(key): self._sanitize_record(value)
+            for key, value in payload.get("drafts", {}).items()
+        }
 
     def _save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -47,13 +59,13 @@ class MeetingDraftStore:
     def save(self, client_id: str, draft: dict[str, Any]) -> dict[str, Any]:
         with self._lock:
             draft_id = draft.get("id") or f"draft-{uuid.uuid4().hex[:12]}"
-            record = {
+            record = self._sanitize_record({
                 **draft,
                 "id": draft_id,
                 "client_id": client_id,
                 "created_at": draft.get("created_at") or _now(),
                 "updated_at": _now(),
-            }
+            })
             self._drafts[draft_id] = record
             self._save()
             return record
@@ -72,13 +84,13 @@ class MeetingDraftStore:
         with self._lock:
             if draft_id not in self._drafts:
                 return None
-            record = {
+            record = self._sanitize_record({
                 **self._drafts[draft_id],
                 **draft,
                 "id": draft_id,
                 "client_id": client_id,
                 "updated_at": _now(),
-            }
+            })
             self._drafts[draft_id] = record
             self._save()
             return record

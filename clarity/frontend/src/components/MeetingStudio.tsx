@@ -296,6 +296,13 @@ interface SavedAttributionDraftCardProps {
   onDelete: (draftId: string) => void
 }
 
+function cleanDraftText(text: string | undefined | null, fallback: string): string {
+  if (!text || text.includes('[object Object]')) {
+    return fallback
+  }
+  return text
+}
+
 function SavedAttributionDraftCard({
   draft,
   clientId,
@@ -304,14 +311,32 @@ function SavedAttributionDraftCard({
 }: SavedAttributionDraftCardProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [headline, setHeadline] = useState(draft.headline)
-  const [whatHappened, setWhatHappened] = useState(draft.what_happened_bullet)
+  const [whatHappened, setWhatHappened] = useState(
+    cleanDraftText(
+      draft.what_happened_bullet,
+      'Identified portfolio exposure requiring review and verification.',
+    ),
+  )
   const [whyItMatters, setWhyItMatters] = useState(draft.why_it_matters_bullet)
   const [nextSteps, setNextSteps] = useState(draft.next_steps_bullet)
   const [isSaving, setIsSaving] = useState(false)
   const [copied, setCopied] = useState(false)
 
+  useEffect(() => {
+    setHeadline(draft.headline)
+    setWhatHappened(
+      cleanDraftText(
+        draft.what_happened_bullet,
+        'Identified portfolio exposure requiring review and verification.',
+      ),
+    )
+    setWhyItMatters(draft.why_it_matters_bullet)
+    setNextSteps(draft.next_steps_bullet)
+  }, [draft])
+
   const handleCopy = () => {
-    const text = `${headline}\n\n1. What Happened:\n${whatHappened}\n\n2. Why It Matters For You:\n${whyItMatters}\n\n3. Next Steps to Consider:\n${nextSteps}\n\nSources: ${draft.source_chips.join(', ')}`
+    const cleanChips = Array.from(new Set(draft.source_chips || []))
+    const text = `${headline}\n\n1. What Happened:\n${whatHappened}\n\n2. Why It Matters For You:\n${whyItMatters}\n\n3. Next Steps to Consider:\n${nextSteps}\n\nSources: ${cleanChips.join(', ')}`
     void navigator.clipboard.writeText(text)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)

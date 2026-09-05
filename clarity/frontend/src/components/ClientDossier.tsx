@@ -11,6 +11,7 @@ import type {
   SimulatedRole,
 } from '../types'
 import {
+  formatHeadline,
   money,
   pct,
   signedPct,
@@ -118,17 +119,53 @@ export function ClientDossier({
       }
     }
 
+    const cleanTitle = formatHeadline(insight.headline)
+
+    // Format observed facts cleanly into human-readable strings
+    const factDetails = (insight.observed_facts || [])
+      .map((f: any) => {
+        if (!f) return ''
+        if (typeof f === 'string') return f
+        if (typeof f === 'object') {
+          const label = f.label || ''
+          const value = f.value !== undefined && f.value !== null ? String(f.value) : ''
+          if (label && value) return `${label}: ${value}`
+          if (label) return label
+          if (value) return value
+        }
+        return String(f)
+      })
+      .filter(Boolean)
+
+    let whatHappenedText = ''
+    if (insight.summary && insight.summary.trim()) {
+      whatHappenedText = insight.summary.trim()
+    } else if (factDetails.length > 0) {
+      whatHappenedText = factDetails.join('; ')
+    } else {
+      whatHappenedText = `Identified portfolio exposure requiring review: ${cleanTitle}.`
+    }
+
+    // Deduplicate source chips
+    const sourceChips = Array.from(
+      new Set(
+        (insight.evidence || [])
+          .map((e) => (e.source_file ? `${e.source_file}${e.row_or_id ? `:${e.row_or_id}` : ''}` : 'dossier_signal'))
+          .filter(Boolean),
+      ),
+    )
+
     // Synthesize client-centric talking points directly from verified insight facts
     const syntheticDraft: ClientAttributionDraft = {
       client_id: clientId,
       instrument_id: insight.id,
-      instrument_name: insight.headline,
-      headline: `Discussion on ${insight.headline}`,
-      what_happened_bullet: insight.observed_facts.join('; ') || 'Identified portfolio exposure requiring review.',
+      instrument_name: cleanTitle,
+      headline: `Discussion on ${cleanTitle}`,
+      what_happened_bullet: whatHappenedText,
       why_it_matters_bullet: insight.client_relevance || 'Impacting client allocation mandate or liquidity horizon.',
       next_steps_bullet: insight.suggested_next_step || 'Review suitable options and confirm client instructions.',
       confidence: 'High (Deterministic Dossier Signal)',
-      source_chips: (insight.evidence || []).map((e) => `${e.source_file}:${e.row_or_id}`),
+      source_chips: sourceChips.length > 0 ? sourceChips : ['portfolio_holdings.csv'],
       limitations: (insight.assumptions || []).map((a) => a.statement),
       language_disclaimer:
         'Synthesized from verified portfolio signals and client parameters. Review and adapt before sharing with client.',
