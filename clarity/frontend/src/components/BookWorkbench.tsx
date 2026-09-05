@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { BookView, Severity } from '../types'
-import { pct, shortDate, titleCase, usd } from '../format'
+import { formatHeadline, pct, shortDate, titleCase, usd } from '../format'
 import type { EventImpactView, EventSummary } from '../types'
 import { getEventImpact, getEvents } from '../api'
 
@@ -353,7 +353,7 @@ export function BookWorkbench({
                             {flag.severity}
                           </span>
                           <span style={{ fontWeight: idx === 0 ? 600 : 400, color: 'var(--ink)' }}>
-                            {flag.headline}
+                            {formatHeadline(flag.headline)}
                           </span>
                         </div>
                       ))}
@@ -384,7 +384,7 @@ export function BookWorkbench({
                     </div>
                   ) : (
                     <>
-                      <div className="h">{row.top_headline}</div>
+                      <div className="h">{formatHeadline(row.top_headline)}</div>
                       <div className="why">{row.why_now.join(' · ')}</div>
                     </>
                   )}

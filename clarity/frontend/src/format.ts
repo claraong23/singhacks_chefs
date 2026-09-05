@@ -80,3 +80,16 @@ export const CONFIDENCE_HINT: Record<string, string> = {
   derived: 'Arithmetic plus a stated modelling assumption.',
   reported: 'Rests on an RM note or a client statement the data does not confirm.',
 }
+
+export function formatHeadline(headline: string | null | undefined): string {
+  if (!headline) return ''
+  let formatted = headline.replace(
+    /(\d+\.?\d*)\s*pp\s+from\s+a\s+margin\s+call/gi,
+    '$1% buffer before margin call trigger',
+  )
+  formatted = formatted.replace(
+    /Known obligations of (USD [\d,]+) against (USD [\d,]+) the client can actually withdraw/gi,
+    'Liquidity shortfall: $1 obligations due vs $2 withdrawable cash',
+  )
+  return formatted
+}
