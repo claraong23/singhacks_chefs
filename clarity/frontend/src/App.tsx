@@ -8,6 +8,7 @@ import { FollowThroughBoard } from './components/FollowThrough'
 import { AuditConsole } from './components/AuditConsole'
 import { CalibrationLab } from './components/CalibrationLab'
 import { KnowledgeLibrary } from './components/KnowledgeReference'
+import { HeroPage } from './components/HeroPage'
 import { shortDate } from './format'
 
 export default function App() {
@@ -18,6 +19,10 @@ export default function App() {
   const [busy, setBusy] = useState(false)
   const [role, setRole] = useState<SimulatedRole>('rm')
   const [view, setView] = useState<'book' | 'client' | 'follow' | 'audit' | 'calibration' | 'knowledge'>('book')
+  // A ?client= deep link goes straight to the dossier and skips the landing page.
+  const [showHero, setShowHero] = useState(
+    () => !new URLSearchParams(window.location.search).get('client'),
+  )
 
   const loadBook = useCallback(async () => {
     try {
@@ -122,6 +127,10 @@ export default function App() {
     },
     [decide],
   )
+
+  if (showHero) {
+    return <HeroPage onEnter={() => setShowHero(false)} clientCount={book?.totals.clients} />
+  }
 
   return (
     <div className="shell">

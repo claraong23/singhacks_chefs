@@ -1,0 +1,332 @@
+/* Hero landing page.
+ *
+ * Scoped entirely under .hero-page so nothing here reaches the workbench,
+ * which keeps its own light design system in styles.css. Values are taken
+ * from DESIGN.md (sections 2, 3.3, 4.2, 4.4, 5.4) rather than eyeballed.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+.hero-page {
+  /* Colour tokens — DESIGN.md §2 */
+  --h-surface: rgba(14, 24, 50, 0.72);
+  --h-surface-alt: rgba(11, 20, 42, 0.55);
+  --h-border: rgba(37, 75, 150, 0.18);
+  --h-border-strong: rgba(37, 99, 235, 0.28);
+  --h-text: #e2e8f0;
+  --h-text-sub: #8a9fc0;
+  --h-text-muted: #4e6080;
+  --h-blue: #2563eb;
+  --h-blue-light: #60a5fa;
+  --h-teal: #06b6d4;
+
+  /* Type — DESIGN.md §3.1 */
+  --h-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --h-body: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --h-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  z-index: 50;
+
+  /* §2.1 — dark navy ground with a top-left blue glow and a faint teal
+     counterweight bottom-right. The glow is what stops it reading as flat. */
+  background:
+    radial-gradient(ellipse 55% 45% at 12% 0%, rgba(37, 99, 235, 0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 90% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 60%),
+    #070e1c;
+  color: var(--h-text);
+  font-family: var(--h-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hero-page *,
+.hero-page *::before,
+.hero-page *::after {
+  box-sizing: border-box;
+}
+
+/* ── Top nav (§4.2, 60px sticky) ─────────────────────────────────────────── */
+
+.hero-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 48px;
+  border-bottom: 1px solid var(--h-border);
+  background: rgba(7, 14, 28, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--h-blue), var(--h-teal));
+}
+
+.hero-wordmark {
+  font-family: var(--h-display);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--h-text);
+}
+
+.hero-nav-cta {
+  padding: 7px 18px;
+  border: 1px solid var(--h-border-strong);
+  border-radius: 7px;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--h-blue-light);
+  font-family: var(--h-body);
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.hero-nav-cta:hover {
+  background: rgba(37, 99, 235, 0.18);
+  border-color: rgba(37, 99, 235, 0.45);
+}
+
+/* ── Body (§4.2 — single column, 780px, centred) ─────────────────────────── */
+
+.hero-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 100px 48px 80px;
+  text-align: center;
+}
+
+.hero-headline {
+  margin: 0 0 12px;
+  font-family: var(--h-display);
+  font-size: clamp(38px, 6vw, 62px);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--h-text);
+}
+
+/* §3.2 — the italic Fraunces cut is reserved for this one emphasis phrase. */
+.hero-headline em {
+  font-style: italic;
+  color: var(--h-blue-light);
+}
+
+.hero-sub {
+  max-width: 520px;
+  margin: 0 auto 48px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--h-text-sub);
+}
+
+/* ── Calls to action (§5.4) ──────────────────────────────────────────────── */
+
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 72px;
+}
+
+.hero-cta-primary,
+.hero-cta-secondary {
+  padding: 13px 28px;
+  border-radius: 9px;
+  font-family: var(--h-body);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.hero-cta-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: var(--h-blue);
+  color: #fff;
+  font-weight: 500;
+  /* §11 — one glow per element, never stacked. */
+  box-shadow: 0 0 32px rgba(37, 99, 235, 0.25);
+}
+
+.hero-cta-primary:hover {
+  background: #1d4fd8;
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.38);
+}
+
+.hero-cta-secondary {
+  border: 1px solid var(--h-border);
+  background: transparent;
+  color: var(--h-text-sub);
+}
+
+.hero-cta-secondary:hover {
+  border-color: var(--h-border-strong);
+  color: var(--h-text);
+}
+
+/* ── Stats strip ─────────────────────────────────────────────────────────── */
+
+/* The 1px grid gap over a border-coloured ground draws the dividers, so the
+   cells need no borders of their own. */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin-bottom: 100px;
+  border: 1px solid var(--h-border);
+  border-radius: 12px;
+  background: var(--h-border);
+  overflow: hidden;
+}
+
+.hero-stat {
+  padding: 22px 16px;
+  background: var(--h-surface-alt);
+  text-align: center;
+}
+
+.hero-stat-value {
+  font-family: var(--h-display);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--h-text);
+}
+
+.hero-stat-label {
+  margin-top: 6px;
+  font-family: var(--h-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--h-text-muted);
+}
+
+/* ── How it works ────────────────────────────────────────────────────────── */
+
+.hero-pillars {
+  text-align: left;
+}
+
+/* §3.4 — ALL CAPS mono section header, textMuted, never text or textSub. */
+.hero-eyebrow {
+  margin-bottom: 32px;
+  font-family: var(--h-mono);
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  text-align: center;
+  color: var(--h-text-muted);
+}
+
+.hero-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.hero-pillar {
+  padding: 24px 22px;
+  border: 1px solid var(--h-border);
+  border-radius: 13px;
+  background: var(--h-surface);
+}
+
+.hero-pillar-icon {
+  margin-bottom: 14px;
+  color: var(--h-blue-light);
+}
+
+.hero-pillar-title {
+  margin-bottom: 8px;
+  font-family: var(--h-display);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--h-text);
+}
+
+.hero-pillar-body {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--h-text-sub);
+}
+
+/* ── Scrollbars (§9) ─────────────────────────────────────────────────────── */
+
+.hero-page {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(37, 99, 235, 0.3) transparent;
+}
+
+.hero-page::-webkit-scrollbar {
+  width: 4px;
+}
+
+.hero-page::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hero-page::-webkit-scrollbar-thumb {
+  background: rgba(37, 99, 235, 0.3);
+  border-radius: 2px;
+}
+
+.hero-page:not(:hover)::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* ── Narrow viewports ────────────────────────────────────────────────────── */
+
+@media (max-width: 720px) {
+  .hero-nav {
+    padding: 0 20px;
+  }
+
+  .hero-body {
+    padding: 64px 20px 56px;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 72px;
+  }
+
+  .hero-pillar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* §8 — motion is purposeful only; honour a reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-page * {
+    transition: none !important;
+  }
+}
