@@ -32,7 +32,9 @@ npm run dev                              # http://127.0.0.1:5173
 `npm run build` writes `frontend/dist`, which the API serves itself — so for the
 demo, one process on port 8000 is the whole product.
 
-No API keys, no external calls, no data leaves the machine.
+Local mode needs no API keys or external calls; no synthetic data leaves the
+machine. Hosted mode and optional AI drafting are explicitly opt-in and use
+only server-side environment variables.
 
 ### Durable hosted mode
 
@@ -82,6 +84,47 @@ python -m unittest tests.test_deployed_smoke
 Before the judge demo, verify `/api/health` reports `postgresql`, the Knowledge
 Library shows five approved synthetic guides, the active policy is
 `baseline-v1`, unauthorised writes return `401`, and `/api/reset` returns `403`.
+
+### Teammate handoff and demo path
+
+Task 3 is the RM operating layer over Task 1 context and Task 2 signals. It
+consumes the published `Insight`, `Evidence`, `ActionOption` and client-context
+payloads; it must not recalculate upstream risk or rewrite source facts.
+
+The recommended judge path is:
+
+```text
+Book → Client dossier → evidence/context → Scenario Studio or options
+→ Client-ready checks → RM rationale/decision → Meeting Studio
+→ simulated hand-off → Follow-through/Audit
+```
+
+Use these three anchor journeys:
+
+| Client | Demo proof | Safe wording |
+|---|---|---|
+| `CL-0014` Lau | Correlated property/collateral exposure, liquidity and redevelopment funding | Current-state arithmetic; credit review remains required |
+| `CL-0003` Margarethe | Conservative mandate deviation, EUR tax-installment reserve and missing tax facts | Tax/planning escalation; never state a tax outcome |
+| `CL-0017` Fong | Confirmed commitments, gated private-credit liquidity and funding sequence | Gated assets and uncertain capital calls are not available cash |
+
+The RM must visibly select/edit/defer/dismiss an action and provide rationale.
+`client_ready` means prepared for RM-approved conversation work only: it never
+sends advice, records consent, creates a trade ticket or executes a transaction.
+Meeting Studio copy is enabled only after communication preflight passes. The
+optional AI adapter is a guarded drafting aid; deterministic wording remains the
+fallback and the provider never receives raw CSVs, RM notes, full dossiers or
+knowledge-search results.
+
+For a local takeover, one teammate can run the complete app with:
+
+```powershell
+python run_backend.py
+```
+
+The backend serves the production frontend on port 8000 after a build. For hot
+reload, keep the backend on port 8000 and run `npm run dev` in
+`clarity/frontend` on port 5173. Reset only local demo state through the UI/API;
+hosted reset is intentionally blocked by default.
 
 ### Without a browser
 
@@ -410,6 +453,7 @@ The seams are already cut, so four people can work without colliding.
 | Route | |
 |---|---|
 | `GET /api/book` | The ranked book |
+| `GET /api/health` | Safe storage mode, schema and hosted write-lock metadata |
 | `GET /api/clients/<id>` | One full dossier |
 | `GET /api/events` | `event_log.csv`, normalised with stable ids |
 | `GET /api/events/<id>/impact` | Ranked clients, mapped exposure and explicit sensitivity for one event |
@@ -426,6 +470,7 @@ The seams are already cut, so four people can work without colliding.
 | `GET /api/clients/<id>/scenarios` | Saved RM scenario comparisons |
 | `POST /api/clients/<id>/scenarios/evaluate` | Evaluate `{template_id, insight_id, option_id, inputs}` |
 | `POST /api/clients/<id>/scenarios` | Re-evaluate and save a named comparison |
+| `POST /api/insights/<id>/readiness` | Evaluate the five client-ready gates without changing workflow state |
 | `POST /api/insights/<id>/decision` | `{status, rm_note, selected_option_id, edited_next_step}` |
 | `POST /api/insights/<id>/narrative` | Optional grounded OpenAI wording for one computed insight |
 | `GET /api/clients/<id>/meeting-packages` | Versioned packages for one client |
@@ -438,7 +483,11 @@ The seams are already cut, so four people can work without colliding.
 | `GET /api/follow-through?role=<role>` | Role-scoped local tasks, referrals, outcomes and re-evaluation work |
 | `POST /api/follow-through/(tasks|referrals|outcomes|evidence-updates)` | Create governed post-meeting workflow records |
 | `POST /api/follow-through/<collection>/<id>/update` | Controlled work or re-evaluation status update |
-| `POST /api/reset` | Clear local demo workflow state and reseed the five approved synthetic knowledge fixtures |
+| `GET /api/integrations/capabilities` | Supported simulated source/destination systems and model-readiness metadata |
+| `GET /api/integrations?role=<role>` | Role-scoped inbound events and simulated work orders |
+| `POST /api/integrations/inbound` and `/<id>/(accept|reject)` | Operations-only validated inbound event lifecycle |
+| `POST /api/integrations/work-orders` and `/<id>/(dispatch|acknowledge)` | RM-prepared idempotent local CRM/specialist hand-off |
+| `POST /api/reset` | Clear local demo workflow state; blocked in hosted mode unless explicitly enabled |
 
 ---
 
