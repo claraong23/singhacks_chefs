@@ -273,6 +273,21 @@ export interface EventImpactView {
     priority_reasons: string[]
     instrument_ids: string[]
   }[]
+  scenario_comparisons: {
+    key: string
+    name: string
+    theme_key: string
+    shock_pct: number
+    description: string
+    affected_clients: {
+      client_id: string
+      client_name: string
+      exposure_usd: number
+      exposure_pct: number
+      estimated_impact_usd: number
+      estimated_impact_pct: number
+    }[]
+  }[]
   method: string
   limitations: string[]
 }

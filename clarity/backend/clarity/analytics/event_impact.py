@@ -124,6 +124,34 @@ def event_impact_view(book: DataBook, event_id: str) -> dict[str, Any]:
             if theme.key in theme_keys and theme.attributed_usd > 0:
                 impacts.append(_client_impact(book, event, client_id, theme))
     impacts.sort(key=lambda item: (-item.priority_score, -item.exposure_usd))
+    scenario_comparisons = []
+    for scenario in DEFAULT_SCENARIOS:
+        if scenario.theme_key not in theme_keys:
+            continue
+        affected = []
+        for item in impacts:
+            if item.theme_key != scenario.theme_key:
+                continue
+            affected.append(
+                {
+                    "client_id": item.client_id,
+                    "client_name": item.client_name,
+                    "exposure_usd": item.exposure_usd,
+                    "exposure_pct": item.exposure_pct,
+                    "estimated_impact_usd": item.exposure_usd * scenario.shock_pct / 100.0,
+                    "estimated_impact_pct": item.exposure_pct * scenario.shock_pct / 100.0,
+                }
+            )
+        scenario_comparisons.append(
+            {
+                "key": scenario.key,
+                "name": scenario.name,
+                "theme_key": scenario.theme_key,
+                "shock_pct": scenario.shock_pct,
+                "description": scenario.description,
+                "affected_clients": affected,
+            }
+        )
     return {
         "event": {
             "event_id": event["event_id"],
@@ -140,6 +168,7 @@ def event_impact_view(book: DataBook, event_id: str) -> dict[str, Any]:
             if theme.key in theme_keys
         ],
         "affected_clients": [item.to_dict() for item in impacts],
+        "scenario_comparisons": scenario_comparisons,
         "method": (
             "event_log.csv event -> curated theme -> current household holdings; "
             "estimated impact appears only where an explicit scenario shock exists"

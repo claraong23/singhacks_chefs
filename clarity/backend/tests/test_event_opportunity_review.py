@@ -51,6 +51,19 @@ class TestEventImpact(unittest.TestCase):
         with self.assertRaises(KeyError):
             event_impact_view(BOOK, "EVT-99")
 
+    def test_hormuz_event_compares_deescalation_and_escalation(self) -> None:
+        result = event_impact_view(BOOK, "EVT-04")
+        comparisons = {item["key"]: item for item in result["scenario_comparisons"]}
+        self.assertEqual(set(comparisons), {"hormuz_reopens", "hormuz_escalates"})
+        self.assertLess(comparisons["hormuz_reopens"]["shock_pct"], 0)
+        self.assertGreater(comparisons["hormuz_escalates"]["shock_pct"], 0)
+        self.assertTrue(comparisons["hormuz_reopens"]["affected_clients"])
+        client = comparisons["hormuz_reopens"]["affected_clients"][0]
+        self.assertAlmostEqual(
+            client["estimated_impact_usd"],
+            client["exposure_usd"] * comparisons["hormuz_reopens"]["shock_pct"] / 100,
+        )
+
 
 class TestGuardedOpportunity(unittest.TestCase):
     def test_opportunity_is_conversation_only_and_guardrails_pass(self) -> None:

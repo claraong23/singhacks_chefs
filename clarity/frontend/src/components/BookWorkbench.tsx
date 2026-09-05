@@ -152,6 +152,44 @@ export function BookWorkbench({
                       {eventImpact.affected_clients.length === 0 && <tr><td colSpan={5} className="muted">No current holding maps to this event.</td></tr>}
                     </tbody>
                   </table>
+                  {eventImpact.scenario_comparisons.length >= 2 && (
+                    <div style={{ marginTop: 18 }}>
+                      <div className="card-head" style={{ paddingLeft: 0, paddingRight: 0 }}>
+                        <h2>What if conditions de-escalate or worsen?</h2>
+                        <span className="sub">Side-by-side sensitivity, not a forecast</span>
+                      </div>
+                      <div className="grid2">
+                        {eventImpact.scenario_comparisons.map((scenario) => (
+                          <div className="card" key={scenario.key} style={{ background: 'var(--surface-sunk)' }}>
+                            <div className="card-head">
+                              <h3>{scenario.name}</h3>
+                              <span className={`pill ${scenario.shock_pct < 0 ? 'low' : 'high'}`}>
+                                {scenario.shock_pct > 0 ? '+' : ''}{scenario.shock_pct}% assumption
+                              </span>
+                            </div>
+                            <div className="card-body">
+                              <p style={{ marginTop: 0 }}>{scenario.description}</p>
+                              <table className="postable">
+                                <thead><tr><th>Client</th><th>Exposure</th><th>Estimated impact</th></tr></thead>
+                                <tbody>
+                                  {scenario.affected_clients.map((item) => (
+                                    <tr key={`${scenario.key}-${item.client_id}`}>
+                                      <td><button className="btn quiet" onClick={() => onOpenClient(item.client_id)}>{item.client_name}</button></td>
+                                      <td>{usd(item.exposure_usd)}<div className="footnote">{pct(item.exposure_pct)} of household</div></td>
+                                      <td>{usd(item.estimated_impact_usd)}<div className="footnote">{item.estimated_impact_pct > 0 ? '+' : ''}{item.estimated_impact_pct.toFixed(1)}% of household</div></td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="banner" style={{ marginTop: 12 }}>
+                        <strong>Interpretation limit.</strong> These are linear sensitivity assumptions applied to mapped current holdings. They are not probabilities, forecasts or recommendations.
+                      </div>
+                    </div>
+                  )}
                   <p className="footnote"><strong>Method.</strong> {eventImpact.method}. {eventImpact.limitations.join(' ')}</p>
                 </>
               )}
