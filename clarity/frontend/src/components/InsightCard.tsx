@@ -215,14 +215,6 @@ export function InsightCard({
         </div>
       )}
 
-      <div className="nextstep">
-        <strong>Next step.</strong> {insight.suggested_next_step}
-        {insight.suggested_next_step_original && (
-          <div className="footnote" style={{ marginTop: 6 }}>
-            Engine wording, updated by RM: “{insight.suggested_next_step_original}”
-          </div>
-        )}
-      </div>
 
       {insight.rm_note && (
         <div className="nextstep" style={{ background: 'var(--surface-sunk)', borderLeftColor: 'var(--rule-strong)' }}>
